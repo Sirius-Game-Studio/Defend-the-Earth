@@ -1,0 +1,154 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1443809487949520}
+  m_IsPrefabParent: 1
+--- !u!1 &1443809487949520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4956073287951326}
+  - component: {fileID: 114243316616525088}
+  - component: {fileID: 114943729927984594}
+  - component: {fileID: 114475116800532520}
+  - component: {fileID: 114772751198850842}
+  - component: {fileID: 114507456616628506}
+  - component: {fileID: 114146181273117224}
+  m_Layer: 0
+  m_Name: Star
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4956073287951326
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114146181273117224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a34cd0abea24c41833facee217e8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanceMin:
+    Value: 0
+    Scale: 0
+  Prefab: {fileID: 114896478378546410, guid: 0758f6d8100e55c428a481b790b6cd4a, type: 2}
+  DistanceMax:
+    Value: 10
+    Scale: 2
+  instance: {fileID: 0}
+--- !u!114 &114243316616525088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64340bf31620cea499238c419391810d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position:
+    LocalX: 0
+    LocalY: 0
+    LocalZ: 0
+    GlobalX: 0
+    GlobalY: 0
+    GlobalZ: 0
+--- !u!114 &114475116800532520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dafcadce2aec5dc4b8dde998829302c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Point: {fileID: 114243316616525088}
+  Seed: -1591276727
+  Scale: 1
+  MonitorPosition: 0
+  expectedPosition: {x: 0, y: 0, z: 0}
+  expectedPositionSet: 0
+--- !u!114 &114507456616628506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a34cd0abea24c41833facee217e8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanceMin:
+    Value: 0
+    Scale: 0
+  Prefab: {fileID: 114896478378546410, guid: f5cf116fbc1e57c4dabeed61d19251bc, type: 2}
+  DistanceMax:
+    Value: 100
+    Scale: 2
+  instance: {fileID: 0}
+--- !u!114 &114772751198850842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a34cd0abea24c41833facee217e8c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DistanceMin:
+    Value: 0
+    Scale: 0
+  Prefab: {fileID: 114070186275848776, guid: 5a30c21c5f416004da8dfa1af9c5da91, type: 2}
+  DistanceMax:
+    Value: 100
+    Scale: 3
+  instance: {fileID: 0}
+--- !u!114 &114943729927984594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443809487949520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f55ab7139ab18b4bb75c7282e34ae1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WarpName: Star
+  WarpDistance:
+    Value: 1
+    Scale: 2

@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
+  m_Name: Readme
+  m_EditorClassIdentifier: 
+  icon: {fileID: 2800000, guid: 6756ed7b80223ac4e8f026ce27541de4, type: 3}
+  title: Space Shooter Asteroids
+  sections:
+  - heading: More Sci-Fi Items?
+    text: 
+    linkText: 
+    url: 
+  - heading: 
+    text: 
+    linkText: Free Assets On Our Store Page
+    url: https://assetstore.unity.com/publishers/24304
+  - heading: 
+    text: 
+    linkText: Ultimate Spaceships Creator
+    url: http://u3d.as/J0F
+  - heading: 
+    text: 
+    linkText: Modular Pick Up Items
+    url: http://u3d.as/WJ2
+  - heading: 
+    text: 
+    linkText: Space Mines
+    url: http://u3d.as/Vqb
+  - heading: 
+    text: 
+    linkText: Planets
+    url: http://u3d.as/12tt
+  - heading: Can I Use This Asset in My Game?
+    text: Yes! You can use this asset in your free or commercial game. We wish you
+      all the best in all of your projects!
+    linkText: 
+    url: 
+  - heading: 
+    text: 
+    linkText: Forum Thread
+    url: https://forum.unity.com/threads/released-modular-spaceships-collection.518276/
+  loadedLayout: 1
