@@ -3,6 +3,11 @@
 public class BulletHit : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt to enemies.")] public long damage = 5;
+    [SerializeField] private float doubleDamageMultiplier = 1.5f;
+    [SerializeField] private int doubleDamageLayer = -1;
+    [SerializeField] private GameObject explosion;
+
+    private bool hit = false;
 
     void Update()
     {
@@ -11,12 +16,20 @@ public class BulletHit : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (!hit && other.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth)
             {
-                enemyHealth.takeDamage(damage);
+                if (other.gameObject.layer != doubleDamageLayer)
+                {
+                    enemyHealth.takeDamage(damage);
+                } else
+                {
+                    enemyHealth.takeDamage((long)(damage * 1.5f));
+                }
+                if (explosion) Instantiate(explosion, transform.position, transform.rotation);
+                hit = true;
                 Destroy(gameObject);
             }
         }

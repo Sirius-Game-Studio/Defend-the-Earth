@@ -2,10 +2,26 @@
 
 public class Rotator : MonoBehaviour
 {
-    [Tooltip("How fast this object rotates on the Y axis.")] [SerializeField] private float y = 0;
+    [SerializeField] private bool useInsideUnitSphere = false;
+    [SerializeField] private float tumble = 0;
+    [SerializeField] private Vector3 rotation = Vector3.zero;
+
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        if (useInsideUnitSphere) rb.angularVelocity = Random.insideUnitSphere * tumble;
+    }
 
     void Update()
     {
-        transform.Rotate(new Vector3(0, y * Time.deltaTime, 0));
+        if (useInsideUnitSphere && rb) rb.isKinematic = false;
+        if (!useInsideUnitSphere)
+        {
+            transform.Rotate(rotation * Time.deltaTime);
+            if (rb) rb.isKinematic = true;
+        }
+        if (rb) rb.velocity = Vector3.zero;
     }
 }

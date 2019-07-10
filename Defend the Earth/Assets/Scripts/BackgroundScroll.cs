@@ -3,7 +3,7 @@
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField] private float speed = -1;
-    [SerializeField] private float z = 36.86f;
+    [SerializeField] private float z = 25;
 
     private Vector3 initialPosition;
 
@@ -15,6 +15,6 @@ public class BackgroundScroll : MonoBehaviour
     void Update()
     {
         transform.position = initialPosition + Vector3.up * Mathf.Repeat(Time.time * speed, z);
-        transform.position = new Vector3(0, transform.position.y, 0);
+        transform.position = new Vector3(0, transform.position.y, 5);
     }
 }

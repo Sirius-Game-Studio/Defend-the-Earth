@@ -2,7 +2,10 @@
 
 public class EnemyBulletHit : MonoBehaviour
 {
-    [Tooltip("Amount of damage dealt to players.")] public long damage = 3;
+    [Tooltip("Amount of damage dealt to players.")] public int damage = 1;
+    [SerializeField] private GameObject explosion;
+
+    private bool hit = false;
 
     void Update()
     {
@@ -11,12 +14,14 @@ public class EnemyBulletHit : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!hit && other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController)
             {
                 playerController.takeDamage(damage);
+                if (explosion) Instantiate(explosion, transform.position, transform.rotation);
+                hit = true;
                 Destroy(gameObject);
             }
         }
