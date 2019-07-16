@@ -13,12 +13,11 @@ GameObject:
   - component: {fileID: 23613917832763796}
   - component: {fileID: 5245361146907897753}
   - component: {fileID: 1127968697884610942}
-  - component: {fileID: 8886960742205969855}
-  - component: {fileID: 4409415156767462841}
   - component: {fileID: -8016167930194288132}
+  - component: {fileID: 4409415156767462841}
   m_Layer: 0
   m_Name: BioTorpedoWhite
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +111,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 7684aa101ccc34e43b3a50a6a375c9b1, type: 3}
---- !u!114 &8886960742205969855
+--- !u!114 &-8016167930194288132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -121,13 +120,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528543826248096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  score: 0
-  money: 0
-  killsKey: 
+  damage: 16
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &4409415156767462841
 MonoBehaviour:
@@ -144,17 +140,3 @@ MonoBehaviour:
   speed: 11.25
   movement: {x: 0, y: 0}
   useForwardMovement: 1
---- !u!114 &-8016167930194288132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1528543826248096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}

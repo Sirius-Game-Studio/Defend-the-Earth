@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: -3330956377024115046}
   - component: {fileID: 6247750720696137293}
   - component: {fileID: 6724942758054178236}
-  - component: {fileID: -7719614096706931847}
   - component: {fileID: 1916452485091788028}
+  - component: {fileID: -7719614096706931847}
   m_Layer: 0
   m_Name: AlienFighterWhite
   m_TagString: Enemy
@@ -223,14 +223,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
-  score: 5
+  health: 20
   money: 1
-  powerupChance: 1
+  powerupChance: 0.4
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
-  killsKey: 
+  countsTowardsKillGoal: 1
+  killTracker: AlienKills
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &6724942758054178236
 MonoBehaviour:
@@ -244,25 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b56eb22db5e0324e9ddfc33862d2ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 4
-  fireRate: 1.25
+  damage: 16
+  RPM: 60
   bullet: {fileID: 1528543826248096, guid: 0eb1dc9b0d8505f45a18313076e1e653, type: 3}
   fireSound: {fileID: 8300000, guid: 5f218a78b9b5a834b9e26656769d0fa7, type: 3}
---- !u!114 &-7719614096706931847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062015658370612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3.25
-  movement: {x: 0, y: 0}
-  useForwardMovement: 1
 --- !u!114 &1916452485091788028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,8 +260,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
+  damage: 28
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+--- !u!114 &-7719614096706931847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062015658370612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  movement: {x: 0, y: 0}
+  useForwardMovement: 1
 --- !u!1 &2447458015143334116
 GameObject:
   m_ObjectHideFlags: 0

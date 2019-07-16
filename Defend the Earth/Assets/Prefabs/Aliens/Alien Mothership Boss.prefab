@@ -394,11 +394,12 @@ MonoBehaviour:
   health: 500
   score: 50
   money: 125
-  powerupChance: 1
+  powerupChance: 0
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
-  killsKey: 
+  countsTowardsKillGoal: 1
+  killTracker: BossKills
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
 --- !u!114 &-568326974251831360
 MonoBehaviour:
@@ -412,8 +413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b56eb22db5e0324e9ddfc33862d2ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
-  fireRate: 0.75
+  damage: 24
+  RPM: 65
   bullet: {fileID: 1528543826248096, guid: 0eb1dc9b0d8505f45a18313076e1e653, type: 3}
   fireSound: {fileID: 8300000, guid: 5f218a78b9b5a834b9e26656769d0fa7, type: 3}
 --- !u!114 &-5932199832120989895

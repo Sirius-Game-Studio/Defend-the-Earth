@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 7254721782622157369}
   - component: {fileID: -8144951575833724472}
   - component: {fileID: -7713539351241848798}
-  - component: {fileID: -5756407963200088436}
   - component: {fileID: -4004246986436686688}
+  - component: {fileID: -5756407963200088436}
   m_Layer: 0
   m_Name: AlienDestroyerGreen
   m_TagString: Enemy
@@ -223,14 +223,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  score: 10
-  money: 2
-  powerupChance: 1
+  health: 60
+  money: 3
+  powerupChance: 0.4
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
-  killsKey: 
+  countsTowardsKillGoal: 1
+  killTracker: AlienKills
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &-7713539351241848798
 MonoBehaviour:
@@ -244,25 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b56eb22db5e0324e9ddfc33862d2ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 6
-  fireRate: 1.5
+  damage: 24
+  RPM: 35
   bullet: {fileID: 1314043251266546, guid: a30ef2e5b0c4a2f4f894c4ff7f998e13, type: 3}
   fireSound: {fileID: 8300000, guid: 5f218a78b9b5a834b9e26656769d0fa7, type: 3}
---- !u!114 &-5756407963200088436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1963857078541744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2.75
-  movement: {x: 0, y: 0}
-  useForwardMovement: 1
 --- !u!114 &-4004246986436686688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,8 +260,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 9
+  damage: 36
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+--- !u!114 &-5756407963200088436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963857078541744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2.5
+  movement: {x: 0, y: 0}
+  useForwardMovement: 1
 --- !u!1 &7081369292938688779
 GameObject:
   m_ObjectHideFlags: 0

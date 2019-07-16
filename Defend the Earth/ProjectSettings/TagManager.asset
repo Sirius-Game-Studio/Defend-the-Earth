@@ -10,6 +10,7 @@ TagManager:
   - HealthBar
   - SmallRepair
   - LargeRepair
+  - Background
   layers:
   - Default
   - TransparentFX

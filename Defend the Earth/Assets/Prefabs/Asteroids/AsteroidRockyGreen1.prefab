@@ -126,10 +126,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
-  score: 5
+  health: 40
   money: 1
-  killsKey: 
+  powerupChance: 0
+  powerups: []
+  countsTowardsKillGoal: 0
+  killTracker: AsteroidKills
   explosion: {fileID: 100004, guid: 2a166c067f1bb1a4ab000ad044ca02bc, type: 3}
 --- !u!114 &7489597210954443730
 MonoBehaviour:
@@ -143,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 11
+  damage: 42
   explosion: {fileID: 100004, guid: 2a166c067f1bb1a4ab000ad044ca02bc, type: 3}
 --- !u!114 &8024120582389604154
 MonoBehaviour:
@@ -157,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 2.5
   movement: {x: 0, y: -1}
   useForwardMovement: 0
 --- !u!114 &-6264907973308361774
