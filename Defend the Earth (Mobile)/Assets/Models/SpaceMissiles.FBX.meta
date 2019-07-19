@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: 8877092c49d4cd445a536cee36849209
+timeCreated: 1544618222
+licenseType: Store
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: MissileAlien
+    100002: MissileBomb
+    100004: MissileCapsule
+    100006: MissileCruise
+    100008: MissileHook
+    100010: MissileShipKiller
+    100012: MissileSidewinder
+    100014: MissileSmall
+    100016: MissileSteampunk
+    100018: MissileStylized
+    100020: MissileViking
+    100022: MissisleAB
+    100024: //RootNode
+    400000: MissileAlien
+    400002: MissileBomb
+    400004: MissileCapsule
+    400006: MissileCruise
+    400008: MissileHook
+    400010: MissileShipKiller
+    400012: MissileSidewinder
+    400014: MissileSmall
+    400016: MissileSteampunk
+    400018: MissileStylized
+    400020: MissileViking
+    400022: MissisleAB
+    400024: //RootNode
+    2300000: MissileAlien
+    2300002: MissileBomb
+    2300004: MissileCapsule
+    2300006: MissileCruise
+    2300008: MissileHook
+    2300010: MissileShipKiller
+    2300012: MissileSidewinder
+    2300014: MissileSmall
+    2300016: MissileSteampunk
+    2300018: MissileStylized
+    2300020: MissileViking
+    2300022: MissisleAB
+    3300000: MissileAlien
+    3300002: MissileBomb
+    3300004: MissileCapsule
+    3300006: MissileCruise
+    3300008: MissileHook
+    3300010: MissileShipKiller
+    3300012: MissileSidewinder
+    3300014: MissileSmall
+    3300016: MissileSteampunk
+    3300018: MissileStylized
+    3300020: MissileViking
+    3300022: MissisleAB
+    4300000: MissileAlien
+    4300002: MissisleAB
+    4300004: MissileBomb
+    4300006: MissileHook
+    4300008: MissileCapsule
+    4300010: MissileSmall
+    4300012: MissileSteampunk
+    4300014: MissileStylized
+    4300016: MissileCruise
+    4300018: MissileShipKiller
+    4300020: MissileSidewinder
+    4300022: MissileViking
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
