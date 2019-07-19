@@ -1215,6 +1215,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2615693148980937725, guid: 4e96fd4f62f31b44e8a2200689649778,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7828969710937775465, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1432,7 +1437,7 @@ MonoBehaviour:
   loadingText: {fileID: 2128789852}
   loadingSlider: {fileID: 1471608847}
   loadingPercentage: {fileID: 1063671029}
-  enemiesLeft: 1
+  enemiesLeft: 13
   aliensReached: 0
   currentBoss: {fileID: 0}
   deathMessageToShow: 

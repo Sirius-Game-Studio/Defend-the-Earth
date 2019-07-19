@@ -2,7 +2,7 @@
 
 public class SkinPicker : MonoBehaviour
 {
-    public string skin = "Default";
+    public int skin = 1; //1 is default, 2 is green, 3 is white
     [Tooltip("Default Skin")] [SerializeField] private Texture defaultAlbedo = null;
     [Tooltip("Green Skin")] [SerializeField] private Texture greenAlbedo = null;
     [Tooltip("White Skin")] [SerializeField] private Texture whiteAlbedo = null;
@@ -16,15 +16,15 @@ public class SkinPicker : MonoBehaviour
         if (random <= 0.33)
         {
             renderer.material.SetTexture("_MainTex", defaultAlbedo);
-            skin = "Default";
+            skin = 1;
         } else if (random <= 0.66)
         {
             renderer.material.SetTexture("_MainTex", greenAlbedo);
-            skin = "Green";
+            skin = 2;
         } else
         {
             renderer.material.SetTexture("_MainTex", whiteAlbedo);
-            skin = "White";
+            skin = 3;
         }
         enabled = false;
     }
