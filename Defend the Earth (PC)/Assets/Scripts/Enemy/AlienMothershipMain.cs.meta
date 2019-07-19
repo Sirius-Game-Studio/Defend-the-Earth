@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5f8a382fb839bf64daeb0aa134df350a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - bustedShotObject: {fileID: 1528543826248096, guid: a4ad9dc0a0ac1e84b9d433669b12dba8,
+      type: 3}
+  - UFO: {fileID: 1450454693458920266, guid: 33a8d119a32f42b418a8c40aca107f76, type: 3}
+  - fireSound: {fileID: 8300000, guid: 5f218a78b9b5a834b9e26656769d0fa7, type: 3}
+  - bioTorpedo: {fileID: 1528543826248096, guid: 0eb1dc9b0d8505f45a18313076e1e653,
+      type: 3}
+  - alienMissile: {fileID: 1059709308236542, guid: a17ed5f586a904d44a4d6380c48a0e18,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
