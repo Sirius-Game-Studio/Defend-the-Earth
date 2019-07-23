@@ -11,7 +11,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private long maxWaves = 1;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
-    [SerializeField] private float timeBetweenWaves = 5;
     [SerializeField] private int maxAliensReached = 10;
     [SerializeField] private GameObject[] enemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
@@ -26,6 +25,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Canvas graphicsQualityMenu = null;
     [SerializeField] private Canvas soundMenu = null;
     [SerializeField] private Canvas quitGameMenu = null;
+    [SerializeField] private Canvas restartPrompt = null;
     [SerializeField] private Text levelCount = null;
     [SerializeField] private Text waveCount = null;
     [SerializeField] private Text moneyCount = null;
@@ -80,6 +80,8 @@ public class GameController : MonoBehaviour
         won = false;
         paused = false;
         enemyAmount = enemiesLeft;
+        Time.timeScale = 1;
+        AudioListener.pause = false;
 
         //Destroy all player, enemy and projectile objects in the scene
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
@@ -114,9 +116,6 @@ public class GameController : MonoBehaviour
             maxAliensReached -= 2;
         }
         if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        paused = false;
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
@@ -129,10 +128,9 @@ public class GameController : MonoBehaviour
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
             PlayerPrefs.Save();
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
         if (Camera.main.GetComponent<AudioSource>())
@@ -172,6 +170,7 @@ public class GameController : MonoBehaviour
         graphicsQualityMenu.enabled = false;
         soundMenu.enabled = false;
         quitGameMenu.enabled = false;
+        restartPrompt.enabled = false;
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
     }
@@ -179,7 +178,36 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) pause();
+        if (Input.GetKeyDown(KeyCode.Escape)) pause();
+        if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1))
+        {
+            if (settingsMenu.enabled)
+            {
+                clickSettings();
+            } else if (graphicsQualityMenu.enabled)
+            {
+                clickGraphicsQuality();
+            } else if (soundMenu.enabled)
+            {
+                clickSoundMenu();
+            } else if (quitGameMenu.enabled)
+            {
+                openCanvasFromClickSource(quitGameMenu);
+            } else if (restartPrompt.enabled)
+            {
+                openCanvasFromClickSource(restartPrompt);
+            }
+        }
+        if (restartPrompt.enabled)
+        {
+            if (Input.GetKeyDown(KeyCode.JoystickButton0))
+            {
+                restart();
+            } else if (Input.GetKeyDown(KeyCode.JoystickButton1))
+            {
+                openCanvasFromClickSource(restartPrompt);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (!gameOver && aliensReached >= maxAliensReached)
         {
@@ -207,7 +235,15 @@ public class GameController : MonoBehaviour
             {
                 won = true;
                 clickSource = 3;
-                if (!quitGameMenu.enabled && !loading) levelCompletedMenu.enabled = true;
+                if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                {
+                    if (!quitGameMenu.enabled && !loading) levelCompletedMenu.enabled = true;
+                } else
+                {
+                    PlayerPrefs.SetInt("Level", 1);
+                    PlayerPrefs.Save();
+                    StartCoroutine(loadScene("Ending"));
+                }
                 StopCoroutine(spawnWaves());
                 StopCoroutine(spawnAsteroids());
                 if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
@@ -305,7 +341,7 @@ public class GameController : MonoBehaviour
                 {
                     if (!boss)
                     {
-                        yield return new WaitForSeconds(timeBetweenWaves);
+                        yield return new WaitForSeconds(3);
                         if (wave >= maxWaves) canWin = true;
                         enemiesLeft = enemyAmount;
                         reachedNextWave = false;
@@ -313,13 +349,13 @@ public class GameController : MonoBehaviour
                     {
                         if (wave < maxWaves)
                         {
-                            yield return new WaitForSeconds(timeBetweenWaves);
+                            yield return new WaitForSeconds(3);
                             if (wave >= maxWaves) canWin = true;
                             enemiesLeft = enemyAmount;
                             reachedNextWave = false;
                         } else
                         {
-                            yield return new WaitForSeconds(timeBetweenWaves);
+                            yield return new WaitForSeconds(3);
                             if (wave >= maxWaves) canWin = true;
                             GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
                             enemy.name = boss.name;
@@ -345,10 +381,15 @@ public class GameController : MonoBehaviour
             if (!gameOver && !won)
             {
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
-                if (!gameOver && !won) Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(-11, 11), 9.5f, 0), Quaternion.Euler(0, 0, 0));
+                Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+                Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+                if (!gameOver && !won)
+                {
+                    Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(left.x, right.x), 9.5f, 0), Quaternion.Euler(0, 0, 0));
+                }
             } else
             {
-                break;
+                yield break;
             }
         }
     }
@@ -360,36 +401,36 @@ public class GameController : MonoBehaviour
             while (enemy && enemy.transform.position.y > y)
             {
                 enemy.GetComponent<Mover>().enabled = true;
-                if (enemy.GetComponent<SideMover>()) enemy.GetComponent<SideMover>().enabled = false;
+                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
                 yield return new WaitForEndOfFrame();
             }
             if (enemy)
             {
                 enemy.GetComponent<Mover>().enabled = false;
-                if (enemy.GetComponent<SideMover>()) enemy.GetComponent<SideMover>().enabled = true;
+                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
             }
         }
     }
 
     void pause()
     {
-        if (!gameOver && !won)
+        if (!gameOver && !won && !gameOverMenu.enabled && !levelCompletedMenu.enabled)
         {
-            clickSource = 1;
-            if (!paused)
+            if (!paused) //Pauses the game
             {
-                Time.timeScale = 0;
+                clickSource = 1;
                 paused = true;
-                gamePausedMenu.enabled = true;
+                Time.timeScale = 0;
                 AudioListener.pause = true;
-            } else
+                gamePausedMenu.enabled = true;
+            } else //Unpauses the game
             {
-                if (!settingsMenu.enabled && !graphicsQualityMenu.enabled && !soundMenu.enabled && !quitGameMenu.enabled)
+                if (!settingsMenu.enabled && !graphicsQualityMenu.enabled && !soundMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
                 {
-                    Time.timeScale = 1;
                     paused = false;
-                    gamePausedMenu.enabled = false;
+                    Time.timeScale = 1;
                     AudioListener.pause = false;
+                    gamePausedMenu.enabled = false;
                 }
             }
         }
@@ -397,10 +438,13 @@ public class GameController : MonoBehaviour
 
     public void resumeGame()
     {
-        Time.timeScale = 1;
-        paused = false;
-        gamePausedMenu.enabled = false;
-        AudioListener.pause = false;
+        if (!settingsMenu.enabled && !quitGameMenu.enabled)
+        {
+            paused = false;
+            Time.timeScale = 1;
+            AudioListener.pause = false;
+            gamePausedMenu.enabled = false;
+        }
     }
 
     public void restart()
@@ -471,35 +515,51 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void clickQuitGame()
+    public void openCanvasFromClickSource(Canvas canvas)
     {
-        if (!quitGameMenu.enabled)
+        if (canvas)
         {
-            quitGameMenu.enabled = true;
-            if (clickSource <= 1)
+            if (!canvas.enabled)
             {
-                gamePausedMenu.enabled = false;
-            } else if (clickSource == 2)
+                canvas.enabled = true;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = false;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = false;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = false;
+                }
+            } else
             {
-                gameOverMenu.enabled = false;
-            } else if (clickSource >= 3)
-            {
-                levelCompletedMenu.enabled = false;
-            }
-        } else
-        {
-            quitGameMenu.enabled = false;
-            if (clickSource <= 1)
-            {
-                gamePausedMenu.enabled = true;
-            } else if (clickSource == 2)
-            {
-                gameOverMenu.enabled = true;
-            } else if (clickSource >= 3)
-            {
-                levelCompletedMenu.enabled = true;
+                canvas.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
             }
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 
     IEnumerator loadScene(string scene)
@@ -520,6 +580,7 @@ public class GameController : MonoBehaviour
                 graphicsQualityMenu.enabled = false;
                 soundMenu.enabled = false;
                 quitGameMenu.enabled = false;
+                restartPrompt.enabled = false;
                 yield return null;
             }
             loading = false;

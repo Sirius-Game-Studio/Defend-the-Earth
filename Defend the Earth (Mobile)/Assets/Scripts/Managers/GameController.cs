@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class GameController : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private long maxWaves = 1;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
-    [SerializeField] private float timeBetweenWaves = 5;
     [SerializeField] private int maxAliensReached = 10;
     [SerializeField] private GameObject[] enemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
@@ -23,9 +23,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Canvas gameOverMenu = null;
     [SerializeField] private Canvas levelCompletedMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
-    [SerializeField] private Canvas graphicsQualityMenu = null;
-    [SerializeField] private Canvas soundMenu = null;
     [SerializeField] private Canvas quitGameMenu = null;
+    [SerializeField] private Canvas restartPrompt = null;
+    public Text pauseButton = null;
     [SerializeField] private Text levelCount = null;
     [SerializeField] private Text waveCount = null;
     [SerializeField] private Text moneyCount = null;
@@ -79,17 +79,21 @@ public class GameController : MonoBehaviour
         won = false;
         paused = false;
         enemyAmount = enemiesLeft;
+        Time.timeScale = 1;
+        AudioListener.pause = false;
 
-        //Destroy all player and enemy objects in the scene 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        GameObject[] aliens = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach (GameObject player in players)
+        //Destroy all player, enemy and projectile objects in the scene
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
         {
             if (player) Destroy(player);
         }
-        foreach (GameObject enemy in aliens)
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
             if (enemy) Destroy(enemy);
+        }
+        foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
+        {
+            if (projectile) Destroy(projectile);
         }
 
         if (!PlayerPrefs.HasKey("Difficulty")) //Sets the difficulty to Normal if no difficulty key is found
@@ -111,9 +115,6 @@ public class GameController : MonoBehaviour
             maxAliensReached -= 2;
         }
         if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        paused = false;
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
@@ -128,6 +129,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
         if (Camera.main.GetComponent<AudioSource>())
@@ -163,10 +165,11 @@ public class GameController : MonoBehaviour
         gamePausedMenu.enabled = false;
         gameOverMenu.enabled = false;
         levelCompletedMenu.enabled = false;
-        settingsMenu.enabled = false;
-        graphicsQualityMenu.enabled = false;
-        soundMenu.enabled = false;
+        settingsMenu.enabled = false;   
         quitGameMenu.enabled = false;
+        restartPrompt.enabled = false;
+        pauseButton.gameObject.SetActive(true);
+        pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
     }
@@ -174,7 +177,20 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) pause();
+        if (Input.GetKeyDown(KeyCode.Escape)) pause();
+        if (paused && Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (settingsMenu.enabled)
+            {
+                clickSettings();
+            } else if (quitGameMenu.enabled)
+            {
+                openCanvasFromClickSource(quitGameMenu);
+            } else if (restartPrompt.enabled)
+            {
+                openCanvasFromClickSource(restartPrompt);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (!gameOver && aliensReached >= maxAliensReached)
         {
@@ -202,7 +218,15 @@ public class GameController : MonoBehaviour
             {
                 won = true;
                 clickSource = 3;
-                if (!quitGameMenu.enabled && !loading) levelCompletedMenu.enabled = true;
+                if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                {
+                    if (!quitGameMenu.enabled && !loading) levelCompletedMenu.enabled = true;
+                } else
+                {
+                    PlayerPrefs.SetInt("Level", 1);
+                    PlayerPrefs.Save();
+                    StartCoroutine(loadScene("Ending"));
+                }
                 StopCoroutine(spawnWaves());
                 StopCoroutine(spawnAsteroids());
                 if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
@@ -298,7 +322,7 @@ public class GameController : MonoBehaviour
                 {
                     if (!boss)
                     {
-                        yield return new WaitForSeconds(timeBetweenWaves);
+                        yield return new WaitForSeconds(3);
                         if (wave >= maxWaves) canWin = true;
                         enemiesLeft = enemyAmount;
                         reachedNextWave = false;
@@ -306,13 +330,13 @@ public class GameController : MonoBehaviour
                     {
                         if (wave < maxWaves)
                         {
-                            yield return new WaitForSeconds(timeBetweenWaves);
+                            yield return new WaitForSeconds(3);
                             if (wave >= maxWaves) canWin = true;
                             enemiesLeft = enemyAmount;
                             reachedNextWave = false;
                         } else
                         {
-                            yield return new WaitForSeconds(timeBetweenWaves);
+                            yield return new WaitForSeconds(3);
                             if (wave >= maxWaves) canWin = true;
                             GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
                             enemy.name = boss.name;
@@ -338,10 +362,15 @@ public class GameController : MonoBehaviour
             if (!gameOver && !won)
             {
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
-                if (!gameOver && !won) Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(-11, 11), 9.5f, 0), Quaternion.Euler(0, 0, 0));
+                Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+                Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+                if (!gameOver && !won)
+                {
+                    Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(left.x, right.x), 9.5f, 0), Quaternion.Euler(0, 0, 0));
+                }
             } else
             {
-                break;
+                yield break;
             }
         }
     }
@@ -353,44 +382,56 @@ public class GameController : MonoBehaviour
             while (enemy && enemy.transform.position.y > y)
             {
                 enemy.GetComponent<Mover>().enabled = true;
-                if (enemy.GetComponent<SideMover>()) enemy.GetComponent<SideMover>().enabled = false;
+                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
                 yield return new WaitForEndOfFrame();
             }
             if (enemy)
             {
                 enemy.GetComponent<Mover>().enabled = false;
-                if (enemy.GetComponent<SideMover>()) enemy.GetComponent<SideMover>().enabled = true;
+                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
             }
         }
     }
 
-    void pause()
+    public void pause()
     {
-        if (!gameOver && !won)
+        if (!gameOver && !won && !gameOverMenu.enabled && !levelCompletedMenu.enabled)
         {
-            clickSource = 1;
-            if (!paused)
+            if (!paused) //Pauses the game
             {
-                Time.timeScale = 0;
+                clickSource = 1;
                 paused = true;
-                gamePausedMenu.enabled = true;
+                Time.timeScale = 0;
                 AudioListener.pause = true;
-            } else
+                gamePausedMenu.enabled = true;
+                pauseButton.gameObject.SetActive(false);
+                pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
+            } else //Unpauses the game
             {
-                Time.timeScale = 1;
-                paused = false;
-                gamePausedMenu.enabled = false;
-                AudioListener.pause = false;
+                if (!settingsMenu.enabled && !quitGameMenu.enabled)
+                {
+                    paused = false;
+                    Time.timeScale = 1;
+                    AudioListener.pause = false;
+                    gamePausedMenu.enabled = false;
+                    pauseButton.gameObject.SetActive(true);
+                    pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
+                }
             }
         }
     }
 
     public void resumeGame()
     {
-        Time.timeScale = 1;
-        paused = false;
-        gamePausedMenu.enabled = false;
-        AudioListener.pause = false;
+        if (!settingsMenu.enabled && !quitGameMenu.enabled)
+        {
+            paused = false;
+            Time.timeScale = 1;
+            AudioListener.pause = false;
+            gamePausedMenu.enabled = false;
+            pauseButton.gameObject.SetActive(true);
+            pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
+        }
     }
 
     public void restart()
@@ -435,61 +476,51 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void clickGraphicsQuality()
+    public void openCanvasFromClickSource(Canvas canvas)
     {
-        if (!graphicsQualityMenu.enabled)
+        if (canvas)
         {
-            graphicsQualityMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            graphicsQualityMenu.enabled = false;
-            settingsMenu.enabled = true;
+            if (!canvas.enabled)
+            {
+                canvas.enabled = true;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = false;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = false;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = false;
+                }
+            } else
+            {
+                canvas.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
+            }
         }
     }
 
-    public void clickSoundMenu()
+    float getVolumeData(bool isSound)
     {
-        if (!soundMenu.enabled)
+        float volume = 1;
+        if (isSound)
         {
-            soundMenu.enabled = true;
-            settingsMenu.enabled = false;
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
         } else
         {
-            soundMenu.enabled = false;
-            settingsMenu.enabled = true;
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
         }
-    }
-
-    public void clickQuitGame()
-    {
-        if (!quitGameMenu.enabled)
-        {
-            quitGameMenu.enabled = true;
-            if (clickSource <= 1)
-            {
-                gamePausedMenu.enabled = false;
-            } else if (clickSource == 2)
-            {
-                gameOverMenu.enabled = false;
-            } else if (clickSource >= 3)
-            {
-                levelCompletedMenu.enabled = false;
-            }
-        } else
-        {
-            quitGameMenu.enabled = false;
-            if (clickSource <= 1)
-            {
-                gamePausedMenu.enabled = true;
-            } else if (clickSource == 2)
-            {
-                gameOverMenu.enabled = true;
-            } else if (clickSource >= 3)
-            {
-                levelCompletedMenu.enabled = true;
-            }
-        }
+        return volume;
     }
 
     IEnumerator loadScene(string scene)
@@ -507,9 +538,8 @@ public class GameController : MonoBehaviour
                 gameOverMenu.enabled = false;
                 levelCompletedMenu.enabled = false;
                 settingsMenu.enabled = false;
-                graphicsQualityMenu.enabled = false;
-                soundMenu.enabled = false;
                 quitGameMenu.enabled = false;
+                restartPrompt.enabled = false;
                 yield return null;
             }
             loading = false;

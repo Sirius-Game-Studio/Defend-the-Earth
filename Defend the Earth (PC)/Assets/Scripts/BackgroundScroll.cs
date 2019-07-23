@@ -3,7 +3,7 @@
 public class BackgroundScroll : MonoBehaviour
 {
     [SerializeField] private float speed = -1;
-    [SerializeField] private float z = 25;
+    [SerializeField] private float z = 60;
 
     private Vector3 initialPosition;
 

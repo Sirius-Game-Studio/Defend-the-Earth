@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8513550893873227408}
   m_Layer: 0
   m_Name: Missile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,5 +140,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  movement: {x: 0, y: 0}
+  movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 1

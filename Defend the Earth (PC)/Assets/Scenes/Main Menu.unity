@@ -1024,7 +1024,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $7
+  m_Text: $8
 --- !u!222 &176536103
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1755,12 +1755,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -1777,6 +1771,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -2042,12 +2042,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -2064,6 +2058,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -2837,7 +2837,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $6
+  m_Text: $7
 --- !u!222 &329266298
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3038,7 +3038,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &417101335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3127,7 +3127,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445606111}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -3533,7 +3533,7 @@ MonoBehaviour:
 
     Aliens deal 30% more damage, have 20% more health and shoot slightly
 
-    faster. Bosses have 50% more health, 40% more damage and improved
+    faster. Bosses have 100% more health, 40% more damage and improved
 
     abilities. Asteroids spawn more frequently.'
 --- !u!222 &489387620
@@ -3795,12 +3795,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -3817,6 +3811,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -3903,7 +3903,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'This mode is recommended for new players. Aliens deal 25% less
 
-    damage and have 20% less health. Bosses deal 10% less damage.'
+    damage and have 15% less health. Bosses deal 10% less damage.
+
+    Enemies give 50% less money when killed.'
 --- !u!222 &518051439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3984,7 +3986,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'This mode is good for players who want a challenge. Aliens deal
 
-    15% more damage and have 10% more health. Bosses have 25% more
+    15% more damage and have 10% more health. Bosses have 50% more
 
     health, deal 20% more damage and have slightly improved abilities.
 
@@ -4417,7 +4419,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: changeSpaceshipsPage
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5067,11 +5069,11 @@ RectTransform:
   m_Father: {fileID: 417101335}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: 300, y: 41}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &705075847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5247,6 +5249,8 @@ RectTransform:
   - {fileID: 417101335}
   - {fileID: 2124662894}
   - {fileID: 613835538}
+  - {fileID: 2910675732344726100}
+  - {fileID: 2910675732200939141}
   m_Father: {fileID: 1002154996}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5854,7 +5858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &831438695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5950,7 +5954,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '130 Health
 
-    5-8 (x6) Damage
+    4-9 (x6) Damage
 
     130 Rate of Fire
 
@@ -7324,7 +7328,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004614327}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -7673,7 +7677,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1024149217}
   m_OnClick:
     m_PersistentCalls:
@@ -9675,12 +9679,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -9697,6 +9695,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -10043,11 +10047,11 @@ RectTransform:
   m_Father: {fileID: 831438695}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -40}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: 300, y: 41}
-  m_Pivot: {x: 0.5, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1328360101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10137,12 +10141,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -10159,6 +10157,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -10354,7 +10358,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $5
+  m_Text: $4
 --- !u!222 &1399138116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11141,7 +11145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: $4
+  m_Text: $5
 --- !u!222 &1508655232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11222,7 +11226,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '100 Health
 
-    23 (x1) Damage
+    26 (x1) Damage
 
     115 Rate of Fire
 
@@ -11402,7 +11406,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '120 Health
 
-    6 (x4) Damage
+    8 (x4) Damage
 
     190 Rate of Fire
 
@@ -11666,12 +11670,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -11688,6 +11686,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -12321,7 +12325,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '110 Health
 
-    7 (x2) Damage
+    9 (x2) Damage
 
     250 Rate of Fire
 
@@ -14392,12 +14396,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
     - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Enabled
@@ -14414,6 +14412,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -14862,7 +14866,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: '145 Health
 
-    6 (x6) Damage
+    7 (x6) Damage
 
     150 Rate of Fire
 
@@ -15346,14 +15350,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: changeSpaceshipsPage
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -15590,8 +15594,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff57ca5a606068646a78ad03a8ed8b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  page1: {fileID: 831438694}
-  page2: {fileID: 417101334}
+  pages:
+  - {fileID: 831438694}
+  - {fileID: 417101334}
   buySpaceFighterButton: {fileID: 949335692}
   buyAlienMowerButton: {fileID: 182632257}
   buyBlazingRocketButton: {fileID: 1034844368}
@@ -15604,7 +15609,7 @@ MonoBehaviour:
   quadShooterPrice: {fileID: 1551807814}
   pointVoidBreakerPrice: {fileID: 1729664121}
   annihilatorPrice: {fileID: 306462312}
-  moneyText: {fileID: 44209462}
+  moneyCount: {fileID: 44209462}
   damageText: {fileID: 1960001748}
   fireRateText: {fileID: 32723923}
   upgradeDamageButton: {fileID: 1032177964}
@@ -15638,9 +15643,187 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143584394}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.571123, y: -10.846123, z: 0.40981907}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2910675732200939138
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2910675732200939141}
+  - component: {fileID: 2910675732200939142}
+  - component: {fileID: 2910675732200939143}
+  - component: {fileID: 2910675732200939140}
+  m_Layer: 5
+  m_Name: RightBumper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2910675732200939140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732200939138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca7fba58ca1a014989635fee9135d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xboxButton: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  PSButton: {fileID: 21300030, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+--- !u!224 &2910675732200939141
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732200939138}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 756711039}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
+  m_Pivot: {x: 1, y: 1}
+--- !u!222 &2910675732200939142
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732200939138}
+  m_CullTransparentMesh: 0
+--- !u!114 &2910675732200939143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732200939138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!1 &2910675732344726099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2910675732344726100}
+  - component: {fileID: 2910675732344726103}
+  - component: {fileID: 2910675732344726102}
+  - component: {fileID: 2910675732344726101}
+  m_Layer: 5
+  m_Name: LeftBumper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2910675732344726100
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732344726099}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 756711039}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 40}
+  m_SizeDelta: {x: 35, y: 35}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &2910675732344726101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732344726099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca7fba58ca1a014989635fee9135d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xboxButton: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  PSButton: {fileID: 21300028, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+--- !u!114 &2910675732344726102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732344726099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &2910675732344726103
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2910675732344726099}
+  m_CullTransparentMesh: 0

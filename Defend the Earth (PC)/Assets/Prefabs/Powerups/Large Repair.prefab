@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 490852}
-  - component: {fileID: 6361562459424169971}
-  - component: {fileID: 5241640103153728014}
-  - component: {fileID: 8523594190439686236}
-  - component: {fileID: 5155182229531140557}
-  - component: {fileID: 616113234535245697}
+  - component: {fileID: 8986340672682831509}
+  - component: {fileID: 604591831420316342}
+  - component: {fileID: 7903276455441565566}
+  - component: {fileID: 4839323291990872610}
+  - component: {fileID: 2220761450136899481}
   m_Layer: 0
-  m_Name: HeavyWrench03
+  m_Name: Large Repair
   m_TagString: LargeRepair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 122894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.25, y: 5.25, z: 5.25}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 481520}
   - {fileID: 480884}
@@ -38,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6361562459424169971
+--- !u!54 &8986340672682831509
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,7 +54,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
---- !u!65 &5241640103153728014
+--- !u!65 &604591831420316342
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,12 +62,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122894}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.445, z: 0.0325}
-  m_Center: {x: -0.018, y: 0.01, z: 0}
---- !u!114 &8523594190439686236
+  m_Size: {x: 0.1, y: 0.45, z: 0.01}
+  m_Center: {x: -0.02, y: 0.01, z: 0}
+--- !u!114 &7903276455441565566
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb2fecb882c7a144bf2f46c0be1daf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5155182229531140557
+--- !u!114 &4839323291990872610
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,9 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
-  movement: {x: 0, y: -1}
+  movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 0
---- !u!114 &616113234535245697
+--- !u!114 &2220761450136899481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useInsideUnitSphere: 1
-  tumble: 1
+  tumble: 1.25
   rotation: {x: 0, y: 0, z: 0}
 --- !u!1 &148956
 GameObject:

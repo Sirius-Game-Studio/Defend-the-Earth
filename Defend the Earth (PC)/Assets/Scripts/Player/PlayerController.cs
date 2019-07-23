@@ -46,12 +46,22 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (health < 0) health = 0; //Checks if health is below 0
+        if (health < 0) //Checks if health is below 0
+        {
+            health = 0;
+        } else if (health > maxHealth) //Checks if health is above the maximum
+        {
+            health = maxHealth;
+        }
         if (healthBar) healthBar.value = health;
         if (healthText) healthText.text = health + " / " + maxHealth;
         if (health <= 0)
         {
-            if (explosion) Instantiate(explosion, transform.position, transform.rotation);
+            if (explosion)
+            {
+                GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
+                if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+            }
             if (!GameController.instance.gameOver && !GameController.instance.won)
             {
                 GameController.instance.gameOver = true;
@@ -89,9 +99,10 @@ public class PlayerController : MonoBehaviour
                 {
                     if (fireSound)
                     {
-                        audioSource.PlayOneShot(fireSound);
+                        audioSource.PlayOneShot(fireSound, getVolumeData(true));
                     } else
                     {
+                        audioSource.volume = getVolumeData(true);
                         audioSource.Play();
                     }
                 }
@@ -110,5 +121,18 @@ public class PlayerController : MonoBehaviour
         {
             --health;
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 }

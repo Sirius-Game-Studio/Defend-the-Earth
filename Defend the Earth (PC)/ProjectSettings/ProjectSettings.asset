@@ -119,7 +119,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1.0
+  bundleVersion: 0.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -175,7 +175,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 1
+  StripUnusedMeshComponents: 0
   VertexChannelCompressionMask: 254
   iPhoneSdkVersion: 988
   iOSTargetOSVersionString: 9.0
@@ -274,7 +274,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: b47166a473ec3fe4e894a663b5717abf, type: 3}
+      m_Icon: {fileID: 2800000, guid: 89572596cff1e3940b4e4234e7dfec13, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0

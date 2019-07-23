@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7489597210954443730}
   - component: {fileID: 8024120582389604154}
   - component: {fileID: -6264907973308361774}
+  - component: {fileID: 511658102979405190}
   m_Layer: 8
   m_Name: AsteroidRockyGreen1
   m_TagString: Enemy
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 40
+  defense: 1
   money: 1
   powerupChance: 0
   powerups: []
@@ -160,7 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
-  movement: {x: 0, y: -1}
+  movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 0
 --- !u!114 &-6264907973308361774
 MonoBehaviour:
@@ -177,6 +179,18 @@ MonoBehaviour:
   useInsideUnitSphere: 1
   tumble: 1.5
   rotation: {x: 0, y: 0, z: 0}
+--- !u!114 &511658102979405190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075912379424398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd977e57f16782a4786c63c349931963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1923878083515758
 GameObject:
   m_ObjectHideFlags: 0

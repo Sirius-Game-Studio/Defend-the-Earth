@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 public class DataInitializer : MonoBehaviour
 {
     [SerializeField] private int level = 1;
-    [SerializeField] private int maxLevels = 3;
+    [SerializeField] private int maxLevels = 5;
 
     void Awake()
     {
-        //PlayerPrefs.DeleteAll();
         if (!PlayerPrefs.HasKey("Spaceship")) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
         if (!PlayerPrefs.HasKey("HasSpaceFighter")) PlayerPrefs.SetInt("HasSpaceFighter", 1);
 
@@ -32,7 +31,7 @@ public class DataInitializer : MonoBehaviour
         if (!PlayerPrefs.HasKey("DamagePrice")) PlayerPrefs.SetInt("DamagePrice", 8);
         if (!PlayerPrefs.HasKey("SpeedPrice")) PlayerPrefs.SetInt("SpeedPrice", 5);
         if (!PlayerPrefs.HasKey("HealthPrice")) PlayerPrefs.SetInt("HealthPrice", 7);
-        if (!PlayerPrefs.HasKey("MoneyPrice")) PlayerPrefs.SetInt("MoneyPrice", 3);
+        if (!PlayerPrefs.HasKey("MoneyPrice")) PlayerPrefs.SetInt("MoneyPrice", 4);
 
         //Set up money data
         if (!PlayerPrefs.HasKey("Money")) PlayerPrefs.SetString("Money", "0");

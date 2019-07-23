@@ -9,12 +9,9 @@ public class TouchPowerup : MonoBehaviour
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController)
             {
-                if (CompareTag("SmallRepair"))
+                if (CompareTag("Repair"))
                 {
-                    playerController.health += 15;
-                } else if (CompareTag("LargeRepair"))
-                {
-                    playerController.health += 25;
+                    playerController.health += 20;
                 } else
                 {
                     Debug.LogError("Powerup tag " + tag + " is invalid.");

@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Spaceships Menu")]
-    //Pages
-    [SerializeField] private GameObject page1 = null;
-    [SerializeField] private GameObject page2 = null;
+    [SerializeField] private GameObject[] pages = new GameObject[0];
 
     //Buy Buttons
     [SerializeField] private Text buySpaceFighterButton = null;
@@ -27,7 +25,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text annihilatorPrice = null;
 
     [Header("Upgrades Menu")]
-    [SerializeField] private Text moneyText = null;
+    [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text damageText = null;
     [SerializeField] private Text fireRateText = null;
     [SerializeField] private Text upgradeDamageButton = null;
@@ -51,8 +49,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas upgradesMenu = null;
     [SerializeField] private Canvas spaceshipsMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
-    [SerializeField] private Canvas graphicsQualityMenu = null;
-    [SerializeField] private Canvas soundMenu = null;
     [SerializeField] private Canvas selectDifficultyMenu = null;
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
@@ -69,7 +65,7 @@ public class MainMenuManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
-            soundSlider.value = 1;
+            PlayerPrefs.Save();
         } else
         {
             soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
@@ -77,9 +73,10 @@ public class MainMenuManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
-            musicSlider.value = 1;
+            PlayerPrefs.Save();
         } else
         {
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
             musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         }
         PlayerPrefs.Save();
@@ -89,18 +86,22 @@ public class MainMenuManager : MonoBehaviour
         spaceshipsMenu.enabled = false;
         upgradesMenu.enabled = false;
         settingsMenu.enabled = false;
-        graphicsQualityMenu.enabled = false;
-        soundMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
-        page1.SetActive(true);
-        page2.SetActive(false);
-        page = 1;
+        foreach (GameObject page in pages)
+        {
+            if (page) page.SetActive(false);
+        }
+        if (pages[0])
+        {
+            pages[0].SetActive(true);
+            page = 1;
+        }
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (shopMenu.enabled)
             {
@@ -114,26 +115,27 @@ public class MainMenuManager : MonoBehaviour
             } else if (settingsMenu.enabled)
             {
                 clickSettings();
-            } else if (graphicsQualityMenu.enabled)
-            {
-                clickGraphicsQuality();
-            } else if (soundMenu.enabled)
-            {
-                clickSound();
             } else if (selectDifficultyMenu.enabled)
             {
                 clickPlayGame();
             }
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
 
         //Updates volume data to match the slider values
         PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
         PlayerPrefs.Save();
 
+        if (PlayerPrefs.GetString("Money") != "")
+        {
+            moneyCount.text = "$" + PlayerPrefs.GetString("Money");
+        } else
+        {
+            moneyCount.text = "$0";
+        }
+
         //Updates the money counter and upgrade price text
-        moneyText.text = "$" + PlayerPrefs.GetString("Money");
         damageText.text = "+" + PlayerPrefs.GetInt("DamagePercentage") + "% Damage";
         speedText.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
         healthText.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
@@ -156,26 +158,26 @@ public class MainMenuManager : MonoBehaviour
         priceTextState(annihilatorPrice, buyAnnihilatorButton, false, false, false, "HasAnnihilator", "", 5000, 1, false);
 
         //Sets the states of upgrade price text
-        priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 75, false);
+        priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 50, false);
         priceTextState(speedPrice, upgradeSpeedButton, true, true, true, "SpeedPercentage", "SpeedPrice", 5, 20, false);
-        priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 150, false);
-        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 3, 300, false);
+        priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 100, false);
+        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 300, false);
 
         if (!loading)
         {
             loadingText.SetActive(false);
-            moneyText.gameObject.SetActive(true);
+            moneyCount.gameObject.SetActive(true);
         } else
         {
             loadingText.SetActive(true);
-            moneyText.gameObject.SetActive(false);
+            moneyCount.gameObject.SetActive(false);
         }
 
         //Checks if the player upgrades are above maximum values
-        if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.75f)
+        if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
         {
-            PlayerPrefs.SetFloat("DamageMultiplier", 1.75f);
-            PlayerPrefs.SetInt("DamagePercentage", 75);
+            PlayerPrefs.SetFloat("DamageMultiplier", 1.5f);
+            PlayerPrefs.SetInt("DamagePercentage", 50);
             PlayerPrefs.Save();
         }
         if (PlayerPrefs.GetFloat("SpeedMultiplier") > 1.2f)
@@ -184,10 +186,10 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.SetInt("SpeedPercentage", 20);
             PlayerPrefs.Save();
         }
-        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2.5f)
+        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2f)
         {
-            PlayerPrefs.SetFloat("HealthMultiplier", 2.5f);
-            PlayerPrefs.SetInt("HealthPercentage", 150);
+            PlayerPrefs.SetFloat("HealthMultiplier", 2f);
+            PlayerPrefs.SetInt("HealthPercentage", 100);
             PlayerPrefs.Save();
         }
         if (PlayerPrefs.GetFloat("MoneyMultiplier") > 4)
@@ -264,9 +266,20 @@ public class MainMenuManager : MonoBehaviour
         {
             spaceshipsMenu.enabled = false;
             shopMenu.enabled = true;
-            page1.SetActive(true);
-            page2.SetActive(false);
-            page = 1;
+            foreach (GameObject page in pages)
+            {
+                if (page) page.SetActive(false);
+            }
+            if (pages[0])
+            {
+                pages[0].SetActive(true);
+                page = 1;
+            } else
+            {
+                spaceshipsMenu.enabled = false;
+                shopMenu.enabled = true;
+                Debug.LogError("Could not find page objects in the pages array!");
+            }
         }
     }
 
@@ -305,18 +318,46 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void changeSpaceshipsPage()
+    public void changeSpaceshipsPage(bool next)
     {
-        if (page <= 1)
+        if (next)
         {
-            page1.SetActive(false);
-            page2.SetActive(true);
-            page = 2;
-        } else if (page >= 2)
+            ++page;
+            if (page < pages.Length)
+            {
+                foreach (GameObject page in pages)
+                {
+                    if (page) page.SetActive(false);
+                }
+                pages[page - 1].SetActive(true);
+            } else
+            {
+                foreach (GameObject page in pages)
+                {
+                    if (page) page.SetActive(false);
+                }
+                pages[pages.Length - 1].SetActive(true);
+                page = pages.Length;
+            }
+        } else
         {
-            page1.SetActive(true);
-            page2.SetActive(false);
-            page = 1;
+            --page;
+            if (page > 0)
+            {
+                foreach (GameObject page in pages)
+                {
+                    if (page) page.SetActive(false);
+                }
+                pages[page - 1].SetActive(true);
+            } else
+            {
+                foreach (GameObject page in pages)
+                {
+                    if (page) page.SetActive(false);
+                }
+                pages[0].SetActive(true);
+                page = 1;
+            }
         }
     }
 
@@ -424,14 +465,14 @@ public class MainMenuManager : MonoBehaviour
      
     public void upgradeDamage()
     {
-        if (PlayerPrefs.GetInt("DamagePercentage") < 75)
+        if (PlayerPrefs.GetInt("DamagePercentage") < 50)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("DamagePrice"))
             {
                 money -= PlayerPrefs.GetInt("DamagePrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("DamagePrice", (int)(PlayerPrefs.GetInt("DamagePrice") * 1.45f));
+                PlayerPrefs.SetInt("DamagePrice", (int)(PlayerPrefs.GetInt("DamagePrice") * 1.7f));
                 PlayerPrefs.SetFloat("DamageMultiplier", PlayerPrefs.GetFloat("DamageMultiplier") + 0.05f);
                 PlayerPrefs.SetInt("DamagePercentage", PlayerPrefs.GetInt("DamagePercentage") + 5);
                 PlayerPrefs.Save();
@@ -448,7 +489,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 money -= PlayerPrefs.GetInt("SpeedPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.4f));
+                PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.35f));
                 PlayerPrefs.SetFloat("SpeedMultiplier", PlayerPrefs.GetFloat("SpeedMultiplier") + 0.01f);
                 PlayerPrefs.SetInt("SpeedPercentage", PlayerPrefs.GetInt("SpeedPercentage") + 1);
                 PlayerPrefs.Save();
@@ -458,16 +499,16 @@ public class MainMenuManager : MonoBehaviour
 
     public void upgradeHealth()
     {
-        if (PlayerPrefs.GetInt("HealthPercentage") < 150)
+        if (PlayerPrefs.GetInt("HealthPercentage") < 100)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("HealthPrice"))
             {
                 money -= PlayerPrefs.GetInt("HealthPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.5f));
-                PlayerPrefs.SetFloat("HealthMultiplier", PlayerPrefs.GetFloat("HealthMultiplier") + 0.1f);
-                PlayerPrefs.SetInt("HealthPercentage", PlayerPrefs.GetInt("HealthPercentage") + 10);
+                PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.4f));
+                PlayerPrefs.SetFloat("HealthMultiplier", PlayerPrefs.GetFloat("HealthMultiplier") + 0.05f);
+                PlayerPrefs.SetInt("HealthPercentage", PlayerPrefs.GetInt("HealthPercentage") + 5);
                 PlayerPrefs.Save();
             }
         }
@@ -482,7 +523,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 money -= PlayerPrefs.GetInt("MoneyPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.35f));
+                PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.3f));
                 PlayerPrefs.SetFloat("MoneyMultiplier", PlayerPrefs.GetFloat("MoneyMultiplier") + 0.1f);
                 PlayerPrefs.SetInt("MoneyPercentage", PlayerPrefs.GetInt("MoneyPercentage") + 10);
                 PlayerPrefs.Save();
@@ -490,35 +531,17 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void clickGraphicsQuality()
+    float getVolumeData(bool isSound)
     {
-        if (!graphicsQualityMenu.enabled)
+        float volume = 1;
+        if (isSound)
         {
-            graphicsQualityMenu.enabled = true;
-            settingsMenu.enabled = false;
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
         } else
         {
-            graphicsQualityMenu.enabled = false;
-            settingsMenu.enabled = true;
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
         }
-    }
-
-    public void clickSound()
-    {
-        if (!soundMenu.enabled)
-        {
-            soundMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            soundMenu.enabled = false;
-            settingsMenu.enabled = true;
-        }
-    }
-
-    public void changeQualityLevel(int qualityLevel)
-    {
-        if (graphicsQualityMenu.enabled && qualityLevel >= 0) QualitySettings.SetQualityLevel(qualityLevel, true);
+        return volume;
     }
 
     IEnumerator loadScene(string scene)
@@ -537,8 +560,6 @@ public class MainMenuManager : MonoBehaviour
                 spaceshipsMenu.enabled = false;
                 upgradesMenu.enabled = false;
                 settingsMenu.enabled = false;
-                graphicsQualityMenu.enabled = false;
-                soundMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
             }

@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 3937757261437629004}
   - component: {fileID: 3937757261437629003}
   - component: {fileID: 3937757261437629002}
-  - component: {fileID: 3937757261437629001}
   - component: {fileID: -2546559010840841040}
+  - component: {fileID: 3937757261437629001}
   - component: {fileID: 2795523735423435743}
   - component: {fileID: 3565738850329549525}
   - component: {fileID: 2245807509010582296}
   m_Layer: 0
   m_Name: Fast Laser
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,19 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3937757261437629001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3937757261437629000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-2546559010840841040
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111,6 +98,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
+--- !u!65 &3937757261437629001
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3937757261437629000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2795523735423435743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16f3c49995ea03429c640b31c268159, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 8
+  damage: 9
   doubleDamageMultiplier: 1
   doubleDamageLayer: -1
   explosion: {fileID: 0}
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 14.5
-  movement: {x: 0, y: 0}
+  movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 1
 --- !u!114 &2245807509010582296
 MonoBehaviour:
@@ -154,6 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5b74c846b2d3bc449c0fd5c6b8b8105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDamage: 5
+  minimumDamage: 4
   damageDecrement: 1
-  falloffTime: 0.3
+  falloffTime: 0.17

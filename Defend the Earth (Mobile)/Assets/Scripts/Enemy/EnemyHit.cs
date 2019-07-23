@@ -34,10 +34,27 @@ public class EnemyHit : MonoBehaviour
             if (playerController)
             {
                 playerController.takeDamage(damage);
-                if (explosion) Instantiate(explosion, transform.position, transform.rotation);
+                if (explosion)
+                {
+                    GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
+                    if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+                }
                 hit = true;
                 Destroy(gameObject);
             }
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 }

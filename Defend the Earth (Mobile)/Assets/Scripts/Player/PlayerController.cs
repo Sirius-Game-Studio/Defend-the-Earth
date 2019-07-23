@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private long damage = 10;
     [SerializeField] private float RPM = 200;
     [SerializeField] private float speed = 7.5f;
+
+    [Header("Miscellanous")]
     [SerializeField] private float yMin = -6.75f, yMax = 2;
 
     [Header("Setup")]
@@ -17,61 +19,72 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource audioSource;
     private Slider healthBar;
+    private Text healthText;
+    private long maxHealth = 0;
     private float nextShot = 0;
-    private Vector3 screenBounds = Vector3.zero;
-    private float width = 0;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        Slider[] healthbars = FindObjectsOfType<Slider>();
-        foreach (Slider slider in healthbars)
+
+        //Gets sliders and texts tagged as HealthBar, then sets health bar and health text
+        foreach (Slider slider in FindObjectsOfType<Slider>())
         {
             if (slider.CompareTag("HealthBar")) healthBar = slider;
         }
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        width = GetComponent<Collider>().bounds.extents.x;
+        foreach (Text text in FindObjectsOfType<Text>())
+        {
+            if (text.CompareTag("HealthBar")) healthText = text;
+        }
+
+        if (healthBar && healthBar.maxValue != health) healthBar.maxValue = health;
         if (PlayerPrefs.HasKey("HealthMultiplier")) health = (long)(health * PlayerPrefs.GetFloat("HealthMultiplier"));
         if (PlayerPrefs.HasKey("DamageMultiplier")) damage = (long)(damage * PlayerPrefs.GetFloat("DamageMultiplier"));
         if (PlayerPrefs.HasKey("SpeedMultiplier")) speed *= PlayerPrefs.GetFloat("SpeedMultiplier");
-        if (healthBar) healthBar.maxValue = health;
+        maxHealth = health;
+        if (healthBar) healthBar.maxValue = maxHealth;
+        if (healthText) healthText.text = health + " / " + maxHealth;
     }
 
     void Update()
     {
-        if (health > healthBar.maxValue) health = (int)healthBar.maxValue;
+        if (health < 0) //Checks if health is below 0
+        {
+            health = 0;
+        } else if (health > maxHealth) //Checks if health is above the maximum
+        {
+            health = maxHealth;
+        }
         if (healthBar) healthBar.value = health;
+        if (healthText) healthText.text = health + " / " + maxHealth;
         if (health <= 0)
         {
-            if (explosion) Instantiate(explosion, transform.position, transform.rotation);
+            if (explosion)
+            {
+                GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
+                if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+            }
             if (!GameController.instance.gameOver && !GameController.instance.won)
             {
                 GameController.instance.gameOver = true;
-                GameController.instance.deathMessageToShow = "Your spaceship was destroyed!";
+                GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
             }
             Destroy(gameObject);
         }
-        if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused)
+        if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && GameController.instance.pauseButton.color != GameController.instance.pauseButton.GetComponent<ButtonHover>().hoverColor)
         {
-            float moveHorizontal = Input.GetAxisRaw("Horizontal");
-            float moveVertical = Input.GetAxisRaw("Vertical");
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+            float width = GetComponent<Collider>().bounds.extents.x;
+            if (Input.touchCount > 0)
             {
-                Touch touch = Input.touches[0];
-                moveHorizontal = touch.deltaPosition.x;
-                moveVertical = touch.deltaPosition.y;
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
+                {
+                    Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+                    transform.position = Vector3.Lerp(transform.position, newPosition, speed * 0.375f * Time.deltaTime);
+                }
             }
-            if ((moveHorizontal > 0 || moveVertical > 0) || (moveHorizontal < 0 || moveVertical < 0))
-            {
-                Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0).normalized * speed * Time.deltaTime;
-                Vector3 newPosition = transform.position + movement;
-                Vector3 cameraViewPoint = Camera.main.WorldToViewportPoint(newPosition);
-                cameraViewPoint.x = Mathf.Clamp(cameraViewPoint.x, 0.04f, 0.96f);
-                cameraViewPoint.y = Mathf.Clamp(cameraViewPoint.y, 0.07f, 0.93f);
-                Vector3 finalPosition = Camera.main.ViewportToWorldPoint(cameraViewPoint);
-                transform.position = finalPosition;
-                transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
-            }
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
             if (Input.GetButton("Shoot") && Time.time >= nextShot)
             {
                 bool foundBulletSpawns = false;
@@ -96,9 +109,10 @@ public class PlayerController : MonoBehaviour
                 {
                     if (fireSound)
                     {
-                        audioSource.PlayOneShot(fireSound);
+                        audioSource.PlayOneShot(fireSound, getVolumeData(true));
                     } else
                     {
+                        audioSource.volume = getVolumeData(true);
                         audioSource.Play();
                     }
                 }
@@ -117,5 +131,18 @@ public class PlayerController : MonoBehaviour
         {
             --health;
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 }

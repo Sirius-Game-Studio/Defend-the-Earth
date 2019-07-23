@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 4942335906372709948}
   - component: {fileID: 4843553239151021148}
   - component: {fileID: 2493193171044722015}
+  - component: {fileID: -7596114456813252547}
   m_Layer: 8
   m_Name: AsteroidRockyBlue1
   m_TagString: Enemy
@@ -171,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 40
+  defense: 1
   money: 1
   powerupChance: 0
   powerups: []
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2.5
-  movement: {x: 0, y: -1}
+  movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 0
 --- !u!114 &2493193171044722015
 MonoBehaviour:
@@ -221,3 +223,15 @@ MonoBehaviour:
   useInsideUnitSphere: 1
   tumble: 1.5
   rotation: {x: 0, y: 0, z: 0}
+--- !u!114 &-7596114456813252547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870533537087504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd977e57f16782a4786c63c349931963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour
     public long health = 1;
     [Tooltip("Values below 1 reduce damage and values above 1 increase damage.")] public float defense = 1;
     [Tooltip("Amount of money earned from killing this enemy.")] [SerializeField] private long money = 0;
-    [Range(0, 1)] [SerializeField] private float powerupChance = 1;
+    [Range(0, 1)] [SerializeField] private float powerupChance = 0.5f;
     [SerializeField] private GameObject[] powerups = new GameObject[0];
     [SerializeField] private bool countsTowardsKillGoal = true;
     [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
@@ -18,28 +18,32 @@ public class EnemyHealth : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Difficulty") <= 1)
         {
-            health = (long)(health * 0.75);
-        }
-        else if (PlayerPrefs.GetInt("Difficulty") == 3)
+            if (gameObject.layer != 9) health = (long)(health * 0.85);
+            if (money > 0)
+            {
+                money = (long)(money * 0.5f);
+                if (money <= 0) money = 1;
+            }
+        } else if (PlayerPrefs.GetInt("Difficulty") == 3)
         {
-            if (gameObject.layer != 9)
+            if (gameObject.layer != 9) //If this enemy isn't a boss
             {
                 health = (long)(health * 1.1);
-            } else
-            {
-                health = (long)(health * 1.25);
-                defense -= 0.05f;
-            }
-        }
-        else if (PlayerPrefs.GetInt("Difficulty") >= 4)
-        {
-            if (gameObject.layer != 9)
-            {
-                health = (long)(health * 1.2);
-            } else
+            } else //If this enemy is a boss
             {
                 health = (long)(health * 1.5);
-                defense -= 0.1f;
+                defense -= 0.075f;
+            }
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
+        {
+            if (gameObject.layer != 9) //If this enemy isn't a boss
+            {
+                health = (long)(health * 1.2);
+                defense -= 0.05f;
+            } else //If this enemy is a boss
+            {
+                health *= 2;
+                defense -= 0.15f;
             }
         }
         if (PlayerPrefs.HasKey("MoneyMultiplier")) money = (long)(money * PlayerPrefs.GetFloat("MoneyMultiplier"));
@@ -62,7 +66,11 @@ public class EnemyHealth : MonoBehaviour
                 }
                 PlayerPrefs.Save();
             }
-            if (explosion) Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
+            if (explosion)
+            {
+                GameObject newExplosion = Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
+                if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+            }
             if (powerups.Length > 0)
             {
                 float random = Random.value;
@@ -97,5 +105,18 @@ public class EnemyHealth : MonoBehaviour
         {
             --health;
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 }
