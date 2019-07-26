@@ -19,7 +19,7 @@ public class ShowControllerButton : MonoBehaviour
         if (controllers.Length > 0)
         {
             gameObject.SetActive(true);
-            if (controllers[0].Contains("Xbox"))
+            if (controllers[0].ToLower().Contains("xbox"))
             {
                 image.sprite = xboxButton;
             } else if (controllers[0].Length == 19)

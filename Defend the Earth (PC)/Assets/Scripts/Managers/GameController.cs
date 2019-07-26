@@ -52,7 +52,6 @@ public class GameController : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
 
-    private GameObject[] backgrounds;
     private long wave = 1;
     private int enemyAmount = 0; //Stores the amount of enemies
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
@@ -70,11 +69,11 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        backgrounds = GameObject.FindGameObjectsWithTag("Background");
         if (enemiesLeft <= 0) enemiesLeft = 1;
         currentBoss = null;
         bossMaxHealth = 0;
         aliensReached = 0;
+        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
         deathMessageToShow = "";
         gameOver = false;
         won = false;
@@ -107,15 +106,14 @@ public class GameController : MonoBehaviour
             maxAliensReached += 2;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
-            asteroidSpawnTime -= new Vector2(0.5f, 0);
+            asteroidSpawnTime *= 0.95f;
             maxAliensReached -= 1;
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
-            asteroidSpawnTime -= new Vector2(1.25f, 1);
+            asteroidSpawnTime *= 0.85f;
             enemyAmount += 1;
             maxAliensReached -= 2;
         }
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
@@ -135,7 +133,7 @@ public class GameController : MonoBehaviour
         }
         if (Camera.main.GetComponent<AudioSource>())
         {
-            Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+            Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
             Camera.main.GetComponent<AudioSource>().Play();
         }
         if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
@@ -177,7 +175,8 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
+        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape)) pause();
         if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1))
         {
@@ -208,20 +207,6 @@ public class GameController : MonoBehaviour
                 openCanvasFromClickSource(restartPrompt);
             }
         }
-        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (!gameOver && aliensReached >= maxAliensReached)
-        {
-            gameOver = true;
-            deathMessageToShow = "You failed to protect the Earth!";
-        }
-        if (gameOver)
-        {
-            clickSource = 2;
-            if (!quitGameMenu.enabled && !loading) gameOverMenu.enabled = true;
-            StopCoroutine(spawnWaves());
-            StopCoroutine(spawnAsteroids());
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-        }
         if (!gameOver && !won)
         {
             if (wave < maxWaves && enemiesLeft <= 0 && !canWin)
@@ -237,7 +222,7 @@ public class GameController : MonoBehaviour
                 clickSource = 3;
                 if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                 {
-                    if (!quitGameMenu.enabled && !loading) levelCompletedMenu.enabled = true;
+                    if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
                 } else
                 {
                     PlayerPrefs.SetInt("Level", 1);
@@ -248,6 +233,19 @@ public class GameController : MonoBehaviour
                 StopCoroutine(spawnAsteroids());
                 if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             }
+        }
+        if (!gameOver && !won && aliensReached >= maxAliensReached)
+        {
+            gameOver = true;
+            deathMessageToShow = "You failed to protect the Earth!";
+        }
+        if (gameOver)
+        {
+            clickSource = 2;
+            if (!loading && !quitGameMenu.enabled) gameOverMenu.enabled = true;
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            StopCoroutine(spawnWaves());
+            StopCoroutine(spawnAsteroids());
         }
 
         //Updates volume data to match the slider values
@@ -293,6 +291,7 @@ public class GameController : MonoBehaviour
         deathMessage.text = deathMessageToShow;
         if (!loading)
         {
+            GameObject[] backgrounds = GameObject.FindGameObjectsWithTag("Background");
             Camera.main.transform.position = new Vector3(0, 0, -10);
             foreach (GameObject background in backgrounds)
             {
@@ -305,6 +304,7 @@ public class GameController : MonoBehaviour
             loadingText.SetActive(false);
         } else
         {
+            GameObject[] backgrounds = GameObject.FindGameObjectsWithTag("Background");
             Camera.main.transform.position = new Vector3(500, 0, -10);
             foreach (GameObject background in backgrounds)
             {
@@ -356,13 +356,23 @@ public class GameController : MonoBehaviour
                         } else
                         {
                             yield return new WaitForSeconds(3);
-                            if (wave >= maxWaves) canWin = true;
                             GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
                             enemy.name = boss.name;
                             currentBoss = enemy;
                             StartCoroutine(scrollEnemy(enemy, 4.5f));
+                            if (PlayerPrefs.GetInt("Difficulty") <= 2) //Easy and Normal
+                            {
+                                asteroidSpawnTime *= 2;
+                            } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+                            {
+                                asteroidSpawnTime *= 1.75f;
+                            } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+                            {
+                                asteroidSpawnTime *= 1.5f;
+                            }
                             enemiesLeft = 1;
                             reachedNextWave = false;
+                            if (wave >= maxWaves) canWin = true;
                             yield break;
                         }
                     }
@@ -383,7 +393,7 @@ public class GameController : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
                 Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
                 Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
-                if (!gameOver && !won)
+                if (!gameOver && !won && !paused)
                 {
                     Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(left.x, right.x), 9.5f, 0), Quaternion.Euler(0, 0, 0));
                 }
@@ -470,8 +480,7 @@ public class GameController : MonoBehaviour
             StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
         } else
         {
-            PlayerPrefs.SetInt("Level", 1);
-            StartCoroutine(loadScene("Level 1"));
+            StartCoroutine(loadScene("Ending"));
         }
         PlayerPrefs.Save();
     }

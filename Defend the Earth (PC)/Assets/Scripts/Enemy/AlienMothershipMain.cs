@@ -58,7 +58,7 @@ public class AlienMothershipMain : MonoBehaviour
             abilityTime -= new Vector2(0, -0.5f);
             torpedoBarrageShots = 17;
             torpedoBarrageFireRate = 0.25f;
-            UFODeploymentTime -= 2;
+            UFODeploymentTime -= 2.5f;
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
         {
             bulletDamage = 18;
@@ -68,7 +68,7 @@ public class AlienMothershipMain : MonoBehaviour
             abilityTime -= new Vector2(-0.5f, -0.5f);
             torpedoBarrageShots = 20;
             torpedoBarrageFireRate = 0.225f;
-            UFODeploymentTime -= 4;
+            UFODeploymentTime -= 5;
         }
         StartCoroutine(main());
     }
@@ -107,12 +107,12 @@ public class AlienMothershipMain : MonoBehaviour
                 if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && !usingAbility)
                 {
                     float random = Random.value;
-                    if (random <= 0.3f) //Busted Shot (30% chance)
-                    {
-                        bustedShot();
-                    } else if (random <= 0.75f) //Torpedo Barrage (45% chance)
+                    if (random <= 0.3f) //Torpedo Barrage (30% chance)
                     {
                         StartCoroutine(torpedoBarrage());
+                    } else if (random <= 0.75f) //Busted Shot (45% chance)
+                    {
+                        bustedShot();
                     } else //Double Shot (25% chance)
                     {
                         doubleShot();
@@ -129,8 +129,8 @@ public class AlienMothershipMain : MonoBehaviour
     {
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(90, 0, 0));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
-        if (damage > 0) bullet.GetComponent<EnemyHit>().damage = damage;
-        if (speed > 0) bullet.GetComponent<Mover>().speed = speed;
+        bullet.GetComponent<EnemyHit>().damage = damage;
+        bullet.GetComponent<Mover>().speed = speed;
     }
 
     float getFinalUFOPosition()
@@ -170,7 +170,7 @@ public class AlienMothershipMain : MonoBehaviour
     //Ability Functions
     void doubleShot()
     {
-        if (PlayerPrefs.GetInt("Difficulty") < 4)
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
             spawnProjectile(bioTorpedo, bulletSpawns[1].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.25f, true);
             spawnProjectile(bioTorpedo, bulletSpawns[2].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.25f, true);

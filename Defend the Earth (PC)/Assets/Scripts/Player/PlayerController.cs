@@ -71,10 +71,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused)
         {
-            Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-            float width = GetComponent<Collider>().bounds.extents.x;
             transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized * speed * Time.deltaTime;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
             if (Input.GetButton("Shoot") && Time.time >= nextShot)
             {
                 bool foundBulletSpawns = false;
@@ -108,6 +105,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        float width = GetComponent<Collider>().bounds.extents.x;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
         if (damage < 0) damage = 1; //Checks if damage is below 1
         if (speed < 0) speed = 0; //Checks if speed is below 0
     }

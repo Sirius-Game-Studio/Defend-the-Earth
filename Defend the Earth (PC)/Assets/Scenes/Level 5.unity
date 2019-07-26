@@ -1450,7 +1450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5a73ce81792b94e807d8a95dc4c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaves: 4
+  maxWaves: 2
   enemySpawnTime: {x: 3, y: 3.5}
   asteroidSpawnTime: {x: 6.5, y: 8}
   maxAliensReached: 13
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   loadingText: {fileID: 2128789852}
   loadingSlider: {fileID: 1471608847}
   loadingPercentage: {fileID: 1063671029}
-  enemiesLeft: 11
+  enemiesLeft: 1
   aliensReached: 0
   currentBoss: {fileID: 0}
   deathMessageToShow: 

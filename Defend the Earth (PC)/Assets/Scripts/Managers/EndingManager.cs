@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class EndingManager : MonoBehaviour
 {
+    [Header("Credits Settings")]
+    [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 570;
+    [SerializeField] private float creditsScrollSpeed = 0.25f;
+
+    [Header("Setup")]
     [SerializeField] private Canvas endingMenu = null;
     [SerializeField] private Canvas creditsMenu = null;
     [SerializeField] private RectTransform credits = null;
@@ -13,14 +18,15 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
-    [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 570;
-    [SerializeField] private float creditsScrollSpeed = 0.25f;
+    [SerializeField] private AudioClip buttonClick = null;
 
+    private AudioSource audioSource;
     private bool spedupCredits = false;
     private bool loading = false;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
@@ -63,7 +69,7 @@ public class EndingManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
-            if (creditsMenu.enabled) clickCredits();
+            if (creditsMenu.enabled) clickCredits(false);
         }
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
@@ -90,8 +96,19 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
     }
 
-    public void clickCredits()
+    public void clickCredits(bool clicked)
     {
+        if (clicked && audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (!creditsMenu.enabled)
         {
             creditsMenu.enabled = true;
@@ -107,6 +124,17 @@ public class EndingManager : MonoBehaviour
 
     public void exitToMainMenu()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         StartCoroutine(loadScene("Main Menu"));
     }
 

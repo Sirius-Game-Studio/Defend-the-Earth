@@ -3,7 +3,8 @@ guid: c6395117876609448adba7e8c25402b5
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

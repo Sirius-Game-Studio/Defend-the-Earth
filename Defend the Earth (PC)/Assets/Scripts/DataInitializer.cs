@@ -9,7 +9,14 @@ public class DataInitializer : MonoBehaviour
     void Awake()
     {
         if (!PlayerPrefs.HasKey("Spaceship")) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
+
+        //Set up owned spaceship data
         if (!PlayerPrefs.HasKey("HasSpaceFighter")) PlayerPrefs.SetInt("HasSpaceFighter", 1);
+        if (!PlayerPrefs.HasKey("HasAlienMower")) PlayerPrefs.SetInt("HasAlienMower", 0);
+        if (!PlayerPrefs.HasKey("HasBlazingRocket")) PlayerPrefs.SetInt("HasBlazingRocket", 0);
+        if (!PlayerPrefs.HasKey("HasQuadShooter")) PlayerPrefs.SetInt("HasQuadShooter", 0);
+        if (!PlayerPrefs.HasKey("HasPointVoidBreaker")) PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
+        if (!PlayerPrefs.HasKey("HasAnnihilator")) PlayerPrefs.SetInt("HasAnnihilator", 0);
 
         //Set up level data
         if (!PlayerPrefs.HasKey("Level"))
