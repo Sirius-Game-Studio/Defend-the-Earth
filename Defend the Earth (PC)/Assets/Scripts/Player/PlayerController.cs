@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 7.5f;
     [SerializeField] private float yMin = -6.75f, yMax = 2;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip fireSound = null;
+
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
-    [SerializeField] private AudioClip fireSound = null;
 
     private AudioSource audioSource;
     private Slider healthBar;

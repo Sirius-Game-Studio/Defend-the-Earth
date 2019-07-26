@@ -11,9 +11,11 @@ public class EnemyGun : MonoBehaviour
     [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture greenAlbedo = null;
     [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture whiteAlbedo = null;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip fireSound = null;
+
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
-    [SerializeField] private AudioClip fireSound = null;
 
     private AudioSource audioSource;
     private float nextShot = 0;

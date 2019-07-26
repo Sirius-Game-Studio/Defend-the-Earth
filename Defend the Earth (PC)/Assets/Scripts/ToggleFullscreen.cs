@@ -14,6 +14,7 @@ public class ToggleFullscreen : MonoBehaviour
     {
         fullscreenText = GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
     }
 
     void Update()

@@ -43,6 +43,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip buttonClick = null;
+    [SerializeField] private AudioClip cannotAfford = null;
+
     [Header("Setup")]
     [SerializeField] private Canvas mainMenu = null;
     [SerializeField] private Canvas shopMenu = null;
@@ -55,8 +59,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
-    [SerializeField] private AudioClip buttonClick = null;
-    [SerializeField] private AudioClip cannotAfford = null;
 
     private AudioSource audioSource;
     private int page = 1;
@@ -66,6 +68,7 @@ public class MainMenuManager : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");

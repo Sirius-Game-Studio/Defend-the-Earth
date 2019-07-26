@@ -31,6 +31,8 @@ MonoImporter:
   - moneyPrice: {instanceID: 0}
   - soundSlider: {instanceID: 0}
   - musicSlider: {instanceID: 0}
+  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
+  - cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
   - mainMenu: {instanceID: 0}
   - shopMenu: {instanceID: 0}
   - upgradesMenu: {instanceID: 0}
@@ -42,8 +44,6 @@ MonoImporter:
   - loadingText: {instanceID: 0}
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
-  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
-  - cannotAfford: {fileID: 8300000, guid: 299485babf93393488cfdcc7efd42f6d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

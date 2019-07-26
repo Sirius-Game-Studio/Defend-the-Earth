@@ -9,6 +9,7 @@ public class QualityChanger : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
     }
 
     public void changeQuality(int qualityLevel)

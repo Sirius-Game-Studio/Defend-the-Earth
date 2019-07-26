@@ -22,11 +22,13 @@ public class AlienMothershipMain : MonoBehaviour
     [Tooltip("Required for Busted Shot (Nightmare) ability.")] [SerializeField] private GameObject strongBustedShot = null;
     [Tooltip("Required for UFO Deployment ability.")] [SerializeField] private GameObject UFO = null;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip fireSound = null;
+    [SerializeField] private AudioClip bustedShotFireSound = null;
+
     [Header("Setup")]
     [SerializeField] private long bulletDamage = 16;
     [SerializeField] private float bulletSpeed = 11.25f;
-    [SerializeField] private AudioClip fireSound = null;
-    [SerializeField] private AudioClip bustedShotFireSound = null;
     [SerializeField] private GameObject bioTorpedo = null;
     [SerializeField] private GameObject alienMissile = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];

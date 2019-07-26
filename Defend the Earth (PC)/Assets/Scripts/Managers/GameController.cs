@@ -49,9 +49,13 @@ public class GameController : MonoBehaviour
     public bool won = false;
     public bool paused = false;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip buttonClick = null;
+
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
 
+    private AudioSource audioSource;
     private long wave = 1;
     private int enemyAmount = 0; //Stores the amount of enemies
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
@@ -69,16 +73,18 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (enemiesLeft <= 0) enemiesLeft = 1;
-        currentBoss = null;
-        bossMaxHealth = 0;
-        aliensReached = 0;
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
-        deathMessageToShow = "";
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
         gameOver = false;
         won = false;
         paused = false;
+        currentBoss = null;
+        bossMaxHealth = 0;
+        if (enemiesLeft <= 0) enemiesLeft = 5; //Checks if the amount of enemies left is 0 or less
         enemyAmount = enemiesLeft;
+        aliensReached = 0;
+        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
+        deathMessageToShow = "";
         Time.timeScale = 1;
         AudioListener.pause = false;
 
@@ -182,19 +188,42 @@ public class GameController : MonoBehaviour
         {
             if (settingsMenu.enabled)
             {
-                clickSettings();
+                settingsMenu.enabled = false;
+                gamePausedMenu.enabled = true;
             } else if (graphicsQualityMenu.enabled)
             {
-                clickGraphicsQuality();
+                graphicsQualityMenu.enabled = false;
+                settingsMenu.enabled = true;
             } else if (soundMenu.enabled)
             {
-                clickSoundMenu();
+                soundMenu.enabled = false;
+                settingsMenu.enabled = true;
             } else if (quitGameMenu.enabled)
             {
-                openCanvasFromClickSource(quitGameMenu);
+                quitGameMenu.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
             } else if (restartPrompt.enabled)
             {
-                openCanvasFromClickSource(restartPrompt);
+                restartPrompt.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
             }
         }
         if (restartPrompt.enabled)
@@ -448,8 +477,19 @@ public class GameController : MonoBehaviour
 
     public void resumeGame()
     {
-        if (!settingsMenu.enabled && !quitGameMenu.enabled)
+        if (!settingsMenu.enabled && !graphicsQualityMenu.enabled && !soundMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
         {
+            if (audioSource)
+            {
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
             paused = false;
             Time.timeScale = 1;
             AudioListener.pause = false;
@@ -459,34 +499,92 @@ public class GameController : MonoBehaviour
 
     public void restart()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
     }
 
     public void exitGame()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         Application.Quit();
     }
 
     public void exitToMainMenu()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         StartCoroutine(loadScene("Main Menu"));
     }
 
     public void toNextLevel()
     {
-        if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+        if (won && levelCompletedMenu.enabled)
         {
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
-            StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
-        } else
-        {
-            StartCoroutine(loadScene("Ending"));
+            if (audioSource)
+            {
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
+            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+            {
+                PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
+            } else
+            {
+                StartCoroutine(loadScene("Ending"));
+            }
+            PlayerPrefs.Save();
         }
-        PlayerPrefs.Save();
     }
 
     public void clickSettings()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (!settingsMenu.enabled)
         {
             settingsMenu.enabled = true;
@@ -500,6 +598,17 @@ public class GameController : MonoBehaviour
 
     public void clickGraphicsQuality()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (!graphicsQualityMenu.enabled)
         {
             graphicsQualityMenu.enabled = true;
@@ -513,6 +622,17 @@ public class GameController : MonoBehaviour
 
     public void clickSoundMenu()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (!soundMenu.enabled)
         {
             soundMenu.enabled = true;
@@ -528,6 +648,17 @@ public class GameController : MonoBehaviour
     {
         if (canvas)
         {
+            if (audioSource)
+            {
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
             if (!canvas.enabled)
             {
                 canvas.enabled = true;

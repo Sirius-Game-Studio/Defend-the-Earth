@@ -9,6 +9,9 @@ public class EndingManager : MonoBehaviour
     [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 570;
     [SerializeField] private float creditsScrollSpeed = 0.25f;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip buttonClick = null;
+
     [Header("Setup")]
     [SerializeField] private Canvas endingMenu = null;
     [SerializeField] private Canvas creditsMenu = null;
@@ -18,7 +21,6 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
-    [SerializeField] private AudioClip buttonClick = null;
 
     private AudioSource audioSource;
     private bool spedupCredits = false;
@@ -27,6 +29,7 @@ public class EndingManager : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
