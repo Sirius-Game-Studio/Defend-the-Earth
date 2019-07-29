@@ -70,9 +70,11 @@ public class EndingManager : MonoBehaviour
                 controllerSpeedUpButton.text = "Speed Up";
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (Input.GetKeyDown(KeyCode.Escape) && creditsMenu.enabled)
         {
-            if (creditsMenu.enabled) clickCredits(false);
+            creditsMenu.enabled = false;
+            endingMenu.enabled = true;
+            StopCoroutine(scrollCredits());
         }
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
@@ -99,9 +101,9 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
     }
 
-    public void clickCredits(bool clicked)
+    public void clickCredits()
     {
-        if (clicked && audioSource)
+        if (audioSource)
         {
             if (buttonClick)
             {

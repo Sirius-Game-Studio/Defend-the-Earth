@@ -297,6 +297,8 @@ MonoBehaviour:
   countsTowardsKillGoal: 1
   killTracker: AlienKills
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+  textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
+    type: 3}
 --- !u!114 &-4061231970185013492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,8 +316,8 @@ MonoBehaviour:
   defaultAlbedo: {fileID: 0}
   greenAlbedo: {fileID: 0}
   whiteAlbedo: {fileID: 0}
-  bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
+  bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
 --- !u!114 &-2473834150980811120
 MonoBehaviour:
   m_ObjectHideFlags: 0

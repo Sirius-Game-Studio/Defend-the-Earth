@@ -9,17 +9,37 @@ public class DataInitializer : MonoBehaviour
     void Awake()
     {
         if (!PlayerPrefs.HasKey("Spaceship")) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
+
+        //Set up owned spaceship data
         if (!PlayerPrefs.HasKey("HasSpaceFighter")) PlayerPrefs.SetInt("HasSpaceFighter", 1);
+        if (!PlayerPrefs.HasKey("HasAlienMower")) PlayerPrefs.SetInt("HasBlazingRocket", 0);
+        if (!PlayerPrefs.HasKey("HasQuadShooter")) PlayerPrefs.SetInt("HasQuadShooter", 0);
+        if (!PlayerPrefs.HasKey("HasPointVoidBreaker")) PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
+        if (!PlayerPrefs.HasKey("HasAnnihilator")) PlayerPrefs.SetInt("HasAnnihilator", 0);
+
+        //Gets the level the player previously played if there's a level key
+        int previousLevel = 1;
+        if (PlayerPrefs.HasKey("Level")) previousLevel = PlayerPrefs.GetInt("Level");
 
         //Set up level data
+        string sceneName = SceneManager.GetActiveScene().name;
         if (!PlayerPrefs.HasKey("Level"))
         {
-            PlayerPrefs.SetInt("Level", level);
+            if (!sceneName.ToLower().Contains("level"))
+            {
+                PlayerPrefs.SetInt("Level", level);
+            } else
+            {
+                PlayerPrefs.SetInt("Level", 1);
+            }
         } else
         {
-            if (SceneManager.GetActiveScene().name != "Main Menu") PlayerPrefs.SetInt("Level", level);
+            if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
         }
         PlayerPrefs.SetInt("MaxLevels", maxLevels);
+
+        //Delete WatchedAd key if the level is different from the previous level
+        if (PlayerPrefs.GetInt("Level") != previousLevel && PlayerPrefs.HasKey("WatchedAd")) PlayerPrefs.DeleteKey("WatchedAd");
 
         //Set up player upgrade data
         if (!PlayerPrefs.HasKey("DamageMultiplier")) PlayerPrefs.SetFloat("DamageMultiplier", 1);

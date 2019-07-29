@@ -266,6 +266,8 @@ MonoBehaviour:
   countsTowardsKillGoal: 0
   killTracker: AlienKills
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+  textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
+    type: 3}
 --- !u!114 &-4061231970185013492
 MonoBehaviour:
   m_ObjectHideFlags: 0

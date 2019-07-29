@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class AlienMothershipMain : MonoBehaviour
 {
-    public static AlienMothershipMain instance;
-
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(6, 7);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;

@@ -1507,7 +1507,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSound
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1976,7 +1976,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickPlayGame
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2263,7 +2263,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickShop
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3440,7 +3440,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickPlayGame
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3729,7 +3729,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSpaceships
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6506,7 +6506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSettings
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8722,7 +8722,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickGraphicsQuality
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9004,7 +9004,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickGraphicsQuality
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -12194,7 +12194,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSpaceships
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13558,7 +13558,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickUpgrades
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13762,7 +13762,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSettings
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -13966,7 +13966,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickUpgrades
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14265,7 +14265,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickSound
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -15207,7 +15207,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickShop
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -16215,6 +16215,8 @@ MonoBehaviour:
   moneyPrice: {fileID: 1399138115}
   soundSlider: {fileID: 471273626}
   musicSlider: {fileID: 1429454445}
+  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
+  cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
   mainMenu: {fileID: 1004614330}
   shopMenu: {fileID: 445606114}
   upgradesMenu: {fileID: 214567956}
@@ -16226,8 +16228,6 @@ MonoBehaviour:
   loadingText: {fileID: 634967534}
   loadingSlider: {fileID: 1891441989}
   loadingPercentage: {fileID: 921716274}
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
-  cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
 --- !u!4 &2143584396
 Transform:
   m_ObjectHideFlags: 0

@@ -1,59 +1,68 @@
-﻿/*
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+using UnityEngine.Monetization;
 
-public class WatchRewardAd : MonoBehaviour, IUnityAdsListener
+public class WatchRewardAd : MonoBehaviour
 {
-    [SerializeField] private string adPlacement = "";
+    [SerializeField] private Text moneyReward = null;
 
-    private Button button;
-    #if UNITY_IOS
-    private string gameID = "3229624";
-    #elif UNITY_ANDROID
     private string gameID = "3229625";
-    #endif
+    private long givenMoney = 15;
 
     void Start()
     {
-        button = GetComponent<Button>();
-        button.interactable = Advertisement.IsReady(adPlacement);
-        button.onClick.AddListener(showAd);
-        Advertisement.AddListener(this);
-        Advertisement.Initialize(gameID, true);
+#if UNITY_IOS
+        gameID = "3229624";
+#elif UNITY_ANDROID
+        gameID = "3229625";
+#endif
+        Monetization.Initialize(gameID, false);
+        givenMoney = Random.Range(15, 40);
+        if (PlayerPrefs.HasKey("WatchedAd"))
+        {
+            transform.parent.gameObject.SetActive(false);
+            enabled = false;
+        }
     }
 
-    void showAd()
+    void Update()
     {
-        Advertisement.Show(adPlacement);
+        if (moneyReward) moneyReward.text = "$" + givenMoney;
     }
 
-    public void OnUnityAdsDidError(string message)
+    public void showAd()
     {
-        Debug.LogError("Could not finish ad due to a error!");
+        StartCoroutine(waitForAd());
     }
 
-    public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
+    IEnumerator waitForAd()
+    {
+        while (!Monetization.IsReady("rewardedVideo")) yield return null;
+        ShowAdPlacementContent ad = Monetization.GetPlacementContent("rewardedVideo") as ShowAdPlacementContent;
+        if (ad != null) ad.Show(isAdFinished);
+    }
+
+    void isAdFinished(ShowResult showResult)
     {
         if (showResult == ShowResult.Finished)
         {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            money += Random.Range(20, 50);
-            PlayerPrefs.SetString("Money", money.ToString());
+            if (PlayerPrefs.GetString("Money") != "")
+            {
+                long money = long.Parse(PlayerPrefs.GetString("Money"));
+                money += givenMoney;
+                PlayerPrefs.SetString("Money", money.ToString());
+            } else
+            {
+                PlayerPrefs.SetString("Money", Random.Range(20, 40).ToString());
+            }
+            PlayerPrefs.SetInt("WatchedAd", 0);
+            PlayerPrefs.Save();
+            transform.parent.gameObject.SetActive(false);
+            enabled = false;
         } else if (showResult == ShowResult.Failed)
         {
             Debug.LogError("Could not finish ad due to a error!");
         }
     }
-
-    public void OnUnityAdsDidStart(string placementId)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void OnUnityAdsReady(string placementId)
-    {
-        if (placementId == adPlacement) button.interactable = true;
-    }
 }
-*/

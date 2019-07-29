@@ -3,7 +3,45 @@ guid: ff57ca5a606068646a78ad03a8ed8b2a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buySpaceFighterButton: {instanceID: 0}
+  - buyAlienMowerButton: {instanceID: 0}
+  - buyBlazingRocketButton: {instanceID: 0}
+  - buyQuadShooterButton: {instanceID: 0}
+  - buyPointVoidBreakerButton: {instanceID: 0}
+  - buyAnnihilatorButton: {instanceID: 0}
+  - spaceFighterPrice: {instanceID: 0}
+  - alienMowerPrice: {instanceID: 0}
+  - blazingRocketPrice: {instanceID: 0}
+  - quadShooterPrice: {instanceID: 0}
+  - pointVoidBreakerPrice: {instanceID: 0}
+  - annihilatorPrice: {instanceID: 0}
+  - moneyCount: {instanceID: 0}
+  - damageText: {instanceID: 0}
+  - fireRateText: {instanceID: 0}
+  - upgradeDamageButton: {instanceID: 0}
+  - upgradeSpeedButton: {instanceID: 0}
+  - upgradeHealthButton: {instanceID: 0}
+  - upgradeMoneyButton: {instanceID: 0}
+  - speedText: {instanceID: 0}
+  - healthText: {instanceID: 0}
+  - damagePrice: {instanceID: 0}
+  - speedPrice: {instanceID: 0}
+  - healthPrice: {instanceID: 0}
+  - moneyPrice: {instanceID: 0}
+  - soundSlider: {instanceID: 0}
+  - musicSlider: {instanceID: 0}
+  - buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
+  - cannotAfford: {fileID: 8300000, guid: 95eae1e42658e14429853e87a35919e7, type: 3}
+  - mainMenu: {instanceID: 0}
+  - shopMenu: {instanceID: 0}
+  - upgradesMenu: {instanceID: 0}
+  - spaceshipsMenu: {instanceID: 0}
+  - settingsMenu: {instanceID: 0}
+  - selectDifficultyMenu: {instanceID: 0}
+  - loadingText: {instanceID: 0}
+  - loadingSlider: {instanceID: 0}
+  - loadingPercentage: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

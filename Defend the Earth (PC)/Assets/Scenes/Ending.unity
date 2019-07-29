@@ -541,7 +541,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickCredits
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -593,7 +593,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400375242}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -745,7 +745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143584395}
         m_MethodName: clickCredits
-        m_Mode: 6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -856,8 +856,8 @@ RectTransform:
   m_Children:
   - {fileID: 1545453104}
   - {fileID: 1347642006}
-  - {fileID: 387236870}
   - {fileID: 2071122828}
+  - {fileID: 387236870}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2660,7 +2660,7 @@ RectTransform:
   - {fileID: 856250607}
   - {fileID: 1217478923}
   m_Father: {fileID: 400375242}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2699,6 +2699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   creditsY: 570
   creditsScrollSpeed: 0.5
+  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   endingMenu: {fileID: 1004614330}
   creditsMenu: {fileID: 400375241}
   credits: {fileID: 2071122828}
@@ -2707,7 +2708,6 @@ MonoBehaviour:
   loadingText: {fileID: 634967534}
   loadingSlider: {fileID: 1891441989}
   loadingPercentage: {fileID: 921716274}
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!4 &2143584396
 Transform:
   m_ObjectHideFlags: 0

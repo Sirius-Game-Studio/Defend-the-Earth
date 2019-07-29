@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
+    [SerializeField] private GameObject textPopup = null;
 
     void Start()
     {
@@ -29,6 +31,7 @@ public class EnemyHealth : MonoBehaviour
             if (gameObject.layer != 9) //If this enemy isn't a boss
             {
                 health = (long)(health * 1.1);
+                defense -= 0.05f;
             } else //If this enemy is a boss
             {
                 health = (long)(health * 1.5);
@@ -39,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
             if (gameObject.layer != 9) //If this enemy isn't a boss
             {
                 health = (long)(health * 1.2);
-                defense -= 0.05f;
+                defense -= 0.1f;
             } else //If this enemy is a boss
             {
                 health *= 2;
@@ -49,7 +52,7 @@ public class EnemyHealth : MonoBehaviour
         if (PlayerPrefs.HasKey("MoneyMultiplier")) money = (long)(money * PlayerPrefs.GetFloat("MoneyMultiplier"));
     }
 
-    void Update()   
+    void Update()
     {
         if (health <= 0)
         {
@@ -80,6 +83,19 @@ public class EnemyHealth : MonoBehaviour
             {
                 long cash = long.Parse(PlayerPrefs.GetString("Money"));
                 cash += money;
+                if (textPopup)
+                {
+                    if (textPopup.GetComponent<TextMeshPro>())
+                    {
+                        GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                        popup.GetComponent<TextMeshPro>().text = "$" + money;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(255, 215, 0, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 107, 0, 255);
+                    } else
+                    {
+                        Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                    }
+                }
                 PlayerPrefs.SetString("Money", cash.ToString());
             }
             if (countsTowardsKillGoal && GameController.instance.enemiesLeft > 0)

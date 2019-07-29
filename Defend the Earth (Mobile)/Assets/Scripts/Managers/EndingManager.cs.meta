@@ -3,7 +3,15 @@ guid: 0a059069b6b2e7a419d3b0f8cbd39102
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
+  - endingMenu: {instanceID: 0}
+  - creditsMenu: {instanceID: 0}
+  - credits: {instanceID: 0}
+  - moneyCount: {instanceID: 0}
+  - loadingText: {instanceID: 0}
+  - loadingSlider: {instanceID: 0}
+  - loadingPercentage: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

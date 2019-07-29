@@ -1508,6 +1508,7 @@ MonoBehaviour:
   loadingText: {fileID: 2128789852}
   loadingSlider: {fileID: 1471608847}
   loadingPercentage: {fileID: 1063671029}
+  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   enemiesLeft: 11
   aliensReached: 0
   currentBoss: {fileID: 0}
@@ -1515,7 +1516,6 @@ MonoBehaviour:
   gameOver: 0
   won: 0
   paused: 0
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   playerShips:
   - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
   - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}

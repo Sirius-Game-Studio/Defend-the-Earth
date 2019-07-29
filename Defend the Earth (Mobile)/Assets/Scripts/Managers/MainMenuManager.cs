@@ -43,6 +43,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip buttonClick = null;
+    [SerializeField] private AudioClip cannotAfford = null;
+
     [Header("Setup")]
     [SerializeField] private Canvas mainMenu = null;
     [SerializeField] private Canvas shopMenu = null;
@@ -54,11 +58,14 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
 
+    private AudioSource audioSource;
     private int page = 1;
     private bool loading = false;
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
@@ -68,7 +75,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            soundSlider.value = PlayerPrefs.GetFloat("SoundVolume");
+            soundSlider.value = getVolumeData(true);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -77,10 +84,9 @@ public class MainMenuManager : MonoBehaviour
         } else
         {
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+            musicSlider.value = getVolumeData(false);
         }
         PlayerPrefs.Save();
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
         mainMenu.enabled = true;
         shopMenu.enabled = false;
         spaceshipsMenu.enabled = false;
@@ -91,33 +97,40 @@ public class MainMenuManager : MonoBehaviour
         {
             if (page) page.SetActive(false);
         }
-        if (pages[0])
-        {
-            pages[0].SetActive(true);
-            page = 1;
-        }
+        pages[0].SetActive(true);
+        page = 1;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (shopMenu.enabled)
             {
-                clickShop();
+                shopMenu.enabled = false;
+                mainMenu.enabled = true;
             } else if (spaceshipsMenu.enabled)
             {
-                clickSpaceships();
+                spaceshipsMenu.enabled = false;
+                shopMenu.enabled = true;
+                foreach (GameObject page in pages)
+                {
+                    if (page) page.SetActive(false);
+                }
+                pages[0].SetActive(true);
+                page = 1;
             } else if (upgradesMenu.enabled)
             {
-                clickUpgrades();
+                upgradesMenu.enabled = false;
+                shopMenu.enabled = true;
             } else if (settingsMenu.enabled)
             {
-                clickSettings();
+                settingsMenu.enabled = false;
+                mainMenu.enabled = true;
             } else if (selectDifficultyMenu.enabled)
             {
-                clickPlayGame();
+                selectDifficultyMenu.enabled = false;
+                mainMenu.enabled = true;
             }
         }
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
@@ -214,6 +227,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void clickPlayGame()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         if (!selectDifficultyMenu.enabled)
         {
             selectDifficultyMenu.enabled = true;
@@ -227,6 +248,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void clickShop()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         if (!shopMenu.enabled)
         {
             shopMenu.enabled = true;
@@ -240,6 +269,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void clickSettings()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         if (!settingsMenu.enabled)
         {
             settingsMenu.enabled = true;
@@ -253,11 +290,27 @@ public class MainMenuManager : MonoBehaviour
 
     public void clickQuitGame()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         Application.Quit();
     }
 
     public void clickSpaceships()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         if (!spaceshipsMenu.enabled)
         {
             spaceshipsMenu.enabled = true;
@@ -285,6 +338,14 @@ public class MainMenuManager : MonoBehaviour
 
     public void clickUpgrades()
     {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
         if (!upgradesMenu.enabled)
         {
             upgradesMenu.enabled = true;
@@ -298,6 +359,17 @@ public class MainMenuManager : MonoBehaviour
 
     public void startGame(int difficulty)
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (PlayerPrefs.GetInt("Level") > 0)
         {
             PlayerPrefs.SetInt("Difficulty", difficulty);
@@ -320,6 +392,17 @@ public class MainMenuManager : MonoBehaviour
 
     public void changeSpaceshipsPage(bool next)
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         if (next)
         {
             ++page;
@@ -381,6 +464,19 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasAlienMower", 1);
                 PlayerPrefs.Save();
+            } else if (money < 300)
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -396,6 +492,19 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasBlazingRocket", 1);
                 PlayerPrefs.Save();
+            } else if (money < 950)
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -411,6 +520,19 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasQuadShooter", 1);
                 PlayerPrefs.Save();
+            } else if (money < 1500)
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -426,6 +548,19 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasPointVoidBreaker", 1);
                 PlayerPrefs.Save();
+            } else if (money < 2300)
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -441,6 +576,19 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasAnnihilator", 1);
                 PlayerPrefs.Save();
+            } else if (money < 5000)
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -451,8 +599,19 @@ public class MainMenuManager : MonoBehaviour
         {
             if (PlayerPrefs.HasKey("Has" + spaceship))
             {
-                if (PlayerPrefs.GetInt("Has" + spaceship) >= 1 && PlayerPrefs.GetString("Spaceship") != spaceship)
+                if (PlayerPrefs.GetInt("Has" + spaceship) >= 1)
                 {
+                    if (audioSource)
+                    {
+                        if (buttonClick)
+                        {
+                            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                        } else
+                        {
+                            audioSource.volume = getVolumeData(true);
+                            audioSource.Play();
+                        }
+                    }
                     PlayerPrefs.SetString("Spaceship", spaceship);
                 }
             } else
@@ -460,9 +619,9 @@ public class MainMenuManager : MonoBehaviour
                 if (PlayerPrefs.GetString("Spaceship") != "SpaceFighter") PlayerPrefs.SetString("Spaceship", "SpaceFighter");
             }
             PlayerPrefs.Save();
-       }
+        }
     }
-     
+
     public void upgradeDamage()
     {
         if (PlayerPrefs.GetInt("DamagePercentage") < 50)
@@ -470,12 +629,36 @@ public class MainMenuManager : MonoBehaviour
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("DamagePrice"))
             {
+                if (audioSource)
+                {
+                    if (buttonClick)
+                    {
+                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
                 money -= PlayerPrefs.GetInt("DamagePrice");
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("DamagePrice", (int)(PlayerPrefs.GetInt("DamagePrice") * 1.7f));
                 PlayerPrefs.SetFloat("DamageMultiplier", PlayerPrefs.GetFloat("DamageMultiplier") + 0.05f);
                 PlayerPrefs.SetInt("DamagePercentage", PlayerPrefs.GetInt("DamagePercentage") + 5);
                 PlayerPrefs.Save();
+            } else if (money < PlayerPrefs.GetInt("DamagePrice"))
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -487,12 +670,37 @@ public class MainMenuManager : MonoBehaviour
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("SpeedPrice"))
             {
+                if (audioSource)
+                {
+                    if (buttonClick)
+                    {
+                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
                 money -= PlayerPrefs.GetInt("SpeedPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.35f));
                 PlayerPrefs.SetFloat("SpeedMultiplier", PlayerPrefs.GetFloat("SpeedMultiplier") + 0.01f);
                 PlayerPrefs.SetInt("SpeedPercentage", PlayerPrefs.GetInt("SpeedPercentage") + 1);
                 PlayerPrefs.Save();
+            } else if (money < PlayerPrefs.GetInt("SpeedPrice"))
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    }
+                    else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -504,12 +712,36 @@ public class MainMenuManager : MonoBehaviour
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("HealthPrice"))
             {
+                if (audioSource)
+                {
+                    if (buttonClick)
+                    {
+                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
                 money -= PlayerPrefs.GetInt("HealthPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.4f));
                 PlayerPrefs.SetFloat("HealthMultiplier", PlayerPrefs.GetFloat("HealthMultiplier") + 0.05f);
                 PlayerPrefs.SetInt("HealthPercentage", PlayerPrefs.GetInt("HealthPercentage") + 5);
                 PlayerPrefs.Save();
+            } else if (money < PlayerPrefs.GetInt("HealthPrice"))
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }
@@ -521,12 +753,36 @@ public class MainMenuManager : MonoBehaviour
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("MoneyPrice"))
             {
+                if (audioSource)
+                {
+                    if (buttonClick)
+                    {
+                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
                 money -= PlayerPrefs.GetInt("MoneyPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.3f));
                 PlayerPrefs.SetFloat("MoneyMultiplier", PlayerPrefs.GetFloat("MoneyMultiplier") + 0.1f);
                 PlayerPrefs.SetInt("MoneyPercentage", PlayerPrefs.GetInt("MoneyPercentage") + 10);
                 PlayerPrefs.Save();
+            } else if (money < PlayerPrefs.GetInt("MoneyPrice"))
+            {
+                if (audioSource)
+                {
+                    if (cannotAfford)
+                    {
+                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                    } else
+                    {
+                        audioSource.volume = getVolumeData(true);
+                        audioSource.Play();
+                    }
+                }
             }
         }
     }

@@ -179,6 +179,8 @@ MonoBehaviour:
   countsTowardsKillGoal: 0
   killTracker: AsteroidKills
   explosion: {fileID: 100004, guid: 2a166c067f1bb1a4ab000ad044ca02bc, type: 3}
+  textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
+    type: 3}
 --- !u!114 &-4897318021266691112
 MonoBehaviour:
   m_ObjectHideFlags: 0

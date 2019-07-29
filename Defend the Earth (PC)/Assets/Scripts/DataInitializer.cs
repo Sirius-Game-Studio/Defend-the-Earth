@@ -19,12 +19,19 @@ public class DataInitializer : MonoBehaviour
         if (!PlayerPrefs.HasKey("HasAnnihilator")) PlayerPrefs.SetInt("HasAnnihilator", 0);
 
         //Set up level data
+        string sceneName = SceneManager.GetActiveScene().name;
         if (!PlayerPrefs.HasKey("Level"))
         {
-            PlayerPrefs.SetInt("Level", level);
+            if (!sceneName.ToLower().Contains("level"))
+            {
+                PlayerPrefs.SetInt("Level", level);
+            } else
+            {
+                PlayerPrefs.SetInt("Level", 1);
+            }
         } else
         {
-            if (SceneManager.GetActiveScene().name != "Main Menu") PlayerPrefs.SetInt("Level", level);
+            if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
         }
         PlayerPrefs.SetInt("MaxLevels", maxLevels);
 
