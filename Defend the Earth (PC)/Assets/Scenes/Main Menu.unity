@@ -3531,11 +3531,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'If you are looking for a real challenge, then this mode is for you.
 
-    Aliens deal 30% more damage, have 20% more health and shoot slightly
+    Aliens deal 30% more damage, have 10% more fire rate and 20% more
 
-    faster. Bosses have 100% more health, 40% more damage and improved
+    health. Bosses have 100% more health, 40% more damage and their
 
-    abilities. Asteroids spawn more frequently.'
+    abilities are improved. Asteroids spawn more frequently.'
 --- !u!222 &489387620
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3875,7 +3875,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 518051436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -3901,11 +3901,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This mode is recommended for new players. Aliens deal 25% less
+  m_Text: 'This mode is recommended for new players. Aliens deal 20% less
 
-    damage and have 15% less health. Bosses deal 10% less damage.
+    damage, have 15% less fire rate and 20% less health. Bosses deal
 
-    Enemies give 50% less money when killed.'
+    10% less damage. Enemies give 50% less money when killed.'
 --- !u!222 &518051439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3986,11 +3986,11 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'This mode is good for players who want a challenge. Aliens deal
 
-    15% more damage and have 10% more health. Bosses have 50% more
+    15% more damage, have 5% more fire rate and 10% more health.
 
-    health, deal 20% more damage and have slightly improved abilities.
+    Bosses have 50% more health and deal 20% more damage. Asteroids
 
-    Asteroids spawn slightly more frequently.'
+    spawn slightly more frequently.'
 --- !u!222 &547296554
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7233,7 +7233,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4c424c6ee7b4fb94faf19df974f7e722, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b261a70c85435074392a5599729d9d5c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

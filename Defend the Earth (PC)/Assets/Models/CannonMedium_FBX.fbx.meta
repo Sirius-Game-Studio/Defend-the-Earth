@@ -9,7 +9,12 @@ ModelImporter:
   - first:
       1001: 100100000
     second: DataTemplate __Singleton__
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: None__Cannon.png.001
+    second: {fileID: 2100000, guid: bfb3509af2dc32341be8c3d37f3861ef, type: 2}
   materials:
     importMaterials: 1
     materialName: 3
@@ -41,7 +46,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     importVisibility: 0
@@ -92,7 +97,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -920,7 +920,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -2067,7 +2067,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -5604,7 +5604,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4c424c6ee7b4fb94faf19df974f7e722, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9978b050b1a4d9847ae50b35a068b687, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -7060,7 +7060,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -7909,7 +7909,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -8564,7 +8564,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4
@@ -9400,7 +9400,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
     m_FontSize: 41
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 4

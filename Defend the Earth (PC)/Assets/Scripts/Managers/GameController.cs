@@ -13,8 +13,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
     [SerializeField] private int maxAliensReached = 10;
     [SerializeField] private GameObject[] enemies = new GameObject[0];
+    [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
+    [Tooltip("The enemy spawn to limit.")] [SerializeField] private GameObject enemyToLimit = null;
+    [SerializeField] private int limitedEnemySpawns = 2;
 
     [Header("UI")]
     [SerializeField] private Canvas gameHUD = null;
@@ -42,6 +45,8 @@ public class GameController : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
+    [SerializeField] private AudioClip loseJingle = null;
+    [SerializeField] private AudioClip winJingle = null;
 
     [Header("Miscellanous")]
     public int enemiesLeft = 8;
@@ -54,6 +59,7 @@ public class GameController : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
+    [SerializeField] private GameObject[] backgrounds = new GameObject[0];
 
     private AudioSource audioSource;
     private long wave = 1;
@@ -61,6 +67,7 @@ public class GameController : MonoBehaviour
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
     private bool canWin = false; //Checks if the player is on the last wave, thus allowing the player to win
     private long bossMaxHealth = 0; //If the value is above 0, the boss health bar's max value is not updated
+    private bool playedLoseSound = false, playedWinSound = false;
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
     private bool loading = false;
 
@@ -100,6 +107,15 @@ public class GameController : MonoBehaviour
         foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             if (projectile) Destroy(projectile);
+        }
+
+        //If backgrounds array's length is more than 0, destroy all background objects in the scene
+        if (backgrounds.Length > 0)
+        {
+            foreach (GameObject background in GameObject.FindGameObjectsWithTag("Background"))
+            {
+                if (background) Destroy(background);
+            }
         }
 
         if (!PlayerPrefs.HasKey("Difficulty")) //Sets the difficulty to Normal if no difficulty key is found
@@ -166,6 +182,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
             Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
         }
+        if (backgrounds.Length > 0) Instantiate(backgrounds[Random.Range(0, backgrounds.Length)], new Vector3(0, 0, 5), Quaternion.Euler(0, 0, 0));
         gameHUD.enabled = true;
         gamePausedMenu.enabled = false;
         gameOverMenu.enabled = false;
@@ -181,10 +198,10 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape)) pause();
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame();
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1))
         {
             if (settingsMenu.enabled)
@@ -246,6 +263,24 @@ public class GameController : MonoBehaviour
                 openCanvasFromClickSource(restartPrompt);
             }
         }
+        if (!gameOver && !won && aliensReached >= maxAliensReached)
+        {
+            gameOver = true;
+            deathMessageToShow = "You failed to protect the Earth!";
+        }
+        if (gameOver)
+        {
+            clickSource = 2;
+            if (!quitGameMenu.enabled && !loading) gameOverMenu.enabled = true;
+            StopCoroutine(spawnWaves());
+            StopCoroutine(spawnAsteroids());
+            if (audioSource && loseJingle && !playedLoseSound)
+            {
+                playedLoseSound = true;
+                audioSource.PlayOneShot(loseJingle, getVolumeData(true));
+            }
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+        }
         if (!gameOver && !won && enemiesLeft <= 0)
         {
             if (maxWaves > 1)
@@ -264,6 +299,11 @@ public class GameController : MonoBehaviour
                     if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                     {
                         if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (audioSource && winJingle && !playedWinSound)
+                        {
+                            playedWinSound = true;
+                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        }
                     } else
                     {
                         if (!loading) StartCoroutine(loadScene("Ending"));
@@ -281,6 +321,11 @@ public class GameController : MonoBehaviour
                     if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                     {
                         if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (audioSource && winJingle && !playedWinSound)
+                        {
+                            playedWinSound = true;
+                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        }
                     } else
                     {
                         if (!loading) StartCoroutine(loadScene("Ending"));
@@ -290,19 +335,6 @@ public class GameController : MonoBehaviour
                     if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
             }
-        }
-        if (!gameOver && !won && aliensReached >= maxAliensReached)
-        {
-            gameOver = true;
-            deathMessageToShow = "You failed to protect the Earth!";
-        }
-        if (gameOver)
-        {
-            clickSource = 2;
-            if (!loading && !quitGameMenu.enabled) gameOverMenu.enabled = true;
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            StopCoroutine(spawnWaves());
-            StopCoroutine(spawnAsteroids());
         }
 
         //Updates volume data to match the slider values
@@ -373,8 +405,9 @@ public class GameController : MonoBehaviour
             }
             loadingText.SetActive(true);
         }
-        if (wave > maxWaves) wave = maxWaves; //Checks if current wave is above max waves
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
+        if (wave > maxWaves) wave = maxWaves; //Checks if current wave is more than max waves
+        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is less than 5
+        if (limitedEnemySpawns < 1) limitedEnemySpawns = 1; //Checks if limited enemy spawns are less than 1
     }
 
     void OnApplicationQuit()
@@ -393,7 +426,28 @@ public class GameController : MonoBehaviour
                 if (enemiesLeft > 0)
                 {
                     yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
-                    Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                    if (!enemyToLimit)
+                    {
+                        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                    } else
+                    {
+                        int foundEnemies = 0;
+                        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+                        for (int i = 0; i < enemyArray.Length; i++)
+                        {
+                            if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)")
+                            {
+                                ++foundEnemies;
+                            }
+                        }
+                        if (foundEnemies < limitedEnemySpawns)
+                        {
+                            Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                        } else
+                        {
+                            Instantiate(otherEnemies[Random.Range(0, otherEnemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                        }
+                    }
                 } else
                 {
                     if (!boss)
@@ -597,30 +651,6 @@ public class GameController : MonoBehaviour
                 StartCoroutine(loadScene("Ending"));
             }
             PlayerPrefs.Save();
-        }
-    }
-
-    public void clickSettings()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!settingsMenu.enabled)
-        {
-            settingsMenu.enabled = true;
-            gamePausedMenu.enabled = false;
-        } else
-        {
-            settingsMenu.enabled = false;
-            gamePausedMenu.enabled = true;
         }
     }
 

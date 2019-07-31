@@ -24,15 +24,16 @@ public class EnemyGun : MonoBehaviour
         nextShot = Time.time + 60 / RPM;
         if (PlayerPrefs.GetInt("Difficulty") <= 1)
         {
-            damage = (long)(damage * 0.75);
-            RPM *= 0.9f;
+            damage = (long)(damage * 0.8);
+            RPM *= 0.85f;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3)
         {
             damage = (long)(damage * 1.15);
+            RPM *= 1.05f;
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
         {
             damage = (long)(damage * 1.3);
-            RPM *= 1.05f;
+            RPM *= 1.1f;
         }
     }
 

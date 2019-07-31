@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 510072693061241148}
   - component: {fileID: -7599845334762177351}
   - component: {fileID: 7777921763681771291}
+  - component: {fileID: 2938965713518676911}
   - component: {fileID: 4049466411141910179}
   - component: {fileID: 3287084473952699036}
   - component: {fileID: 4280584233416397756}
@@ -225,10 +226,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
+  health: 70
   defense: 1
   money: 3
-  powerupChance: 0.35
+  powerupChance: 0.37
   powerups:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   countsTowardsKillGoal: 1
@@ -269,6 +270,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 36
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+--- !u!114 &2938965713518676911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048570700629992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6865a33c80a55f64985c298fc5a07cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  timeTillManeuver: {x: 5, y: 6}
+  maneuverTime: {x: 0.25, y: 0.5}
 --- !u!114 &4049466411141910179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.25
+  speed: 2
   movement: {x: 0, y: 0, z: 0}
   useForwardMovement: 1
 --- !u!114 &3287084473952699036

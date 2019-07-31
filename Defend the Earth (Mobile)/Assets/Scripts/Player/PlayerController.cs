@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameController.instance.gameOver = true;
                 GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
+                GameController.instance.updatePlayerPosition(transform.position, transform.rotation);
             }
             Destroy(gameObject);
         }

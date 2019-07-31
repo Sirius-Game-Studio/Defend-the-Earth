@@ -19,6 +19,7 @@ MonoImporter:
   - bossName: {instanceID: 0}
   - bossHealthBar: {instanceID: 0}
   - bossHealthText: {instanceID: 0}
+  - saveMeCountdown: {instanceID: 0}
   - soundSlider: {instanceID: 0}
   - musicSlider: {instanceID: 0}
   - deathMessage: {instanceID: 0}
@@ -26,6 +27,8 @@ MonoImporter:
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
   - buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
+  - loseJingle: {fileID: 8300000, guid: 7d4039d0a5237f9498763b210c9844b3, type: 3}
+  - winJingle: {fileID: 8300000, guid: 055eef4fb6957444d8fa26af25c61461, type: 3}
   - currentBoss: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}

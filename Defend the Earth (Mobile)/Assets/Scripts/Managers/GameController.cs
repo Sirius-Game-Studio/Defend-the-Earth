@@ -2,7 +2,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Advertisements;
+
+struct PlayerPosition
+{
+    public Vector3 position;
+    public Quaternion rotation;
+}
 
 public class GameController : MonoBehaviour
 {
@@ -12,10 +17,13 @@ public class GameController : MonoBehaviour
     [SerializeField] private long maxWaves = 1;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
-    [SerializeField] private int maxAliensReached = 10;
+    public int maxAliensReached = 10;
     [SerializeField] private GameObject[] enemies = new GameObject[0];
+    [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
+    [Tooltip("The enemy spawn to limit.")] [SerializeField] private GameObject enemyToLimit = null;
+    [SerializeField] private int limitedEnemySpawns = 2;
 
     [Header("UI")]
     [SerializeField] private Canvas gameHUD = null;
@@ -25,6 +33,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Canvas settingsMenu = null;
     [SerializeField] private Canvas quitGameMenu = null;
     [SerializeField] private Canvas restartPrompt = null;
+    [SerializeField] private Canvas revivePrompt = null;
     public Text pauseButton = null;
     [SerializeField] private Text levelCount = null;
     [SerializeField] private Text waveCount = null;
@@ -32,6 +41,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text bossName = null;
     [SerializeField] private Slider bossHealthBar = null;
     [SerializeField] private Text bossHealthText = null;
+    [SerializeField] private Text saveMeCountdown = null;
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
     [SerializeField] private Text deathMessage = null;
@@ -41,6 +51,8 @@ public class GameController : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
+    [SerializeField] private AudioClip loseJingle = null;
+    [SerializeField] private AudioClip winJingle = null;
 
     [Header("Miscellanous")]
     public int enemiesLeft = 8;
@@ -53,13 +65,18 @@ public class GameController : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
+    [SerializeField] private GameObject[] backgrounds = new GameObject[0];
 
     private AudioSource audioSource;
+    private PlayerPosition playerPosition;
     private long wave = 1;
     private int enemyAmount = 0; //Stores the amount of enemies
+    private bool saveMeInProgress = false;
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
     private bool canWin = false; //Checks if the player is on the last wave, thus allowing the player to win
     private long bossMaxHealth = 0; //If the value is above 0, the boss health bar's max value is not updated
+    private bool showRevivePrompt = true;
+    private bool playedLoseSound = false, playedWinSound = false;
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
     private bool loading = false;
 
@@ -99,6 +116,15 @@ public class GameController : MonoBehaviour
         foreach (GameObject projectile in GameObject.FindGameObjectsWithTag("Projectile"))
         {
             if (projectile) Destroy(projectile);
+        }
+
+        //If backgrounds array's length is more than 0, destroy all background objects in the scene
+        if (backgrounds.Length > 0)
+        {
+            foreach (GameObject background in GameObject.FindGameObjectsWithTag("Background"))
+            {
+                if (background) Destroy(background);
+            }
         }
 
         if (!PlayerPrefs.HasKey("Difficulty")) //Sets the difficulty to Normal if no difficulty key is found
@@ -141,30 +167,34 @@ public class GameController : MonoBehaviour
             Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
             Camera.main.GetComponent<AudioSource>().Play();
         }
+        GameObject playerShip;
         if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
         {
-            Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
         } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
         {
-            Instantiate(playerShips[1], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[1], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
         } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
         {
-            Instantiate(playerShips[2], new Vector3(0, -6.75f, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[2], new Vector3(0, -6.75f, 0), Quaternion.Euler(-90, 0, 0));
         } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
         {
-            Instantiate(playerShips[3], new Vector3(0, -6.75f, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[3], new Vector3(0, -6.75f, 0), Quaternion.Euler(-90, 0, 0));
         } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
         {
-            Instantiate(playerShips[4], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[4], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
         } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
         {
-            Instantiate(playerShips[5], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[5], new Vector3(0, -6.5f, 0), Quaternion.Euler(-90, 0, 0));
         } else //Instantiates Space Fighter if the currently used spaceship is invalid
         {
             PlayerPrefs.SetString("Spaceship", "SpaceFighter");
             PlayerPrefs.Save();
-            Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
+            playerShip = Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
         }
+        playerPosition.position = playerShip.transform.position;
+        playerPosition.rotation = playerShip.transform.rotation;
+        if (backgrounds.Length > 0) Instantiate(backgrounds[Random.Range(0, backgrounds.Length)], new Vector3(0, 0, 5), Quaternion.Euler(0, 0, 0));
         gameHUD.enabled = true;
         gamePausedMenu.enabled = false;
         gameOverMenu.enabled = false;
@@ -172,6 +202,8 @@ public class GameController : MonoBehaviour
         settingsMenu.enabled = false;   
         quitGameMenu.enabled = false;
         restartPrompt.enabled = false;
+        revivePrompt.enabled = false;
+        saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);
         pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         StartCoroutine(spawnWaves());
@@ -180,9 +212,9 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) pause(false);
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-        if (paused && Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) pause(false);
+        if (Input.GetKeyDown(KeyCode.Escape) && paused)
         {
             if (settingsMenu.enabled)
             {
@@ -225,46 +257,87 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.Escape) && revivePrompt.enabled) closeRevivePrompt();
         if (!gameOver && aliensReached >= maxAliensReached)
         {
             gameOver = true;
+            showRevivePrompt = false;
+            revivePrompt.enabled = false;
             deathMessageToShow = "You failed to protect the Earth!";
         }
         if (gameOver)
         {
             clickSource = 2;
-            if (!quitGameMenu.enabled && !loading) gameOverMenu.enabled = true;
+            if (showRevivePrompt)
+            {
+                showRevivePrompt = false;
+                revivePrompt.enabled = true;
+            }
+            if (!quitGameMenu.enabled && !revivePrompt.enabled && !saveMeInProgress && !loading) gameOverMenu.enabled = true;
             pauseButton.gameObject.SetActive(false);
             pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
             StopCoroutine(spawnWaves());
             StopCoroutine(spawnAsteroids());
+            if (audioSource && loseJingle && !playedLoseSound)
+            {
+                playedLoseSound = true;
+                audioSource.PlayOneShot(loseJingle, getVolumeData(true));
+            }
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
         }
-        if (!gameOver && !won)
+        if (!gameOver && !won && enemiesLeft <= 0)
         {
-            if (wave < maxWaves && enemiesLeft <= 0 && !canWin)
+            if (maxWaves > 1)
             {
-                if (!reachedNextWave)
+                if (wave < maxWaves && !canWin)
                 {
-                    reachedNextWave = true;
-                    if (wave < maxWaves + 1) ++wave;
+                    if (!reachedNextWave)
+                    {
+                        reachedNextWave = true;
+                        if (wave < maxWaves + 1) ++wave;
+                    }
+                } else if (wave >= maxWaves && canWin)
+                {
+                    won = true;
+                    clickSource = 3;
+                    if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                    {
+                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (audioSource && winJingle && !playedWinSound)
+                        {
+                            playedWinSound = true;
+                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        }
+                    } else
+                    {
+                        if (!loading) StartCoroutine(loadScene("Ending"));
+                    }
+                    StopCoroutine(spawnWaves());
+                    StopCoroutine(spawnAsteroids());
+                    if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
-            } else if (wave >= maxWaves && enemiesLeft <= 0 && canWin)
+            } else
             {
-                won = true;
-                clickSource = 3;
-                if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                if (canWin)
                 {
-                    if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
-                } else
-                {
-                    if (!loading) StartCoroutine(loadScene("Ending"));
+                    won = true;
+                    clickSource = 3;
+                    if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                    {
+                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (audioSource && winJingle && !playedWinSound)
+                        {
+                            playedWinSound = true;
+                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        }
+                    } else
+                    {
+                        if (!loading) StartCoroutine(loadScene("Ending"));
+                    }
+                    StopCoroutine(spawnWaves());
+                    StopCoroutine(spawnAsteroids());
+                    if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
-                pauseButton.gameObject.SetActive(false);
-                pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
-                StopCoroutine(spawnWaves());
-                StopCoroutine(spawnAsteroids());
-                if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             }
         }
 
@@ -352,7 +425,28 @@ public class GameController : MonoBehaviour
                 if (enemiesLeft > 0)
                 {
                     yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
-                    Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                    if (!enemyToLimit)
+                    {
+                        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                    } else
+                    {
+                        int foundEnemies = 0;
+                        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+                        for (int i = 0; i < enemyArray.Length; i++)
+                        {
+                            if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)")
+                            {
+                                ++foundEnemies;
+                            }
+                        }
+                        if (foundEnemies < limitedEnemySpawns)
+                        {
+                            Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                        } else
+                        {
+                            Instantiate(otherEnemies[Random.Range(0, otherEnemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                        }
+                    }
                 } else
                 {
                     if (!boss)
@@ -436,6 +530,76 @@ public class GameController : MonoBehaviour
                 if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
             }
         }
+    }
+
+    public void startSaveMe()
+    {
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        saveMeInProgress = true;
+        showRevivePrompt = false;
+        saveMeCountdown.text = "3";
+        revivePrompt.enabled = false;
+        gameOverMenu.enabled = false;
+        StopCoroutine(spawnWaves());
+        StopCoroutine(spawnAsteroids());
+        StartCoroutine(saveMe());
+    }
+
+    IEnumerator saveMe()
+    {
+        GameObject playerShip;
+        int t = 3;
+        while (t > 0)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            --t;
+            saveMeCountdown.text = t.ToString();
+        }
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        gameOver = false;
+        saveMeInProgress = false;
+        playedLoseSound = false;
+        deathMessageToShow = "";
+        clickSource = 1;
+        if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
+        {
+            playerShip = Instantiate(playerShips[0], playerPosition.position, playerPosition.rotation);
+        } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
+        {
+            playerShip = Instantiate(playerShips[1], playerPosition.position, playerPosition.rotation);
+        } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
+        {
+            playerShip = Instantiate(playerShips[2], playerPosition.position, playerPosition.rotation);
+        } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
+        {
+            playerShip = Instantiate(playerShips[3], playerPosition.position, playerPosition.rotation);
+        } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
+        {
+            playerShip = Instantiate(playerShips[4], playerPosition.position, playerPosition.rotation);
+        } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
+        {
+            playerShip = Instantiate(playerShips[5], playerPosition.position, playerPosition.rotation);
+        } else //Instantiates Space Fighter if the currently used spaceship is invalid
+        {
+            PlayerPrefs.SetString("Spaceship", "SpaceFighter");
+            PlayerPrefs.Save();
+            playerShip = Instantiate(playerShips[0], playerPosition.position, playerPosition.rotation);
+        }
+        StartCoroutine(halvePlayerHealth(playerShip.GetComponent<PlayerController>()));
+        saveMeCountdown.text = "";
+        pauseButton.gameObject.SetActive(true);
+        pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
+        if (!currentBoss) StartCoroutine(spawnWaves());
+        StartCoroutine(spawnAsteroids());
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Play();
+    }
+
+    IEnumerator halvePlayerHealth(PlayerController playerController)
+    {
+        yield return new WaitForEndOfFrame();
+        if (playerController) playerController.health = (long)(playerController.health * 0.5);
     }
 
     public void pause(bool clicked)
@@ -576,30 +740,6 @@ public class GameController : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void clickSettings()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!settingsMenu.enabled)
-        {
-            settingsMenu.enabled = true;
-            gamePausedMenu.enabled = false;
-        } else
-        {
-            settingsMenu.enabled = false;
-            gamePausedMenu.enabled = true;
-        }
-    }
-
     public void openCanvasFromClickSource(Canvas canvas)
     {
         if (canvas)
@@ -643,6 +783,28 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void closeRevivePrompt()
+    {
+        showRevivePrompt = false;
+        revivePrompt.enabled = false;
+        if (clickSource <= 1)
+        {
+            gamePausedMenu.enabled = true;
+        } else if (clickSource == 2)
+        {
+            gameOverMenu.enabled = true;
+        } else if (clickSource >= 3)
+        {
+            levelCompletedMenu.enabled = true;
+        }
+    }
+
+    public void updatePlayerPosition(Vector3 newPosition, Quaternion newRotation)
+    {
+        playerPosition.position = newPosition;
+        playerPosition.rotation = newRotation;
     }
 
     float getVolumeData(bool isSound)

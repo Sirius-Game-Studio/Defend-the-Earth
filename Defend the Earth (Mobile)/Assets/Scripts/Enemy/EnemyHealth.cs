@@ -20,7 +20,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Difficulty") <= 1)
         {
-            if (gameObject.layer != 9) health = (long)(health * 0.85);
+            if (gameObject.layer != 9)
+            {
+                health = (long)(health * 0.85);
+                powerupChance += 0.03f;
+            }
             if (money > 0)
             {
                 money = (long)(money * 0.5f);
@@ -32,6 +36,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 health = (long)(health * 1.1);
                 defense -= 0.05f;
+                powerupChance -= 0.02f;
             } else //If this enemy is a boss
             {
                 health = (long)(health * 1.5);
@@ -43,6 +48,7 @@ public class EnemyHealth : MonoBehaviour
             {
                 health = (long)(health * 1.2);
                 defense -= 0.1f;
+                powerupChance -= 0.04f;
             } else //If this enemy is a boss
             {
                 health *= 2;

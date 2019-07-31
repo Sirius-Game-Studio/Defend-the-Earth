@@ -52,6 +52,7 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0))
         {
@@ -76,7 +77,6 @@ public class EndingManager : MonoBehaviour
             endingMenu.enabled = true;
             StopCoroutine(scrollCredits());
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
         if (PlayerPrefs.GetString("Money") != "")
         {

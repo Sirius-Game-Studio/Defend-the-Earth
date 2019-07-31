@@ -32,25 +32,23 @@ public class EndingManager : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
-        if (!PlayerPrefs.HasKey("SoundVolume"))
-        {
-            PlayerPrefs.SetFloat("SoundVolume", 1);
-            PlayerPrefs.Save();
-        }
+        PlayerPrefs.SetInt("Level", 1);
+        if (!PlayerPrefs.HasKey("SoundVolume")) PlayerPrefs.SetFloat("SoundVolume", 1);
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
-            PlayerPrefs.Save();
         } else
         {
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         }
+        PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
     }
 
     void Update()
     {
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.JoystickButton0))
         {
             if (!spedupCredits)
@@ -72,7 +70,6 @@ public class EndingManager : MonoBehaviour
             endingMenu.enabled = true;
             StopCoroutine(scrollCredits());
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
         if (PlayerPrefs.GetString("Money") != "")
         {

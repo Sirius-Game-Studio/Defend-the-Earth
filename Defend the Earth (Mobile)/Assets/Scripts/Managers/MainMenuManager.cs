@@ -103,6 +103,7 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (shopMenu.enabled)
@@ -133,7 +134,6 @@ public class MainMenuManager : MonoBehaviour
                 mainMenu.enabled = true;
             }
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
 
         //Updates volume data to match the slider values
         PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);

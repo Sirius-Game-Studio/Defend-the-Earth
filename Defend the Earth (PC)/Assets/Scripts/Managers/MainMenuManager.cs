@@ -108,6 +108,7 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
         {
@@ -161,7 +162,6 @@ public class MainMenuManager : MonoBehaviour
                 pressedBumper = false;
             }
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
 
         //Updates volume data to match the slider values
         PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);

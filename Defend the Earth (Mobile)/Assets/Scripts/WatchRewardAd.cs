@@ -39,8 +39,7 @@ public class WatchRewardAd : MonoBehaviour
     IEnumerator waitForAd()
     {
         while (!Monetization.IsReady("rewardedVideo")) yield return null;
-        ShowAdPlacementContent ad = Monetization.GetPlacementContent("rewardedVideo") as ShowAdPlacementContent;
-        if (ad != null) ad.Show(isAdFinished);
+        if (Monetization.GetPlacementContent("rewardedVideo") is ShowAdPlacementContent ad) ad.Show(isAdFinished);
     }
 
     void isAdFinished(ShowResult showResult)
@@ -54,7 +53,7 @@ public class WatchRewardAd : MonoBehaviour
                 PlayerPrefs.SetString("Money", money.ToString());
             } else
             {
-                PlayerPrefs.SetString("Money", Random.Range(20, 40).ToString());
+                PlayerPrefs.SetString("Money", givenMoney.ToString());
             }
             PlayerPrefs.SetInt("WatchedAd", 0);
             PlayerPrefs.Save();
