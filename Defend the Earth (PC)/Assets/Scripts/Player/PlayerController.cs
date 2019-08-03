@@ -48,10 +48,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (health < 0) //Checks if health is below 0
+        if (health < 0) //Checks if health is less than 0
         {
             health = 0;
-        } else if (health > maxHealth) //Checks if health is above the maximum
+        } else if (health > maxHealth) //Checks if health is more than the maximum
         {
             health = maxHealth;
         }
@@ -110,8 +110,8 @@ public class PlayerController : MonoBehaviour
         Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         float width = GetComponent<Collider>().bounds.extents.x;
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
-        if (damage < 0) damage = 1; //Checks if damage is below 1
-        if (speed < 0) speed = 0; //Checks if speed is below 0
+        if (damage < 0) damage = 1; //Checks if damage is less than 1
+        if (speed < 0) speed = 0; //Checks if speed is less than 0
     }
 
     public void takeDamage(long hitDamage)

@@ -78,6 +78,7 @@ public class GameController : MonoBehaviour
     private bool showRevivePrompt = true;
     private bool playedLoseSound = false, playedWinSound = false;
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
+    private long storedMaxWaves = 2;
     private bool loading = false;
 
     void Awake()
@@ -96,11 +97,12 @@ public class GameController : MonoBehaviour
         paused = false;
         currentBoss = null;
         bossMaxHealth = 0;
-        if (enemiesLeft <= 0) enemiesLeft = 5; //Checks if the amount of enemies left is 0 or less
+        if (enemiesLeft < 5) enemiesLeft = 5; //Checks if the starting amount of enemies left is less than 5
         enemyAmount = enemiesLeft;
         aliensReached = 0;
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
+        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is less than 5
         deathMessageToShow = "";
+        storedMaxWaves = maxWaves;
         Time.timeScale = 1;
         AudioListener.pause = false;
 
@@ -258,6 +260,13 @@ public class GameController : MonoBehaviour
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) && revivePrompt.enabled) closeRevivePrompt();
+        if (storedMaxWaves > 2)
+        {
+            maxWaves = storedMaxWaves;
+        } else
+        {
+            maxWaves = 2;
+        }
         if (!gameOver && aliensReached >= maxAliensReached)
         {
             gameOver = true;
@@ -405,8 +414,42 @@ public class GameController : MonoBehaviour
             }
             loadingText.SetActive(true);
         }
+
+        //Checks if the player upgrades are above maximum values
+        if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
+        {
+            PlayerPrefs.SetFloat("DamageMultiplier", 1.5f);
+            PlayerPrefs.SetInt("DamagePercentage", 50);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("SpeedMultiplier") > 1.2f)
+        {
+            PlayerPrefs.SetFloat("SpeedMultiplier", 1.2f);
+            PlayerPrefs.SetInt("SpeedPercentage", 20);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2)
+        {
+            PlayerPrefs.SetFloat("HealthMultiplier", 2);
+            PlayerPrefs.SetInt("HealthPercentage", 100);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("MoneyMultiplier") > 3)
+        {
+            PlayerPrefs.SetFloat("MoneyMultiplier", 3);
+            PlayerPrefs.SetInt("MoneyPercentage", 200);
+            PlayerPrefs.Save();
+        }
+
+        //Checks if money is below 0
+        if (long.Parse(PlayerPrefs.GetString("Money")) < 0)
+        {
+            PlayerPrefs.SetString("Money", "0");
+            PlayerPrefs.Save();
+        }
+
         if (wave > maxWaves) wave = maxWaves; //Checks if current wave is above max waves
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is below 5
+        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is less than 5
     }
 
     void OnApplicationQuit()
@@ -424,27 +467,30 @@ public class GameController : MonoBehaviour
                 Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
                 if (enemiesLeft > 0)
                 {
-                    yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
-                    if (!enemyToLimit)
+                    if (!gameOver && !won && !paused)
                     {
-                        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
-                    } else
-                    {
-                        int foundEnemies = 0;
-                        GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
-                        for (int i = 0; i < enemyArray.Length; i++)
-                        {
-                            if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)")
-                            {
-                                ++foundEnemies;
-                            }
-                        }
-                        if (foundEnemies < limitedEnemySpawns)
+                        yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
+                        if (!enemyToLimit)
                         {
                             Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                         } else
                         {
-                            Instantiate(otherEnemies[Random.Range(0, otherEnemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                            int foundEnemies = 0;
+                            GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
+                            for (int i = 0; i < enemyArray.Length; i++)
+                            {
+                                if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)")
+                                {
+                                    ++foundEnemies;
+                                }
+                            }
+                            if (foundEnemies < limitedEnemySpawns)
+                            {
+                                Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                            } else
+                            {
+                                Instantiate(otherEnemies[Random.Range(0, otherEnemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                            }
                         }
                     }
                 } else
@@ -452,37 +498,46 @@ public class GameController : MonoBehaviour
                     if (!boss)
                     {
                         yield return new WaitForSeconds(3);
-                        if (wave >= maxWaves) canWin = true;
-                        enemiesLeft = enemyAmount;
-                        reachedNextWave = false;
+                        if (!gameOver && !won && !paused)
+                        {
+                            if (wave >= maxWaves) canWin = true;
+                            enemiesLeft = enemyAmount;
+                            reachedNextWave = false;
+                        }
                     } else
                     {
                         if (wave < maxWaves)
                         {
                             yield return new WaitForSeconds(3);
-                            if (wave >= maxWaves) canWin = true;
-                            enemiesLeft = enemyAmount;
-                            reachedNextWave = false;
+                            if (!gameOver && !won && !paused)
+                            {
+                                if (wave >= maxWaves) canWin = true;
+                                enemiesLeft = enemyAmount;
+                                reachedNextWave = false;
+                            }
                         } else
                         {
                             yield return new WaitForSeconds(3);
-                            GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
-                            enemy.name = boss.name;
-                            currentBoss = enemy;
-                            StartCoroutine(scrollEnemy(enemy, 4.5f));
-                            if (PlayerPrefs.GetInt("Difficulty") <= 2) //Easy and Normal
+                            if (!gameOver && !won && !paused)
                             {
-                                asteroidSpawnTime *= 2;
-                            } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
-                            {
-                                asteroidSpawnTime *= 1.75f;
-                            } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
-                            {
-                                asteroidSpawnTime *= 1.5f;
+                                GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
+                                enemy.name = boss.name;
+                                currentBoss = enemy;
+                                StartCoroutine(scrollEnemy(enemy, 4.5f));
+                                if (PlayerPrefs.GetInt("Difficulty") <= 2) //Easy and Normal
+                                {
+                                    asteroidSpawnTime *= 2;
+                                } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+                                {
+                                    asteroidSpawnTime *= 1.75f;
+                                } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+                                {
+                                    asteroidSpawnTime *= 1.5f;
+                                }
+                                enemiesLeft = 1;
+                                reachedNextWave = false;
+                                if (wave >= maxWaves) canWin = true;
                             }
-                            enemiesLeft = 1;
-                            reachedNextWave = false;
-                            if (wave >= maxWaves) canWin = true;
                             yield break;
                         }
                     }
@@ -501,10 +556,10 @@ public class GameController : MonoBehaviour
             if (!gameOver && !won)
             {
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
-                Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
-                Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
-                if (!gameOver && !won)
+                if (!gameOver && !won && !paused)
                 {
+                    Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+                    Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
                     Instantiate(asteroids[Random.Range(0, asteroids.Length)], new Vector3(Random.Range(left.x, right.x), 9.5f, 0), Quaternion.Euler(0, 0, 0));
                 }
             } else
@@ -587,6 +642,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
             playerShip = Instantiate(playerShips[0], playerPosition.position, playerPosition.rotation);
         }
+        playerShip.GetComponent<PlayerController>().startInvulnerability();
         StartCoroutine(halvePlayerHealth(playerShip.GetComponent<PlayerController>()));
         saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);

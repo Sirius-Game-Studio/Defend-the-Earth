@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -11,12 +12,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Miscellanous")]
     [SerializeField] private float yMin = -6.75f, yMax = 2;
+    public bool invulnerable = false;
 
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
     [SerializeField] private AudioClip fireSound = null;
 
+    private new Renderer renderer;
     private AudioSource audioSource;
     private Slider healthBar;
     private Text healthText;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        renderer = GetComponent<Renderer>();
         audioSource = GetComponent<AudioSource>();
 
         //Gets sliders and texts tagged as HealthBar, then sets health bar and health text
@@ -48,10 +52,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (health < 0) //Checks if health is below 0
+        if (health < 0) //Checks if health is less than 0
         {
             health = 0;
-        } else if (health > maxHealth) //Checks if health is above the maximum
+        } else if (health > maxHealth) //Checks if health is more than the maximum
         {
             health = maxHealth;
         }
@@ -119,18 +123,73 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        if (damage < 0) damage = 1; //Checks if damage is below 1
-        if (speed < 0) speed = 0; //Checks if speed is below 0
+        if (damage < 0) damage = 1; //Checks if damage is less than 1
+        if (speed < 0) speed = 0; //Checks if speed is less than 0
     }
 
     public void takeDamage(long hitDamage)
     {
-        if (hitDamage > 0)
+        if (!invulnerable)
         {
-            health -= hitDamage;
+            if (hitDamage > 0)
+            {
+                health -= hitDamage;
+            } else
+            {
+                --health;
+            }
+        }
+    }
+
+    public void startInvulnerability()
+    {
+        invulnerable = true;
+        StartCoroutine(invulnerabilityFadeEffect());
+        Invoke("stopInvulnerability", 5);
+    }
+
+    public void stopInvulnerability()
+    {
+        invulnerable = false;
+        if (renderer) renderer.enabled = true;
+        foreach (Renderer child in GetComponentsInChildren<Renderer>())
+        {
+            if (child) child.enabled = true;
+        }
+    }
+
+    IEnumerator invulnerabilityFadeEffect()
+    {
+        if (invulnerable)
+        {
+            while (invulnerable)
+            {
+                if (renderer) renderer.enabled = false;
+                foreach (Renderer child in GetComponentsInChildren<Renderer>())
+                {
+                    if (child) child.enabled = false;
+                }
+                yield return new WaitForSeconds(0.1f);
+                if (renderer) renderer.enabled = true;
+                foreach (Renderer child in GetComponentsInChildren<Renderer>())
+                {
+                    if (child) child.enabled = true;
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+            if (renderer) renderer.enabled = true;
+            foreach (Renderer child in GetComponentsInChildren<Renderer>())
+            {
+                if (child) child.enabled = true;
+            }
         } else
         {
-            --health;
+            if (renderer) renderer.enabled = true;
+            foreach (Renderer child in GetComponentsInChildren<Renderer>())
+            {
+                if (child) child.enabled = true;
+            }
+            yield break;
         }
     }
 

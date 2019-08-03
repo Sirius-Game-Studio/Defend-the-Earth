@@ -3,8 +3,8 @@
 public class EnemyGun : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private long damage = 1;
-    [SerializeField] private float RPM = 50;
+    public long damage = 1;
+    public float RPM = 50;
 
     [Header("Default Skin")]
     [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture defaultAlbedo = null;
@@ -89,7 +89,7 @@ public class EnemyGun : MonoBehaviour
                 }
             }
         }
-        if (damage < 1) damage = 1; //Checks if damage is below 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1
     }
 
     float getVolumeData(bool isSound)

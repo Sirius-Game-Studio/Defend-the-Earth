@@ -17,6 +17,17 @@ PluginImporter:
       enabled: 1
       settings: {}
   - first:
+      '': Linux
+    second:
+      enabled: 1
+      settings:
+        CPU: x86
+  - first:
+      '': LinuxUniversal
+    second:
+      enabled: 1
+      settings: {}
+  - first:
       '': OSXIntel
     second:
       enabled: 1
@@ -86,23 +97,11 @@ PluginImporter:
       settings:
         CPU: AnyCPU
   - first:
-      Standalone: Linux
-    second:
-      enabled: 1
-      settings:
-        CPU: x86
-  - first:
       Standalone: Linux64
     second:
       enabled: 1
       settings:
-        CPU: x86_64
-  - first:
-      Standalone: LinuxUniversal
-    second:
-      enabled: 1
-      settings:
-        CPU: 
+        CPU: AnyCPU
   - first:
       Standalone: OSXUniversal
     second:

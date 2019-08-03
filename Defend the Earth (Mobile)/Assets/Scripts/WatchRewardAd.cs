@@ -28,7 +28,7 @@ public class WatchRewardAd : MonoBehaviour
 
     void Update()
     {
-        if (moneyReward) moneyReward.text = "$" + givenMoney;
+        if (moneyReward) moneyReward.text = "Claim $" + givenMoney;
     }
 
     public void showAd()

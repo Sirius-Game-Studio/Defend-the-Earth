@@ -9,12 +9,20 @@ public class EnemyManeuver : MonoBehaviour
 
     private Mover mover;
     private float maneuver = 0;
-    private bool direction = false; //false is left, true is right
+    private bool left = true;
 
     void Start()
     {
         mover = GetComponent<Mover>();
         if (mover) speed = mover.speed;
+        if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+        {
+            maneuverTime *= 1.05f;
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+        {
+            timeTillManeuver *= 0.85f;
+            maneuverTime *= 1.1f;
+        }
         StartCoroutine(doManeuvers());
     }
 
@@ -23,7 +31,7 @@ public class EnemyManeuver : MonoBehaviour
         if (maneuver > 0)
         {
             Vector3 movement;
-            if (!direction)
+            if (left)
             {
                 movement = Vector3.left;
             } else
@@ -46,10 +54,10 @@ public class EnemyManeuver : MonoBehaviour
                 float random = Random.value;
                 if (random <= 0.5f)
                 {
-                    direction = false;
+                    left = true;
                 } else
                 {
-                    direction = true;
+                    left = false;
                 }
                 maneuver = Random.Range(maneuverTime.x, maneuverTime.y);
             } else

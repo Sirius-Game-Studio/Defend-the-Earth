@@ -21,20 +21,18 @@ public class DamageFalloff : MonoBehaviour
 
     void Update()
     {
-        if (bulletHit.damage < minimumDamage) damageDecrement = minimumDamage;
-        if (minimumDamage < 0) minimumDamage = 0; //Checks if minimum damage is below 0
-        if (damageDecrement < 1) damageDecrement = 1; //Checks if damage decrement is below 1
+        if (bulletHit.damage < minimumDamage) bulletHit.damage = minimumDamage; //Checks if damage is less than the minimum
+        if (minimumDamage < 0) minimumDamage = 0; //Checks if minimum damage is less than 0
+        if (damageDecrement < 1) damageDecrement = 1; //Checks if damage decrement is less than 1
     }
 
     void dropDamage()
     {
-        if (bulletHit.damage > minimumDamage)
+        if (bulletHit.damage != minimumDamage)
         {
             bulletHit.damage -= damageDecrement;
-            print(bulletHit.damage);
-        } else if (bulletHit.damage < minimumDamage)
+        } else
         {
-            bulletHit.damage = damageDecrement;
             CancelInvoke("dropDamage");
         }
     }

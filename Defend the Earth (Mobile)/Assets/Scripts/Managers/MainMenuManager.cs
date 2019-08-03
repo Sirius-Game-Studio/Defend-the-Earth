@@ -164,17 +164,17 @@ public class MainMenuManager : MonoBehaviour
 
         //Sets the states of spaceship price text
         priceTextState(spaceFighterPrice, buySpaceFighterButton, false, false, false, "HasSpaceFighter", "", 0, 1, false);
-        priceTextState(alienMowerPrice, buyAlienMowerButton, false, false, false, "HasAlienMower", "", 300, 1, false);
-        priceTextState(blazingRocketPrice, buyBlazingRocketButton, false, false, false, "HasBlazingRocket", "", 950, 1, false);
-        priceTextState(quadShooterPrice, buyQuadShooterButton, false, false, false, "HasQuadShooter", "", 1500, 1, false);
-        priceTextState(pointVoidBreakerPrice, buyPointVoidBreakerButton, false, false, false, "HasPointVoidBreaker", "", 2300, 1, false);
-        priceTextState(annihilatorPrice, buyAnnihilatorButton, false, false, false, "HasAnnihilator", "", 5000, 1, false);
+        priceTextState(alienMowerPrice, buyAlienMowerButton, false, false, false, "HasAlienMower", "", 400, 1, false);
+        priceTextState(blazingRocketPrice, buyBlazingRocketButton, false, false, false, "HasBlazingRocket", "", 1100, 1, false);
+        priceTextState(quadShooterPrice, buyQuadShooterButton, false, false, false, "HasQuadShooter", "", 1750, 1, false);
+        priceTextState(pointVoidBreakerPrice, buyPointVoidBreakerButton, false, false, false, "HasPointVoidBreaker", "", 2600, 1, false);
+        priceTextState(annihilatorPrice, buyAnnihilatorButton, false, false, false, "HasAnnihilator", "", 6000, 1, false);
 
         //Sets the states of upgrade price text
         priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 50, false);
         priceTextState(speedPrice, upgradeSpeedButton, true, true, true, "SpeedPercentage", "SpeedPrice", 5, 20, false);
         priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 100, false);
-        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 300, false);
+        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 200, false);
 
         if (!loading)
         {
@@ -199,23 +199,23 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.SetInt("SpeedPercentage", 20);
             PlayerPrefs.Save();
         }
-        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2f)
+        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2)
         {
-            PlayerPrefs.SetFloat("HealthMultiplier", 2f);
+            PlayerPrefs.SetFloat("HealthMultiplier", 2);
             PlayerPrefs.SetInt("HealthPercentage", 100);
             PlayerPrefs.Save();
         }
-        if (PlayerPrefs.GetFloat("MoneyMultiplier") > 4)
+        if (PlayerPrefs.GetFloat("MoneyMultiplier") > 3)
         {
-            PlayerPrefs.SetFloat("MoneyMultiplier", 4);
-            PlayerPrefs.SetInt("MoneyPercentage", 300);
+            PlayerPrefs.SetFloat("MoneyMultiplier", 3);
+            PlayerPrefs.SetInt("MoneyPercentage", 200);
             PlayerPrefs.Save();
         }
 
         //Checks if money is below 0
-        if (PlayerPrefs.GetInt("Money") < 0)
+        if (long.Parse(PlayerPrefs.GetString("Money")) < 0)
         {
-            PlayerPrefs.SetInt("Money", 0);
+            PlayerPrefs.SetString("Money", "0");
             PlayerPrefs.Save();
         }
     }
@@ -458,13 +458,13 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.GetInt("HasAlienMower") <= 0)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 300)
+            if (money >= 400)
             {
-                money -= 300;
+                money -= 400;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasAlienMower", 1);
                 PlayerPrefs.Save();
-            } else if (money < 300)
+            } else
             {
                 if (audioSource)
                 {
@@ -486,13 +486,13 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.GetInt("HasBlazingRocket") <= 0)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 950)
+            if (money >= 1100)
             {
-                money -= 950;
+                money -= 1100;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasBlazingRocket", 1);
                 PlayerPrefs.Save();
-            } else if (money < 950)
+            } else
             {
                 if (audioSource)
                 {
@@ -514,13 +514,13 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.GetInt("HasQuadShooter") <= 0)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 1500)
+            if (money >= 1750)
             {
-                money -= 1500;
+                money -= 1750;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasQuadShooter", 1);
                 PlayerPrefs.Save();
-            } else if (money < 1500)
+            } else
             {
                 if (audioSource)
                 {
@@ -542,13 +542,13 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.GetInt("HasPointVoidBreaker") <= 0)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 2300)
+            if (money >= 2600)
             {
-                money -= 2300;
+                money -= 2600;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasPointVoidBreaker", 1);
                 PlayerPrefs.Save();
-            } else if (money < 2300)
+            } else
             {
                 if (audioSource)
                 {
@@ -570,13 +570,13 @@ public class MainMenuManager : MonoBehaviour
         if (PlayerPrefs.GetInt("HasAnnihilator") <= 0)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 5000)
+            if (money >= 6000)
             {
-                money -= 5000;
+                money -= 6000;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.SetInt("HasAnnihilator", 1);
                 PlayerPrefs.Save();
-            } else if (money < 5000)
+            } else
             {
                 if (audioSource)
                 {
@@ -646,7 +646,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.SetFloat("DamageMultiplier", PlayerPrefs.GetFloat("DamageMultiplier") + 0.05f);
                 PlayerPrefs.SetInt("DamagePercentage", PlayerPrefs.GetInt("DamagePercentage") + 5);
                 PlayerPrefs.Save();
-            } else if (money < PlayerPrefs.GetInt("DamagePrice"))
+            } else
             {
                 if (audioSource)
                 {
@@ -683,11 +683,11 @@ public class MainMenuManager : MonoBehaviour
                 }
                 money -= PlayerPrefs.GetInt("SpeedPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.35f));
+                PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.325f));
                 PlayerPrefs.SetFloat("SpeedMultiplier", PlayerPrefs.GetFloat("SpeedMultiplier") + 0.01f);
                 PlayerPrefs.SetInt("SpeedPercentage", PlayerPrefs.GetInt("SpeedPercentage") + 1);
                 PlayerPrefs.Save();
-            } else if (money < PlayerPrefs.GetInt("SpeedPrice"))
+            } else
             {
                 if (audioSource)
                 {
@@ -725,11 +725,11 @@ public class MainMenuManager : MonoBehaviour
                 }
                 money -= PlayerPrefs.GetInt("HealthPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.4f));
+                PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.35f));
                 PlayerPrefs.SetFloat("HealthMultiplier", PlayerPrefs.GetFloat("HealthMultiplier") + 0.05f);
                 PlayerPrefs.SetInt("HealthPercentage", PlayerPrefs.GetInt("HealthPercentage") + 5);
                 PlayerPrefs.Save();
-            } else if (money < PlayerPrefs.GetInt("HealthPrice"))
+            } else
             {
                 if (audioSource)
                 {
@@ -748,7 +748,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void upgradeMoney()
     {
-        if (PlayerPrefs.GetInt("MoneyPercentage") < 300)
+        if (PlayerPrefs.GetInt("MoneyPercentage") < 200)
         {
             long money = long.Parse(PlayerPrefs.GetString("Money"));
             if (money >= PlayerPrefs.GetInt("MoneyPrice"))
@@ -766,11 +766,11 @@ public class MainMenuManager : MonoBehaviour
                 }
                 money -= PlayerPrefs.GetInt("MoneyPrice");
                 PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.3f));
+                PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.45f));
                 PlayerPrefs.SetFloat("MoneyMultiplier", PlayerPrefs.GetFloat("MoneyMultiplier") + 0.1f);
                 PlayerPrefs.SetInt("MoneyPercentage", PlayerPrefs.GetInt("MoneyPercentage") + 10);
                 PlayerPrefs.Save();
-            } else if (money < PlayerPrefs.GetInt("MoneyPrice"))
+            } else
             {
                 if (audioSource)
                 {

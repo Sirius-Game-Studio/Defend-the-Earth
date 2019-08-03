@@ -23,7 +23,7 @@ public class EnemyHit : MonoBehaviour
 
     void Update()
     {
-        if (damage < 1) damage = 1; //Checks if damage is below 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1
     }
 
     void OnTriggerStay(Collider other)
@@ -31,7 +31,7 @@ public class EnemyHit : MonoBehaviour
         if (!hit && other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController)
+            if (playerController && !playerController.invulnerable)
             {
                 playerController.takeDamage(damage);
                 if (explosion)

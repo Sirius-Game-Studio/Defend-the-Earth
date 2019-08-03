@@ -94,6 +94,8 @@ public class AlienMothershipMain : MonoBehaviour
             if (deployedUFO.name.ToLower() == UFO.name.ToLower()) ++amount;
         }
         deployedUFOs = amount;
+
+        if (bulletDamage < 1) bulletDamage = 1; //Checks if damage is less than 1
     }
 
     //Main Functions
@@ -208,12 +210,12 @@ public class AlienMothershipMain : MonoBehaviour
             Mover mover = torpedo.GetComponent<Mover>();
             if (enemyHit && mover)
             {
-                if (PlayerPrefs.GetInt("Difficulty") <= 3)
+                if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
                 {
                     enemyHit.damage = bulletDamage;
-                } else
+                } else //Nightmare
                 {
-                    enemyHit.damage = bulletDamage;
+                    enemyHit.damage = (long)(bulletDamage * 1.05);
                 }
                 torpedo.GetComponent<Mover>().speed = bulletSpeed;
             }
@@ -241,15 +243,15 @@ public class AlienMothershipMain : MonoBehaviour
                 float random = Random.value;
                 if (random <= 0.5f)
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, bulletDamage, bulletSpeed, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, bulletDamage, bulletSpeed * 1.05f, true);
                 } else
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, bulletDamage, bulletSpeed, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, bulletDamage, bulletSpeed * 1.05f, true);
                 }
             } else
             {
-                spawnProjectile(alienMissile, bulletSpawns[1].position, bulletDamage, bulletSpeed + 0.5f, true);
-                spawnProjectile(alienMissile, bulletSpawns[2].position, bulletDamage, bulletSpeed + 0.5f, true);
+                spawnProjectile(alienMissile, bulletSpawns[1].position, bulletDamage, bulletSpeed * 1.1f, true);
+                spawnProjectile(alienMissile, bulletSpawns[2].position, bulletDamage, bulletSpeed * 1.1f, true);
             }
             if (audioSource)
             {
@@ -273,6 +275,12 @@ public class AlienMothershipMain : MonoBehaviour
         {
             GameObject newUFO = Instantiate(UFO, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(90, 180, 0));
             newUFO.name = UFO.name;
+            if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+            {
+                newUFO.GetComponent<EnemyHealth>().health = (long)(newUFO.GetComponent<EnemyHealth>().health * 1.2f);
+                newUFO.GetComponent<EnemyGun>().damage = (long)(UFO.GetComponent<EnemyGun>().damage * 1.3f);
+                newUFO.GetComponent<EnemyGun>().RPM *= 1.1f;
+            }
             newUFO.GetComponent<UFODeployMotion>().y += getFinalUFOPosition();
         }
     }

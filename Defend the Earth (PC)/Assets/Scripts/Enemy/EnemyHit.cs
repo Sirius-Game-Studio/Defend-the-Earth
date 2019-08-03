@@ -23,7 +23,7 @@ public class EnemyHit : MonoBehaviour
 
     void Update()
     {
-        if (damage < 1) damage = 1; //Checks if damage is below 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1
     }
 
     void OnTriggerStay(Collider other)

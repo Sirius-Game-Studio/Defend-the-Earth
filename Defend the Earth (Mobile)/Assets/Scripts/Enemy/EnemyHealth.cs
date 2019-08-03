@@ -69,9 +69,9 @@ public class EnemyHealth : MonoBehaviour
                     PlayerPrefs.SetString(killTracker, "1");
                 } else
                 {
-                    long plus = long.Parse(PlayerPrefs.GetString(killTracker));
-                    ++plus;
-                    PlayerPrefs.SetString(killTracker, plus.ToString());
+                    long newKill = long.Parse(PlayerPrefs.GetString(killTracker));
+                    ++newKill;
+                    PlayerPrefs.SetString(killTracker, newKill.ToString());
                 }
                 PlayerPrefs.Save();
             }
@@ -87,8 +87,15 @@ public class EnemyHealth : MonoBehaviour
             }
             if (money > 0)
             {
-                long cash = long.Parse(PlayerPrefs.GetString("Money"));
-                cash += money;
+                if (PlayerPrefs.GetString("Money") != "")
+                {
+                    long cash = long.Parse(PlayerPrefs.GetString("Money"));
+                    cash += money;
+                    PlayerPrefs.SetString("Money", cash.ToString());
+                } else
+                {
+                    PlayerPrefs.SetString("Money", money.ToString());
+                }
                 if (textPopup)
                 {
                     if (textPopup.GetComponent<TextMeshPro>())
@@ -102,7 +109,6 @@ public class EnemyHealth : MonoBehaviour
                         Debug.LogError("TextPopup object does not have a TextMeshPro component!");
                     }
                 }
-                PlayerPrefs.SetString("Money", cash.ToString());
             }
             if (countsTowardsKillGoal && GameController.instance.enemiesLeft > 0)
             {
