@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d7da2b7004effbe47ab3f64175f1f017
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - music: {fileID: 8300000, guid: 4bf488ec7cc942641939a84ff217a998, type: 3}
+  - beam: {fileID: 1509662052000183132, guid: e109e7c5e02023a4c94549aa0a8bb62c, type: 3}
+  - fireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}
+  - circleBombSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598, type: 3}
+  - laser: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
+  - scatterlaser: {fileID: 3937757261437629000, guid: 973d3e143b1eef443983de606c683164,
+      type: 3}
+  - scorchingBeamSpawn: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

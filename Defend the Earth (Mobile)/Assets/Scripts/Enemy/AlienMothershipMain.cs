@@ -101,7 +101,7 @@ public class AlienMothershipMain : MonoBehaviour
     //Main Functions
     IEnumerator main()
     {
-        while (!GameController.instance.gameOver && !GameController.instance.won)
+        while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)
             {
@@ -122,7 +122,7 @@ public class AlienMothershipMain : MonoBehaviour
                 }
             } else
             {
-                yield return new WaitForEndOfFrame();
+                yield return null;
             }
         }
     }

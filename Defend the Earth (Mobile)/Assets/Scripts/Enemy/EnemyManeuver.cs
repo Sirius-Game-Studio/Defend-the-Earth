@@ -46,24 +46,18 @@ public class EnemyManeuver : MonoBehaviour
 
     IEnumerator doManeuvers()
     {
-        while (!GameController.instance.gameOver && !GameController.instance.won)
+        while (true)
         {
-            if (!GameController.instance.gameOver && !GameController.instance.won)
+            yield return new WaitForSeconds(Random.Range(timeTillManeuver.x, timeTillManeuver.y));
+            float random = Random.value;
+            if (random <= 0.5f)
             {
-                yield return new WaitForSeconds(Random.Range(timeTillManeuver.x, timeTillManeuver.y));
-                float random = Random.value;
-                if (random <= 0.5f)
-                {
-                    left = true;
-                } else
-                {
-                    left = false;
-                }
-                maneuver = Random.Range(maneuverTime.x, maneuverTime.y);
+                left = true;
             } else
             {
-                yield break;
+                left = false;
             }
+            maneuver = Random.Range(maneuverTime.x, maneuverTime.y);
         }
     }
 }

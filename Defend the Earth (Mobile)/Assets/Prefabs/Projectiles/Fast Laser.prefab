@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2795523735423435743}
   - component: {fileID: 3565738850329549525}
   - component: {fileID: 2245807509010582296}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Fast Laser
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -70,6 +70,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

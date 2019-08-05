@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5123430029943399738}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Boundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5123430030352179291}
   - component: {fileID: 5123430030352179288}
   - component: {fileID: 5123430030352179289}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LeftBoundary
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5123430030352179270}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.25, y: 0, z: 0}
+  m_LocalPosition: {x: -19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 5123430029943399738}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 5123430030795051895}
   - component: {fileID: 5123430030795051890}
   - component: {fileID: 5123430030795051893}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MainBoundary
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ Transform:
   m_GameObject: {fileID: 5123430030795051891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.5, z: 0}
-  m_LocalScale: {x: 35.5, y: 23, z: 1}
+  m_LocalScale: {x: 37, y: 23, z: 1}
   m_Children: []
   m_Father: {fileID: 5123430029943399738}
   m_RootOrder: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 5123430031469069509}
   - component: {fileID: 5123430031469069506}
   - component: {fileID: 5123430031469069507}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RightBoundary
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5123430031469069504}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.25, y: 0, z: 0}
+  m_LocalPosition: {x: 19, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 30, z: 1}
   m_Children: []
   m_Father: {fileID: 5123430029943399738}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 5123430031700472685}
   - component: {fileID: 5123430031700472682}
   - component: {fileID: 5123430031700472683}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: BottomBoundary
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 5123430031700472680}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -14.5, z: 0}
-  m_LocalScale: {x: 35.5, y: 1, z: 1}
+  m_LocalScale: {x: 37, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5123430029943399738}
   m_RootOrder: 1

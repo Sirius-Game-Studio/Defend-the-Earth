@@ -24,15 +24,15 @@ public class EnemyGun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         nextShot = Time.time + 60 / RPM;
-        if (PlayerPrefs.GetInt("Difficulty") <= 1)
+        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             damage = (long)(damage * 0.8);
             RPM *= 0.85f;
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3)
+        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             damage = (long)(damage * 1.15);
             RPM *= 1.05f;
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             damage = (long)(damage * 1.3);
             RPM *= 1.1f;

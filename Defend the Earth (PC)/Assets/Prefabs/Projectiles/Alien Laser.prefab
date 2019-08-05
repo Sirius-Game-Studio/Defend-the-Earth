@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 3937757261437629001}
   - component: {fileID: 7340351678094186958}
   - component: {fileID: 3565738850329549525}
-  m_Layer: 0
-  m_Name: UFO Laser
+  m_Layer: 2
+  m_Name: Alien Laser
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,6 +69,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

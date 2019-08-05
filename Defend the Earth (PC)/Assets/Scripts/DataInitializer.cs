@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class DataInitializer : MonoBehaviour
 {
     [SerializeField] private int level = 1;
-    [SerializeField] private int maxLevels = 8;
+    [SerializeField] private int maxLevels = 10;
 
     void Awake()
     {

@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -7932807425856512503}
   - component: {fileID: -422310722647597269}
   - component: {fileID: -4960622610072745740}
-  m_Layer: 0
-  m_Name: Bio Torpedo White
+  m_Layer: 2
+  m_Name: White Bio Torpedo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

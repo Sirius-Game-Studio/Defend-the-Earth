@@ -18,9 +18,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("Difficulty") <= 1)
+        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            if (gameObject.layer != 9)
+            if (gameObject.layer != 9) //If this enemy isn't a boss
             {
                 health = (long)(health * 0.85);
                 powerupChance += 0.03f;
@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
                 money = (long)(money * 0.5f);
                 if (money <= 0) money = 1;
             }
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3)
+        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             if (gameObject.layer != 9) //If this enemy isn't a boss
             {
@@ -42,7 +42,7 @@ public class EnemyHealth : MonoBehaviour
                 health = (long)(health * 1.5);
                 defense -= 0.075f;
             }
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             if (gameObject.layer != 9) //If this enemy isn't a boss
             {

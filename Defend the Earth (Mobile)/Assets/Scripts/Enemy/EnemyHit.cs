@@ -9,13 +9,13 @@ public class EnemyHit : MonoBehaviour
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("Difficulty") <= 1)
+        if (PlayerPrefs.GetInt("Difficulty") <= 1)  //Easy
         {
             damage = (long)(damage * 0.75);
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3)
+        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             damage = (long)(damage * 1.15);
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             damage = (long)(damage * 1.3);
         }

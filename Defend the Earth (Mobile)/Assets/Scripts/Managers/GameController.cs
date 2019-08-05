@@ -18,9 +18,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
     public int maxAliensReached = 10;
-    [SerializeField] private GameObject[] enemies = new GameObject[0];
-    [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
-    [SerializeField] private GameObject[] asteroids = new GameObject[0];
+    [SerializeField] private float bossFinalYPosition = 4.5f;
+    [SerializeField] private Vector3 bossRotation = new Vector3(90, 180, 0);
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
     [Tooltip("The enemy spawn to limit.")] [SerializeField] private GameObject enemyToLimit = null;
     [SerializeField] private int limitedEnemySpawns = 2;
@@ -65,6 +64,9 @@ public class GameController : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
+    [SerializeField] private GameObject[] enemies = new GameObject[0];
+    [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
+    [SerializeField] private GameObject[] asteroids = new GameObject[0];
     [SerializeField] private GameObject[] backgrounds = new GameObject[0];
 
     private AudioSource audioSource;
@@ -97,10 +99,10 @@ public class GameController : MonoBehaviour
         paused = false;
         currentBoss = null;
         bossMaxHealth = 0;
-        if (enemiesLeft < 5) enemiesLeft = 5; //Checks if the starting amount of enemies left is less than 5
+        if (enemiesLeft < 6) enemiesLeft = 6; //Checks if the starting amount of enemies left is less than 6
         enemyAmount = enemiesLeft;
         aliensReached = 0;
-        if (maxAliensReached < 5) maxAliensReached = 5; //Checks if maximum aliens reached is less than 5
+        if (maxAliensReached < 7) maxAliensReached = 7; //Checks if maximum aliens reached is less than 7
         deathMessageToShow = "";
         storedMaxWaves = maxWaves;
         Time.timeScale = 1;
@@ -285,8 +287,6 @@ public class GameController : MonoBehaviour
             if (!quitGameMenu.enabled && !revivePrompt.enabled && !saveMeInProgress && !loading) gameOverMenu.enabled = true;
             pauseButton.gameObject.SetActive(false);
             pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
-            StopCoroutine(spawnWaves());
-            StopCoroutine(spawnAsteroids());
             if (audioSource && loseJingle && !playedLoseSound)
             {
                 playedLoseSound = true;
@@ -296,57 +296,30 @@ public class GameController : MonoBehaviour
         }
         if (!gameOver && !won && enemiesLeft <= 0)
         {
-            if (maxWaves > 1)
+            if (wave < maxWaves && !canWin)
             {
-                if (wave < maxWaves && !canWin)
+                if (!reachedNextWave)
                 {
-                    if (!reachedNextWave)
-                    {
-                        reachedNextWave = true;
-                        if (wave < maxWaves + 1) ++wave;
-                    }
-                } else if (wave >= maxWaves && canWin)
-                {
-                    won = true;
-                    clickSource = 3;
-                    if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
-                    {
-                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
-                        if (audioSource && winJingle && !playedWinSound)
-                        {
-                            playedWinSound = true;
-                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
-                        }
-                    } else
-                    {
-                        if (!loading) StartCoroutine(loadScene("Ending"));
-                    }
-                    StopCoroutine(spawnWaves());
-                    StopCoroutine(spawnAsteroids());
-                    if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+                    reachedNextWave = true;
+                    if (wave < maxWaves + 1) ++wave;
                 }
-            } else
+            } else if (wave >= maxWaves && canWin)
             {
-                if (canWin)
+                won = true;
+                clickSource = 3;
+                if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                 {
-                    won = true;
-                    clickSource = 3;
-                    if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                    if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                    if (audioSource && winJingle && !playedWinSound)
                     {
-                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
-                        if (audioSource && winJingle && !playedWinSound)
-                        {
-                            playedWinSound = true;
-                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
-                        }
-                    } else
-                    {
-                        if (!loading) StartCoroutine(loadScene("Ending"));
+                        playedWinSound = true;
+                        audioSource.PlayOneShot(winJingle, getVolumeData(true));
                     }
-                    StopCoroutine(spawnWaves());
-                    StopCoroutine(spawnAsteroids());
-                    if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+                } else
+                {
+                    if (!loading) StartCoroutine(loadScene("Ending"));
                 }
+                if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             }
         }
 
@@ -375,10 +348,6 @@ public class GameController : MonoBehaviour
             currentBoss = null;
             bossMaxHealth = 0;
             bossName.gameObject.SetActive(false);
-            bossName.text = "Boss Name";
-            bossHealthBar.value = 100;
-            bossHealthBar.maxValue = 100;
-            bossHealthText.text = "100 / 100";
         } else
         {
             if (bossMaxHealth <= 0) bossMaxHealth = currentBoss.GetComponent<EnemyHealth>().health;
@@ -518,33 +487,36 @@ public class GameController : MonoBehaviour
                         } else
                         {
                             yield return new WaitForSeconds(3);
-                            if (!gameOver && !won && !paused)
+                            if (wave < maxWaves)
                             {
-                                GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(0, 180, 0));
-                                enemy.name = boss.name;
-                                currentBoss = enemy;
-                                StartCoroutine(scrollEnemy(enemy, 4.5f));
-                                if (PlayerPrefs.GetInt("Difficulty") <= 2) //Easy and Normal
+                                yield return new WaitForSeconds(3);
+                                if (!gameOver && !won && !paused)
                                 {
-                                    asteroidSpawnTime *= 2;
-                                } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
-                                {
-                                    asteroidSpawnTime *= 1.75f;
-                                } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
-                                {
-                                    asteroidSpawnTime *= 1.5f;
+                                    if (wave >= maxWaves) canWin = true;
+                                    enemiesLeft = enemyAmount;
+                                    reachedNextWave = false;
                                 }
-                                enemiesLeft = 1;
-                                reachedNextWave = false;
-                                if (wave >= maxWaves) canWin = true;
+                            } else
+                            {
+                                yield return new WaitForSeconds(3);
+                                if (!gameOver && !won && !paused)
+                                {
+                                    GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                    enemy.name = boss.name;
+                                    currentBoss = enemy;
+                                    StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
+                                    enemiesLeft = 1;
+                                    reachedNextWave = false;
+                                    if (wave >= maxWaves) canWin = true;
+                                }
+                                yield break;
                             }
-                            yield break;
                         }
                     }
                 }
             } else
             {
-                yield break;
+                yield return null;
             }
         }
     }
@@ -556,7 +528,7 @@ public class GameController : MonoBehaviour
             if (!gameOver && !won)
             {
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
-                if (!gameOver && !won && !paused)
+                if (!currentBoss && !gameOver && !won && !paused)
                 {
                     Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
                     Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
@@ -564,7 +536,7 @@ public class GameController : MonoBehaviour
                 }
             } else
             {
-                yield break;
+                yield return null;
             }
         }
     }

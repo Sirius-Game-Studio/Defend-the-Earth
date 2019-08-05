@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8737582940167950490}
   - component: {fileID: 1646131011537254979}
   - component: {fileID: 8513550893873227408}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Missile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -69,6 +69,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8518443029577745798}
   - component: {fileID: -4890062093106764848}
   - component: {fileID: 8561637209330969993}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bio Torpedo
   m_TagString: Projectile
   m_Icon: {fileID: 0}

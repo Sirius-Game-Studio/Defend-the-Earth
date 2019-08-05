@@ -2,7 +2,7 @@
 
 public class HorizontalOnlyMover : MonoBehaviour
 {
-    [SerializeField] private float speed = 2.5f;
+    public float speed = 2.5f;
 
     private bool left = true;
 

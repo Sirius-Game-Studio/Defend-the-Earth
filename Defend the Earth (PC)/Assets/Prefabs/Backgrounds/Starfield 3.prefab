@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2559259812079402653}
   - component: {fileID: 8310604875929200190}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Starfield 3 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -89,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3751253805156671836}
   - component: {fileID: 298034099858952111}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Starfield 3 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +136,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -169,7 +171,7 @@ GameObject:
   - component: {fileID: 7646070162773227591}
   - component: {fileID: 7646070162773227590}
   - component: {fileID: 7646070162773227588}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Starfield 3
   m_TagString: Background
   m_Icon: {fileID: 0}
@@ -217,6 +219,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

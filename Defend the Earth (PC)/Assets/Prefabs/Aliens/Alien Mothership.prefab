@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5309471664943983402}
   - component: {fileID: 6744555977236668340}
   - component: {fileID: 4501256538904753050}
+  - component: {fileID: -1176443078239364825}
   m_Layer: 0
   m_Name: Alien Mothership
   m_TagString: Enemy
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 90
   defense: 0.95
   money: 4
   powerupChance: 0.34
@@ -249,7 +250,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1.25
   movement: {x: 0, y: -1, z: 0}
-  useForwardMovement: 1
+  useForwardMovement: 0
+--- !u!114 &-1176443078239364825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632701638249580328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd977e57f16782a4786c63c349931963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1939797720083874131
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7903276455441565566}
   - component: {fileID: 4839323291990872610}
   - component: {fileID: 2220761450136899481}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Repair
   m_TagString: Repair
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 405114}
   - component: {fileID: 3373102}
   - component: {fileID: 2304074}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeavyWrench01_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 481520}
   - component: {fileID: 3318672}
   - component: {fileID: 2335940}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeavyWrench01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 480884}
   - component: {fileID: 3370126}
   - component: {fileID: 2395850}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HeavyWrench01_Length
   m_TagString: Untagged
   m_Icon: {fileID: 0}

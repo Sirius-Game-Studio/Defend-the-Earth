@@ -1468,13 +1468,59 @@ MonoBehaviour:
   enemySpawnTime: {x: 3.25, y: 3.75}
   asteroidSpawnTime: {x: 6.25, y: 7.5}
   maxAliensReached: 13
+  bossFinalYPosition: 4.5
+  bossRotation: {x: 90, y: 180, z: 0}
+  boss: {fileID: 0}
+  enemyToLimit: {fileID: 0}
+  limitedEnemySpawns: 2
+  gameHUD: {fileID: 1802036951}
+  gamePausedMenu: {fileID: 1589551668}
+  gameOverMenu: {fileID: 4239533325917265998}
+  levelCompletedMenu: {fileID: 24761089}
+  settingsMenu: {fileID: 2135101559}
+  graphicsQualityMenu: {fileID: 252010315}
+  soundMenu: {fileID: 1740766594}
+  quitGameMenu: {fileID: 2035518593}
+  restartPrompt: {fileID: 635441070}
+  levelCount: {fileID: 1802036950}
+  waveCount: {fileID: 1802036949}
+  moneyCount: {fileID: 1802036948}
+  bossName: {fileID: 1750000092}
+  bossHealthBar: {fileID: 2120916792}
+  bossHealthText: {fileID: 2112879940}
+  soundSlider: {fileID: 323872819}
+  musicSlider: {fileID: 1813528182}
+  deathMessage: {fileID: 686168306}
+  controllerShootIcon: {fileID: 653621459}
+  loadingText: {fileID: 2128789852}
+  loadingSlider: {fileID: 1471608847}
+  loadingPercentage: {fileID: 1063671029}
+  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
+  loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
+  winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
+  enemiesLeft: 12
+  aliensReached: 0
+  currentBoss: {fileID: 0}
+  deathMessageToShow: 
+  gameOver: 0
+  won: 0
+  paused: 0
+  playerShips:
+  - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
+  - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
+  - {fileID: 1057238544248868, guid: 0b4b2e0fd6d42004fb5ef3e72e0b55e4, type: 3}
+  - {fileID: 1404724577958374, guid: e261f7b66a8f0fd4492d87df1eee4222, type: 3}
+  - {fileID: 1405876428854690, guid: 12e2965e034095b40b035c26bdecd5ed, type: 3}
+  - {fileID: 1510364872509504, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
   enemies:
   - {fileID: 1458391615630120, guid: 6d18ca3ac0d2ecd4aa99a8099af486bb, type: 3}
   - {fileID: 1450454693458920266, guid: 291e4fec4c7a1a94ba4d7e6cc5dcf28a, type: 3}
+  - {fileID: 6556492256011581412, guid: a4fb0224d3b85aa4198fec1d65e3bf64, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
   otherEnemies:
   - {fileID: 1458391615630120, guid: 6d18ca3ac0d2ecd4aa99a8099af486bb, type: 3}
   - {fileID: 1450454693458920266, guid: 291e4fec4c7a1a94ba4d7e6cc5dcf28a, type: 3}
+  - {fileID: 6556492256011581412, guid: a4fb0224d3b85aa4198fec1d65e3bf64, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
   asteroids:
   - {fileID: 1870533537087504, guid: 3d75efea2d4394f41836d50671b13ecd, type: 3}
@@ -1546,48 +1592,6 @@ MonoBehaviour:
   - {fileID: 1195464655788114, guid: eb63cb6a4e1a0c14099e3d237cfed20f, type: 3}
   - {fileID: 1347515007546912, guid: 24263decba33e9146ab7b476b9b9e00f, type: 3}
   - {fileID: 1356149787574740, guid: 923b8b860dbb73d4ab6d2ccfeedb209f, type: 3}
-  boss: {fileID: 0}
-  enemyToLimit: {fileID: 0}
-  limitedEnemySpawns: 2
-  gameHUD: {fileID: 1802036951}
-  gamePausedMenu: {fileID: 1589551668}
-  gameOverMenu: {fileID: 4239533325917265998}
-  levelCompletedMenu: {fileID: 24761089}
-  settingsMenu: {fileID: 2135101559}
-  graphicsQualityMenu: {fileID: 252010315}
-  soundMenu: {fileID: 1740766594}
-  quitGameMenu: {fileID: 2035518593}
-  restartPrompt: {fileID: 635441070}
-  levelCount: {fileID: 1802036950}
-  waveCount: {fileID: 1802036949}
-  moneyCount: {fileID: 1802036948}
-  bossName: {fileID: 1750000092}
-  bossHealthBar: {fileID: 2120916792}
-  bossHealthText: {fileID: 2112879940}
-  soundSlider: {fileID: 323872819}
-  musicSlider: {fileID: 1813528182}
-  deathMessage: {fileID: 686168306}
-  controllerShootIcon: {fileID: 653621459}
-  loadingText: {fileID: 2128789852}
-  loadingSlider: {fileID: 1471608847}
-  loadingPercentage: {fileID: 1063671029}
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
-  loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
-  winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
-  enemiesLeft: 12
-  aliensReached: 0
-  currentBoss: {fileID: 0}
-  deathMessageToShow: 
-  gameOver: 0
-  won: 0
-  paused: 0
-  playerShips:
-  - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
-  - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
-  - {fileID: 1057238544248868, guid: 0b4b2e0fd6d42004fb5ef3e72e0b55e4, type: 3}
-  - {fileID: 1404724577958374, guid: e261f7b66a8f0fd4492d87df1eee4222, type: 3}
-  - {fileID: 1405876428854690, guid: 12e2965e034095b40b035c26bdecd5ed, type: 3}
-  - {fileID: 1510364872509504, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
   backgrounds:
   - {fileID: 7646070162773227609, guid: 138fc8b5269365a4581567fae24ee6b3, type: 3}
   - {fileID: 7646070162773227609, guid: 2fd43844dec93464992edd1589527779, type: 3}
