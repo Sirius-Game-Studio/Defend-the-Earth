@@ -75,6 +75,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -229,11 +230,17 @@ MonoBehaviour:
   damage: 7
   RPM: 150
   speed: 8
+  smallRepairHeal: 15
+  largeRepairHeal: 25
+  superchargeMultiplier: 1.5
+  superchargeTime: 12
+  fireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7, type: 3}
   yMin: -6.75
   yMax: 2
   bullet: {fileID: 3937757261437629000, guid: 890194f60c70c114ba13f074df895e88, type: 3}
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
-  fireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7, type: 3}
+  textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
+    type: 3}
 --- !u!1 &2578671044072176202
 GameObject:
   m_ObjectHideFlags: 0

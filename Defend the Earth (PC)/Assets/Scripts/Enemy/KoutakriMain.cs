@@ -4,7 +4,7 @@ using UnityEngine;
 public class KoutakriMain : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(3, 3.5f);
+    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Laser Machine")]

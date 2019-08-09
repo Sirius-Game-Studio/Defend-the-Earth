@@ -54,6 +54,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas spaceshipsMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
     [SerializeField] private Canvas selectDifficultyMenu = null;
+    [SerializeField] private Text currentLevelText = null;
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -176,6 +177,13 @@ public class MainMenuManager : MonoBehaviour
         priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 100, false);
         priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 200, false);
 
+        if (PlayerPrefs.GetInt("Level") > 0)
+        {
+            currentLevelText.text = "Current Level: " + PlayerPrefs.GetInt("Level");
+        } else
+        {
+            currentLevelText.text = "Current Level: 1";
+        }
         if (!loading)
         {
             loadingText.SetActive(false);

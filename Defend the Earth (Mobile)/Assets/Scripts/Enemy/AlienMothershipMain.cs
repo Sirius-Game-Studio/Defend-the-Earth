@@ -4,7 +4,7 @@ using UnityEngine;
 public class AlienMothershipMain : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(6, 7);
+    [SerializeField] private Vector2 abilityTime = new Vector2(3.5f, 4);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Torpedo Barrage Settings")]
@@ -25,8 +25,8 @@ public class AlienMothershipMain : MonoBehaviour
     [SerializeField] private AudioClip bustedShotFireSound = null;
 
     [Header("Setup")]
-    [SerializeField] private long bulletDamage = 16;
-    [SerializeField] private float bulletSpeed = 11.25f;
+    [SerializeField] private long damage = 17;
+    [SerializeField] private float bulletSpeed = 12;
     [SerializeField] private GameObject bioTorpedo = null;
     [SerializeField] private GameObject alienMissile = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
@@ -45,25 +45,26 @@ public class AlienMothershipMain : MonoBehaviour
             Camera.main.GetComponent<AudioSource>().Stop();
             Camera.main.GetComponent<AudioSource>().Play();
         }
-        if (PlayerPrefs.GetInt("Difficulty") <= 1)
+        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            bulletDamage = 16;
-            bulletDamage = (long)(bulletDamage * 0.9);
-            bulletSpeed *= 0.8f;
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3)
+            damage = 17;
+            damage = (long)(damage * 0.9);
+            bulletSpeed = 12;
+        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
-            bulletDamage = 16;
-            bulletDamage = (long)(bulletDamage * 1.2);
+            damage = 17;
+            damage = (long)(damage * 1.2);
+            bulletSpeed = 12;
             bulletSpeed *= 1.05f;
             abilityTime -= new Vector2(0, -0.5f);
             torpedoBarrageShots = 17;
             torpedoBarrageFireRate = 0.25f;
             UFODeploymentTime -= 2.5f;
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4)
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
-            bulletDamage = 18;
-            bulletDamage = (long)(bulletDamage * 1.4);
-            bulletSpeed = 12.5f;
+            damage = 18;
+            damage = (long)(damage * 1.4);
+            bulletSpeed = 12.75f;
             bulletSpeed *= 1.1f;
             abilityTime -= new Vector2(-0.5f, -0.5f);
             torpedoBarrageShots = 20;
@@ -95,7 +96,7 @@ public class AlienMothershipMain : MonoBehaviour
         }
         deployedUFOs = amount;
 
-        if (bulletDamage < 1) bulletDamage = 1; //Checks if damage is less than 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1
     }
 
     //Main Functions
@@ -174,12 +175,12 @@ public class AlienMothershipMain : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            spawnProjectile(bioTorpedo, bulletSpawns[1].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.25f, true);
-            spawnProjectile(bioTorpedo, bulletSpawns[2].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.25f, true);
+            spawnProjectile(bioTorpedo, bulletSpawns[1].position, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
+            spawnProjectile(bioTorpedo, bulletSpawns[2].position, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
         } else
         {
-            spawnProjectile(alienMissile, bulletSpawns[1].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.5f, true);
-            spawnProjectile(alienMissile, bulletSpawns[2].position, (long)(bulletDamage * 1.5), bulletSpeed * 1.5f, true);
+            spawnProjectile(alienMissile, bulletSpawns[1].position, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
+            spawnProjectile(alienMissile, bulletSpawns[2].position, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
         }
         if (audioSource)
         {
@@ -212,10 +213,10 @@ public class AlienMothershipMain : MonoBehaviour
             {
                 if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
                 {
-                    enemyHit.damage = bulletDamage;
+                    enemyHit.damage = damage;
                 } else //Nightmare
                 {
-                    enemyHit.damage = (long)(bulletDamage * 1.05);
+                    enemyHit.damage = (long)(damage * 1.05);
                 }
                 torpedo.GetComponent<Mover>().speed = bulletSpeed;
             }
@@ -243,15 +244,15 @@ public class AlienMothershipMain : MonoBehaviour
                 float random = Random.value;
                 if (random <= 0.5f)
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, bulletDamage, bulletSpeed * 1.05f, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, damage, bulletSpeed * 1.05f, true);
                 } else
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, bulletDamage, bulletSpeed * 1.05f, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, damage, bulletSpeed * 1.05f, true);
                 }
             } else
             {
-                spawnProjectile(alienMissile, bulletSpawns[1].position, bulletDamage, bulletSpeed * 1.1f, true);
-                spawnProjectile(alienMissile, bulletSpawns[2].position, bulletDamage, bulletSpeed * 1.1f, true);
+                spawnProjectile(alienMissile, bulletSpawns[1].position, damage, bulletSpeed * 1.1f, true);
+                spawnProjectile(alienMissile, bulletSpawns[2].position, damage, bulletSpeed * 1.1f, true);
             }
             if (audioSource)
             {

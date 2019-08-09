@@ -4,7 +4,7 @@ using UnityEngine;
 public class AlienMothershipMain : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [SerializeField] private Vector2 abilityTime = new Vector2(3.5f, 4);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Torpedo Barrage Settings")]
@@ -25,8 +25,8 @@ public class AlienMothershipMain : MonoBehaviour
     [SerializeField] private AudioClip bustedShotFireSound = null;
 
     [Header("Setup")]
-    [SerializeField] private long damage = 16;
-    [SerializeField] private float bulletSpeed = 11.25f;
+    [SerializeField] private long damage = 17;
+    [SerializeField] private float bulletSpeed = 12;
     [SerializeField] private GameObject bioTorpedo = null;
     [SerializeField] private GameObject alienMissile = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
@@ -47,12 +47,14 @@ public class AlienMothershipMain : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            damage = 16;
+            damage = 17;
             damage = (long)(damage * 0.9);
+            bulletSpeed = 12;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
-            damage = 16;
+            damage = 17;
             damage = (long)(damage * 1.2);
+            bulletSpeed = 12;
             bulletSpeed *= 1.05f;
             abilityTime -= new Vector2(0, -0.5f);
             torpedoBarrageShots = 17;
@@ -60,9 +62,9 @@ public class AlienMothershipMain : MonoBehaviour
             UFODeploymentTime -= 2.5f;
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
-            damage = 18;
+            damage = 19;
             damage = (long)(damage * 1.4);
-            bulletSpeed = 12.5f;
+            bulletSpeed = 12.75f;
             bulletSpeed *= 1.1f;
             abilityTime -= new Vector2(-0.5f, -0.5f);
             torpedoBarrageShots = 20;
@@ -131,7 +133,7 @@ public class AlienMothershipMain : MonoBehaviour
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(90, 0, 0));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
         bullet.GetComponent<EnemyHit>().damage = damage;
-        bullet.GetComponent<Mover>().speed = speed;
+        bullet.GetComponent<Mover>().speed = bulletSpeed;
         return bullet;
     }
 

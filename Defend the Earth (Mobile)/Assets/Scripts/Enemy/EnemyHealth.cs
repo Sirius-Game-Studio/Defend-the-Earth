@@ -83,7 +83,7 @@ public class EnemyHealth : MonoBehaviour
             if (powerups.Length > 0)
             {
                 float random = Random.value;
-                if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, -90, 0));
+                if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
             if (money > 0)
             {

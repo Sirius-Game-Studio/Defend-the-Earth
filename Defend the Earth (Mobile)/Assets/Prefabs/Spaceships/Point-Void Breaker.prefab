@@ -230,11 +230,17 @@ MonoBehaviour:
   damage: 9
   RPM: 130
   speed: 7.5
+  repairHeal: 20
+  superchargeMultiplier: 1.5
+  superchargeTime: 12
   yMin: -6.5
   yMax: 2
+  invulnerable: 0
+  fireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}
   bullet: {fileID: 3937757261437629000, guid: c2d8746c184a26f47b68dfc87979336c, type: 3}
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
-  fireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}
+  textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
+    type: 3}
 --- !u!1 &3377098704008124566
 GameObject:
   m_ObjectHideFlags: 0

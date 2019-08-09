@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private bool countsTowardsKillGoal = true;
     [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
 
+    [Header("Miscellanous")]
+    public bool invulnerable = false;
+
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
     [SerializeField] private GameObject textPopup = null;
@@ -83,7 +86,7 @@ public class EnemyHealth : MonoBehaviour
             if (powerups.Length > 0)
             {
                 float random = Random.value;
-                if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, -90, 0));
+                if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
             if (money > 0)
             {
@@ -126,12 +129,15 @@ public class EnemyHealth : MonoBehaviour
 
     public void takeDamage(long damage)
     {
-        if (damage > 0)
+        if (!invulnerable)
         {
-            health -= damage;
-        } else
-        {
-            --health;
+            if (damage > 0)
+            {
+                health -= damage;
+            } else
+            {
+                --health;
+            }
         }
     }
 

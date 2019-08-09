@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8a382fb839bf64daeb0aa134df350a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityTime: {x: 3.5, y: 5}
+  abilityTime: {x: 3.5, y: 4}
   music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   torpedoBarrageShots: 14
   torpedoBarrageFireRate: 0.3

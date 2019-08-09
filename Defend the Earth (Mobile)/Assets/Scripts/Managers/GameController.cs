@@ -92,6 +92,7 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        Application.targetFrameRate = 60;
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
         gameOver = false;
@@ -138,6 +139,7 @@ public class GameController : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
+            enemySpawnTime *= 0.95f;
             maxAliensReached += 2;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {

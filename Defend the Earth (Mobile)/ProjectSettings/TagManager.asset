@@ -11,6 +11,7 @@ TagManager:
   - BulletSpawn
   - HealthBar
   - Repair
+  - Supercharge
   layers:
   - Default
   - TransparentFX

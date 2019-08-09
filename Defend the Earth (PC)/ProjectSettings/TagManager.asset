@@ -12,6 +12,7 @@ TagManager:
   - LargeRepair
   - Background
   - Projectile
+  - Supercharge
   layers:
   - Default
   - TransparentFX

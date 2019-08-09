@@ -129,6 +129,7 @@ public class GameController : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
+            enemySpawnTime *= 0.95f;
             maxAliensReached += 2;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
@@ -497,6 +498,7 @@ public class GameController : MonoBehaviour
                             if (!gameOver && !won && !paused)
                             {
                                 GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                enemy.GetComponent<EnemyHealth>().invulnerable = true;
                                 enemy.name = boss.name;
                                 currentBoss = enemy;
                                 StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
@@ -542,15 +544,14 @@ public class GameController : MonoBehaviour
         {
             while (enemy && enemy.transform.position.y > y)
             {
+                enemy.GetComponent<EnemyHealth>().invulnerable = true;
                 enemy.GetComponent<Mover>().enabled = true;
                 if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
                 yield return new WaitForEndOfFrame();
             }
-            if (enemy)
-            {
-                enemy.GetComponent<Mover>().enabled = false;
-                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
-            }
+            enemy.GetComponent<EnemyHealth>().invulnerable = false;
+            enemy.GetComponent<Mover>().enabled = false;
+            if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
         }
     }
 

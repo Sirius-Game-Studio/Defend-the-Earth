@@ -27,6 +27,7 @@ public class EndingManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;

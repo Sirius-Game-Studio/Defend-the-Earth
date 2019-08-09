@@ -1,30 +1,43 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header("Settings")]
     public long health = 100;
     [SerializeField] private long damage = 10;
     [SerializeField] private float RPM = 200;
     [SerializeField] private float speed = 7.5f;
 
+    [Header("Powerup Settings")]
+    [Range(1, 20)] public long repairHeal = 20;
+    [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
+    [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
+
     [Header("Miscellanous")]
     [SerializeField] private float yMin = -6.75f, yMax = 2;
     public bool invulnerable = false;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip fireSound = null;
+
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
-    [SerializeField] private AudioClip fireSound = null;
+    [SerializeField] private GameObject textPopup = null;
 
     private new Renderer renderer;
     private AudioSource audioSource;
     private Slider healthBar;
     private Text healthText;
     private long maxHealth = 0;
+    private bool hasSupercharge = false;
+    private float superchargeDuration = 0;
+    private long oldDamage = 0;
     private float nextShot = 0;
+    private bool shownSuperchargeText = false;
 
     void Start()
     {
@@ -78,8 +91,6 @@ public class PlayerController : MonoBehaviour
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && GameController.instance.pauseButton.color != GameController.instance.pauseButton.GetComponent<ButtonHover>().hoverColor)
         {
-            Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-            float width = GetComponent<Collider>().bounds.extents.x;
             if (Input.touchCount > 0)
             {
                 Touch touch = Input.GetTouch(0);
@@ -89,7 +100,6 @@ public class PlayerController : MonoBehaviour
                     transform.position = Vector3.Lerp(transform.position, newPosition, speed * 0.375f * Time.deltaTime);
                 }
             }
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
             if (Input.GetButton("Shoot") && Time.time >= nextShot)
             {
                 bool foundBulletSpawns = false;
@@ -123,8 +133,43 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        float width = GetComponent<Collider>().bounds.extents.x;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
+        if (hasSupercharge)
+        {
+            if (superchargeDuration > 0)
+            {
+                superchargeDuration -= Time.deltaTime;
+                if (superchargeDuration <= 3 && !shownSuperchargeText)
+                {
+                    if (textPopup)
+                    {
+                        if (textPopup.GetComponent<TextMeshPro>())
+                        {
+                            shownSuperchargeText = true;
+                            GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                            popup.GetComponent<TextMeshPro>().text = "Supercharge is wearing off!";
+                            popup.GetComponent<TextMeshPro>().color = new Color32(0, 150, 150, 255);
+                            popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 75, 75, 255);
+                        } else
+                        {
+                            Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                        }
+                    }
+                }
+            } else
+            {
+                hasSupercharge = false;
+                damage = oldDamage;
+                superchargeDuration = superchargeTime;
+            }
+        }
         if (damage < 0) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
+        if (repairHeal < 1) repairHeal = 1; //Checks if Large Repair heal amount is less than 1
+        if (superchargeMultiplier < 1.05f) superchargeMultiplier = 1.05f; //Checks if Supercharge damage multiplier is less than +5%
+        if (superchargeTime < 5) superchargeTime = 5; //Checks if Supercharge time is less than 5
     }
 
     public void takeDamage(long hitDamage)
@@ -190,6 +235,23 @@ public class PlayerController : MonoBehaviour
                 if (child) child.enabled = true;
             }
             yield break;
+        }
+    }
+
+    public void supercharge()
+    {
+        if (!hasSupercharge)
+        {
+            hasSupercharge = true;
+            oldDamage = damage;
+            if (oldDamage < 1) oldDamage = 1;
+            damage = (long)(damage * superchargeMultiplier);
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
+        } else
+        {
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
         }
     }
 
