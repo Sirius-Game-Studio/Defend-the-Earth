@@ -1542,6 +1542,30 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1802036947}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1802036956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6812892386985223846, guid: 4e96fd4f62f31b44e8a2200689649778,
+    type: 3}
+  m_PrefabInstance: {fileID: 1802036947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1802036957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7851260516002654008, guid: 4e96fd4f62f31b44e8a2200689649778,
+    type: 3}
+  m_PrefabInstance: {fileID: 1802036947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1813528182 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5440520913379227627, guid: a4b0b7824474c1d4badc0c5ab61a7181,
@@ -1617,6 +1641,7 @@ MonoBehaviour:
   quitGameMenu: {fileID: 2035518593}
   restartPrompt: {fileID: 545988811}
   levelCount: {fileID: 1802036950}
+  scoreCount: {fileID: 1802036957}
   waveCount: {fileID: 1802036949}
   moneyCount: {fileID: 1802036948}
   bossName: {fileID: 1802036954}
@@ -1624,6 +1649,7 @@ MonoBehaviour:
   bossHealthText: {fileID: 1802036952}
   soundSlider: {fileID: 323872819}
   musicSlider: {fileID: 1813528182}
+  newHighScoreText: {fileID: 1802036956}
   deathMessage: {fileID: 686168306}
   controllerShootIcon: {fileID: 1802036955}
   loadingText: {fileID: 1408104777}
@@ -1633,6 +1659,8 @@ MonoBehaviour:
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
   enemiesLeft: 8
+  isCampaignLevel: 1
+  randomMusic: []
   aliensReached: 0
   currentBoss: {fileID: 0}
   deathMessageToShow: 

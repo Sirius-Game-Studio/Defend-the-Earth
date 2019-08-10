@@ -27,7 +27,7 @@ public class EnemyGun : MonoBehaviour
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             damage = (long)(damage * 0.8);
-            RPM *= 0.85f;
+            RPM *= 0.9f;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             damage = (long)(damage * 1.15);

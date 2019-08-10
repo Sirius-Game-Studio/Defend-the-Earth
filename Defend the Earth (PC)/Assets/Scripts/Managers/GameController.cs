@@ -8,10 +8,10 @@ public class GameController : MonoBehaviour
     public static GameController instance;
 
     [Header("Game Settings")]
-    [SerializeField] private long maxWaves = 1;
-    [SerializeField] private Vector2 enemySpawnTime = new Vector2(3, 4);
-    [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7, 8);
-    [SerializeField] private int maxAliensReached = 10;
+    [SerializeField] private long maxWaves = 2;
+    [SerializeField] private Vector2 enemySpawnTime = new Vector2(3.75f, 4);
+    [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7.5f, 8);
+    [SerializeField] private int maxAliensReached = 15;
     [SerializeField] private float bossFinalYPosition = 4.5f;
     [SerializeField] private Vector3 bossRotation = new Vector3(90, 180, 0);
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Canvas quitGameMenu = null;
     [SerializeField] private Canvas restartPrompt = null;
     [SerializeField] private Text levelCount = null;
+    [SerializeField] private Text scoreCount = null;
     [SerializeField] private Text waveCount = null;
     [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text bossName = null;
@@ -36,8 +37,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text bossHealthText = null;
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
+    [SerializeField] private Text newHighScoreText = null;
     [SerializeField] private Text deathMessage = null;
-    [SerializeField] private RectTransform controllerShootIcon = null;
+    public RectTransform controllerShootIcon = null;
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -49,6 +51,8 @@ public class GameController : MonoBehaviour
 
     [Header("Miscellanous")]
     public int enemiesLeft = 8;
+    public bool isCampaignLevel = true;
+    [SerializeField] private AudioClip[] randomMusic = new AudioClip[0];
     public int aliensReached = 0;
     public GameObject currentBoss;
     public string deathMessageToShow = "";
@@ -65,10 +69,15 @@ public class GameController : MonoBehaviour
 
     private AudioSource audioSource;
     private long wave = 1;
+    private long score = 0;
+    private long endlessMoneyReward = 150;
     private int enemyAmount = 0; //Stores the amount of enemies
+    private long bossMaxHealth = 0; //If the value is above 0, the boss health bar's max value is not updated
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
     private bool canWin = false; //Checks if the player is on the last wave, thus allowing the player to win
-    private long bossMaxHealth = 0; //If the value is above 0, the boss health bar's max value is not updated
+    private long endlessWavesClearedForEnemyAmount = 0;
+    private long endlessWavesClearedForMoneyReward = 0;
+    private bool canSetNewHighScore = true;
     private bool playedLoseSound = false, playedWinSound = false;
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
     private long storedMaxWaves = 2;
@@ -188,6 +197,13 @@ public class GameController : MonoBehaviour
             Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
         }
         if (backgrounds.Length > 0) Instantiate(backgrounds[Random.Range(0, backgrounds.Length)], new Vector3(0, 0, 5), Quaternion.Euler(0, 0, 0));
+        if (Camera.main.GetComponent<AudioSource>() && randomMusic.Length > 0)
+        {
+            Camera.main.GetComponent<AudioSource>().clip = randomMusic[Random.Range(0, randomMusic.Length)];
+            Camera.main.GetComponent<AudioSource>().loop = true;
+            Camera.main.GetComponent<AudioSource>().Stop();
+            Camera.main.GetComponent<AudioSource>().Play();
+        }
         gameHUD.enabled = true;
         gamePausedMenu.enabled = false;
         gameOverMenu.enabled = false;
@@ -197,6 +213,7 @@ public class GameController : MonoBehaviour
         soundMenu.enabled = false;
         quitGameMenu.enabled = false;
         restartPrompt.enabled = false;
+        newHighScoreText.enabled = false;
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
     }
@@ -284,6 +301,20 @@ public class GameController : MonoBehaviour
         {
             clickSource = 2;
             if (!quitGameMenu.enabled && !loading) gameOverMenu.enabled = true;
+            if (canSetNewHighScore)
+            {
+                canSetNewHighScore = false;
+                if (!PlayerPrefs.HasKey("HighScore") && score > 0)
+                {
+                    PlayerPrefs.SetString("HighScore", score.ToString());
+                    StartCoroutine(showNewHighScore());
+                } else if (PlayerPrefs.HasKey("HighScore") && score > long.Parse(PlayerPrefs.GetString("HighScore")))
+                {
+                    PlayerPrefs.SetString("HighScore", score.ToString());
+                    StartCoroutine(showNewHighScore());
+                }
+                PlayerPrefs.Save();
+            }
             if (audioSource && loseJingle && !playedLoseSound)
             {
                 playedLoseSound = true;
@@ -291,32 +322,61 @@ public class GameController : MonoBehaviour
             }
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
         }
-        if (!gameOver && !won && enemiesLeft <= 0)
+        if (isCampaignLevel)
         {
-            if (wave < maxWaves && !canWin)
+            if (!gameOver && !won && enemiesLeft <= 0)
             {
-                if (!reachedNextWave)
+                if (wave < maxWaves && !canWin)
                 {
-                    reachedNextWave = true;
-                    if (wave < maxWaves + 1) ++wave;
-                }
-            } else if (wave >= maxWaves && canWin)
-            {
-                won = true;
-                clickSource = 3;
-                if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
-                {
-                    if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
-                    if (audioSource && winJingle && !playedWinSound)
+                    if (!reachedNextWave)
                     {
-                        playedWinSound = true;
-                        audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        reachedNextWave = true;
+                        if (wave < maxWaves + 1) ++wave;
                     }
-                } else
+                } else if (wave >= maxWaves && canWin)
                 {
-                    if (!loading) StartCoroutine(loadScene("Ending"));
+                    won = true;
+                    clickSource = 3;
+                    if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+                    {
+                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (audioSource && winJingle && !playedWinSound)
+                        {
+                            playedWinSound = true;
+                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                        }
+                    } else
+                    {
+                        if (!loading) StartCoroutine(loadScene("Ending"));
+                    }
+                    if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
-                if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            }
+        } else
+        {
+            if (!gameOver && enemiesLeft <= 0 && !reachedNextWave)
+            {
+                reachedNextWave = true;
+                ++wave;
+                ++endlessWavesClearedForEnemyAmount;
+                ++endlessWavesClearedForMoneyReward;
+            }
+            if (endlessWavesClearedForEnemyAmount >= 2)
+            {
+                endlessWavesClearedForEnemyAmount = 0;
+                if (enemyAmount < 25) enemyAmount += 1;
+                if (enemySpawnTime.x > 2.75f) enemySpawnTime *= 0.98f;
+                if (asteroidSpawnTime.x > 5) asteroidSpawnTime *= 0.98f;
+                if (maxAliensReached > 14) --maxAliensReached;
+            }
+            if (endlessWavesClearedForMoneyReward >= 5)
+            {
+                endlessWavesClearedForMoneyReward = 0;
+                long money = long.Parse(PlayerPrefs.GetString("Money"));
+                money += endlessMoneyReward;
+                PlayerPrefs.SetString("Money", money.ToString());
+                PlayerPrefs.Save();
+                endlessMoneyReward += 150;
             }
         }
 
@@ -325,14 +385,25 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
         PlayerPrefs.Save();
 
-        if (PlayerPrefs.GetInt("Level") > 0)
+        if (isCampaignLevel)
         {
-            levelCount.text = PlayerPrefs.GetInt("Level").ToString();
+            levelCount.transform.parent.gameObject.SetActive(true);
+            scoreCount.transform.parent.gameObject.SetActive(false);
+            if (PlayerPrefs.GetInt("Level") > 0)
+            {
+                levelCount.text = PlayerPrefs.GetInt("Level").ToString();
+            } else
+            {
+                levelCount.text = "1";
+            }
+            waveCount.text = wave + "/" + maxWaves;
         } else
         {
-            levelCount.text = "1";
+            levelCount.transform.parent.gameObject.SetActive(false);
+            scoreCount.transform.parent.gameObject.SetActive(true);
+            scoreCount.text = score.ToString();
+            waveCount.text = wave.ToString();
         }
-        waveCount.text = wave + "/" + maxWaves;
         if (PlayerPrefs.GetString("Money") != "")
         {
             moneyCount.text = "$" + PlayerPrefs.GetString("Money");
@@ -343,13 +414,31 @@ public class GameController : MonoBehaviour
         if (!currentBoss)
         {
             currentBoss = null;
-            if (controllerShootIcon) controllerShootIcon.anchoredPosition = new Vector2(-20, 20);
+            if (controllerShootIcon)
+            {
+                if (isCampaignLevel)
+                {
+                    controllerShootIcon.anchoredPosition = new Vector2(-20, 20);
+                } else
+                {
+                    controllerShootIcon.anchoredPosition = new Vector2(-20, 45);
+                }
+            }
             bossMaxHealth = 0;
             bossName.gameObject.SetActive(false);
         } else
         {
             if (bossMaxHealth <= 0) bossMaxHealth = currentBoss.GetComponent<EnemyHealth>().health;
-            if (controllerShootIcon) controllerShootIcon.anchoredPosition = new Vector2(-20, 70);
+            if (controllerShootIcon)
+            {
+                if (isCampaignLevel)
+                {
+                    controllerShootIcon.anchoredPosition = new Vector2(-20, 70);
+                } else
+                {
+                    controllerShootIcon.anchoredPosition = new Vector2(-20, 105);
+                }
+            }
             bossName.gameObject.SetActive(true);
             bossName.text = currentBoss.name;
             bossHealthBar.value = currentBoss.GetComponent<EnemyHealth>().health;
@@ -444,12 +533,24 @@ public class GameController : MonoBehaviour
                 Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
                 if (enemiesLeft > 0)
                 {
-                    yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
                     if (!gameOver && !won && !paused)
                     {
+                        yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
                         if (!enemyToLimit)
                         {
-                            Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                            if (isCampaignLevel)
+                            {
+                                Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                            } else
+                            {
+                                if (wave < 6)
+                                {
+                                    Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                } else
+                                {
+                                    Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                }
+                            }
                         } else
                         {
                             int foundEnemies = 0;
@@ -463,7 +564,19 @@ public class GameController : MonoBehaviour
                             }
                             if (foundEnemies < limitedEnemySpawns)
                             {
-                                Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                if (isCampaignLevel)
+                                {
+                                    Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                } else
+                                {
+                                    if (wave < 6)
+                                    {
+                                        Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                    } else
+                                    {
+                                        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                    }
+                                }
                             } else
                             {
                                 Instantiate(otherEnemies[Random.Range(0, otherEnemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
@@ -472,18 +585,9 @@ public class GameController : MonoBehaviour
                     }
                 } else
                 {
-                    if (!boss)
+                    if (isCampaignLevel)
                     {
-                        yield return new WaitForSeconds(3);
-                        if (!gameOver && !won && !paused)
-                        {
-                            if (wave >= maxWaves) canWin = true;
-                            enemiesLeft = enemyAmount;
-                            reachedNextWave = false;
-                        }
-                    } else
-                    {
-                        if (wave < maxWaves)
+                        if (!boss)
                         {
                             yield return new WaitForSeconds(3);
                             if (!gameOver && !won && !paused)
@@ -494,21 +598,48 @@ public class GameController : MonoBehaviour
                             }
                         } else
                         {
-                            yield return new WaitForSeconds(3);
-                            if (!gameOver && !won && !paused)
+                            if (wave < maxWaves)
                             {
-                                GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
-                                enemy.GetComponent<EnemyHealth>().invulnerable = true;
-                                enemy.name = boss.name;
-                                currentBoss = enemy;
-                                StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
-                                StopCoroutine(spawnAsteroids());
-                                enemiesLeft = 1;
-                                reachedNextWave = false;
-                                if (wave >= maxWaves) canWin = true;
-                                yield break;
+                                yield return new WaitForSeconds(3);
+                                if (!gameOver && !won && !paused)
+                                {
+                                    if (wave >= maxWaves) canWin = true;
+                                    enemiesLeft = enemyAmount;
+                                    reachedNextWave = false;
+                                }
+                            } else
+                            {
+                                if (wave < maxWaves)
+                                {
+                                    yield return new WaitForSeconds(3);
+                                    if (!gameOver && !won && !paused)
+                                    {
+                                        if (wave >= maxWaves) canWin = true;
+                                        enemiesLeft = enemyAmount;
+                                        reachedNextWave = false;
+                                    }
+                                } else
+                                {
+                                    yield return new WaitForSeconds(3);
+                                    if (!gameOver && !won && !paused)
+                                    {
+                                        GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                        enemy.name = boss.name;
+                                        currentBoss = enemy;
+                                        StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
+                                        enemiesLeft = 1;
+                                        reachedNextWave = false;
+                                        if (wave >= maxWaves) canWin = true;
+                                    }
+                                    yield break;
+                                }
                             }
                         }
+                    } else
+                    {
+                        yield return new WaitForSeconds(3);
+                        enemiesLeft = enemyAmount;
+                        reachedNextWave = false;
                     }
                 }
             } else
@@ -538,21 +669,42 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void addScore(long newScore)
+    {
+        if (!isCampaignLevel && !gameOver && newScore > 0) score += newScore;
+    }
+
     IEnumerator scrollEnemy(GameObject enemy, float y)
     {
         if (enemy && enemy.CompareTag("Enemy") && enemy.GetComponent<Mover>() && y > 0)
         {
             while (enemy && enemy.transform.position.y > y)
             {
-                enemy.GetComponent<EnemyHealth>().invulnerable = true;
                 enemy.GetComponent<Mover>().enabled = true;
                 if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
                 yield return new WaitForEndOfFrame();
             }
-            enemy.GetComponent<EnemyHealth>().invulnerable = false;
-            enemy.GetComponent<Mover>().enabled = false;
-            if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
+            if (enemy)
+            {
+                enemy.GetComponent<Mover>().enabled = false;
+                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
+            }
         }
+    }
+
+    IEnumerator showNewHighScore()
+    {
+        int a = 0;
+        while (a < 6)
+        {
+            newHighScoreText.enabled = true;
+            ++a;
+            yield return new WaitForSeconds(0.5f);
+            newHighScoreText.enabled = false;
+            ++a;
+            yield return new WaitForSeconds(0.5f);
+        }
+        newHighScoreText.enabled = false;
     }
 
     void pause()

@@ -31,7 +31,7 @@ public class EnemyHit : MonoBehaviour
         if (!hit && other.CompareTag("Player"))
         {
             PlayerController playerController = other.GetComponent<PlayerController>();
-            if (playerController)
+            if (playerController && !playerController.invulnerable)
             {
                 playerController.takeDamage(damage);
                 if (explosion)

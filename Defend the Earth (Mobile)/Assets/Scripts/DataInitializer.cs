@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class DataInitializer : MonoBehaviour
 {
     [SerializeField] private int level = 1;
-    [SerializeField] private int maxLevels = 10;
+    [SerializeField] private int maxLevels = 13;
+    [SerializeField] private bool setLevel = true;
 
     void Awake()
     {
@@ -23,18 +24,21 @@ public class DataInitializer : MonoBehaviour
 
         //Set up level data
         string sceneName = SceneManager.GetActiveScene().name;
-        if (!PlayerPrefs.HasKey("Level"))
+        if (setLevel)
         {
-            if (!sceneName.ToLower().Contains("level"))
+            if (!PlayerPrefs.HasKey("Level"))
             {
-                PlayerPrefs.SetInt("Level", level);
+                if (!sceneName.ToLower().Contains("level"))
+                {
+                    PlayerPrefs.SetInt("Level", level);
+                } else
+                {
+                    PlayerPrefs.SetInt("Level", 1);
+                }
             } else
             {
-                PlayerPrefs.SetInt("Level", 1);
+                if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
             }
-        } else
-        {
-            if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
         }
         PlayerPrefs.SetInt("MaxLevels", maxLevels);
 

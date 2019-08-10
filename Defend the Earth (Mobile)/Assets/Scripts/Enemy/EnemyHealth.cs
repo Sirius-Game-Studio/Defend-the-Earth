@@ -3,14 +3,18 @@ using TMPro;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Header("Stats")]
-    public long health = 1;
+    [Header("Settings")]
+    public long health = 20;
     [Tooltip("Values below 1 reduce damage and values above 1 increase damage.")] public float defense = 1;
-    [Tooltip("Amount of money earned from killing this enemy.")] [SerializeField] private long money = 0;
-    [Range(0, 1)] [SerializeField] private float powerupChance = 0.5f;
+    [Tooltip("Amount of money earned from killing this enemy (Campaign only).")] [SerializeField] private long money = 1;
+    [Tooltip("Amount of score earned from killing this enemy (Endless only).")] [SerializeField] private long score = 5;
+    [Range(0, 1)] [SerializeField] private float powerupChance = 0.37f;
     [SerializeField] private GameObject[] powerups = new GameObject[0];
     [SerializeField] private bool countsTowardsKillGoal = true;
     [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
+
+    [Header("Miscellanous")]
+    public bool invulnerable = false;
 
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
@@ -18,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
+        if (!GameController.instance.isCampaignLevel) money = 0;
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             if (gameObject.layer != 9) //If this enemy isn't a boss
@@ -85,7 +90,7 @@ public class EnemyHealth : MonoBehaviour
                 float random = Random.value;
                 if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
-            if (money > 0)
+            if (GameController.instance.isCampaignLevel && money > 0)
             {
                 if (PlayerPrefs.GetString("Money") != "")
                 {
@@ -110,6 +115,23 @@ public class EnemyHealth : MonoBehaviour
                     }
                 }
             }
+            if (!GameController.instance.isCampaignLevel && !GameController.instance.gameOver && score > 0)
+            {
+                GameController.instance.addScore(score);
+                if (textPopup)
+                {
+                    if (textPopup.GetComponent<TextMeshPro>())
+                    {
+                        GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                        popup.GetComponent<TextMeshPro>().text = "+" + score;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(0, 170, 255, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 85, 127, 255);
+                    } else
+                    {
+                        Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                    }
+                }
+            }
             if (countsTowardsKillGoal && GameController.instance.enemiesLeft > 0)
             {
                 if (!GameController.instance.currentBoss && gameObject.layer != 9)
@@ -122,16 +144,20 @@ public class EnemyHealth : MonoBehaviour
             }
             Destroy(gameObject);
         }
+        if (score < 0) score = 0; //Checks if score is less than 0
     }
 
     public void takeDamage(long damage)
     {
-        if (damage > 0)
+        if (!invulnerable)
         {
-            health -= damage;
-        } else
-        {
-            --health;
+            if (damage > 0)
+            {
+                health -= damage;
+            } else
+            {
+                --health;
+            }
         }
     }
 

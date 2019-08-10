@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -21,15 +22,19 @@ public class PlayerController : MonoBehaviour
 
     [Header("Miscellanous")]
     [SerializeField] private float yMin = -6.75f, yMax = 2;
+    public long lives = 3;
+    public bool invulnerable = false;
 
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
     [SerializeField] private GameObject textPopup = null;
 
+    private new Renderer renderer;
     private AudioSource audioSource;
     private Slider healthBar;
     private Text healthText;
+    private Text livesCount;
     private long maxHealth = 0;
     private bool hasSupercharge = false;
     private float superchargeDuration = 0;
@@ -39,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        renderer = GetComponent<Renderer>();
         audioSource = GetComponent<AudioSource>();
 
         //Gets sliders and texts tagged as HealthBar, then sets health bar and health text
@@ -51,7 +57,20 @@ public class PlayerController : MonoBehaviour
             if (text.CompareTag("HealthBar")) healthText = text;
         }
 
+        //Gets all text objects tagged as LivesCount, then sets lives count
+        foreach (Text text in FindObjectsOfType<Text>())
+        {
+            if (text.CompareTag("LivesCount")) livesCount = text;
+        }
+
         if (healthBar && healthBar.maxValue != health) healthBar.maxValue = health;
+        if (GameController.instance.isCampaignLevel)
+        {
+            lives = 1;
+        } else
+        {
+            lives = 3;
+        }
         if (PlayerPrefs.HasKey("HealthMultiplier")) health = (long)(health * PlayerPrefs.GetFloat("HealthMultiplier"));
         if (PlayerPrefs.HasKey("DamageMultiplier")) damage = (long)(damage * PlayerPrefs.GetFloat("DamageMultiplier"));
         if (PlayerPrefs.HasKey("SpeedMultiplier")) speed *= PlayerPrefs.GetFloat("SpeedMultiplier");
@@ -72,8 +91,27 @@ public class PlayerController : MonoBehaviour
         {
             health = maxHealth;
         }
+        if (lives < 0) lives = 0; //Checks if lives are less than 0
         if (healthBar) healthBar.value = health;
         if (healthText) healthText.text = health + " / " + maxHealth;
+        if (livesCount)
+        {
+            livesCount.text = "Lives: " + lives;
+            if (!GameController.instance.currentBoss)
+            {
+                livesCount.rectTransform.anchoredPosition = new Vector2(0, 10);
+            } else
+            {
+                livesCount.rectTransform.anchoredPosition = new Vector2(0, 70);
+            }
+            if (GameController.instance.isCampaignLevel)
+            {
+                livesCount.enabled = false;
+            } else
+            {
+                livesCount.enabled = true;
+            }
+        }
         if (health <= 0)
         {
             if (explosion)
@@ -81,12 +119,22 @@ public class PlayerController : MonoBehaviour
                 GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
                 if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
             }
-            if (!GameController.instance.gameOver && !GameController.instance.won)
+            if (lives > 1)
             {
-                GameController.instance.gameOver = true;
-                GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
+                --lives;
+                health = maxHealth;
+                startInvulnerability(3);
+            } else
+            {
+                lives = 0;
+                if (livesCount) livesCount.text = "Lives: 0";
+                if (!GameController.instance.gameOver && !GameController.instance.won)
+                {
+                    GameController.instance.gameOver = true;
+                    GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused)
         {
@@ -183,12 +231,70 @@ public class PlayerController : MonoBehaviour
 
     public void takeDamage(long hitDamage)
     {
-        if (hitDamage > 0)
+        if (!invulnerable)
         {
-            health -= hitDamage;
+            if (hitDamage > 0)
+            {
+                health -= hitDamage;
+            } else
+            {
+                --health;
+            }
+        }
+    }
+
+    public void startInvulnerability(float duration)
+    {
+        if (!invulnerable && duration > 0)
+        {
+            invulnerable = true;
+            StartCoroutine(invulnerabilityFadeEffect());
+            Invoke("stopInvulnerability", duration);
+        }
+    }
+
+    void stopInvulnerability()
+    {
+        invulnerable = false;
+        if (renderer) renderer.enabled = true;
+        foreach (Renderer child in GetComponentsInChildren<Renderer>())
+        {
+            if (child) child.enabled = true;
+        }
+    }
+
+    IEnumerator invulnerabilityFadeEffect()
+    {
+        if (invulnerable)
+        {
+            while (invulnerable)
+            {
+                if (renderer) renderer.enabled = false;
+                foreach (Renderer child in GetComponentsInChildren<Renderer>())
+                {
+                    if (child) child.enabled = false;
+                }
+                yield return new WaitForSeconds(0.1f);
+                if (renderer) renderer.enabled = true;
+                foreach (Renderer child in GetComponentsInChildren<Renderer>())
+                {
+                    if (child) child.enabled = true;
+                }
+                yield return new WaitForSeconds(0.1f);
+            }
+            if (renderer) renderer.enabled = true;
+            foreach (Renderer child in GetComponentsInChildren<Renderer>())
+            {
+                if (child) child.enabled = true;
+            }
         } else
         {
-            --health;
+            if (renderer) renderer.enabled = true;
+            foreach (Renderer child in GetComponentsInChildren<Renderer>())
+            {
+                if (child) child.enabled = true;
+            }
+            yield break;
         }
     }
 

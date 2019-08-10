@@ -12,6 +12,7 @@ TagManager:
   - HealthBar
   - Repair
   - Supercharge
+  - LivesCount
   layers:
   - Default
   - TransparentFX

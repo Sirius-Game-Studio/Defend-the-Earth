@@ -261,11 +261,13 @@ MonoBehaviour:
   health: 30
   defense: 1
   money: 0
+  score: 0
   powerupChance: 0.37
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   countsTowardsKillGoal: 0
   killTracker: AlienKills
+  invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
     type: 3}

@@ -53,8 +53,10 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas upgradesMenu = null;
     [SerializeField] private Canvas spaceshipsMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
+    [SerializeField] private Canvas selectGamemodeMenu = null;
     [SerializeField] private Canvas selectDifficultyMenu = null;
     [SerializeField] private Text currentLevelText = null;
+    [SerializeField] private Text highScoreText = null;
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -65,6 +67,7 @@ public class MainMenuManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
@@ -93,6 +96,7 @@ public class MainMenuManager : MonoBehaviour
         spaceshipsMenu.enabled = false;
         upgradesMenu.enabled = false;
         settingsMenu.enabled = false;
+        selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
         foreach (GameObject page in pages)
         {
@@ -129,10 +133,14 @@ public class MainMenuManager : MonoBehaviour
             {
                 settingsMenu.enabled = false;
                 mainMenu.enabled = true;
+            } else if (selectGamemodeMenu.enabled)
+            {
+                selectGamemodeMenu.enabled = false;
+                mainMenu.enabled = true;
             } else if (selectDifficultyMenu.enabled)
             {
                 selectDifficultyMenu.enabled = false;
-                mainMenu.enabled = true;
+                selectGamemodeMenu.enabled = true;
             }
         }
 
@@ -183,6 +191,20 @@ public class MainMenuManager : MonoBehaviour
         } else
         {
             currentLevelText.text = "Current Level: 1";
+        }
+        if (PlayerPrefs.HasKey("HighScore"))
+        {
+            long highScore = long.Parse(PlayerPrefs.GetString("HighScore"));
+            if (highScore > 0)
+            {
+                highScoreText.text = "High Score: " + highScore;
+            } else
+            {
+                highScoreText.text = "High Score: 0";
+            }
+        } else
+        {
+            highScoreText.text = "High Score: 0";
         }
         if (!loading)
         {
@@ -243,13 +265,13 @@ public class MainMenuManager : MonoBehaviour
             audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
-        if (!selectDifficultyMenu.enabled)
+        if (!selectGamemodeMenu.enabled)
         {
-            selectDifficultyMenu.enabled = true;
+            selectGamemodeMenu.enabled = true;
             mainMenu.enabled = false;
         } else
         {
-            selectDifficultyMenu.enabled = false;
+            selectGamemodeMenu.enabled = false;
             mainMenu.enabled = true;
         }
     }
@@ -307,6 +329,27 @@ public class MainMenuManager : MonoBehaviour
             audioSource.Play();
         }
         Application.Quit();
+    }
+
+    public void clickCampaign()
+    {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
+        if (!selectDifficultyMenu.enabled)
+        {
+            selectDifficultyMenu.enabled = true;
+            selectGamemodeMenu.enabled = false;
+        } else
+        {
+            selectDifficultyMenu.enabled = false;
+            selectGamemodeMenu.enabled = true;
+        }
     }
 
     public void clickSpaceships()
@@ -388,14 +431,29 @@ public class MainMenuManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Difficulty", 4);
             }
-            PlayerPrefs.Save();
             StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
         } else
         {
             PlayerPrefs.SetInt("Difficulty", difficulty);
-            PlayerPrefs.Save();
             StartCoroutine(loadScene("Level 1"));
         }
+        PlayerPrefs.Save();
+    }
+
+    public void startEndless()
+    {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
+        StartCoroutine(loadScene("Endless"));
     }
 
     public void changeSpaceshipsPage(bool next)
@@ -824,6 +882,7 @@ public class MainMenuManager : MonoBehaviour
                 spaceshipsMenu.enabled = false;
                 upgradesMenu.enabled = false;
                 settingsMenu.enabled = false;
+                selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
             }

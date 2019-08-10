@@ -194,6 +194,7 @@ MonoBehaviour:
   health: 100
   defense: 0.95
   money: 4
+  score: 20
   powerupChance: 0.34
   powerups:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
@@ -220,8 +221,8 @@ MonoBehaviour:
   defaultAlbedo: {fileID: 0}
   greenAlbedo: {fileID: 0}
   whiteAlbedo: {fileID: 0}
-  bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
   fireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
+  bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
 --- !u!114 &6744555977236668340
 MonoBehaviour:
   m_ObjectHideFlags: 0

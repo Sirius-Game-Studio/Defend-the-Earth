@@ -13,6 +13,7 @@ TagManager:
   - Background
   - Projectile
   - Supercharge
+  - LivesCount
   layers:
   - Default
   - TransparentFX

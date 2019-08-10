@@ -195,6 +195,7 @@ MonoBehaviour:
   health: 90
   defense: 0.95
   money: 4
+  score: 20
   powerupChance: 0.34
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}

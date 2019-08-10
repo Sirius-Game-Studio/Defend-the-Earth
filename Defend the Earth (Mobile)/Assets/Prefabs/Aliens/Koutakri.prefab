@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 6893967022203356650}
   - component: {fileID: -4371731122241148580}
   - component: {fileID: -7321378342568149891}
-  - component: {fileID: 6002707471393092696}
   - component: {fileID: 286858825325768464}
+  - component: {fileID: 6002707471393092696}
   - component: {fileID: 6444847964955043290}
   - component: {fileID: 3888172345806951216}
   - component: {fileID: -7128282089127701406}
@@ -264,6 +264,7 @@ MonoBehaviour:
   health: 1500
   defense: 0.9
   money: 200
+  score: 100
   powerupChance: 0
   powerups:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
@@ -272,20 +273,6 @@ MonoBehaviour:
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
     type: 3}
---- !u!114 &6002707471393092696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7696656173546936913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
 --- !u!114 &286858825325768464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,6 +305,20 @@ MonoBehaviour:
   - {fileID: 8696875754718962613}
   - {fileID: 8923509058753674540}
   scorchingBeamSpawn: {fileID: 3924877401792279790}
+--- !u!114 &6002707471393092696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7696656173546936913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 9223372036854775807
+  explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
 --- !u!114 &6444847964955043290
 MonoBehaviour:
   m_ObjectHideFlags: 0
