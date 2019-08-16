@@ -133,47 +133,22 @@ public class PlayerController : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && GameController.instance.pauseButton.color != GameController.instance.pauseButton.GetComponent<ButtonHover>().hoverColor)
+        if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && GameController.instance.pauseButton.color != GameController.instance.pauseButton.GetComponent<ButtonHover>().hoverColor && Input.touchCount > 0)
         {
-            if (Input.touchCount > 0)
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
             {
-                Touch touch = Input.GetTouch(0);
-                if (touch.phase == TouchPhase.Stationary || touch.phase == TouchPhase.Moved)
-                {
-                    Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
-                    transform.position = Vector3.Lerp(transform.position, newPosition, speed * 0.375f * Time.deltaTime);
-                }
+                Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, 0));
+                transform.position = Vector3.Lerp(transform.position, newPosition, speed * 0.375f * Time.deltaTime);
             }
-            if (Input.GetButton("Shoot") && Time.time >= nextShot)
+            if (Time.time >= nextShot)
             {
-                bool foundBulletSpawns = false;
-                nextShot = Time.time + 60 / RPM;
-                foreach (Transform bulletSpawn in transform)
+                if (Input.touchCount >= 1 && PlayerPrefs.GetInt("Autofire") >= 1)
                 {
-                    if (bulletSpawn.CompareTag("BulletSpawn"))
-                    {
-                        GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-                        newBullet.GetComponent<BulletHit>().damage = damage;
-                        foundBulletSpawns = true;
-                    }
-                }
-                if (!foundBulletSpawns)
+                    fire();
+                } else if (Input.touchCount >= 2 && PlayerPrefs.GetInt("Autofire") <= 0)
                 {
-                    GameObject newBullet = Instantiate(bullet, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(-90, 0, 0));
-                    if (newBullet.transform.rotation.y != 90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                    newBullet.GetComponent<BulletHit>().damage = damage;
-                    foundBulletSpawns = true;
-                }
-                if (audioSource && foundBulletSpawns)
-                {
-                    if (fireSound)
-                    {
-                        audioSource.PlayOneShot(fireSound, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
+                    fire();
                 }
             }
         }
@@ -214,6 +189,39 @@ public class PlayerController : MonoBehaviour
         if (repairHeal < 1) repairHeal = 1; //Checks if Large Repair heal amount is less than 1
         if (superchargeMultiplier < 1.05f) superchargeMultiplier = 1.05f; //Checks if Supercharge damage multiplier is less than +5%
         if (superchargeTime < 5) superchargeTime = 5; //Checks if Supercharge time is less than 5
+    }
+
+    void fire()
+    {
+        bool foundBulletSpawns = false;
+        nextShot = Time.time + 60 / RPM;
+        foreach (Transform bulletSpawn in transform)
+        {
+            if (bulletSpawn.CompareTag("BulletSpawn"))
+            {
+                GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+                newBullet.GetComponent<BulletHit>().damage = damage;
+                foundBulletSpawns = true;
+            }
+        }
+        if (!foundBulletSpawns)
+        {
+            GameObject newBullet = Instantiate(bullet, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(-90, 0, 0));
+            if (newBullet.transform.rotation.y != 90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            newBullet.GetComponent<BulletHit>().damage = damage;
+            foundBulletSpawns = true;
+        }
+        if (audioSource && foundBulletSpawns)
+        {
+            if (fireSound)
+            {
+                audioSource.PlayOneShot(fireSound, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
     }
 
     public void supercharge()

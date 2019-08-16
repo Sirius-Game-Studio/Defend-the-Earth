@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -187,10 +188,10 @@ public class MainMenuManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("Level") > 0)
         {
-            currentLevelText.text = "Current Level: " + PlayerPrefs.GetInt("Level");
+            currentLevelText.text = "Level: " + PlayerPrefs.GetInt("Level");
         } else
         {
-            currentLevelText.text = "Current Level: 1";
+            currentLevelText.text = "Level: 1";
         }
         if (PlayerPrefs.HasKey("HighScore"))
         {
@@ -214,6 +215,13 @@ public class MainMenuManager : MonoBehaviour
         {
             loadingText.SetActive(true);
             moneyCount.gameObject.SetActive(false);
+        }
+        if (PlayerPrefs.GetInt("Level") < 1) //Checks if the current level is less than 1
+        {
+            PlayerPrefs.SetInt("Level", 1);
+        } else if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if the current level is more than the maximum amount of levels
+        {
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("MaxLevels"));
         }
 
         //Checks if the player upgrades are above maximum values
@@ -329,6 +337,9 @@ public class MainMenuManager : MonoBehaviour
             audioSource.Play();
         }
         Application.Quit();
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #endif
     }
 
     public void clickCampaign()
@@ -435,6 +446,13 @@ public class MainMenuManager : MonoBehaviour
         } else
         {
             PlayerPrefs.SetInt("Difficulty", difficulty);
+            if (PlayerPrefs.GetInt("Difficulty") < 1)
+            {
+                PlayerPrefs.SetInt("Difficulty", 1);
+            } else if (PlayerPrefs.GetInt("Difficulty") > 4)
+            {
+                PlayerPrefs.SetInt("Difficulty", 4);
+            }
             StartCoroutine(loadScene("Level 1"));
         }
         PlayerPrefs.Save();

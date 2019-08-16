@@ -40,10 +40,19 @@ public class DataInitializer : MonoBehaviour
                 if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
             }
         }
-        PlayerPrefs.SetInt("MaxLevels", maxLevels);
+        if (maxLevels > 0)
+        {
+            PlayerPrefs.SetInt("MaxLevels", maxLevels);
+        } else
+        {
+            PlayerPrefs.SetInt("MaxLevels", 1);
+        }
 
         //Delete WatchedAd key if the level is different from the previous level
         if (PlayerPrefs.GetInt("Level") != previousLevel && PlayerPrefs.HasKey("WatchedAd")) PlayerPrefs.DeleteKey("WatchedAd");
+
+        //Set up settings
+        if (!PlayerPrefs.HasKey("Autofire")) PlayerPrefs.SetInt("Autofire", 1);
 
         //Set up player upgrade data
         if (!PlayerPrefs.HasKey("DamageMultiplier")) PlayerPrefs.SetFloat("DamageMultiplier", 1);

@@ -6,17 +6,20 @@ using UnityEngine.Monetization;
 public class WatchRewardAd : MonoBehaviour
 {
     [SerializeField] private Text moneyReward = null;
+    [SerializeField] private AudioClip buttonClick = null;
 
+    private AudioSource audioSource;
     private string gameID = "3229625";
     private long givenMoney = 15;
 
     void Start()
     {
-#if UNITY_IOS
-        gameID = "3229624";
-#elif UNITY_ANDROID
-        gameID = "3229625";
-#endif
+        audioSource = GetComponent<AudioSource>();
+        #if UNITY_IOS
+            gameID = "3229624";
+        #elif UNITY_ANDROID
+            gameID = "3229625";
+        #endif
         Monetization.Initialize(gameID, false);
         givenMoney = Random.Range(15, 40);
         if (PlayerPrefs.HasKey("WatchedAd"))
@@ -33,6 +36,17 @@ public class WatchRewardAd : MonoBehaviour
 
     public void showAd()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         StartCoroutine(waitForAd());
     }
 
@@ -63,5 +77,18 @@ public class WatchRewardAd : MonoBehaviour
         {
             Debug.LogError("Could not finish ad due to a error!");
         }
+    }
+
+    float getVolumeData(bool isSound)
+    {
+        float volume = 1;
+        if (isSound)
+        {
+            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
+        } else
+        {
+            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
+        }
+        return volume;
     }
 }

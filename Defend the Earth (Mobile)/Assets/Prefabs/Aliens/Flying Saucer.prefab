@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7315212806989315746}
   m_Layer: 0
   m_Name: UFO_body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,7 +120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2484391616660123993}
   - component: {fileID: 1543651120069785782}
-  - component: {fileID: 2573655373167896815}
+  - component: {fileID: -4606711229244780719}
   - component: {fileID: 8501815208417965327}
   - component: {fileID: 3973978989672783495}
   - component: {fileID: -4061231970185013492}
@@ -167,8 +167,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!135 &2573655373167896815
-SphereCollider:
+--- !u!65 &-4606711229244780719
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,8 +178,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.865
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.75, y: 1.75, z: 0.75}
+  m_Center: {x: 0, y: 0, z: -0.05}
 --- !u!82 &8501815208417965327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -298,6 +298,7 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
     type: 3}
@@ -363,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.75
   movement: {x: 0, y: -1, z: 0}
-  useForwardMovement: 0
+  useForwardMovement: 1
 --- !u!114 &2006066762294260738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +390,7 @@ GameObject:
   - component: {fileID: 1128615802696012981}
   m_Layer: 0
   m_Name: UFO_cockpit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

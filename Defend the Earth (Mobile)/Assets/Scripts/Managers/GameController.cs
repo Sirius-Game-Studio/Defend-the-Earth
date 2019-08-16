@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEditor;
 
 struct PlayerPosition
 {
@@ -381,7 +382,7 @@ public class GameController : MonoBehaviour
                 money += endlessMoneyReward;
                 PlayerPrefs.SetString("Money", money.ToString());
                 PlayerPrefs.Save();
-                endlessMoneyReward += 150;
+                endlessMoneyReward += 25;
             }
         }
 
@@ -853,6 +854,9 @@ public class GameController : MonoBehaviour
             }
         }
         Application.Quit();
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #endif
     }
 
     public void exitToMainMenu()
