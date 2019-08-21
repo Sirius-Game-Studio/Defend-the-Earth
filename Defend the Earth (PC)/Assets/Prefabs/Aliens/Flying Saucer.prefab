@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7315212806989315746}
   m_Layer: 0
   m_Name: UFO_body
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 1128615802696012981}
   m_Layer: 0
   m_Name: UFO_cockpit
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

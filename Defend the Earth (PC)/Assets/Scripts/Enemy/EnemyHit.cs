@@ -3,6 +3,7 @@
 public class EnemyHit : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt to players (used by main collider).")] public long damage = 1;
+    [SerializeField] private bool instakill = false;
     [SerializeField] private GameObject explosion = null;
 
     private bool hit = false;
@@ -33,7 +34,14 @@ public class EnemyHit : MonoBehaviour
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController && !playerController.invulnerable)
             {
-                playerController.takeDamage(damage);
+                if (!instakill)
+                {
+                    playerController.takeDamage(damage);
+                } else
+                {
+                    playerController.health = 0;
+                    playerController.lives = 0;
+                }
                 if (explosion)
                 {
                     GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);

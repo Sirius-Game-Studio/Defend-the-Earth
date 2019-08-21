@@ -1298,11 +1298,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBarText
-      objectReference: {fileID: 0}
     - target: {fileID: 2615693148980937725, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1317,6 +1312,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBarText
       objectReference: {fileID: 0}
     - target: {fileID: 7828969710937775465, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
@@ -1493,8 +1493,8 @@ MonoBehaviour:
   asteroidSpawnTime: {x: 6.25, y: 7.25}
   maxAliensReached: 12
   bossFinalYPosition: 3.5
-  bossRotation: {x: 90, y: 180, z: 0}
-  boss: {fileID: 7696656173546936913, guid: 214efcec5fab49c4f8d39eba417f9c8e, type: 3}
+  bossRotation: {x: 0, y: 180, z: 0}
+  boss: {fileID: 3134174284751839711, guid: 586b9914d5d170c49b06695c64a1972e, type: 3}
   enemyToLimit: {fileID: 632701638249580328, guid: a502879cec4393f4d9cc2f94c364e829,
     type: 3}
   limitedEnemySpawns: 2
@@ -1544,12 +1544,14 @@ MonoBehaviour:
   enemies:
   - {fileID: 1458391615630120, guid: 6d18ca3ac0d2ecd4aa99a8099af486bb, type: 3}
   - {fileID: 1450454693458920266, guid: 291e4fec4c7a1a94ba4d7e6cc5dcf28a, type: 3}
+  - {fileID: 5420663412342396601, guid: 8212c4de22f8e94459bc2bab530bb519, type: 3}
   - {fileID: 6556492256011581412, guid: a4fb0224d3b85aa4198fec1d65e3bf64, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
   - {fileID: 632701638249580328, guid: a502879cec4393f4d9cc2f94c364e829, type: 3}
   otherEnemies:
   - {fileID: 1458391615630120, guid: 6d18ca3ac0d2ecd4aa99a8099af486bb, type: 3}
   - {fileID: 1450454693458920266, guid: 291e4fec4c7a1a94ba4d7e6cc5dcf28a, type: 3}
+  - {fileID: 5420663412342396601, guid: 8212c4de22f8e94459bc2bab530bb519, type: 3}
   - {fileID: 6556492256011581412, guid: a4fb0224d3b85aa4198fec1d65e3bf64, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
   asteroids:

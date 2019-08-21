@@ -56,8 +56,11 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas settingsMenu = null;
     [SerializeField] private Canvas selectGamemodeMenu = null;
     [SerializeField] private Canvas selectDifficultyMenu = null;
+    [SerializeField] private Canvas buyMoneyMenu = null;
+    [SerializeField] private GameObject openBuyMoneyButton = null;
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
+    [SerializeField] private Text purchaseNotification = null;
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -99,6 +102,8 @@ public class MainMenuManager : MonoBehaviour
         settingsMenu.enabled = false;
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
+        buyMoneyMenu.enabled = false;
+        if (purchaseNotification) purchaseNotification.text = "";
         foreach (GameObject page in pages)
         {
             if (page) page.SetActive(false);
@@ -112,36 +117,45 @@ public class MainMenuManager : MonoBehaviour
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (shopMenu.enabled)
+            if (!buyMoneyMenu.enabled)
             {
-                shopMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (spaceshipsMenu.enabled)
-            {
-                spaceshipsMenu.enabled = false;
-                shopMenu.enabled = true;
-                foreach (GameObject page in pages)
+                if (shopMenu.enabled)
                 {
-                    if (page) page.SetActive(false);
+                    shopMenu.enabled = false;
+                    mainMenu.enabled = true;
+                } else if (spaceshipsMenu.enabled)
+                {
+                    spaceshipsMenu.enabled = false;
+                    shopMenu.enabled = true;
+                    foreach (GameObject page in pages)
+                    {
+                        if (page) page.SetActive(false);
+                    }
+                    pages[0].SetActive(true);
+                    openBuyMoneyButton.SetActive(true);
+                    page = 1;
+                } else if (upgradesMenu.enabled)
+                {
+                    upgradesMenu.enabled = false;
+                    shopMenu.enabled = true;
+                    openBuyMoneyButton.SetActive(true);
+                } else if (settingsMenu.enabled)
+                {
+                    settingsMenu.enabled = false;
+                    mainMenu.enabled = true;
+                } else if (selectGamemodeMenu.enabled)
+                {
+                    selectGamemodeMenu.enabled = false;
+                    mainMenu.enabled = true;
+                } else if (selectDifficultyMenu.enabled)
+                {
+                    selectDifficultyMenu.enabled = false;
+                    selectGamemodeMenu.enabled = true;
                 }
-                pages[0].SetActive(true);
-                page = 1;
-            } else if (upgradesMenu.enabled)
+            } else
             {
-                upgradesMenu.enabled = false;
-                shopMenu.enabled = true;
-            } else if (settingsMenu.enabled)
-            {
-                settingsMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (selectGamemodeMenu.enabled)
-            {
-                selectGamemodeMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (selectDifficultyMenu.enabled)
-            {
-                selectDifficultyMenu.enabled = false;
-                selectGamemodeMenu.enabled = true;
+                buyMoneyMenu.enabled = false;
+                openBuyMoneyButton.SetActive(true);
             }
         }
 
@@ -377,6 +391,7 @@ public class MainMenuManager : MonoBehaviour
         {
             spaceshipsMenu.enabled = true;
             shopMenu.enabled = false;
+            openBuyMoneyButton.SetActive(false);
         } else
         {
             spaceshipsMenu.enabled = false;
@@ -388,11 +403,13 @@ public class MainMenuManager : MonoBehaviour
             if (pages[0])
             {
                 pages[0].SetActive(true);
+                openBuyMoneyButton.SetActive(true);
                 page = 1;
             } else
             {
                 spaceshipsMenu.enabled = false;
                 shopMenu.enabled = true;
+                openBuyMoneyButton.SetActive(true);
                 Debug.LogError("Could not find page objects in the pages array!");
             }
         }
@@ -412,10 +429,33 @@ public class MainMenuManager : MonoBehaviour
         {
             upgradesMenu.enabled = true;
             shopMenu.enabled = false;
+            openBuyMoneyButton.SetActive(false);
         } else
         {
             upgradesMenu.enabled = false;
             shopMenu.enabled = true;
+            openBuyMoneyButton.SetActive(true);
+        }
+    }
+
+    public void openBuyMoneyMenu()
+    {
+        if (buttonClick)
+        {
+            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+        } else
+        {
+            audioSource.volume = getVolumeData(true);
+            audioSource.Play();
+        }
+        if (!buyMoneyMenu.enabled)
+        {
+            buyMoneyMenu.enabled = true;
+            openBuyMoneyButton.SetActive(false);
+        } else
+        {
+            buyMoneyMenu.enabled = false;
+            openBuyMoneyButton.SetActive(true);
         }
     }
 
@@ -550,17 +590,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -578,17 +608,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -606,17 +626,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -634,17 +644,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -662,17 +662,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -732,17 +722,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -773,18 +753,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    }
-                    else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -815,17 +784,7 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
     }
@@ -856,19 +815,38 @@ public class MainMenuManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
             }
         }
+    }
+
+    public void grantMoney(int amount)
+    {
+        if (PlayerPrefs.GetString("Money") != "")
+        {
+            long money = long.Parse(PlayerPrefs.GetString("Money"));
+            money += amount;
+            PlayerPrefs.SetString("Money", money.ToString());
+        } else
+        {
+            PlayerPrefs.SetString("Money", amount.ToString());
+        }
+        PlayerPrefs.Save();
+    }
+
+    public void onPurchaseFailure()
+    {
+        if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+        if (purchaseNotification)
+        {
+            CancelInvoke("resetPurchaseNotification");
+            Invoke("resetPurchaseNotification", 1);
+        }
+    }
+
+    public void resetPurchaseNotification()
+    {
+        if (purchaseNotification) purchaseNotification.text = "";
     }
 
     float getVolumeData(bool isSound)
@@ -902,6 +880,7 @@ public class MainMenuManager : MonoBehaviour
                 settingsMenu.enabled = false;
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
+                buyMoneyMenu.enabled = false;
                 yield return null;
             }
             loading = false;
@@ -919,8 +898,8 @@ public class MainMenuManager : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Has" + spaceship) <= 0)
             {
-                button.text = "Buy";
-                button.rectTransform.sizeDelta = new Vector2(58, 41);
+                button.text = "Purchase";
+                button.rectTransform.sizeDelta = new Vector2(115, 41);
             } else
             {
                 if (PlayerPrefs.GetString("Spaceship") != spaceship)

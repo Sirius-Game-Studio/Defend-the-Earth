@@ -281,6 +281,7 @@ MonoBehaviour:
   powerups:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
+  - {fileID: 709764095147015039, guid: 3e84a2cbb9ef0a247915875f417313c9, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
   invulnerable: 1
@@ -388,7 +389,7 @@ GameObject:
   - component: {fileID: 6212263294802092853}
   m_Layer: 9
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -467,7 +468,7 @@ GameObject:
   - component: {fileID: 6183468378845568484}
   m_Layer: 9
   m_Name: Cylinder.005
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -546,7 +547,7 @@ GameObject:
   - component: {fileID: 5019377956647562029}
   m_Layer: 9
   m_Name: Cylinder.001
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -625,7 +626,7 @@ GameObject:
   - component: {fileID: 8922511363064638652}
   m_Layer: 9
   m_Name: Cylinder.004
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

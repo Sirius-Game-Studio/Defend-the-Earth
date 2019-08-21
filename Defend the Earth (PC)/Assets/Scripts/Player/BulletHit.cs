@@ -19,7 +19,7 @@ public class BulletHit : MonoBehaviour
         if (!hit && other.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth && !enemyHealth.invulnerable)
+            if (enemyHealth)
             {
                 if (other.gameObject.layer != doubleDamageLayer)
                 {

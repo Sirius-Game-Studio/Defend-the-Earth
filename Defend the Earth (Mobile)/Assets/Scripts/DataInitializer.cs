@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class DataInitializer : MonoBehaviour
 {
     [SerializeField] private int level = 1;
-    [SerializeField] private int maxLevels = 13;
+    [SerializeField] private int maxLevels = 15;
     [SerializeField] private bool setLevel = true;
 
     void Awake()
@@ -13,7 +13,8 @@ public class DataInitializer : MonoBehaviour
 
         //Set up owned spaceship data
         if (!PlayerPrefs.HasKey("HasSpaceFighter")) PlayerPrefs.SetInt("HasSpaceFighter", 1);
-        if (!PlayerPrefs.HasKey("HasAlienMower")) PlayerPrefs.SetInt("HasBlazingRocket", 0);
+        if (!PlayerPrefs.HasKey("HasAlienMower")) PlayerPrefs.SetInt("HasAlienMower", 0);
+        if (!PlayerPrefs.HasKey("HasBlazingRocket")) PlayerPrefs.SetInt("HasBlazingRocket", 0);
         if (!PlayerPrefs.HasKey("HasQuadShooter")) PlayerPrefs.SetInt("HasQuadShooter", 0);
         if (!PlayerPrefs.HasKey("HasPointVoidBreaker")) PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
         if (!PlayerPrefs.HasKey("HasAnnihilator")) PlayerPrefs.SetInt("HasAnnihilator", 0);

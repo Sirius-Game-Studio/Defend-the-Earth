@@ -625,6 +625,7 @@ public class GameController : MonoBehaviour
                                     if (!gameOver && !won && !paused)
                                     {
                                         GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                        enemy.GetComponent<EnemyHealth>().invulnerable = true;
                                         enemy.name = boss.name;
                                         currentBoss = enemy;
                                         StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
@@ -677,16 +678,18 @@ public class GameController : MonoBehaviour
 
     IEnumerator scrollEnemy(GameObject enemy, float y)
     {
-        if (enemy && enemy.CompareTag("Enemy") && enemy.GetComponent<Mover>() && y > 0)
+        if (enemy && enemy.CompareTag("Enemy") && y > 0)
         {
             while (enemy && enemy.transform.position.y > y)
             {
+                enemy.GetComponent<EnemyHealth>().invulnerable = true;
                 enemy.GetComponent<Mover>().enabled = true;
                 if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
                 yield return new WaitForEndOfFrame();
             }
             if (enemy)
             {
+                enemy.GetComponent<EnemyHealth>().invulnerable = false;
                 enemy.GetComponent<Mover>().enabled = false;
                 if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
             }

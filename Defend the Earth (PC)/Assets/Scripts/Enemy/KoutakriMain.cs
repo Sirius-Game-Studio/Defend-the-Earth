@@ -151,7 +151,7 @@ public class KoutakriMain : MonoBehaviour
     IEnumerator laserMachine()
     {
         usingAbility = true;
-        for (int i = 1; i <= laserMachineShots; i++)
+        for (int i = 0; i < laserMachineShots; i++)
         {
             spawnProjectile(laser, bulletSpawns[0].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
             spawnProjectile(laser, bulletSpawns[1].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
@@ -173,7 +173,7 @@ public class KoutakriMain : MonoBehaviour
 
     void scatteredLaserShot()
     {
-        for (int i = 0; i <= scatterlaserShots; i++)
+        for (int i = 0; i < scatterlaserShots; i++)
         {
             float x = 90;
             if (PlayerPrefs.GetInt("Difficulty") < 4) //Nightmare

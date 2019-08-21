@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -107981364, guid: 2c3078f85c1a94a82b179c36ee13484f, type: 3}
+  m_Name: UDP Settings
+  m_EditorClassIdentifier: 
+  UnityProjectID: f19647d9-0ecf-4c98-a9b4-0c591bf90c9c
+  UnityClientID: NFLYZgl8wy26oC_UwoDgiw
+  UnityClientKey: rsF6JYyAaFTI6fCrkuNJtY47dmK14HKZAkQSqcOYTL4
+  UnityClientRSAPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhQ1K8ruAbxQfxXlmdvGZ1Kaiq+yMUj0vSMz/mXS1FmdcVgpjatB49c4eTG+d7qURdBdOohjdVOCkuk4iLIMcp/zVOz2TDRFZzUMgkbcqTsYBkJKmd0ZeaSEJlN6za/wnIEpC8HU4H+EeX2RjHKgMhIuygyBTaje67VEszfJrTRc1/FSZcK5mvHTs8vJTWngCHpa16O8AcymrlLCo9O8B7gqp/0vlFYdtj30xGZfX3Sf/CsQ3xQZ8Eb+qdUs1nLxBzVNX9Kjqpl2ID2eTrurVTv7L2jezTiyGRelNyb5aWFT4oezHObdYolbpn/RBEG648DO4OxeQERlkKxVKAB0KVwIDAQAB
+  AppName: Defend the Earth
+  AppSlug: c0a8980a-8e2a-4a9b-b844-2c4f75d2dc6d
+  AppItemId: 274879847598
+  Permission: owner
