@@ -26,11 +26,13 @@ public class MjolnirMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
     [SerializeField] private GameObject shipkillerMissile = null;
-    [SerializeField] private Transform[] bulletSpawns = new Transform[0];
+    [SerializeField] private Transform[] longlaserGuns = new Transform[0];
+    [SerializeField] private Transform[] antiArmorMissilesGuns = new Transform[0];
     [SerializeField] private Transform[] chargeGlows = new Transform[0];
 
     private AudioSource audioSource;
     private bool usingAbility = false;
+    private bool animatingCharge = false;
 
     void Start()
     {
@@ -93,6 +95,30 @@ public class MjolnirMain : MonoBehaviour
         }
     }
 
+    IEnumerator animateChargeGlow(Transform charge, float speed, float maxSize, bool forward)
+    {
+        animatingCharge = true;
+        if (forward)
+        {
+            while (charge.localScale.x < maxSize)
+            {
+                charge.localScale += new Vector3(speed, speed, 0);
+                if (charge.localScale.x > maxSize) charge.localScale = new Vector3(maxSize, maxSize, 0);
+                yield return new WaitForSeconds(speed);
+            }
+        } else
+        {
+            while (charge.localScale.x > maxSize)
+            {
+                charge.localScale -= new Vector3(speed, speed, 0);
+                if (charge.localScale.x < maxSize) charge.localScale = new Vector3(maxSize, maxSize, 0);
+                yield return new WaitForSeconds(speed);
+            }
+        }
+        animatingCharge = false;
+        yield break;
+    }
+
     GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, long damage, float speed, bool turnToPlayer)
     {
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
@@ -123,7 +149,7 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < longshotGunsShotAmount; i++)
         {
-            spawnProjectile(longlaser, bulletSpawns[point].position, new Vector3(90, 0, 0), longlaserDamage, longlaserSpeed, true);
+            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), longlaserDamage, longlaserSpeed, true);
             if (audioSource)
             {
                 if (longshotGunsSound)
@@ -139,52 +165,51 @@ public class MjolnirMain : MonoBehaviour
             ++point;
             if (point > 1) point = 0;
         }
+        float random = Random.value;
+        if (random <= 0.5f) //Left
+        {
+            point = 0;
+        } else //Right
+        {
+            point = 1;
+        }
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        float chargeSpeed = 0.0001f;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            usingAbility = false;
+            chargeSpeed = 0.0001f;
         } else //Nightmare
         {
-            float random = Random.value;
-            if (random <= 0.5f) //Left
-            {
-                point = 0;
-            } else //Right
-            {
-                point = 1;
-            }
-            foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-            while (chargeGlows[point].localScale.x < 0.0115f)
-            {
-                yield return new WaitForEndOfFrame();
-                chargeGlows[point].localScale += new Vector3(0.00005f, 0.00005f, 0);
-            }
-            foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-            for (int i = 0; i < longshotGunsShotAmount; i++)
-            {
-                spawnProjectile(longlaser, bulletSpawns[point].position, new Vector3(90, 0, 0), (long)(longlaserDamage * 1.1), longlaserSpeed * 1.05f, true);
-                if (audioSource)
-                {
-                    if (longshotGunsSound)
-                    {
-                        audioSource.PlayOneShot(longshotGunsSound, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-                yield return new WaitForSeconds(longshotGunsFireRate * 0.75f);
-            }
-            usingAbility = false;
+            chargeSpeed = 0.0002f;
         }
+        StartCoroutine(animateChargeGlow(chargeGlows[point], chargeSpeed, 0.01f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[point], 0.0003f, 0, false));
+        for (int i = 0; i < longshotGunsShotAmount; i++)
+        {
+            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), (long)(longlaserDamage * 1.1), longlaserSpeed * 1.05f, true);
+            if (audioSource)
+            {
+                if (longshotGunsSound)
+                {
+                    audioSource.PlayOneShot(longshotGunsSound, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(longshotGunsFireRate * 0.75f);
+        }
+        usingAbility = false;
     }
 
     IEnumerator antiarmorMissiles()
     {
         usingAbility = true;
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < aaMissilesShotAmount; i++)
         {
-            spawnProjectile(shipkillerMissile, bulletSpawns[Random.Range(2, 3)].position, new Vector3(90, 0, 0), shipkillerDamage, shipkillerSpeed, true);
+            spawnProjectile(shipkillerMissile, antiArmorMissilesGuns[Random.Range(0, antiArmorMissilesGuns.Length)].position, new Vector3(90, 0, 0), shipkillerDamage, shipkillerSpeed, true);
             if (audioSource)
             {
                 if (fireSound)

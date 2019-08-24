@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7404888694166572361}
   m_Layer: 0
-  m_Name: RightBulletSpawn2
+  m_Name: LeftBulletSpawn2
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2281327401759559291}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1271584489569852084
 GameObject:
@@ -149,10 +149,10 @@ Transform:
   - {fileID: 9095958743271300204}
   - {fileID: 9210154956406257482}
   - {fileID: 1431676775453622287}
-  - {fileID: 3406125935047391998}
-  - {fileID: 5633585031482889922}
   - {fileID: 4064403557207853833}
   - {fileID: 7404888694166572361}
+  - {fileID: 3406125935047391998}
+  - {fileID: 5633585031482889922}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
@@ -325,8 +325,8 @@ MonoBehaviour:
   longlaserSpeed: 15
   longshotGunsFireRate: 0.25
   longshotGunsShotAmount: 10
-  shipkillerDamage: 30
-  shipkillerSpeed: 16
+  shipkillerDamage: 31
+  shipkillerSpeed: 17.5
   aaMissilesFireRate: 0.2
   aaMissilesShotAmount: 6
   abilityTime: {x: 3, y: 4}
@@ -337,11 +337,12 @@ MonoBehaviour:
     type: 3}
   shipkillerMissile: {fileID: 1567194746187364, guid: 29f613712c83e684e87ddb421148f2ca,
     type: 3}
-  bulletSpawns:
-  - {fileID: 3406125935047391998}
+  longlaserGuns:
   - {fileID: 4064403557207853833}
-  - {fileID: 5633585031482889922}
+  - {fileID: 3406125935047391998}
+  antiArmorMissilesGuns:
   - {fileID: 7404888694166572361}
+  - {fileID: 5633585031482889922}
   chargeGlows:
   - {fileID: 9210154956406257482}
   - {fileID: 1431676775453622287}
@@ -358,6 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9223372036854775807
+  instakill: 1
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
 --- !u!114 &-3827161701056916705
 MonoBehaviour:
@@ -409,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3406125935047391998}
   m_Layer: 0
-  m_Name: LeftBulletSpawn1
+  m_Name: RightBulletSpawn1
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -427,7 +429,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2281327401759559291}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &4064403557207853837
 GameObject:
@@ -439,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4064403557207853833}
   m_Layer: 0
-  m_Name: RightBulletSpawn1
+  m_Name: LeftBulletSpawn1
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -457,7 +459,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2281327401759559291}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5637777015634045038
 GameObject:
@@ -469,7 +471,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5633585031482889922}
   m_Layer: 0
-  m_Name: LeftBulletSpawn2
+  m_Name: RightBulletSpawn2
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,7 +489,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2281327401759559291}
-  m_RootOrder: 6
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5718713536856163844
 GameObject:
