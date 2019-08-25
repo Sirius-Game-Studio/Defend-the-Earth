@@ -13,15 +13,15 @@ public class SkinPicker : MonoBehaviour
     {
         meshRenderer = GetComponent<MeshRenderer>();
         float random = Random.value;
-        if (random <= 0.33)
+        if (random <= 0.33) //33% chance
         {
             meshRenderer.material.SetTexture("_MainTex", defaultAlbedo);
             skin = 1;
-        } else if (random <= 0.66)
+        } else if (random <= 0.66) //33% chance
         {
             meshRenderer.material.SetTexture("_MainTex", greenAlbedo);
             skin = 2;
-        } else
+        } else //34% chance
         {
             meshRenderer.material.SetTexture("_MainTex", whiteAlbedo);
             skin = 3;

@@ -4,7 +4,7 @@ public class BulletHit : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt to enemies.")] public long damage = 5;
     [SerializeField] private float doubleDamageMultiplier = 1.5f;
-    [SerializeField] private int doubleDamageLayer = -1;
+    [SerializeField] private LayerMask doubleDamageLayer = -1;
     [SerializeField] private GameObject explosion = null;
 
     private bool hit = false;

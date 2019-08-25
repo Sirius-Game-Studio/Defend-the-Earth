@@ -206,20 +206,23 @@ public class AlienMothershipMain : MonoBehaviour
         {
             ability = Instantiate(strongBustedShot, bulletSpawns[0].position, Quaternion.Euler(0, 0, 0));
         }
-        foreach (Transform torpedo in ability.transform)
+        foreach (Transform projectile in ability.transform)
         {
-            EnemyHit enemyHit = torpedo.GetComponent<EnemyHit>();
-            Mover mover = torpedo.GetComponent<Mover>();
-            if (enemyHit && mover)
+            if (projectile.CompareTag("Projectile"))
             {
-                if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+                EnemyHit enemyHit = projectile.GetComponent<EnemyHit>();
+                Mover mover = projectile.GetComponent<Mover>();
+                if (enemyHit && mover)
                 {
-                    enemyHit.damage = damage;
-                } else //Nightmare
-                {
-                    enemyHit.damage = (long)(damage * 1.05);
+                    if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+                    {
+                        enemyHit.damage = damage;
+                    } else //Nightmare
+                    {
+                        enemyHit.damage = (long)(damage * 1.05);
+                    }
+                    projectile.GetComponent<Mover>().speed = bulletSpeed;
                 }
-                torpedo.GetComponent<Mover>().speed = bulletSpeed;
             }
         }
         if (audioSource)
