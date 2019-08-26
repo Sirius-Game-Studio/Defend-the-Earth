@@ -17,8 +17,8 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Blind Spray")]
     [SerializeField] private long scatterlaserDamage = 12;
-    [SerializeField] private float scatterlaserSpeed = 17;
-    [SerializeField] private int scatterlaserShots = 6;
+    [SerializeField] private float scatterlaserSpeed = 16.5f;
+    [SerializeField] private int blindSprayShots = 6;
 
     [Header("Chaos Orb")]
     [SerializeField] private long chaosOrbDamage = 20;
@@ -128,13 +128,16 @@ public class MjolnirMain : MonoBehaviour
                 if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && !usingAbility)
                 {
                     float random = Random.value;
-                    if (random <= 0.2f) //Chaos Orb (20% chance)
+                    if (random <= 0.15f) //Chaos Orb (15% chance)
                     {
                         chaosOrb();
-                    } else if (random <= 0.55f) //Anti-Armor Missiles (35% chance)
+                    } else if (random <= 0.35f) //Anti-Armor Missiles (20% chance)
                     {
                         StartCoroutine(antiarmorMissiles());
-                    } else //Longshot Guns (45% chance)
+                    } else if (random <= 0.6f) //Blind Spray (25% chance)
+                    {
+                        StartCoroutine(blindSpray());
+                    } else //Longshot Guns (40% Chance)
                     {
                         StartCoroutine(longshotGuns());
                     }
@@ -170,10 +173,11 @@ public class MjolnirMain : MonoBehaviour
         yield break;
     }
 
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, long damage, float speed, bool turnToPlayer)
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
     {
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
         bullet.GetComponent<EnemyHit>().damage = damage;
         bullet.GetComponent<Mover>().speed = speed;
         return bullet;
@@ -200,7 +204,7 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < longshotGunsShots; i++)
         {
-            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), longlaserDamage, longlaserSpeed, true);
+            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), 0, longlaserDamage, longlaserSpeed, true);
             if (audioSource)
             {
                 if (longshotGunsFireSound)
@@ -238,10 +242,10 @@ public class MjolnirMain : MonoBehaviour
         StartCoroutine(animateChargeGlow(chargeGlows[point], 0.0003f, 0, false));
         for (int i = 0; i < longshotGunsShots; i++)
         {
-            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), (long)(longlaserDamage * 1.1), longlaserSpeed * 1.05f, true);
+            spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), 0, (long)(longlaserDamage * 1.1), longlaserSpeed * 1.05f, true);
             if (audioSource)
             {
-                if (longshotGunsFireSound)
+                if (longshotGunsFireSound) 
                 {
                     audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
                 } else
@@ -260,7 +264,7 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < AAMissilesShots; i++)
         {
-            spawnProjectile(shipkillerMissile, antiArmorMissilesGuns[Random.Range(0, antiArmorMissilesGuns.Length)].position, new Vector3(90, 0, 0), shipkillerDamage, shipkillerSpeed, true);
+            spawnProjectile(shipkillerMissile, antiArmorMissilesGuns[Random.Range(0, antiArmorMissilesGuns.Length)].position, new Vector3(90, 0, 0), 1.5f, shipkillerDamage, shipkillerSpeed, true);
             if (audioSource)
             {
                 if (AAMissilesFireSound)
@@ -279,12 +283,12 @@ public class MjolnirMain : MonoBehaviour
 
     IEnumerator blindSpray()
     {
-        for (int i = 0; i < scatterlaserShots; i++)
+        usingAbility = true;
+        for (int i = 0; i < blindSprayShots; i++)
         {
-            for (int s = 0; s < scatterlaserShots; s++)
+            for (int s = 0; s < 6; s++)
             {
-                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserDamage, scatterlaserSpeed, true);
-                laser.transform.rotation = Quaternion.Euler(Random.Range(-20, 20), 0, 0);
+                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), 6, scatterlaserDamage, scatterlaserSpeed, true);
             }
             if (audioSource)
             {
@@ -297,8 +301,9 @@ public class MjolnirMain : MonoBehaviour
                     audioSource.Play();
                 }
             }
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.25f);
         }
+        usingAbility = false;
     }
 
     void chaosOrb()
