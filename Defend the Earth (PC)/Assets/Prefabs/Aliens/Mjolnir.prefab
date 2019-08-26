@@ -259,7 +259,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2fe490fb8c3d2514c97229ce9392de8a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 0d7c62cdbb047984fa3096ab202748b4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -388,13 +388,14 @@ MonoBehaviour:
   longlaserSpeed: 15
   longshotGunsFireRate: 0.25
   longshotGunsShots: 8
+  scatterlaserDamage: 12
+  scatterlaserSpeed: 17
+  scatterlaserSpread: 4.5
+  blindSprayShots: 6
   shipkillerDamage: 31
   shipkillerSpeed: 17.5
   AAMissilesFireRate: 0.2
   AAMissilesShots: 8
-  scatterlaserDamage: 12
-  scatterlaserSpeed: 17
-  blindSprayShots: 6
   chaosOrbDamage: 20
   chaosOrbSpeed: 17.5
   protectiveShieldDuration: 7.5

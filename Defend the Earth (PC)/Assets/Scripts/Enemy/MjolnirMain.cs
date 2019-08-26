@@ -9,16 +9,17 @@ public class MjolnirMain : MonoBehaviour
     [SerializeField] private float longshotGunsFireRate = 0.25f;
     [SerializeField] private int longshotGunsShots = 8;
 
+    [Header("Blind Spray")]
+    [SerializeField] private long scatterlaserDamage = 12;
+    [SerializeField] private float scatterlaserSpeed = 16.5f;
+    [SerializeField] private float scatterlaserSpread = 4.5f;
+    [SerializeField] private int blindSprayShots = 6;
+
     [Header("Anti-Armor Missiles")]
     [SerializeField] private long shipkillerDamage = 31;
     [SerializeField] private float shipkillerSpeed = 17.5f;
     [SerializeField] private float AAMissilesFireRate = 0.2f;
     [SerializeField] private int AAMissilesShots = 8;
-
-    [Header("Blind Spray")]
-    [SerializeField] private long scatterlaserDamage = 12;
-    [SerializeField] private float scatterlaserSpeed = 16.5f;
-    [SerializeField] private int blindSprayShots = 6;
 
     [Header("Chaos Orb")]
     [SerializeField] private long chaosOrbDamage = 20;
@@ -67,9 +68,11 @@ public class MjolnirMain : MonoBehaviour
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             longlaserDamage = (long)(longlaserDamage * 0.9);
-             scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
+            scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
             shipkillerDamage = (long)(shipkillerDamage * 0.9);
             chaosOrbDamage = (long)(chaosOrbDamage * 0.9);
+            scatterlaserSpread *= 0.8f;
+            protectiveShieldDuration = 5;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);
@@ -80,21 +83,26 @@ public class MjolnirMain : MonoBehaviour
             scatterlaserSpeed *= 1.1f;
             shipkillerSpeed *= 1.1f;
             chaosOrbSpeed *= 1.1f;
+            scatterlaserSpread *= 1.15f;
             longshotGunsShots = (int)(longshotGunsShots * 1.5);
+            blindSprayShots = (int)(blindSprayShots * 1.25);
             AAMissilesShots = (int)(AAMissilesShots * 1.25);
             abilityTime -= new Vector2(0, -0.5f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             longlaserDamage = (long)(longlaserDamage * 1.4);
-             scatterlaserDamage = (long)(scatterlaserDamage * 1.4);
+            scatterlaserDamage = (long)(scatterlaserDamage * 1.4);
             shipkillerDamage = (long)(shipkillerDamage * 1.4);
             chaosOrbDamage = (long)(chaosOrbDamage * 1.4);
             longlaserSpeed *= 1.2f;
             scatterlaserSpeed *= 1.2f;
             shipkillerSpeed *= 1.2f;
             chaosOrbSpeed *= 1.2f;
+            scatterlaserSpread *= 1.3f;
             longshotGunsShots *= 2;
+            blindSprayShots = (int)(blindSprayShots * 1.5);
             AAMissilesShots = (int)(AAMissilesShots * 1.5);
+            protectiveShieldDuration = 10;
             abilityTime -= new Vector2(-0.5f, -0.5f);
         }
         shield.gameObject.SetActive(false);
@@ -259,6 +267,31 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = false;
     }
 
+    IEnumerator blindSpray()
+    {
+        usingAbility = true;
+        for (int i = 0; i < blindSprayShots; i++)
+        {
+            for (int s = 0; s < 6; s++)
+            {
+                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
+            }
+            if (audioSource)
+            {
+                if (longshotGunsFireSound)
+                {
+                    audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(0.25f);
+        }
+        usingAbility = false;
+    }
+
     IEnumerator antiarmorMissiles()
     {
         usingAbility = true;
@@ -277,31 +310,6 @@ public class MjolnirMain : MonoBehaviour
                 }
             }
             yield return new WaitForSeconds(AAMissilesFireRate);
-        }
-        usingAbility = false;
-    }
-
-    IEnumerator blindSpray()
-    {
-        usingAbility = true;
-        for (int i = 0; i < blindSprayShots; i++)
-        {
-            for (int s = 0; s < 6; s++)
-            {
-                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), 6, scatterlaserDamage, scatterlaserSpeed, true);
-            }
-            if (audioSource)
-            {
-                if (longshotGunsFireSound)
-                {
-                    audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
-                } else
-                {
-                    audioSource.volume = getVolumeData(true);
-                    audioSource.Play();
-                }
-            }
-            yield return new WaitForSeconds(0.25f);
         }
         usingAbility = false;
     }

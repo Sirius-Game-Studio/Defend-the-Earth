@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWaves: 5
   enemySpawnTime: {x: 3, y: 3.5}
-  asteroidSpawnTime: {x: 6, y: 7}
+  asteroidSpawnTime: {x: 6, y: 6.75}
   maxAliensReached: 12
   bossFinalYPosition: 4.5
   bossRotation: {x: 90, y: 180, z: 0}

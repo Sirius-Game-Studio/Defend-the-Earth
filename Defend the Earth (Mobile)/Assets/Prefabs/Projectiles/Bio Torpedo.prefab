@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8518443029577745798}
   - component: {fileID: -4890062093106764848}
   - component: {fileID: 8561637209330969993}
+  - component: {fileID: 8568663209800321851}
   m_Layer: 2
   m_Name: Bio Torpedo
   m_TagString: Projectile
@@ -141,3 +142,18 @@ MonoBehaviour:
   speed: 11.25
   movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 1
+--- !u!114 &8568663209800321851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1906374043378120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845733fdd96578142bdf86efc5f09aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInsideUnitSphere: 0
+  tumble: 0
+  rotation: {x: 0, y: 0, z: 135}

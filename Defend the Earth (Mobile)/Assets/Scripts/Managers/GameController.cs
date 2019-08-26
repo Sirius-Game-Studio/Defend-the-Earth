@@ -948,6 +948,17 @@ public class GameController : MonoBehaviour
 
     public void closeRevivePrompt()
     {
+        if (audioSource)
+        {
+            if (buttonClick)
+            {
+                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
+            }
+        }
         showRevivePrompt = false;
         revivePrompt.enabled = false;
         if (clickSource <= 1)

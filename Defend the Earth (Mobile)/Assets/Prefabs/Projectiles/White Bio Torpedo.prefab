@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -7932807425856512503}
   - component: {fileID: -422310722647597269}
   - component: {fileID: -4960622610072745740}
+  - component: {fileID: 4688676185164773342}
   m_Layer: 2
   m_Name: White Bio Torpedo
   m_TagString: Untagged
@@ -141,3 +142,18 @@ MonoBehaviour:
   speed: 11.25
   movement: {x: 0, y: -1, z: 0}
   useForwardMovement: 1
+--- !u!114 &4688676185164773342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1528543826248096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845733fdd96578142bdf86efc5f09aa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useInsideUnitSphere: 0
+  tumble: 0
+  rotation: {x: 0, y: 0, z: 135}

@@ -1488,7 +1488,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f5a73ce81792b94e807d8a95dc4c3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxWaves: 2
+  maxWaves: 5
   enemySpawnTime: {x: 3, y: 3.5}
   asteroidSpawnTime: {x: 6, y: 6.75}
   maxAliensReached: 12
@@ -1525,7 +1525,7 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
-  enemiesLeft: -58
+  enemiesLeft: 14
   isCampaignLevel: 1
   randomMusic: []
   aliensReached: 0

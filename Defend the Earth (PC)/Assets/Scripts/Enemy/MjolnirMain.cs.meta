@@ -7,15 +7,17 @@ MonoImporter:
   - music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   - longshotGunsFireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f,
       type: 3}
-  - aaMissilesFireSound: {fileID: 8300000, guid: 0d7c62cdbb047984fa3096ab202748b4,
+  - AAMissilesFireSound: {fileID: 8300000, guid: 0d7c62cdbb047984fa3096ab202748b4,
       type: 3}
-  - sharpnelSphereFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
-      type: 3}
+  - chaosOrbFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c, type: 3}
+  - shield: {instanceID: 0}
   - longlaser: {fileID: 3937757261437629000, guid: 17e0150113393b14baed44a11c1e6727,
+      type: 3}
+  - scatterlaser: {fileID: 3937757261437629000, guid: ae52e54c923a7c54094612b651c36ded,
       type: 3}
   - shipkillerMissile: {fileID: 1567194746187364, guid: 29f613712c83e684e87ddb421148f2ca,
       type: 3}
-  - sharpnelSphereObject: {fileID: 3283681802976587987, guid: 043dd39455142c843b48329e1e409f68,
+  - chaosOrbObject: {fileID: 3283681802976587987, guid: 043dd39455142c843b48329e1e409f68,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
