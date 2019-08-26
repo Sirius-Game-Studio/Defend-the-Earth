@@ -128,12 +128,13 @@ public class AlienMothershipMain : MonoBehaviour
         }
     }
 
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, long damage, float speed, bool turnToPlayer)
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
     {
-        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(90, 0, 0));
+        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
         bullet.GetComponent<EnemyHit>().damage = damage;
-        bullet.GetComponent<Mover>().speed = bulletSpeed;
+        bullet.GetComponent<Mover>().speed = speed;
         return bullet;
     }
 
@@ -176,12 +177,12 @@ public class AlienMothershipMain : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            spawnProjectile(bioTorpedo, bulletSpawns[1].position, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
-            spawnProjectile(bioTorpedo, bulletSpawns[2].position, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
+            spawnProjectile(bioTorpedo, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
+            spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, (long)(damage * 1.5), bulletSpeed * 1.25f, true);
         } else
         {
-            spawnProjectile(alienMissile, bulletSpawns[1].position, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
-            spawnProjectile(alienMissile, bulletSpawns[2].position, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
+            spawnProjectile(alienMissile, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
+            spawnProjectile(alienMissile, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, (long)(damage * 1.5), bulletSpeed * 1.5f, true);
         }
         if (audioSource)
         {
@@ -248,15 +249,15 @@ public class AlienMothershipMain : MonoBehaviour
                 float random = Random.value;
                 if (random <= 0.5f)
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, damage, bulletSpeed * 1.05f, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.05f, true);
                 } else
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, damage, bulletSpeed * 1.05f, true);
+                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.05f, true);
                 }
             } else
             {
-                spawnProjectile(alienMissile, bulletSpawns[1].position, damage, bulletSpeed * 1.1f, true);
-                spawnProjectile(alienMissile, bulletSpawns[2].position, damage, bulletSpeed * 1.1f, true);
+                spawnProjectile(alienMissile, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.1f, true);
+                spawnProjectile(alienMissile, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.1f, true);
             }
             if (audioSource)
             {
