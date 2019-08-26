@@ -124,10 +124,11 @@ public class KoutakriMain : MonoBehaviour
         }
     }
 
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, long damage, float speed, bool turnToPlayer)
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
     {
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
         bullet.GetComponent<EnemyHit>().damage = damage;
         bullet.GetComponent<Mover>().speed = speed;
         return bullet;
@@ -153,8 +154,8 @@ public class KoutakriMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < laserMachineShots; i++)
         {
-            spawnProjectile(laser, bulletSpawns[0].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
-            spawnProjectile(laser, bulletSpawns[1].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
+            spawnProjectile(laser, bulletSpawns[0].position, new Vector3(90, 90, -90), 0, laserDamage, laserSpeed, true);
+            spawnProjectile(laser, bulletSpawns[1].position, new Vector3(90, 90, -90), 0, laserDamage, laserSpeed, true);
             if (audioSource)
             {
                 if (fireSound)
@@ -183,8 +184,8 @@ public class KoutakriMain : MonoBehaviour
             {
                 x = Random.Range(60, 120);
             }
-            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), scatterlaserDamage, scatterlaserSpeed, false);
-            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
         }
         if (audioSource)
         {
@@ -207,7 +208,7 @@ public class KoutakriMain : MonoBehaviour
             float x = 0;
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[spawn].position, new Vector3(x + Random.Range(-7.5f, 7.5f), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[spawn].position, new Vector3(x + Random.Range(-7.5f, 7.5f), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x += 20;
             }
         } else
@@ -216,12 +217,12 @@ public class KoutakriMain : MonoBehaviour
             float x2 = 0;
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[0].position, new Vector3(x1 + Random.Range(-15, 15), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[0].position, new Vector3(x1 + Random.Range(-15, 15), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x1 += 20;
             }
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[1].position, new Vector3(x2 + Random.Range(-15, 15), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[1].position, new Vector3(x2 + Random.Range(-15, 15), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x2 += 20;
             }
         }
