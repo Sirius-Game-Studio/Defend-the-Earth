@@ -541,7 +541,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 0
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -1795,9 +1795,9 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   loseJingle: {fileID: 8300000, guid: 7d4039d0a5237f9498763b210c9844b3, type: 3}
   winJingle: {fileID: 8300000, guid: 055eef4fb6957444d8fa26af25c61461, type: 3}
-  randomMusic: []
-  isCampaignLevel: 1
   enemiesLeft: 9
+  isCampaignLevel: 1
+  randomMusic: []
   aliensReached: 0
   currentBoss: {fileID: 0}
   deathMessageToShow: 
