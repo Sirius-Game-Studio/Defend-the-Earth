@@ -110,28 +110,41 @@ public class PlayerController : MonoBehaviour
         }
         if (health <= 0)
         {
+            if (GameController.instance.isCampaignLevel)
+            {
+                lives = 0;
+            } else
+            {
+                if (lives > 1)
+                {
+                    if (explosion)
+                    {
+                        GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
+                        if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+                    }
+                    --lives;
+                    health = maxHealth;
+                    startInvulnerability(3);
+                } else
+                {
+                    lives = 0;
+                }
+            }
+        }
+        if (lives <= 0)
+        {
             if (explosion)
             {
                 GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
                 if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
             }
-            if (lives > 1)
+            health = 0;
+            if (!GameController.instance.gameOver && !GameController.instance.won)
             {
-                --lives;
-                health = maxHealth;
-                startInvulnerability(3);
-            } else
-            {
-                lives = 0;
-                if (livesCount) livesCount.text = "Lives: 0";
-                if (!GameController.instance.gameOver && !GameController.instance.won)
-                {
-                    GameController.instance.gameOver = true;
-                    GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
-                    GameController.instance.updatePlayerPosition(transform.position, transform.rotation);
-                }
-                Destroy(gameObject);
+                GameController.instance.gameOver = true;
+                GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
             }
+            Destroy(gameObject);
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && GameController.instance.pauseButton.color != GameController.instance.pauseButton.GetComponent<ButtonHover>().hoverColor && Input.touchCount > 0)
         {
