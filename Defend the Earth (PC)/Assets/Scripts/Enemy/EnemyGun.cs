@@ -3,7 +3,7 @@
 public class EnemyGun : MonoBehaviour
 {
     [Header("Settings")]
-    public long damage = 1;
+    public long damage = 10;
     public float RPM = 50;
 
     [Header("Default Skin")]
