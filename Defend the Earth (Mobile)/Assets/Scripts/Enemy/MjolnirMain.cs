@@ -36,7 +36,6 @@ public class MjolnirMain : MonoBehaviour
     [SerializeField] private AudioClip longshotGunsFireSound = null;
     [SerializeField] private AudioClip blindSprayFireSound = null;
     [SerializeField] private AudioClip AAMissilesFireSound = null;
-    [SerializeField] private AudioClip spaceShakingWaveFireSound = null;
     [SerializeField] private AudioClip chaosOrbFireSound = null;
 
     [Header("Setup")]
