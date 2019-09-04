@@ -29,16 +29,22 @@ public class DataInitializer : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey("Level"))
             {
-                if (!sceneName.ToLower().Contains("level"))
+                if (sceneName.ToLower().Contains("level"))
                 {
-                    PlayerPrefs.SetInt("Level", level);
+                    PlayerPrefs.SetInt("IngameLevel", level);
+                    if (!PlayerPrefs.HasKey("Restarted")) PlayerPrefs.SetInt("Level", level);
                 } else
                 {
                     PlayerPrefs.SetInt("Level", 1);
+                    PlayerPrefs.SetInt("IngameLevel", 1);
                 }
             } else
             {
-                if (sceneName.ToLower().Contains("level")) PlayerPrefs.SetInt("Level", level);
+                if (sceneName.ToLower().Contains("level"))
+                {
+                    PlayerPrefs.SetInt("IngameLevel", level);
+                    if (!PlayerPrefs.HasKey("Restarted")) PlayerPrefs.SetInt("Level", level);
+                }
             }
         }
         if (maxLevels > 0)
