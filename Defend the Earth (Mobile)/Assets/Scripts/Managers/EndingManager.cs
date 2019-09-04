@@ -33,6 +33,7 @@ public class EndingManager : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.SetInt("Level", 1);
         if (!PlayerPrefs.HasKey("SoundVolume")) PlayerPrefs.SetFloat("SoundVolume", 1);
         if (!PlayerPrefs.HasKey("MusicVolume"))
@@ -93,6 +94,7 @@ public class EndingManager : MonoBehaviour
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
     }
 
     public void clickCredits()
