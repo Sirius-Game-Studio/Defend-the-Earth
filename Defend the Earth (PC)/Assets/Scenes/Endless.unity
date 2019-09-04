@@ -44,7 +44,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1333,11 +1333,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
-    - target: {fileID: 5843225808441693433, guid: 4e96fd4f62f31b44e8a2200689649778,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 45
-      objectReference: {fileID: 0}
     - target: {fileID: 7828969710694358618, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1472,6 +1467,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5843225808441693433, guid: 4e96fd4f62f31b44e8a2200689649778,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 2615693148980937725, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
