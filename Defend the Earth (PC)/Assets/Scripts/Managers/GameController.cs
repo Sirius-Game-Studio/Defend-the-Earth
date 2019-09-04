@@ -56,8 +56,9 @@ public class GameController : MonoBehaviour
     public int enemiesLeft = 8;
     public bool isCampaignLevel = true;
     [SerializeField] private AudioClip[] randomMusic = new AudioClip[0];
-    public int aliensReached = 0;
+    [Tooltip("The amount of enemies that reached the bottom.")] public int aliensReached = 0;
     public GameObject currentBoss;
+    [Tooltip("Used for handling consecutive enemy health and damage increases in Endless.")] public long wavesCleared = 0;
     public string deathMessageToShow = "";
     public bool gameOver = false;
     public bool won = false;
@@ -111,6 +112,7 @@ public class GameController : MonoBehaviour
         enemyAmount = enemiesLeft;
         aliensReached = 0;
         if (maxAliensReached < 7) maxAliensReached = 7; //Checks if maximum aliens reached is less than 7
+        wavesCleared = 0;
         deathMessageToShow = "";
         storedMaxWaves = maxWaves;
         Time.timeScale = 1;
@@ -419,6 +421,7 @@ public class GameController : MonoBehaviour
             {
                 reachedNextWave = true;
                 ++wave;
+                ++wavesCleared;
                 ++endlessWavesClearedForEnemyAmount;
                 ++endlessWavesClearedForMoneyReward;
             }
@@ -702,6 +705,7 @@ public class GameController : MonoBehaviour
                     {
                         yield return new WaitForSeconds(3);
                         enemiesLeft = enemyAmount;
+                        aliensReached = 0;
                         reachedNextWave = false;
                     }
                 }
