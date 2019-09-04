@@ -114,27 +114,41 @@ public class PlayerController : MonoBehaviour
         }
         if (health <= 0)
         {
+            if (GameController.instance.isCampaignLevel)
+            {
+                lives = 0;
+            } else
+            {
+                if (lives > 1)
+                {
+                    if (explosion)
+                    {
+                        GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
+                        if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
+                    }
+                    --lives;
+                    health = maxHealth;
+                    startInvulnerability(3);
+                } else
+                {
+                    lives = 0;
+                }
+            }
+        }
+        if (lives <= 0)
+        {
             if (explosion)
             {
                 GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
                 if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
             }
-            if (lives > 1)
+            health = 0;
+            if (!GameController.instance.gameOver && !GameController.instance.won)
             {
-                --lives;
-                health = maxHealth;
-                startInvulnerability(3);
-            } else
-            {
-                lives = 0;
-                if (livesCount) livesCount.text = "Lives: 0";
-                if (!GameController.instance.gameOver && !GameController.instance.won)
-                {
-                    GameController.instance.gameOver = true;
-                    GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
-                }
-                Destroy(gameObject);
+                GameController.instance.gameOver = true;
+                GameController.instance.deathMessageToShow = "Your spaceship has been destroyed!";
             }
+            Destroy(gameObject);
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused)
         {
@@ -212,23 +226,6 @@ public class PlayerController : MonoBehaviour
         if (superchargeTime < 5) superchargeTime = 5; //Checks if Supercharge time is less than 5
     }
 
-    public void supercharge()
-    {
-        if (!hasSupercharge)
-        {
-            hasSupercharge = true;
-            oldDamage = damage;
-            if (oldDamage < 1) oldDamage = 1;
-            damage = (long)(damage * superchargeMultiplier);
-            superchargeDuration = superchargeTime;
-            shownSuperchargeText = false;
-        } else
-        {
-            superchargeDuration = superchargeTime;
-            shownSuperchargeText = false;
-        }
-    }
-
     public void takeDamage(long hitDamage)
     {
         if (!invulnerable)
@@ -260,6 +257,23 @@ public class PlayerController : MonoBehaviour
         foreach (Renderer child in GetComponentsInChildren<Renderer>())
         {
             if (child) child.enabled = true;
+        }
+    }
+
+    public void supercharge()
+    {
+        if (!hasSupercharge)
+        {
+            hasSupercharge = true;
+            oldDamage = damage;
+            if (oldDamage < 1) oldDamage = 1;
+            damage = (long)(damage * superchargeMultiplier);
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
+        } else
+        {
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
         }
     }
 
