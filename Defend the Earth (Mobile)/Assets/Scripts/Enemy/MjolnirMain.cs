@@ -34,7 +34,9 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip longshotGunsFireSound = null;
+    [SerializeField] private AudioClip blindSprayFireSound = null;
     [SerializeField] private AudioClip AAMissilesFireSound = null;
+    [SerializeField] private AudioClip spaceShakingWaveFireSound = null;
     [SerializeField] private AudioClip chaosOrbFireSound = null;
 
     [Header("Setup")]
@@ -138,7 +140,7 @@ public class MjolnirMain : MonoBehaviour
                     float random = Random.value;
                     if (random <= 0.15f) //Chaos Orb (15% chance)
                     {
-                        //chaosOrb();
+                        chaosOrb();
                     } else if (random <= 0.35f) //Anti-Armor Missiles (20% chance)
                     {
                         StartCoroutine(antiarmorMissiles());
@@ -149,7 +151,6 @@ public class MjolnirMain : MonoBehaviour
                     {
                         StartCoroutine(longshotGuns());
                     }
-                    chaosOrb();
                 }
             } else
             {
@@ -279,9 +280,9 @@ public class MjolnirMain : MonoBehaviour
             }
             if (audioSource)
             {
-                if (longshotGunsFireSound)
+                if (blindSprayFireSound)
                 {
-                    audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(blindSprayFireSound, getVolumeData(true));
                 } else
                 {
                     audioSource.volume = getVolumeData(true);
@@ -325,16 +326,16 @@ public class MjolnirMain : MonoBehaviour
             foreach (Transform gun in chaosOrbGuns) Instantiate(chaosOrbObject, gun.position, Quaternion.Euler(0, 0, 0));
         }
         if (audioSource)
+        {
+            if (chaosOrbFireSound)
             {
-                if (chaosOrbFireSound)
-                {
-                    audioSource.PlayOneShot(chaosOrbFireSound, getVolumeData(true));
-                } else
-                {
-                    audioSource.volume = getVolumeData(true);
-                    audioSource.Play();
-                }
+                audioSource.PlayOneShot(chaosOrbFireSound, getVolumeData(true));
+            } else
+            {
+                audioSource.volume = getVolumeData(true);
+                audioSource.Play();
             }
+        }
     }
 
     IEnumerator protectiveShield()
