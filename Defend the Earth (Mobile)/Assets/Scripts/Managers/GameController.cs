@@ -1,7 +1,9 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 using UnityEditor;
 
 struct PlayerPosition
@@ -92,6 +94,10 @@ public class GameController : MonoBehaviour
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
     private long storedMaxWaves = 2;
     private bool loading = false;
+
+    //Analytics Events
+    private bool sentGameOverData = false;
+    private bool sentLevelCompleted = false;
 
     void Awake()
     {
@@ -232,6 +238,7 @@ public class GameController : MonoBehaviour
         pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
+        AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
     }
 
     void Update()
@@ -327,6 +334,40 @@ public class GameController : MonoBehaviour
                 audioSource.PlayOneShot(loseJingle, getVolumeData(true));
             }
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            if (!sentGameOverData)
+            {
+                sentGameOverData = true;
+                if (isCampaignLevel)
+                {
+                    string currentBossName = "None";
+                    if (currentBoss)
+                    {
+                        currentBossName = currentBoss.name;
+                    } else
+                    {
+                        currentBossName = "None";
+                    }
+                    AnalyticsEvent.Custom("campaign_game_over", new Dictionary<string, object>
+                    {
+                        {"level_name", SceneManager.GetActiveScene().name},
+                        {"wave", wave},
+                        {"enemy_amount", enemyAmount},
+                        {"boss", currentBossName}
+                    });
+                } else
+                {
+                    AnalyticsEvent.Custom("endless_game_over", new Dictionary<string, object>
+                    {
+                        {"level_name", SceneManager.GetActiveScene().name},
+                        {"score", score},
+                        {"wave", wave},
+                        {"enemy_amount", enemyAmount},
+                        {"enemy_spawn_time", enemySpawnTime},
+                        {"asteroid_spawn_time", asteroidSpawnTime},
+                        {"money_reward", endlessMoneyReward}
+                    });
+                }
+            }
         }
         if (isCampaignLevel)
         {
@@ -346,14 +387,32 @@ public class GameController : MonoBehaviour
                     if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                     {
                         if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (!PlayerPrefs.HasKey("Restarted"))
+                        {
+                            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+                            PlayerPrefs.Save();
+                        }
                         if (audioSource && winJingle && !playedWinSound)
                         {
                             playedWinSound = true;
                             audioSource.PlayOneShot(winJingle, getVolumeData(true));
                         }
+                        if (!sentLevelCompleted)
+                        {
+                            sentLevelCompleted = true;
+                            AnalyticsEvent.LevelComplete(SceneManager.GetActiveScene().name, new Dictionary<string, object>{});
+                        }
                     } else
                     {
-                        if (!loading) StartCoroutine(loadScene("Ending"));
+                        if (!loading)
+                        {
+                            StartCoroutine(loadScene("Ending"));
+                            if (!sentLevelCompleted)
+                            {
+                                sentLevelCompleted = true;
+                                AnalyticsEvent.LevelComplete("Campaign", new Dictionary<string, object>{});
+                            }
+                        }
                     }
                     if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
@@ -498,6 +557,7 @@ public class GameController : MonoBehaviour
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
     }
 
     IEnumerator spawnWaves()
@@ -825,7 +885,6 @@ public class GameController : MonoBehaviour
 
     public void restart()
     {
-        int level = PlayerPrefs.GetInt("Level");
         if (audioSource)
         {
             if (buttonClick)
@@ -837,7 +896,9 @@ public class GameController : MonoBehaviour
                 audioSource.Play();
             }
         }
-        StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
+        StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("IngameLevel")));
+        PlayerPrefs.SetInt("Restarted", 1);
+        PlayerPrefs.Save();
     }
 
     public void exitGame()
@@ -877,28 +938,30 @@ public class GameController : MonoBehaviour
 
     public void toNextLevel()
     {
-        int level = PlayerPrefs.GetInt("Level");
-        if (audioSource)
+        if (won && levelCompletedMenu.enabled)
         {
-            if (buttonClick)
+            int level = PlayerPrefs.GetInt("Level");
+            if (audioSource)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                } else
+                {
+                    audioSource.volume = getVolumeData(true);
+                    audioSource.Play();
+                }
+            }
+            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+            {
+                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
             } else
             {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
+                StartCoroutine(loadScene("Ending"));
             }
+            PlayerPrefs.DeleteKey("Restarted");
+            PlayerPrefs.DeleteKey("WatchedAd");
         }
-        if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
-        {
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
-            StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
-        } else
-        {
-            StartCoroutine(loadScene("Ending"));
-        }
-        PlayerPrefs.DeleteKey("WatchedAd");
-        PlayerPrefs.Save();
     }
 
     public void openCanvasFromClickSource(Canvas canvas)
