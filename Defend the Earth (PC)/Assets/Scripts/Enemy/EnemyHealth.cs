@@ -22,43 +22,61 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        if (!GameController.instance.isCampaignLevel) money = 0;
-        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
+        if (GameController.instance.isCampaignLevel)
         {
-            if (gameObject.layer != 9) //If this enemy isn't a boss
+            if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
             {
-                health = (long)(health * 0.85);
-                powerupChance += 0.03f;
-            }
-            if (money > 0)
+                if (gameObject.layer != 9) //If this enemy isn't a boss
+                {
+                    health = (long)(health * 0.85);
+                    powerupChance += 0.03f;
+                }
+                if (money > 0)
+                {
+                    money = (long)(money * 0.5f);
+                    if (money <= 0) money = 1;
+                }
+            } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
             {
-                money = (long)(money * 0.5f);
-                if (money <= 0) money = 1;
+                if (gameObject.layer != 9) //If this enemy isn't a boss
+                {
+                    health = (long)(health * 1.1);
+                    defense -= 0.05f;
+                    powerupChance -= 0.02f;
+                } else //If this enemy is a boss
+                {
+                    health = (long)(health * 1.5);
+                    defense -= 0.075f;
+                }
+            } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+            {
+                if (gameObject.layer != 9) //If this enemy isn't a boss
+                {
+                    health = (long)(health * 1.2);
+                    defense -= 0.1f;
+                    powerupChance -= 0.04f;
+                } else //If this enemy is a boss
+                {
+                    health *= 2;
+                    defense -= 0.15f;
+                }
             }
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+        } else
         {
-            if (gameObject.layer != 9) //If this enemy isn't a boss
+            if (GameController.instance.wavesCleared > 0)
             {
-                health = (long)(health * 1.1);
-                defense -= 0.05f;
-                powerupChance -= 0.02f;
-            } else //If this enemy is a boss
+                float multiplier = 1;
+                for (long i = 0; i < GameController.instance.wavesCleared; i++) multiplier += 0.04f;
+                if (multiplier > 1.4f) multiplier = 1.4f;
+                float representation = health * multiplier;
+                health = (long)(health * multiplier);
+                print(name + "Multiplied Health: " + health + "(" + multiplier + ")");
+                print(name + "Floating Point Health: " + representation);
+            } else
             {
-                health = (long)(health * 1.5);
-                defense -= 0.075f;
+                print("Health " + health);
             }
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
-        {
-            if (gameObject.layer != 9) //If this enemy isn't a boss
-            {
-                health = (long)(health * 1.2);
-                defense -= 0.1f;
-                powerupChance -= 0.04f;
-            } else //If this enemy is a boss
-            {
-                health *= 2;
-                defense -= 0.15f;
-            }
+            money = 0;
         }
         if (PlayerPrefs.HasKey("MoneyMultiplier")) money = (long)(money * PlayerPrefs.GetFloat("MoneyMultiplier"));
     }
