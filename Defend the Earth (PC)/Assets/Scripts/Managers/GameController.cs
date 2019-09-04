@@ -101,6 +101,7 @@ public class GameController : MonoBehaviour
         }
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        if (maxWaves < 2) maxWaves = 2;
         gameOver = false;
         won = false;
         paused = false;
