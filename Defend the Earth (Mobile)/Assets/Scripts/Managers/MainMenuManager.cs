@@ -77,6 +77,7 @@ public class MainMenuManager : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
@@ -275,6 +276,7 @@ public class MainMenuManager : MonoBehaviour
     void OnApplicationQuit()
     {
         PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
     }
 
     public void clickPlayGame()
