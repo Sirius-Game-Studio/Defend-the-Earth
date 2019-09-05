@@ -68,13 +68,7 @@ public class EnemyHealth : MonoBehaviour
                 float multiplier = 1;
                 for (long i = 0; i < GameController.instance.wavesCleared; i++) multiplier += 0.04f;
                 if (multiplier > 1.4f) multiplier = 1.4f;
-                float representation = health * multiplier;
                 health = (long)(health * multiplier);
-                print(name + "Multiplied Health: " + health + "(" + multiplier + ")");
-                print(name + "Floating Point Health: " + representation);
-            } else
-            {
-                print("Health " + health);
             }
             money = 0;
         }
