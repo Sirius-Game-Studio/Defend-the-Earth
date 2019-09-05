@@ -24,18 +24,30 @@ public class EnemyGun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         nextShot = Time.time + 60 / RPM;
-        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
+        if (GameController.instance.isCampaignLevel)
         {
-            damage = (long)(damage * 0.8);
-            RPM *= 0.9f;
-        } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+            if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
+            {
+                damage = (long)(damage * 0.8);
+                RPM *= 0.9f;
+            } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+            {
+                damage = (long)(damage * 1.15);
+                RPM *= 1.05f;
+            } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+            {
+                damage = (long)(damage * 1.3);
+                RPM *= 1.1f;
+            }
+        } else
         {
-            damage = (long)(damage * 1.15);
-            RPM *= 1.05f;
-        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
-        {
-            damage = (long)(damage * 1.3);
-            RPM *= 1.1f;
+            if (GameController.instance.wavesCleared > 0)
+            {
+                float multiplier = 1;
+                for (long i = 0; i < GameController.instance.wavesCleared; i++) multiplier += 0.05f;
+                if (multiplier > 1.5f) multiplier = 1.5f;
+                damage = (long)(damage * multiplier);
+            }
         }
     }
 
