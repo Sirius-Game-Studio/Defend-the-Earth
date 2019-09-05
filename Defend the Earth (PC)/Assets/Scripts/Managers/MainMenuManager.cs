@@ -44,6 +44,8 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
 
+    [SerializeField] private string[] loadingTips = new string[0];
+
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
     [SerializeField] private AudioClip cannotAfford = null;
@@ -63,10 +65,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject loadingText = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
+    [SerializeField] private Text loadingTip = null;
 
     private AudioSource audioSource;
     private int page = 1;
     private bool pressedBumper = false;
+    private string currentLoadingTip = "";
     private bool loading = false;
 
     void Awake()
@@ -109,6 +113,7 @@ public class MainMenuManager : MonoBehaviour
             if (page) page.SetActive(false);
         }
         pages[0].SetActive(true);
+        loadingTip.text = "";
         page = 1;
     }
 
@@ -238,10 +243,12 @@ public class MainMenuManager : MonoBehaviour
         if (!loading)
         {
             loadingText.SetActive(false);
+            loadingTip.text = "";
             moneyCount.gameObject.SetActive(true);
         } else
         {
             loadingText.SetActive(true);
+            loadingTip.text = currentLoadingTip;
             moneyCount.gameObject.SetActive(false);
         }
         if (PlayerPrefs.GetInt("Level") < 1) //Checks if the current level is less than 1
@@ -974,6 +981,7 @@ public class MainMenuManager : MonoBehaviour
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            if (loadingTips.Length > 0) currentLoadingTip = loadingTips[Random.Range(0, loadingTips.Length)];
             while (!load.isDone)
             {
                 loadingSlider.value = load.progress;
@@ -992,9 +1000,7 @@ public class MainMenuManager : MonoBehaviour
             loading = false;
             loadingSlider.value = 0;
             loadingPercentage.text = "0%";
-        } else
-        {
-            StopCoroutine(loadScene(scene));
+            currentLoadingTip = "";
         }
     }
 
