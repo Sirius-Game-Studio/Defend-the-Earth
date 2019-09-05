@@ -1011,8 +1011,10 @@ public class GameController : MonoBehaviour
     {
         if (!loading)
         {
+            bool pressed = false;
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            load.allowSceneActivation = false;
             while (!load.isDone)
             {
                 loadingSlider.value = load.progress;
