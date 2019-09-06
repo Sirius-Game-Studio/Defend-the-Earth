@@ -43,9 +43,11 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text newHighScoreText = null;
     [SerializeField] private Text deathMessage = null;
     public RectTransform controllerShootIcon = null;
-    [SerializeField] private GameObject loadingText = null;
+    [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
+    [SerializeField] private GameObject anyKeyPrompt = null;
+    [SerializeField] private Text loadingTip = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -85,6 +87,7 @@ public class GameController : MonoBehaviour
     private bool playedLoseSound = false, playedWinSound = false;
     private int clickSource = 1; //1 is game paused menu, 2 is game over menu, 3 is level completed menu
     private long storedMaxWaves = 2;
+    private string currentLoadingTip = "";
     private bool loading = false;
 
     //Analytics Events
@@ -525,7 +528,8 @@ public class GameController : MonoBehaviour
                     background.GetComponent<BackgroundScroll>().enabled = true;
                 }
             }
-            loadingText.SetActive(false);
+            loadingScreen.SetActive(false);
+            loadingTip.text = "";
         } else
         {
             Camera.main.transform.position = new Vector3(500, 0, -10);
@@ -541,7 +545,8 @@ public class GameController : MonoBehaviour
                     background.GetComponent<BackgroundScroll>().enabled = false;
                 }
             }
-            loadingText.SetActive(true);
+            loadingScreen.SetActive(true);
+            loadingTip.text = currentLoadingTip;
         }
 
         //Checks if the player upgrades are above maximum values
@@ -1011,14 +1016,29 @@ public class GameController : MonoBehaviour
     {
         if (!loading)
         {
-            bool pressed = false;
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            load.allowSceneActivation = false;
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
-                loadingSlider.value = load.progress;
-                loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (Input.anyKey)
+                    {
+                        loading = false;
+                        load.allowSceneActivation = true;
+                    }
+                    loadingSlider.value = 1;
+                    loadingPercentage.text = "100%";
+                    anyKeyPrompt.SetActive(true);
+                }
                 gameHUD.enabled = false;
                 gamePausedMenu.enabled = false;
                 gameOverMenu.enabled = false;
@@ -1030,12 +1050,6 @@ public class GameController : MonoBehaviour
                 restartPrompt.enabled = false;
                 yield return null;
             }
-            loading = false;
-            loadingSlider.value = 0;
-            loadingPercentage.text = "0%";
-        } else
-        {
-            StopCoroutine(loadScene(scene));
         }
     }
 }

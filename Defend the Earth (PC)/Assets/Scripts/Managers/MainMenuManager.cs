@@ -44,8 +44,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider soundSlider = null;
     [SerializeField] private Slider musicSlider = null;
 
-    [SerializeField] private string[] loadingTips = new string[0];
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
     [SerializeField] private AudioClip cannotAfford = null;
@@ -62,10 +60,11 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas selectDifficultyMenu = null;
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
-    [SerializeField] private GameObject loadingText = null;
+    [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private Text loadingTip = null;
+    [SerializeField] private GameObject anyKeyPrompt = null;
 
     private AudioSource audioSource;
     private int page = 1;
@@ -183,6 +182,7 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
         PlayerPrefs.Save();
 
+        //Updates the money counter
         if (PlayerPrefs.GetString("Money") != "")
         {
             moneyCount.text = "$" + PlayerPrefs.GetString("Money");
@@ -191,7 +191,7 @@ public class MainMenuManager : MonoBehaviour
             moneyCount.text = "$0";
         }
 
-        //Updates the money counter and upgrade price text
+        //Updates the upgrade price text
         damageText.text = "+" + PlayerPrefs.GetInt("DamagePercentage") + "% Damage";
         speedText.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
         healthText.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
@@ -242,12 +242,12 @@ public class MainMenuManager : MonoBehaviour
         }
         if (!loading)
         {
-            loadingText.SetActive(false);
+            loadingScreen.SetActive(false);
             loadingTip.text = "";
             moneyCount.gameObject.SetActive(true);
         } else
         {
-            loadingText.SetActive(true);
+            loadingScreen.SetActive(true);
             loadingTip.text = currentLoadingTip;
             moneyCount.gameObject.SetActive(false);
         }
@@ -980,12 +980,27 @@ public class MainMenuManager : MonoBehaviour
         {
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            if (loadingTips.Length > 0) currentLoadingTip = loadingTips[Random.Range(0, loadingTips.Length)];
             while (!load.isDone)
             {
-                loadingSlider.value = load.progress;
-                loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (Input.anyKey)
+                    {
+                        loading = false;
+                        load.allowSceneActivation = true;
+                    }
+                    loadingSlider.value = 1;
+                    loadingPercentage.text = "100%";
+                    anyKeyPrompt.SetActive(true);
+                }
                 mainMenu.enabled = false;
                 shopMenu.enabled = false;
                 spaceshipsMenu.enabled = false;
@@ -997,10 +1012,6 @@ public class MainMenuManager : MonoBehaviour
                 selectDifficultyMenu.enabled = false;
                 yield return null;
             }
-            loading = false;
-            loadingSlider.value = 0;
-            loadingPercentage.text = "0%";
-            currentLoadingTip = "";
         }
     }
 
