@@ -633,7 +633,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &44209459
 GameObject:
@@ -1725,7 +1725,7 @@ RectTransform:
   - {fileID: 1922250043}
   - {fileID: 1824950746}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3452,7 +3452,7 @@ RectTransform:
   - {fileID: 1621572152}
   - {fileID: 1889881860}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3593,7 +3593,7 @@ RectTransform:
   - {fileID: 1857837151}
   - {fileID: 1981316989}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3927,10 +3927,10 @@ RectTransform:
   m_Father: {fileID: 1214711906}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -235}
-  m_SizeDelta: {x: 0, y: 112}
+  m_SizeDelta: {x: 600, y: 112}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &489387619
 MonoBehaviour:
@@ -3965,13 +3965,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'If you are looking for a real challenge, then this mode is for you.
-
-    Aliens deal 30% more damage, have 10% more fire rate and 20% more
-
-    health. Bosses have 100% more health, 40% more damage and their
-
-    abilities are improved. Asteroids spawn more frequently.'
+  m_Text: If you are looking for a real challenge, then this mode is for you. Aliens
+    deal 30% more damage, have 10% more fire rate and 20% more health. Bosses have
+    100% more health, 40% more damage and their abilities are improved. Asteroids
+    spawn more frequently.
 --- !u!222 &489387620
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4299,10 +4296,10 @@ RectTransform:
   m_Father: {fileID: 1214711906}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -235}
-  m_SizeDelta: {x: 0, y: 112}
+  m_SizeDelta: {x: 600, y: 112}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &518051438
 MonoBehaviour:
@@ -4337,11 +4334,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This mode is recommended for new players. Aliens deal 20% less
-
-    damage, have 15% less fire rate and 20% less health. Bosses deal
-
-    10% less damage. Enemies give 50% less money when killed.'
+  m_Text: This mode is recommended for new players. Aliens deal 20% less damage, have
+    15% less fire rate and 20% less health. Bosses deal 10% less damage. Enemies give
+    50% less money when killed.
 --- !u!222 &518051439
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4382,10 +4377,10 @@ RectTransform:
   m_Father: {fileID: 1214711906}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -235}
-  m_SizeDelta: {x: 0, y: 112}
+  m_SizeDelta: {x: 600, y: 112}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &547296553
 MonoBehaviour:
@@ -4420,13 +4415,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'This mode is good for players who want a challenge. Aliens deal
-
-    15% more damage, have 5% more fire rate and 10% more health.
-
-    Bosses have 50% more health and deal 20% more damage. Asteroids
-
-    spawn slightly more frequently.'
+  m_Text: This mode is good for players who want a challenge. Aliens deal 15% more
+    damage, have 5% more fire rate and 10% more health. Bosses have 50% more health
+    and deal 20% more damage. Asteroids spawn slightly more frequently.
 --- !u!222 &547296554
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5800,7 +5791,7 @@ RectTransform:
   - {fileID: 44209460}
   - {fileID: 807851086}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6440,7 +6431,7 @@ RectTransform:
   - {fileID: 683816901}
   - {fileID: 1051355875}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -6526,7 +6517,7 @@ PrefabInstance:
     - target: {fileID: 5898063090534206878, guid: f09a5a26f8c045b49a07ee1aaf47806c,
         type: 3}
       propertyPath: m_Name
-      value: LoadingText
+      value: LoadingScreen
       objectReference: {fileID: 0}
     - target: {fileID: 5898063090534206879, guid: f09a5a26f8c045b49a07ee1aaf47806c,
         type: 3}
@@ -6632,6 +6623,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5898063089774136955, guid: f09a5a26f8c045b49a07ee1aaf47806c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f09a5a26f8c045b49a07ee1aaf47806c, type: 3}
@@ -7442,7 +7438,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 30, z: 0}
 --- !u!1 &954536628
 GameObject:
@@ -8096,7 +8092,7 @@ RectTransform:
   - {fileID: 756711039}
   - {fileID: 506727333}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8200,7 +8196,7 @@ RectTransform:
   - {fileID: 934572030}
   - {fileID: 1796682962}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9075,13 +9071,19 @@ RectTransform:
   - {fileID: 639791330}
   - {fileID: 1856570972}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1046133428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6894848661372022738, guid: f09a5a26f8c045b49a07ee1aaf47806c,
+    type: 3}
+  m_PrefabInstance: {fileID: 807851084}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1051355874
 GameObject:
   m_ObjectHideFlags: 0
@@ -9965,7 +9967,7 @@ RectTransform:
   - {fileID: 1094905913}
   - {fileID: 342593491}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10799,7 +10801,7 @@ RectTransform:
   - {fileID: 1669379007}
   - {fileID: 482351471}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -11141,6 +11143,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275786098}
   m_CullTransparentMesh: 0
+--- !u!1001 &1281647489
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1561258775414096705, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_Name
+      value: LoadingTipArray
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999967434964571809, guid: 3e385e44be1ccc448b8703fc0d9e1b3f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3e385e44be1ccc448b8703fc0d9e1b3f, type: 3}
 --- !u!1 &1288644041
 GameObject:
   m_ObjectHideFlags: 0
@@ -16157,10 +16228,10 @@ RectTransform:
   m_Father: {fileID: 1214711906}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -235}
-  m_SizeDelta: {x: 0, y: 112}
+  m_SizeDelta: {x: 600, y: 112}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &2018410350
 MonoBehaviour:
@@ -17036,15 +17107,6 @@ MonoBehaviour:
   moneyPrice: {fileID: 1399138115}
   soundSlider: {fileID: 471273626}
   musicSlider: {fileID: 1429454445}
-  loadingTips:
-  - When firing at enemies, you can move out of the way of a incoming projectile.
-  - Bosses are the toughest enemies that only spawn on the last wave of certain Campaign
-    levels. Be careful while fighting them, as their attacks can dish out a lot of
-    damage!
-  - Clearing 5 waves in Endless gives you 150 money. The reward also scales with every
-    5th wave cleared.
-  - Watch out for Alien Motherships on Campaign level 8 or up! Their ability to fire
-    lasers to the left and right can give you some trouble.
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
   mainMenu: {fileID: 1004614330}
@@ -17058,10 +17120,11 @@ MonoBehaviour:
   selectDifficultyMenu: {fileID: 1214711905}
   currentLevelText: {fileID: 1972067316}
   highScoreText: {fileID: 203353186}
-  loadingText: {fileID: 807851089}
+  loadingScreen: {fileID: 807851089}
   loadingSlider: {fileID: 807851088}
   loadingPercentage: {fileID: 807851087}
   loadingTip: {fileID: 807851085}
+  anyKeyPrompt: {fileID: 1046133428}
 --- !u!4 &2143584396
 Transform:
   m_ObjectHideFlags: 0
