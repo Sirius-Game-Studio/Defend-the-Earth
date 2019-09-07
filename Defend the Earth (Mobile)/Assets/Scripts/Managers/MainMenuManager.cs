@@ -61,12 +61,15 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
     [SerializeField] private Text purchaseNotification = null;
-    [SerializeField] private GameObject loadingText = null;
+    [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
+    [SerializeField] private GameObject anyKeyPrompt = null;
+    [SerializeField] private Text loadingTip = null;
 
     private AudioSource audioSource;
     private int page = 1;
+    private string currentLoadingTip = "";
     private bool loading = false;
 
     void Awake()
@@ -224,11 +227,13 @@ public class MainMenuManager : MonoBehaviour
         }
         if (!loading)
         {
-            loadingText.SetActive(false);
+            loadingScreen.SetActive(false);
+            loadingTip.text = "";
             moneyCount.gameObject.SetActive(true);
         } else
         {
-            loadingText.SetActive(true);
+            loadingScreen.SetActive(true);
+            loadingTip.text = currentLoadingTip; 
             moneyCount.gameObject.SetActive(false);
         }
         if (PlayerPrefs.GetInt("Level") < 1) //Checks if the current level is less than 1
@@ -870,11 +875,27 @@ public class MainMenuManager : MonoBehaviour
         {
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
-                loadingSlider.value = load.progress;
-                loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (Input.anyKeyDown)
+                    {
+                        loading = false;
+                        load.allowSceneActivation = true;
+                    }
+                    loadingSlider.value = 1;
+                    loadingPercentage.text = "100%";
+                    anyKeyPrompt.SetActive(true);
+                }
                 mainMenu.enabled = false;
                 shopMenu.enabled = false;
                 spaceshipsMenu.enabled = false;
@@ -882,15 +903,8 @@ public class MainMenuManager : MonoBehaviour
                 settingsMenu.enabled = false;
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
-                buyMoneyMenu.enabled = false;
                 yield return null;
             }
-            loading = false;
-            loadingSlider.value = 0;
-            loadingPercentage.text = "0%";
-        } else
-        {
-            StopCoroutine(loadScene(scene));
         }
     }
 
@@ -988,8 +1002,7 @@ public class MainMenuManager : MonoBehaviour
                         button.rectTransform.sizeDelta = new Vector2(100, 41);
                         button.text = "Upgrade";
                     }
-                }
-                else if (PlayerPrefs.GetFloat(statKey) >= max)
+                } else if (PlayerPrefs.GetFloat(statKey) >= max)
                 {
                     if (isUpgrade)
                     {
