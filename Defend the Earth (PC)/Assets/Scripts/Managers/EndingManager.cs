@@ -99,7 +99,7 @@ public class EndingManager : MonoBehaviour
             loadingScreen.SetActive(true);
             loadingTip.text = currentLoadingTip; 
             moneyCount.gameObject.SetActive(false);
-         }
+        }
     }
 
     void OnApplicationQuit()
@@ -196,7 +196,7 @@ public class EndingManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKey)
+                    if (Input.anyKeyDown)
                     {
                         loading = false;
                         load.allowSceneActivation = true;

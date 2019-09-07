@@ -992,7 +992,7 @@ public class MainMenuManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKey)
+                    if (Input.anyKeyDown)
                     {
                         loading = false;
                         load.allowSceneActivation = true;
