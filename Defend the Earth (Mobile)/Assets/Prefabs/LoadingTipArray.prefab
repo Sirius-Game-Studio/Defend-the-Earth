@@ -44,7 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tips:
-  - 
-  - 
-  - 
-  - 
+  - When firing at enemies, you can move out of the way of a incoming projectile.
+  - Bosses are the toughest enemies that only spawn on the last wave of certain Campaign
+    levels. Be careful while fighting them, as their attacks can dish out a lot of
+    damage!
+  - Clearing 5 waves in Endless gives you 150 money. The reward also scales with every
+    5th wave cleared.
+  - Watch out for Alien Motherships on Campaign level 8 or up! Their ability to fire
+    lasers to the left and right can give you some trouble.
+  - You can disable autofiring in the main menu settings.
