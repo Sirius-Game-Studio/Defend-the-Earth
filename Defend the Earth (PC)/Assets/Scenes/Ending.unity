@@ -2394,7 +2394,7 @@ GameObject:
   - component: {fileID: 2143584397}
   - component: {fileID: 2143584395}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: EndingManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2425,15 +2425,6 @@ MonoBehaviour:
   loadingPercentage: {fileID: 1072652448}
   anyKeyPrompt: {fileID: 1072652447}
   loadingTip: {fileID: 1072652451}
-  loadingTips:
-  - When firing at enemies, you can move out of the way of a incoming projectile.
-  - Bosses are the toughest enemies that only spawn on the last wave of certain Campaign
-    levels. Be careful while fighting them, as their attacks can dish out a lot of
-    damage!
-  - Clearing 5 waves in Endless gives you 150 money. The reward also scales with every
-    5th wave cleared.
-  - Watch out for Alien Motherships on Campaign level 8 or up! Their ability to fire
-    lasers to the left and right can give you some trouble.
 --- !u!4 &2143584396
 Transform:
   m_ObjectHideFlags: 0

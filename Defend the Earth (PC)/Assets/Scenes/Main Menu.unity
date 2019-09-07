@@ -17059,7 +17059,7 @@ GameObject:
   - component: {fileID: 2143584397}
   - component: {fileID: 2143584395}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: MainMenuManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
