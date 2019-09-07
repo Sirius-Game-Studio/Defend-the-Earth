@@ -166,7 +166,7 @@ PlayerSettings:
     Standalone: com.roopkothastudio.defendtheearth
     iPhone: com.roopkothastudio.defendtheearth
   buildNumber: {}
-  AndroidBundleVersionCode: 9
+  AndroidBundleVersionCode: 10
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
