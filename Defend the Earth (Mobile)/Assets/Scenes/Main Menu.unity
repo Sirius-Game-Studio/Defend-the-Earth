@@ -4655,7 +4655,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1.49
+  m_Text: USD 1.49
 --- !u!222 &540767619
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8653,10 +8653,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor:
     serializedVersion: 2
-    rgba: 4291348680
+    rgba: 4291335680
   hoverColor:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4294952960
   textsToShow: []
 --- !u!114 &1045751603
 MonoBehaviour:
@@ -8718,7 +8718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Color: {r: 0, g: 0.5882353, b: 0.78431374, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -9479,7 +9479,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 2.99
+  m_Text: USD 2.99
 --- !u!222 &1241954998
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9921,10 +9921,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor:
     serializedVersion: 2
-    rgba: 4291348680
+    rgba: 4291335680
   hoverColor:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4294952960
   textsToShow: []
 --- !u!114 &1302798008
 MonoBehaviour:
@@ -9986,7 +9986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Color: {r: 0, g: 0.5882353, b: 0.78431374, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -11393,7 +11393,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 5.99
+  m_Text: USD 5.99
 --- !u!114 &1525952728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11926,10 +11926,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   normalColor:
     serializedVersion: 2
-    rgba: 4291348680
+    rgba: 4291335680
   hoverColor:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4294952960
   textsToShow: []
 --- !u!114 &1575069762
 MonoBehaviour:
@@ -11991,7 +11991,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+  m_Color: {r: 0, g: 0.5882353, b: 0.78431374, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -13295,7 +13295,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821970274}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
