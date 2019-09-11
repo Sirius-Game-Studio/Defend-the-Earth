@@ -17,10 +17,12 @@ public struct Spaceship
 [System.Serializable]
 public struct Upgrade
 {
-    [Tooltip("Upgrade data key.")] public string key;
+    [Tooltip("Upgrade name.")] public string name;
+    [Tooltip("Maximum upgrade value.")] public int maxValue;
     [Tooltip("Upgrade price.")] public int price;
     [Tooltip("Upgrade price multiplier.")] public float priceMultiplier;
-    [Tooltip("Upgrade percentage visual data key.")] public string percentageKey;
+    [Tooltip("Amount added to the upgrade multiplier.")] public float multiplierIncrease;
+    [Tooltip("Amount added to the upgrade percentage visuals.")] public int percentageIncrease;
 }
 
 public class ShopManager : MonoBehaviour
@@ -82,6 +84,12 @@ public class ShopManager : MonoBehaviour
         {
             page = 1;
         }
+        for (int i = 0; i < upgrades.Length; i++)
+        {
+            if (!PlayerPrefs.HasKey(upgrades[i].name + "Multiplier")) PlayerPrefs.SetFloat(upgrades[i].name + "Multiplier", 1);
+            if (!PlayerPrefs.HasKey(upgrades[i].name + "Price")) PlayerPrefs.SetInt(upgrades[i].name + "Price", upgrades[i].price);
+        }
+        PlayerPrefs.Save();
     }
 
     void Update()
@@ -105,6 +113,13 @@ public class ShopManager : MonoBehaviour
             equipSpaceship();
             pressedBumper = false;
         }
+        if (page < 1)
+        {
+            page = 1;
+        } else if (page > spaceships.Length)
+        {
+            page = spaceships.Length;
+        }
         spaceshipName.text = spaceship.name;
         if (PlayerPrefs.GetInt("Has" + spaceship.key) >= 1)
         {
@@ -121,7 +136,13 @@ public class ShopManager : MonoBehaviour
             if (controllerXText) controllerXText.text = "Use";
         } else
         {
-            spaceshipPrice.text = "$" + spaceship.price;
+            if (spaceship.price > 0)
+            {
+                spaceshipPrice.text = "$" + spaceship.price;
+            } else
+            {
+                spaceshipPrice.text = "Free";
+            }
             spaceshipBuyText.text = "Buy";
             spaceshipBuyText.alignment = TextAnchor.MiddleLeft;
             if (controllerXText) controllerXText.text = "Buy";
@@ -206,82 +227,87 @@ public class ShopManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Has" + spaceships[page - 1].key) <= 0)
         {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= spaceships[page - 1].price)
+            if (spaceships[page - 1].price > 0)
             {
-                money -= spaceships[page - 1].price;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("Has" + spaceships[page - 1].key, 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
+                long money = long.Parse(PlayerPrefs.GetString("Money"));
+                if (money >= spaceships[page - 1].price)
                 {
-                    if (cannotAfford)
+                    money -= spaceships[page - 1].price;
+                    PlayerPrefs.SetString("Money", money.ToString());
+                    PlayerPrefs.SetInt("Has" + spaceships[page - 1].key, 1);
+                    PlayerPrefs.Save();
+                } else
+                {
+                    if (audioSource)
                     {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
+                        if (cannotAfford)
+                        {
+                            audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                        } else
+                        {
+                            audioSource.volume = getVolumeData(true);
+                            audioSource.Play();
+                        }
                     }
                 }
+            } else
+            {
+                PlayerPrefs.SetInt("Has" + spaceships[page - 1].key, 1);
             }
+            PlayerPrefs.Save();
         }
     }
 
-    public void upgrade(string upgradeName)
+    public void upgrade(int index)
     {
-        int max = 0;
-        if (upgradeName == "Damage")
+        int maxValue = upgrades[index].maxValue;
+        int c = (int)(PlayerPrefs.GetInt(upgrades[index].name + "Price") * upgrades[index].priceMultiplier);
+        float m = PlayerPrefs.GetFloat(upgrades[index].name + "Multiplier") + upgrades[index].multiplierIncrease;
+        int p = PlayerPrefs.GetInt(upgrades[index].name + "Percentage") + upgrades[index].percentageIncrease;
+        if (PlayerPrefs.GetInt(upgrades[index].name + "Percentage") < maxValue)
         {
-
-        } else if (upgradeName == "Speed")
-        {
-
-        } else if (upgradeName == "Health")
-        {
-
-        } else if (upgradeName == "Money")
-        {
-
-        }
-        if (PlayerPrefs.GetInt("DamagePercentage") < 50)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= PlayerPrefs.GetInt("DamagePrice"))
+            if (upgrades[index].price > 0)
             {
-                if (audioSource)
+                long money = long.Parse(PlayerPrefs.GetString("Money"));
+                if (money >= PlayerPrefs.GetInt(upgrades[index].name + "Price"))
                 {
-                    if (buttonClick)
+                    if (audioSource)
                     {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                    } else
+                        if (buttonClick)
+                        {
+                            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                        } else
+                        {
+                            audioSource.volume = getVolumeData(true);
+                            audioSource.Play();
+                        }
+                    }
+                    money -= PlayerPrefs.GetInt(upgrades[index].name + "Price");
+                    PlayerPrefs.SetString("Money", money.ToString());
+                    PlayerPrefs.SetInt(upgrades[index].name + "Price", c);
+                    PlayerPrefs.SetFloat(upgrades[index].name + "Multiplier", m);
+                    PlayerPrefs.SetInt(upgrades[index].name + "Percentage", p);
+                } else
+                {
+                    if (audioSource)
                     {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
+                        if (cannotAfford)
+                        {
+                            audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                        } else
+                        {
+                            audioSource.volume = getVolumeData(true);
+                            audioSource.Play();
+                        }
                     }
                 }
-                money -= PlayerPrefs.GetInt("DamagePrice");
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("DamagePrice", (int)(PlayerPrefs.GetInt("DamagePrice") * 1.7f));
-                PlayerPrefs.SetFloat("DamageMultiplier", PlayerPrefs.GetFloat("DamageMultiplier") + 0.05f);
-                PlayerPrefs.SetInt("DamagePercentage", PlayerPrefs.GetInt("DamagePercentage") + 5);
-                PlayerPrefs.Save();
             } else
             {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
+                PlayerPrefs.SetInt(upgrades[index].name + "Price", c);
+                PlayerPrefs.SetFloat(upgrades[index].name + "Multiplier", m);
+                PlayerPrefs.SetInt(upgrades[index].name + "Percentage", p);
             }
+            PlayerPrefs.Save();
         }
     }
 }
