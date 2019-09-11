@@ -6732,13 +6732,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: upgradeSpeed
-        m_Mode: 1
+      - m_Target: {fileID: 2068057270}
+        m_MethodName: upgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7737,9 +7737,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: upgradeDamage
-        m_Mode: 1
+      - m_Target: {fileID: 2068057270}
+        m_MethodName: upgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -11951,7 +11951,7 @@ PrefabInstance:
     - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -14665,13 +14665,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: upgradeHealth
-        m_Mode: 1
+      - m_Target: {fileID: 2068057270}
+        m_MethodName: upgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14803,7 +14803,7 @@ MonoBehaviour:
     damage: 26 (x1)
     fireRate: 115
   - key: AlienMower
-    price: 400
+    price: 0
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
@@ -14853,22 +14853,30 @@ MonoBehaviour:
     damage: 7 (x6)
     fireRate: 130
   upgrades:
-  - key: DamageMultiplier
-    price: 0
-    priceMultiplier: 0
-    percentageKey: 
-  - key: SpeedMultiplier
-    price: 0
-    priceMultiplier: 0
-    percentageKey: 
-  - key: HealthMultiplier
-    price: 0
-    priceMultiplier: 0
-    percentageKey: 
-  - key: MoneyMultiplier
-    price: 0
-    priceMultiplier: 0
-    percentageKey: 
+  - name: Damage
+    maxValue: 50
+    price: 8
+    priceMultiplier: 1.7
+    multiplierIncrease: 0.05
+    percentageIncrease: 5
+  - name: Speed
+    maxValue: 20
+    price: 5
+    priceMultiplier: 1.5
+    multiplierIncrease: 0.02
+    percentageIncrease: 2
+  - name: Health
+    maxValue: 100
+    price: 7
+    priceMultiplier: 1.35
+    multiplierIncrease: 0.05
+    percentageIncrease: 5
+  - name: Money
+    maxValue: 200
+    price: 4
+    priceMultiplier: 1.45
+    multiplierIncrease: 0.1
+    percentageIncrease: 10
   spaceshipName: {fileID: 1690659171}
   spaceshipPrice: {fileID: 2091245651}
   spaceshipBuyText: {fileID: 405071528}
@@ -15268,13 +15276,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: upgradeMoney
-        m_Mode: 1
+      - m_Target: {fileID: 2068057270}
+        m_MethodName: upgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -15319,23 +15327,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff57ca5a606068646a78ad03a8ed8b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyCount: {fileID: 44209462}
   damageText: {fileID: 1960001748}
   fireRateText: {fileID: 32723923}
-  upgradeDamageButton: {fileID: 1032177964}
-  upgradeSpeedButton: {fileID: 955937598}
-  upgradeHealthButton: {fileID: 2059130173}
-  upgradeMoneyButton: {fileID: 2128962718}
   speedText: {fileID: 53955296}
   healthText: {fileID: 267383547}
   damagePrice: {fileID: 176536102}
   speedPrice: {fileID: 1508655231}
   healthPrice: {fileID: 329266297}
   moneyPrice: {fileID: 1399138115}
+  upgradeDamageButton: {fileID: 1032177964}
+  upgradeSpeedButton: {fileID: 955937598}
+  upgradeHealthButton: {fileID: 2059130173}
+  upgradeMoneyButton: {fileID: 2128962718}
   soundSlider: {fileID: 471273626}
   musicSlider: {fileID: 1429454445}
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
-  cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
   mainMenu: {fileID: 1004614330}
   shopMenu: {fileID: 445606114}
   upgradesMenu: {fileID: 214567956}
@@ -15347,6 +15353,7 @@ MonoBehaviour:
   selectDifficultyMenu: {fileID: 1214711905}
   currentLevelText: {fileID: 1972067316}
   highScoreText: {fileID: 203353186}
+  moneyCount: {fileID: 44209462}
   loadingScreen: {fileID: 807851089}
   loadingSlider: {fileID: 807851088}
   loadingPercentage: {fileID: 807851087}
@@ -15608,7 +15615,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057239078526749}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 4127044502398395}
@@ -16065,7 +16072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7283461143348297379}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: -0.05, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
