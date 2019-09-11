@@ -187,6 +187,8 @@ MonoBehaviour:
   fireSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598, type: 3}
   yMin: -6.75
   yMax: 2
+  lives: 3
+  invulnerable: 0
   bullet: {fileID: 1070339840893364, guid: 823fa3458f3986542ba5a223f40efdce, type: 3}
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
