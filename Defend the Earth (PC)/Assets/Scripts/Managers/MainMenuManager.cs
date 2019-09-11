@@ -6,25 +6,6 @@ using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Spaceships Menu")]
-    [SerializeField] private GameObject[] pages = new GameObject[0];
-
-    //Buy Buttons
-    [SerializeField] private Text buySpaceFighterButton = null;
-    [SerializeField] private Text buyAlienMowerButton = null;
-    [SerializeField] private Text buyBlazingRocketButton = null;
-    [SerializeField] private Text buyQuadShooterButton = null;
-    [SerializeField] private Text buyPointVoidBreakerButton = null;
-    [SerializeField] private Text buyAnnihilatorButton = null;
-
-    //Price Text
-    [SerializeField] private Text spaceFighterPrice = null;
-    [SerializeField] private Text alienMowerPrice = null;
-    [SerializeField] private Text blazingRocketPrice = null;
-    [SerializeField] private Text quadShooterPrice = null;
-    [SerializeField] private Text pointVoidBreakerPrice = null;
-    [SerializeField] private Text annihilatorPrice = null;
-
     [Header("Upgrades Menu")]
     [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text damageText = null;
@@ -67,8 +48,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject anyKeyPrompt = null;
 
     private AudioSource audioSource;
-    private int page = 1;
-    private bool pressedBumper = false;
     private string currentLoadingTip = "";
     private bool loading = false;
 
@@ -107,20 +86,15 @@ public class MainMenuManager : MonoBehaviour
         soundMenu.enabled = false;
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
-        foreach (GameObject page in pages)
-        {
-            if (page) page.SetActive(false);
-        }
-        pages[0].SetActive(true);
         loadingTip.text = "";
-        page = 1;
+        ShopManager.instance.page = 1;
     }
 
     void Update()
     {
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
         {
             if (shopMenu.enabled)
             {
@@ -130,12 +104,28 @@ public class MainMenuManager : MonoBehaviour
             {
                 spaceshipsMenu.enabled = false;
                 shopMenu.enabled = true;
-                foreach (GameObject page in pages)
+                if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
                 {
-                    if (page) page.SetActive(false);
+                    ShopManager.instance.page = 1;
+                } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
+                {
+                    ShopManager.instance.page = 2;
+                } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
+                {
+                    ShopManager.instance.page = 3;
+                } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
+                {
+                    ShopManager.instance.page = 4;
+                } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
+                {
+                    ShopManager.instance.page = 5;
+                } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
+                {
+                    ShopManager.instance.page = 6;
+                } else
+                {
+                    ShopManager.instance.page = 1;
                 }
-                pages[0].SetActive(true);
-                page = 1;
             } else if (upgradesMenu.enabled)
             {
                 upgradesMenu.enabled = false;
@@ -162,20 +152,6 @@ public class MainMenuManager : MonoBehaviour
                 selectGamemodeMenu.enabled = true;
             }
         }
-        if (spaceshipsMenu.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.JoystickButton4))
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(false);
-                pressedBumper = false;
-            } else if (Input.GetKeyDown(KeyCode.JoystickButton5))
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(true);
-                pressedBumper = false;
-            }
-        }
 
         //Updates volume data to match the slider values
         PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
@@ -196,22 +172,6 @@ public class MainMenuManager : MonoBehaviour
         speedText.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
         healthText.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
         fireRateText.text = "+" + PlayerPrefs.GetInt("MoneyPercentage") + "% Money";
-
-        //Sets the states of spaceship buy buttons
-        spaceshipButtonState(buySpaceFighterButton, "SpaceFighter");
-        spaceshipButtonState(buyAlienMowerButton, "AlienMower");
-        spaceshipButtonState(buyBlazingRocketButton, "BlazingRocket");
-        spaceshipButtonState(buyQuadShooterButton, "QuadShooter");
-        spaceshipButtonState(buyPointVoidBreakerButton, "PointVoidBreaker");
-        spaceshipButtonState(buyAnnihilatorButton, "Annihilator");
-
-        //Sets the states of spaceship price text
-        priceTextState(spaceFighterPrice, buySpaceFighterButton, false, false, false, "HasSpaceFighter", "", 0, 1, false);
-        priceTextState(alienMowerPrice, buyAlienMowerButton, false, false, false, "HasAlienMower", "", 400, 1, false);
-        priceTextState(blazingRocketPrice, buyBlazingRocketButton, false, false, false, "HasBlazingRocket", "", 1100, 1, false);
-        priceTextState(quadShooterPrice, buyQuadShooterButton, false, false, false, "HasQuadShooter", "", 1750, 1, false);
-        priceTextState(pointVoidBreakerPrice, buyPointVoidBreakerButton, false, false, false, "HasPointVoidBreaker", "", 2600, 1, false);
-        priceTextState(annihilatorPrice, buyAnnihilatorButton, false, false, false, "HasAnnihilator", "", 6000, 1, false);
 
         //Sets the states of upgrade price text
         priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 50, false);
@@ -429,12 +389,28 @@ public class MainMenuManager : MonoBehaviour
         {
             spaceshipsMenu.enabled = false;
             shopMenu.enabled = true;
-            foreach (GameObject page in pages)
+            if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
             {
-                if (page) page.SetActive(false);
+                ShopManager.instance.page = 1;
+            } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
+            {
+                ShopManager.instance.page = 2;
+            } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
+            {
+                ShopManager.instance.page = 3;
+            } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
+            {
+                ShopManager.instance.page = 4;
+            } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
+            {
+                ShopManager.instance.page = 5;
+            } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
+            {
+                ShopManager.instance.page = 6;
+            } else
+            {
+                ShopManager.instance.page = 1;
             }
-            pages[0].SetActive(true);
-            page = 1;
         }
     }
 
@@ -563,238 +539,6 @@ public class MainMenuManager : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Endless"));
-    }
-
-    public void changeSpaceshipsPage(bool next)
-    {
-        if (!pressedBumper && audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (next)
-        {
-            ++page;
-            if (page < pages.Length)
-            {
-                foreach (GameObject page in pages)
-                {
-                    if (page) page.SetActive(false);
-                }
-                pages[page - 1].SetActive(true);
-            } else
-            {
-                foreach (GameObject page in pages)
-                {
-                    if (page) page.SetActive(false);
-                }
-                pages[pages.Length - 1].SetActive(true);
-                page = pages.Length;
-            }
-        } else
-        {
-            --page;
-            if (page > 0)
-            {
-                foreach (GameObject page in pages)
-                {
-                    if (page) page.SetActive(false);
-                }
-                pages[page - 1].SetActive(true);
-            } else
-            {
-                foreach (GameObject page in pages)
-                {
-                    if (page) page.SetActive(false);
-                }
-                pages[0].SetActive(true);
-                page = 1;
-            }
-        }
-    }
-
-    public void buySpaceFighter()
-    {
-        if (PlayerPrefs.GetInt("HasSpaceFighter") <= 0)
-        {
-            PlayerPrefs.SetInt("HasSpaceFighter", 1);
-            PlayerPrefs.Save();
-        }
-    }
-
-    public void buyAlienMower()
-    {
-        if (PlayerPrefs.GetInt("HasAlienMower") <= 0)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 400)
-            {
-                money -= 400;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HasAlienMower", 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void buyBlazingRocket()
-    {
-        if (PlayerPrefs.GetInt("HasBlazingRocket") <= 0)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 1100)
-            {
-                money -= 1100;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HasBlazingRocket", 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void buyQuadShooter()
-    {
-        if (PlayerPrefs.GetInt("HasQuadShooter") <= 0)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 1750)
-            {
-                money -= 1750;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HasQuadShooter", 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void buyPointVoidBreaker()
-    {
-        if (PlayerPrefs.GetInt("HasPointVoidBreaker") <= 0)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 2600)
-            {
-                money -= 2600;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HasPointVoidBreaker", 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void buyAnnihilator()
-    {
-        if (PlayerPrefs.GetInt("HasAnnihilator") <= 0)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= 6000)
-            {
-                money -= 6000;
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HasAnnihilator", 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void equipSpaceship(string spaceship)
-    {
-        if (spaceship != "")
-        {
-            if (PlayerPrefs.HasKey("Has" + spaceship))
-            {
-                if (PlayerPrefs.GetInt("Has" + spaceship) >= 1)
-                {
-                    if (audioSource)
-                    {
-                        if (buttonClick)
-                        {
-                            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                        } else
-                        {
-                            audioSource.volume = getVolumeData(true);
-                            audioSource.Play();
-                        }
-                    }
-                    PlayerPrefs.SetString("Spaceship", spaceship);
-                }
-            } else
-            {
-                if (PlayerPrefs.GetString("Spaceship") != "SpaceFighter") PlayerPrefs.SetString("Spaceship", "SpaceFighter");
-            }
-            PlayerPrefs.Save();
-        }
     }
 
     public void upgradeDamage()
