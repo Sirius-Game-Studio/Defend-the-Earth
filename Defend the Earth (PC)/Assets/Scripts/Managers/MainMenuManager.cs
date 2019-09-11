@@ -7,19 +7,18 @@ using UnityEditor;
 public class MainMenuManager : MonoBehaviour
 {
     [Header("Upgrades Menu")]
-    [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text damageText = null;
     [SerializeField] private Text fireRateText = null;
-    [SerializeField] private Text upgradeDamageButton = null;
-    [SerializeField] private Text upgradeSpeedButton = null;
-    [SerializeField] private Text upgradeHealthButton = null;
-    [SerializeField] private Text upgradeMoneyButton = null;
     [SerializeField] private Text speedText = null;
     [SerializeField] private Text healthText = null;
     [SerializeField] private Text damagePrice = null;
     [SerializeField] private Text speedPrice = null;
     [SerializeField] private Text healthPrice = null;
     [SerializeField] private Text moneyPrice = null;
+    [SerializeField] private Text upgradeDamageButton = null;
+    [SerializeField] private Text upgradeSpeedButton = null;
+    [SerializeField] private Text upgradeHealthButton = null;
+    [SerializeField] private Text upgradeMoneyButton = null;
     
     [Header("Sound Menu")]
     [SerializeField] private Slider soundSlider = null;
@@ -27,7 +26,6 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
-    [SerializeField] private AudioClip cannotAfford = null;
 
     [Header("Setup")]
     [SerializeField] private Canvas mainMenu = null;
@@ -41,6 +39,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas selectDifficultyMenu = null;
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
+    [SerializeField] private Text moneyCount = null;
     [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -539,170 +538,6 @@ public class MainMenuManager : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Endless"));
-    }
-
-    public void upgradeDamage()
-    {
-        if (PlayerPrefs.GetInt("DamagePercentage") < 50)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= PlayerPrefs.GetInt("DamagePrice"))
-            {
-                if (audioSource)
-                {
-                    if (buttonClick)
-                    {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-                money -= PlayerPrefs.GetInt("DamagePrice");
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("DamagePrice", (int)(PlayerPrefs.GetInt("DamagePrice") * 1.7f));
-                PlayerPrefs.SetFloat("DamageMultiplier", PlayerPrefs.GetFloat("DamageMultiplier") + 0.05f);
-                PlayerPrefs.SetInt("DamagePercentage", PlayerPrefs.GetInt("DamagePercentage") + 5);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void upgradeSpeed()
-    {
-        if (PlayerPrefs.GetInt("SpeedPercentage") < 20)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= PlayerPrefs.GetInt("SpeedPrice"))
-            {
-                if (audioSource)
-                {
-                    if (buttonClick)
-                    {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-                money -= PlayerPrefs.GetInt("SpeedPrice");
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("SpeedPrice", (int)(PlayerPrefs.GetInt("SpeedPrice") * 1.325f));
-                PlayerPrefs.SetFloat("SpeedMultiplier", PlayerPrefs.GetFloat("SpeedMultiplier") + 0.01f);
-                PlayerPrefs.SetInt("SpeedPercentage", PlayerPrefs.GetInt("SpeedPercentage") + 1);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void upgradeHealth()
-    {
-        if (PlayerPrefs.GetInt("HealthPercentage") < 100)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= PlayerPrefs.GetInt("HealthPrice"))
-            {
-                if (audioSource)
-                {
-                    if (buttonClick)
-                    {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-                money -= PlayerPrefs.GetInt("HealthPrice");
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("HealthPrice", (int)(PlayerPrefs.GetInt("HealthPrice") * 1.35f));
-                PlayerPrefs.SetFloat("HealthMultiplier", PlayerPrefs.GetFloat("HealthMultiplier") + 0.05f);
-                PlayerPrefs.SetInt("HealthPercentage", PlayerPrefs.GetInt("HealthPercentage") + 5);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
-    }
-
-    public void upgradeMoney()
-    {
-        if (PlayerPrefs.GetInt("MoneyPercentage") < 200)
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            if (money >= PlayerPrefs.GetInt("MoneyPrice"))
-            {
-                if (audioSource)
-                {
-                    if (buttonClick)
-                    {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-                money -= PlayerPrefs.GetInt("MoneyPrice");
-                PlayerPrefs.SetString("Money", money.ToString());
-                PlayerPrefs.SetInt("MoneyPrice", (int)(PlayerPrefs.GetInt("MoneyPrice") * 1.45f));
-                PlayerPrefs.SetFloat("MoneyMultiplier", PlayerPrefs.GetFloat("MoneyMultiplier") + 0.1f);
-                PlayerPrefs.SetInt("MoneyPercentage", PlayerPrefs.GetInt("MoneyPercentage") + 10);
-                PlayerPrefs.Save();
-            } else
-            {
-                if (audioSource)
-                {
-                    if (cannotAfford)
-                    {
-                        audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
-                    } else
-                    {
-                        audioSource.volume = getVolumeData(true);
-                        audioSource.Play();
-                    }
-                }
-            }
-        }
     }
 
     float getVolumeData(bool isSound)
