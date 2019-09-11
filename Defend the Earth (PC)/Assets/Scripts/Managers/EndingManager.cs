@@ -58,7 +58,7 @@ public class EndingManager : MonoBehaviour
     {
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0)) // X/Cross (Xbox/PS Controller)
         {
             if (!spedupCredits)
             {
@@ -66,7 +66,7 @@ public class EndingManager : MonoBehaviour
                 creditsScrollSpeed *= 2;
                 controllerSpeedUpButton.text = "Slow Down";
             }
-        } else if (!Input.GetKey(KeyCode.Space) || !Input.GetKey(KeyCode.JoystickButton0))
+        } else if (!Input.GetKey(KeyCode.Space) || !Input.GetKey(KeyCode.JoystickButton0)) // X/Cross (Xbox/PS Controller)
         {
             if (spedupCredits)
             {
@@ -75,11 +75,14 @@ public class EndingManager : MonoBehaviour
                 controllerSpeedUpButton.text = "Speed Up";
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && creditsMenu.enabled)
+        if (creditsMenu.enabled)
         {
-            creditsMenu.enabled = false;
-            endingMenu.enabled = true;
-            StopCoroutine(scrollCredits());
+            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
+            {
+                creditsMenu.enabled = false;
+                endingMenu.enabled = true;
+                StopCoroutine(scrollCredits());
+            }
         }
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
         if (PlayerPrefs.GetString("Money") != "")
