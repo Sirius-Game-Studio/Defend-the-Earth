@@ -237,8 +237,8 @@ public class GameController : MonoBehaviour
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape)) pause();
-        if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame();
-        if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1))
+        if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame(); // B/Circle (Xbox/PS Controller)
+        if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
         {
             if (settingsMenu.enabled)
             {
@@ -291,10 +291,10 @@ public class GameController : MonoBehaviour
         }
         if (restartPrompt.enabled)
         {
-            if (Input.GetKeyDown(KeyCode.JoystickButton0))
+            if (Input.GetKeyDown(KeyCode.JoystickButton0)) // A/Cross (Xbox/PS Controller)
             {
                 restart();
-            } else if (Input.GetKeyDown(KeyCode.JoystickButton1))
+            } else if (Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
             {
                 openCanvasFromClickSource(restartPrompt);
             }
