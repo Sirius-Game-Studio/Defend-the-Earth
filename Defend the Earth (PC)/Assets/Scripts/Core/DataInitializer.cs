@@ -66,7 +66,7 @@ public class DataInitializer : MonoBehaviour
         */
 
         //Set up money data
-        if (!PlayerPrefs.HasKey("Money")) PlayerPrefs.SetString("Money", "9213981204812094812");
+        if (!PlayerPrefs.HasKey("Money")) PlayerPrefs.SetString("Money", "0");
 
         PlayerPrefs.Save();
         Destroy(gameObject);
