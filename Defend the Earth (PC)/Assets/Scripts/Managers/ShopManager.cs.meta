@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 1d617ae32c600f54ca54d7e3125bf2c9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - spaceshipName: {instanceID: 0}
+  - spaceshipPrice: {instanceID: 0}
+  - spaceshipBuyText: {instanceID: 0}
+  - spaceshipInfo: {instanceID: 0}
+  - spaceshipPanel: {instanceID: 0}
+  - leftButton: {instanceID: 0}
+  - rightButton: {instanceID: 0}
+  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
+  - cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
