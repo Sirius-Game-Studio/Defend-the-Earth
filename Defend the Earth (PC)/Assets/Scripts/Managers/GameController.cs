@@ -664,6 +664,14 @@ public class GameController : MonoBehaviour
                             {
                                 if (wave >= maxWaves) canWin = true;
                                 enemiesLeft = enemyAmount;
+                                if (PlayerPrefs.GetInt("Difficulty") < 2) //Easy
+                                {
+                                    aliensReached -= 2;
+                                } else //Normal, Hard and Nightmare
+                                {
+                                    --aliensReached;
+                                }
+                                if (aliensReached < 0) aliensReached = 0;
                                 reachedNextWave = false;
                             }
                         } else
@@ -675,6 +683,14 @@ public class GameController : MonoBehaviour
                                 {
                                     if (wave >= maxWaves) canWin = true;
                                     enemiesLeft = enemyAmount;
+                                    if (PlayerPrefs.GetInt("Difficulty") < 2) //Easy
+                                    {
+                                        aliensReached -= 2;
+                                    } else //Normal, Hard and Nightmare
+                                    {
+                                        --aliensReached;
+                                    }
+                                    if (aliensReached < 0) aliensReached = 0;
                                     reachedNextWave = false;
                                 }
                             } else
@@ -686,6 +702,14 @@ public class GameController : MonoBehaviour
                                     {
                                         if (wave >= maxWaves) canWin = true;
                                         enemiesLeft = enemyAmount;
+                                        if (PlayerPrefs.GetInt("Difficulty") < 2) //Easy
+                                        {
+                                            aliensReached -= 2;
+                                        } else //Normal, Hard and Nightmare
+                                        {
+                                            --aliensReached;
+                                        }
+                                        if (aliensReached < 0) aliensReached = 0;
                                         reachedNextWave = false;
                                     }
                                 } else
