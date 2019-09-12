@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  maxLevels: 15
+  maxLevels: 20
   setLevel: 1
