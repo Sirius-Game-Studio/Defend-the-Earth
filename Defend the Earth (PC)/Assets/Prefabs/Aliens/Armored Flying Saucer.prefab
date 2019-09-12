@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8640501861934555880}
   - component: {fileID: -4727773426560166323}
   - component: {fileID: -3134756628339912720}
+  - component: {fileID: -1630627430929400299}
   - component: {fileID: 303222229814705739}
   - component: {fileID: 6343327695708614505}
   - component: {fileID: -3061473327870354244}
@@ -212,6 +213,18 @@ MonoBehaviour:
   whiteAlbedo: {fileID: 0}
   fireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
+--- !u!114 &-1630627430929400299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5420663412342396601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a48824ceaf0fd4f949cecb2d44bb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &303222229814705739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 33
+  instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &6343327695708614505
 MonoBehaviour:
