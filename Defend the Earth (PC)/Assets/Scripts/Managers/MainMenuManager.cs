@@ -87,6 +87,7 @@ public class MainMenuManager : MonoBehaviour
         selectDifficultyMenu.enabled = false;
         loadingTip.text = "";
         ShopManager.instance.page = 1;
+        ShopManager.instance.open = false;
     }
 
     void Update()
@@ -103,28 +104,8 @@ public class MainMenuManager : MonoBehaviour
             {
                 spaceshipsMenu.enabled = false;
                 shopMenu.enabled = true;
-                if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
-                {
-                    ShopManager.instance.page = 1;
-                } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
-                {
-                    ShopManager.instance.page = 2;
-                } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
-                {
-                    ShopManager.instance.page = 3;
-                } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
-                {
-                    ShopManager.instance.page = 4;
-                } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
-                {
-                    ShopManager.instance.page = 5;
-                } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
-                {
-                    ShopManager.instance.page = 6;
-                } else
-                {
-                    ShopManager.instance.page = 1;
-                }
+                ShopManager.instance.page = 1;
+                ShopManager.instance.open = false;
             } else if (upgradesMenu.enabled)
             {
                 upgradesMenu.enabled = false;
@@ -384,32 +365,13 @@ public class MainMenuManager : MonoBehaviour
         {
             spaceshipsMenu.enabled = true;
             shopMenu.enabled = false;
+            ShopManager.instance.open = true;
         } else
         {
             spaceshipsMenu.enabled = false;
             shopMenu.enabled = true;
-            if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
-            {
-                ShopManager.instance.page = 1;
-            } else if (PlayerPrefs.GetString("Spaceship") == "AlienMower")
-            {
-                ShopManager.instance.page = 2;
-            } else if (PlayerPrefs.GetString("Spaceship") == "BlazingRocket")
-            {
-                ShopManager.instance.page = 3;
-            } else if (PlayerPrefs.GetString("Spaceship") == "QuadShooter")
-            {
-                ShopManager.instance.page = 4;
-            } else if (PlayerPrefs.GetString("Spaceship") == "PointVoidBreaker")
-            {
-                ShopManager.instance.page = 5;
-            } else if (PlayerPrefs.GetString("Spaceship") == "Annihilator")
-            {
-                ShopManager.instance.page = 6;
-            } else
-            {
-                ShopManager.instance.page = 1;
-            }
+            ShopManager.instance.page = 1;
+            ShopManager.instance.open = false;
         }
     }
 
@@ -430,10 +392,12 @@ public class MainMenuManager : MonoBehaviour
         {
             upgradesMenu.enabled = true;
             shopMenu.enabled = false;
+            ShopManager.instance.open = true;
         } else
         {
             upgradesMenu.enabled = false;
             shopMenu.enabled = true;
+            ShopManager.instance.open = false;
         }
     }
 
