@@ -52,6 +52,7 @@ public class EndingManager : MonoBehaviour
         }
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
+        currentLoadingTip = "";
     }
 
     void Update()
