@@ -1122,6 +1122,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBarText
+      objectReference: {fileID: 0}
     - target: {fileID: 2615693148980937725, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1136,11 +1141,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBarText
       objectReference: {fileID: 0}
     - target: {fileID: 7828969710937775465, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
@@ -1582,7 +1582,7 @@ PrefabInstance:
     - target: {fileID: 5898063090534206879, guid: f09a5a26f8c045b49a07ee1aaf47806c,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5898063090534206879, guid: f09a5a26f8c045b49a07ee1aaf47806c,
         type: 3}
