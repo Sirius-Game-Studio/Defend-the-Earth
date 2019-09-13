@@ -229,12 +229,13 @@ MonoBehaviour:
   health: 130
   damage: 7
   RPM: 150
-  speed: 8
+  speed: 7.5
   repairHeal: 20
   superchargeMultiplier: 1.5
   superchargeTime: 12
   yMin: -6.75
   yMax: 2
+  lives: 3
   invulnerable: 0
   fireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7, type: 3}
   bullet: {fileID: 3937757261437629000, guid: 890194f60c70c114ba13f074df895e88, type: 3}
