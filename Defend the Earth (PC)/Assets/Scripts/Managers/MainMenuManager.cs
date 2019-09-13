@@ -85,7 +85,7 @@ public class MainMenuManager : MonoBehaviour
         soundMenu.enabled = false;
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
-        loadingTip.text = "";
+        currentLoadingTip = "";
         ShopManager.instance.page = 1;
         ShopManager.instance.open = false;
     }
