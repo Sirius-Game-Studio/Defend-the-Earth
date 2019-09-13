@@ -49,6 +49,7 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
+        currentLoadingTip = "";
     }
 
     void Update()
