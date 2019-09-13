@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public bool invulnerable = false;
 
     [Header("Setup")]
+    [SerializeField] private AudioSource lowHealthSound = null;
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
     [SerializeField] private GameObject textPopup = null;
@@ -189,6 +190,17 @@ public class PlayerController : MonoBehaviour
         Vector3 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         float width = GetComponent<Collider>().bounds.extents.x;
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
+        if (lowHealthSound)
+        {
+            lowHealthSound.volume = getVolumeData(true) * 0.15f;
+            if (health > maxHealth * 0.25)
+            {
+                lowHealthSound.Stop();
+            } else
+            {
+                if (!lowHealthSound.isPlaying) lowHealthSound.Play();
+            }
+        }
         if (hasSupercharge)
         {
             if (superchargeDuration > 0)
