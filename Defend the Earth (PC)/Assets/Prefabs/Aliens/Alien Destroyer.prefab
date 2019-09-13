@@ -277,7 +277,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444ee89a2fdca184ab0ff6b8f59e243c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawns: []
+  bulletSpawns:
+  - {fileID: 2541583393921765049}
+  - {fileID: 511969993554005138}
 --- !u!114 &7777921763681771291
 MonoBehaviour:
   m_ObjectHideFlags: 0
