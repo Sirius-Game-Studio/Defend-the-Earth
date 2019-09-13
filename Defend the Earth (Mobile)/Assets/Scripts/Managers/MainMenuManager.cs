@@ -49,7 +49,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text loadingTip = null;
 
     private AudioSource audioSource;
-    private int page = 1;
     private string currentLoadingTip = "";
     private bool loading = false;
 
