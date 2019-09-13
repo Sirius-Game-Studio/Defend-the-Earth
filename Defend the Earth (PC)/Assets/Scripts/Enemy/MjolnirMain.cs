@@ -34,6 +34,7 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip longshotGunsFireSound = null;
+    [SerializeField] private AudioClip blindSprayFireSound = null;
     [SerializeField] private AudioClip AAMissilesFireSound = null;
     [SerializeField] private AudioClip chaosOrbFireSound = null;
 
@@ -278,7 +279,7 @@ public class MjolnirMain : MonoBehaviour
             }
             if (audioSource)
             {
-                if (longshotGunsFireSound)
+                if (blindSprayFireSound)
                 {
                     audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
                 } else
