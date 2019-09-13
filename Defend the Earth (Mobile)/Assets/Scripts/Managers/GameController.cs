@@ -243,6 +243,7 @@ public class GameController : MonoBehaviour
         saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);
         pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
+        currentLoadingTip = "";
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
         AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
