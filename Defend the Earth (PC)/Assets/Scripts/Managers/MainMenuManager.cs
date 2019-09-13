@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEditor;
 
@@ -33,8 +34,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Canvas upgradesMenu = null;
     [SerializeField] private Canvas spaceshipsMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
-    [SerializeField] private Canvas graphicsQualityMenu = null;
-    [SerializeField] private Canvas soundMenu = null;
     [SerializeField] private Canvas selectGamemodeMenu = null;
     [SerializeField] private Canvas selectDifficultyMenu = null;
     [SerializeField] private Text currentLevelText = null;
@@ -45,6 +44,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private Text loadingTip = null;
     [SerializeField] private GameObject anyKeyPrompt = null;
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private string currentLoadingTip = "";
@@ -64,7 +64,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            soundSlider.value = getVolumeData(true);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(getVolumeData(true)) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -72,17 +72,13 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            musicSlider.value = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(getVolumeData(false)) * 20);
         }
-        PlayerPrefs.Save();
         mainMenu.enabled = true;
         shopMenu.enabled = false;
         spaceshipsMenu.enabled = false;
         upgradesMenu.enabled = false;
         settingsMenu.enabled = false;
-        graphicsQualityMenu.enabled = false;
-        soundMenu.enabled = false;
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
         currentLoadingTip = "";
@@ -92,7 +88,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
         {
@@ -114,14 +109,6 @@ public class MainMenuManager : MonoBehaviour
             {
                 settingsMenu.enabled = false;
                 mainMenu.enabled = true;
-            } else if (graphicsQualityMenu.enabled)
-            {
-                graphicsQualityMenu.enabled = false;
-                settingsMenu.enabled = true;
-            } else if (soundMenu.enabled)
-            {
-                soundMenu.enabled = false;
-                settingsMenu.enabled = true;
             } else if (selectGamemodeMenu.enabled)
             {
                 selectGamemodeMenu.enabled = false;
@@ -132,11 +119,6 @@ public class MainMenuManager : MonoBehaviour
                 selectGamemodeMenu.enabled = true;
             }
         }
-
-        //Updates volume data to match the slider values
-        PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.Save();
 
         //Updates the money counter
         if (PlayerPrefs.GetString("Money") != "")
@@ -243,10 +225,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!selectGamemodeMenu.enabled)
@@ -266,10 +247,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -290,10 +270,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);;
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -314,10 +293,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -331,10 +309,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!selectDifficultyMenu.enabled)
@@ -354,10 +331,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -381,10 +357,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -401,64 +376,15 @@ public class MainMenuManager : MonoBehaviour
         }
     }
 
-    public void clickGraphicsQuality()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!graphicsQualityMenu.enabled)
-        {
-            graphicsQualityMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            graphicsQualityMenu.enabled = false;
-            settingsMenu.enabled = true;
-        }
-    }
-
-    public void clickSound()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!soundMenu.enabled)
-        {
-            soundMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            soundMenu.enabled = false;
-            settingsMenu.enabled = true;
-        }
-    }
-
     public void startGame(int difficulty)
     {
         if (audioSource)
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -494,10 +420,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -549,8 +474,6 @@ public class MainMenuManager : MonoBehaviour
                 spaceshipsMenu.enabled = false;
                 upgradesMenu.enabled = false;
                 settingsMenu.enabled = false;
-                graphicsQualityMenu.enabled = false;
-                soundMenu.enabled = false;
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
