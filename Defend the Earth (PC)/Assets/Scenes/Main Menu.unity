@@ -4683,7 +4683,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6395117876609448adba7e8c25402b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!114 &683816904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5176,7 +5175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6395117876609448adba7e8c25402b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!114 &767009833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8510,7 +8508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6395117876609448adba7e8c25402b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!114 &1146691985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8825,7 +8822,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6395117876609448adba7e8c25402b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!114 &1179459720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10331,7 +10327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6395117876609448adba7e8c25402b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
 --- !u!114 &1447313158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14344,7 +14339,7 @@ MonoBehaviour:
     damage: 26 (x1)
     fireRate: 115
   - key: AlienMower
-    price: 400
+    price: 350
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
@@ -14354,7 +14349,7 @@ MonoBehaviour:
     damage: 9 (x2)
     fireRate: 250
   - key: BlazingRocket
-    price: 1100
+    price: 900
     panelColor:
       serializedVersion: 2
       rgba: 2516590260
@@ -14364,7 +14359,7 @@ MonoBehaviour:
     damage: 23 (x2)
     fireRate: 125
   - key: QuadShooter
-    price: 1750
+    price: 1600
     panelColor:
       serializedVersion: 2
       rgba: 2516630527
@@ -14374,7 +14369,7 @@ MonoBehaviour:
     damage: 8 (x4)
     fireRate: 190
   - key: PointVoidBreaker
-    price: 2600
+    price: 2500
     panelColor:
       serializedVersion: 2
       rgba: 2529741000
@@ -14384,7 +14379,7 @@ MonoBehaviour:
     damage: 4-9 (x6)
     fireRate: 130
   - key: Annihilator
-    price: 6000
+    price: 5000
     panelColor:
       serializedVersion: 2
       rgba: 2516582655
