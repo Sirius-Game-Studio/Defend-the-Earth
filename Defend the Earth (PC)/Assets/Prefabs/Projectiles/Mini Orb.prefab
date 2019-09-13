@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3283681802976587997}
   - component: {fileID: -4393162972897695596}
   - component: {fileID: 3283681802976587996}
+  - component: {fileID: 5146652266472510837}
   - component: {fileID: 7476641356926021965}
   - component: {fileID: -6309918539878845564}
-  - component: {fileID: 5146652266472510837}
   m_Layer: 0
   m_Name: Mini Orb
   m_TagString: Projectile
@@ -107,41 +107,11 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3283681802976587987}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7476641356926021965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3283681802976587987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 13
-  instakill: 0
-  explosion: {fileID: 0}
---- !u!114 &-6309918539878845564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3283681802976587987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  movement: {x: 0, y: -1, z: 0}
-  useForwardMovement: 1
 --- !u!108 &5146652266472510837
 Light:
   m_ObjectHideFlags: 0
@@ -202,3 +172,33 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &7476641356926021965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283681802976587987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e4c8c3b4fc75c44693957b6735ff049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 13
+  instakill: 0
+  explosion: {fileID: 0}
+--- !u!114 &-6309918539878845564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3283681802976587987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24519cb99f15da640b019cb1949940c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+  movement: {x: 0, y: -1, z: 0}
+  useForwardMovement: 1
