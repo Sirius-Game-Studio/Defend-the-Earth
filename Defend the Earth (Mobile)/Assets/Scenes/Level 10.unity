@@ -1376,8 +1376,8 @@ MonoBehaviour:
   asteroidSpawnTime: {x: 6.25, y: 7.25}
   maxAliensReached: 12
   bossFinalYPosition: 3.5
-  bossRotation: {x: 90, y: 180, z: 0}
-  boss: {fileID: 7696656173546936913, guid: 694ef581f45d71248be1b671dad31302, type: 3}
+  bossRotation: {x: 0, y: 180, z: 0}
+  boss: {fileID: 3134174284751839711, guid: 38921ad20b82c4e4492d98fb88aef150, type: 3}
   enemyToLimit: {fileID: 632701638249580328, guid: 776063f6daa3a4944b9e4c7d338668d9,
     type: 3}
   limitedEnemySpawns: 2
