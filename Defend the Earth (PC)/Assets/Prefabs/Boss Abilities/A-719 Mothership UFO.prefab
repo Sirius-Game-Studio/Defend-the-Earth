@@ -159,7 +159,8 @@ AudioSource:
   m_GameObject: {fileID: 1450454693458920266}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: c1ef42722485a0041badfa391742e5c6,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -290,6 +291,7 @@ MonoBehaviour:
   whiteAlbedo: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
+  nightmareBullet: {fileID: 0}
 --- !u!114 &-2473834150980811120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 28
+  instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &-5595221590768939216
 MonoBehaviour:

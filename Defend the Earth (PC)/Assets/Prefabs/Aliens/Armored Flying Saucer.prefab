@@ -80,7 +80,8 @@ AudioSource:
   m_GameObject: {fileID: 5420663412342396601}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: c1ef42722485a0041badfa391742e5c6,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -213,6 +214,7 @@ MonoBehaviour:
   whiteAlbedo: {fileID: 0}
   fireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
+  nightmareBullet: {fileID: 0}
 --- !u!114 &-1630627430929400299
 MonoBehaviour:
   m_ObjectHideFlags: 0
