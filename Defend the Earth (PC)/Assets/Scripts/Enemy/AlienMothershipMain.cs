@@ -159,19 +159,6 @@ public class AlienMothershipMain : MonoBehaviour
         }
     }
 
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
-    }
-
     //Ability Functions
     void doubleShot()
     {
@@ -188,10 +175,9 @@ public class AlienMothershipMain : MonoBehaviour
         {
             if (fireSound)
             {
-                audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                audioSource.PlayOneShot(fireSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -230,10 +216,9 @@ public class AlienMothershipMain : MonoBehaviour
         {
             if (bustedShotFireSound)
             {
-                audioSource.PlayOneShot(bustedShotFireSound, getVolumeData(true));
+                audioSource.PlayOneShot(bustedShotFireSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -263,10 +248,9 @@ public class AlienMothershipMain : MonoBehaviour
             {
                 if (fireSound)
                 {
-                    audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(fireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }

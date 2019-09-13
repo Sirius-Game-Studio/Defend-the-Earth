@@ -30,27 +30,10 @@ public class BulletHit : MonoBehaviour
                     dealtDamage = (long)(dealtDamage * enemyHealth.defense);
                     enemyHealth.takeDamage(dealtDamage);
                 }
-                if (explosion)
-                {
-                    GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
-                    if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
-                }
+                if (explosion) Instantiate(explosion, transform.position, transform.rotation);
                 hit = true;
                 Destroy(gameObject);
             }
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

@@ -107,27 +107,13 @@ public class EnemyGun : MonoBehaviour
             {
                 if (fireSound)
                 {
-                    audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(fireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
         }
         if (damage < 1) damage = 1; //Checks if damage is less than 1
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

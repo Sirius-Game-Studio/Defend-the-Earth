@@ -24,7 +24,7 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private GameObject anyKeyPrompt = null;
     [SerializeField] private Text loadingTip = null;
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private bool spedupCredits = false;
@@ -45,7 +45,7 @@ public class EndingManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            audioMixer.SetFloat("SoundVolume", Mathf.Log10(getVolumeData(true)) * 20);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -53,7 +53,7 @@ public class EndingManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            audioMixer.SetFloat("MusicVolume", Mathf.Log10(getVolumeData(false)) * 20);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
@@ -169,19 +169,6 @@ public class EndingManager : MonoBehaviour
                 yield break;
             }
         }
-    }
-    
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     IEnumerator loadScene(string scene)
