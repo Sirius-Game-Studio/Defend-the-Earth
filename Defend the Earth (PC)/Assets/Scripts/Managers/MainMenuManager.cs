@@ -21,10 +21,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text upgradeHealthButton = null;
     [SerializeField] private Text upgradeMoneyButton = null;
     
-    [Header("Sound Menu")]
-    [SerializeField] private Slider soundSlider = null;
-    [SerializeField] private Slider musicSlider = null;
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
 
@@ -64,7 +60,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            audioMixer.SetFloat("SoundVolume", Mathf.Log10(getVolumeData(true)) * 20);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -72,7 +68,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            audioMixer.SetFloat("MusicVolume", Mathf.Log10(getVolumeData(false)) * 20);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
         mainMenu.enabled = true;
         shopMenu.enabled = false;
@@ -429,19 +425,6 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(loadScene("Endless"));
     }
 
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
-    }
-
     IEnumerator loadScene(string scene)
     {
         if (!loading)
@@ -477,29 +460,6 @@ public class MainMenuManager : MonoBehaviour
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
-            }
-        }
-    }
-
-    void spaceshipButtonState(Text button, string spaceship)
-    {
-        if (button && spaceship != "")
-        {
-            if (PlayerPrefs.GetInt("Has" + spaceship) <= 0)
-            {
-                button.text = "Buy";
-                button.rectTransform.sizeDelta = new Vector2(58, 41);
-            } else
-            {
-                if (PlayerPrefs.GetString("Spaceship") != spaceship)
-                {
-                    button.text = "Use";
-                    button.rectTransform.sizeDelta = new Vector2(46, 41);
-                } else if (PlayerPrefs.GetString("Spaceship") == spaceship)
-                {
-                    button.text = "Using";
-                    button.rectTransform.sizeDelta = new Vector2(68, 41);
-                }
             }
         }
     }
