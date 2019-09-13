@@ -40,7 +40,6 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Image spaceshipPanel = null;
     [SerializeField] private GameObject leftButton = null;
     [SerializeField] private GameObject rightButton = null;
-    [SerializeField] private Text controllerXText = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -77,26 +76,6 @@ public class ShopManager : MonoBehaviour
     void Update()
     {
         Spaceship spaceship = spaceships[page - 1];
-        if (open)
-        {
-            if (Input.GetKeyDown(KeyCode.JoystickButton4) && page > 1) // LB/L1 (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(false);
-                pressedBumper = false;
-            } else if (Input.GetKeyDown(KeyCode.JoystickButton5) && page < spaceships.Length) // RB/R1 (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(true);
-                pressedBumper = false;
-            }
-            if (Input.GetKeyDown(KeyCode.JoystickButton2)) // X/Square (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                buySpaceship();
-                pressedBumper = false;
-            }
-        }
         if (page < 1)
         {
             page = 1;
@@ -117,7 +96,6 @@ public class ShopManager : MonoBehaviour
             {
                 spaceshipBuyText.text = "Use";
             }
-            if (controllerXText) controllerXText.text = "Use";
         } else
         {
             spaceshipBuyText.rectTransform.offsetMin = new Vector2(10, 0);
@@ -131,7 +109,6 @@ public class ShopManager : MonoBehaviour
                 spaceshipPrice.text = "Free";
             }
             spaceshipBuyText.text = "Buy";
-            if (controllerXText) controllerXText.text = "Buy";
         }
         spaceshipInfo.text = "Health: " + spaceship.health + "\nDamage: " + spaceship.damage + "\nFire Rate: " + spaceship.fireRate;
         spaceshipPanel.color = new Color32(spaceship.panelColor.r, spaceship.panelColor.g, spaceship.panelColor.b, 150);
