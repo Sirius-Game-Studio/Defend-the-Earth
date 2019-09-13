@@ -227,6 +227,7 @@ public class GameController : MonoBehaviour
         quitGameMenu.enabled = false;
         restartPrompt.enabled = false;
         newHighScoreText.enabled = false;
+        currentLoadingTip = "";
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
         AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
