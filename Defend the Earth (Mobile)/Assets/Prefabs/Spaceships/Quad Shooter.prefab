@@ -233,6 +233,7 @@ MonoBehaviour:
   superchargeTime: 12
   yMin: -6.75
   yMax: 2
+  lives: 3
   invulnerable: 0
   fireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
   bullet: {fileID: 3937757261437629000, guid: 890194f60c70c114ba13f074df895e88, type: 3}
