@@ -107,19 +107,22 @@ public class ShopManager : MonoBehaviour
         spaceshipName.text = spaceship.name;
         if (PlayerPrefs.GetInt("Has" + spaceship.key) >= 1)
         {
-            spaceshipPrice.text = "";
+            spaceshipBuyText.rectTransform.offsetMin = new Vector2(0, 0);
+            spaceshipBuyText.rectTransform.offsetMax = new Vector2(0, 0);
+            spaceshipBuyText.alignment = TextAnchor.MiddleCenter;
             if (PlayerPrefs.GetString("Spaceship") == spaceship.key)
             {
                 spaceshipBuyText.text = "Using";
-                spaceshipBuyText.alignment = TextAnchor.MiddleCenter;
             } else
             {
                 spaceshipBuyText.text = "Use";
-                spaceshipBuyText.alignment = TextAnchor.MiddleCenter;
             }
             if (controllerXText) controllerXText.text = "Use";
         } else
         {
+            spaceshipBuyText.rectTransform.offsetMin = new Vector2(10, 0);
+            spaceshipBuyText.rectTransform.offsetMax = new Vector2(0, 0);
+            spaceshipBuyText.alignment = TextAnchor.MiddleLeft;
             if (spaceship.price > 0)
             {
                 spaceshipPrice.text = "$" + spaceship.price;
@@ -128,7 +131,6 @@ public class ShopManager : MonoBehaviour
                 spaceshipPrice.text = "Free";
             }
             spaceshipBuyText.text = "Buy";
-            spaceshipBuyText.alignment = TextAnchor.MiddleLeft;
             if (controllerXText) controllerXText.text = "Buy";
         }
         spaceshipInfo.text = "Health: " + spaceship.health + "\nDamage: " + spaceship.damage + "\nFire Rate: " + spaceship.fireRate;
@@ -318,9 +320,6 @@ public class ShopManager : MonoBehaviour
                 }
                 PlayerPrefs.Save();
             }
-        } else
-        {
-            print("utniy3D");
         }
     }
 }
