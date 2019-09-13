@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class EndingManager : MonoBehaviour
@@ -23,6 +24,7 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private GameObject anyKeyPrompt = null;
     [SerializeField] private Text loadingTip = null;
+    [SerializeField] private AudioMixer audioMixer;
 
     private AudioSource audioSource;
     private bool spedupCredits = false;
@@ -41,6 +43,9 @@ public class EndingManager : MonoBehaviour
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
             PlayerPrefs.Save();
+        } else
+        {
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(getVolumeData(true)) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -48,7 +53,7 @@ public class EndingManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(getVolumeData(false)) * 20);
         }
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
@@ -57,7 +62,6 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0)) // X/Cross (Xbox/PS Controller)
         {
@@ -118,10 +122,9 @@ public class EndingManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -144,10 +147,9 @@ public class EndingManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }

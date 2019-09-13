@@ -4,15 +4,18 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   - endingMenu: {instanceID: 0}
   - creditsMenu: {instanceID: 0}
   - credits: {instanceID: 0}
   - moneyCount: {instanceID: 0}
   - controllerSpeedUpButton: {instanceID: 0}
-  - loadingText: {instanceID: 0}
+  - loadingScreen: {instanceID: 0}
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
-  - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
+  - anyKeyPrompt: {instanceID: 0}
+  - loadingTip: {instanceID: 0}
+  - audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
