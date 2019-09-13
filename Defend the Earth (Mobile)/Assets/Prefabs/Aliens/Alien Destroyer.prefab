@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -4250597711089654220}
   - component: {fileID: -4113819702479574869}
   - component: {fileID: 510072693061241148}
+  - component: {fileID: 5563204480094436324}
   - component: {fileID: -7599845334762177351}
   - component: {fileID: 7777921763681771291}
   - component: {fileID: 2938965713518676911}
@@ -237,9 +238,23 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
     type: 3}
+--- !u!114 &5563204480094436324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048570700629992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa237a4067d98434bb423b5d1ca33a0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawns: []
 --- !u!114 &-7599845334762177351
 MonoBehaviour:
   m_ObjectHideFlags: 0
