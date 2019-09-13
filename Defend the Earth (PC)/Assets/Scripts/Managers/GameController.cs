@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEditor;
@@ -27,8 +28,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Canvas gameOverMenu = null;
     [SerializeField] private Canvas levelCompletedMenu = null;
     [SerializeField] private Canvas settingsMenu = null;
-    [SerializeField] private Canvas graphicsQualityMenu = null;
-    [SerializeField] private Canvas soundMenu = null;
     [SerializeField] private Canvas quitGameMenu = null;
     [SerializeField] private Canvas restartPrompt = null;
     [SerializeField] private Text levelCount = null;
@@ -38,8 +37,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text bossName = null;
     [SerializeField] private Slider bossHealthBar = null;
     [SerializeField] private Text bossHealthText = null;
-    [SerializeField] private Slider soundSlider = null;
-    [SerializeField] private Slider musicSlider = null;
     [SerializeField] private Text newHighScoreText = null;
     [SerializeField] private Text deathMessage = null;
     public RectTransform controllerShootIcon = null;
@@ -72,6 +69,7 @@ public class GameController : MonoBehaviour
     [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
     [SerializeField] private GameObject[] backgrounds = new GameObject[0];
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private long wave = 1;
@@ -169,7 +167,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            soundSlider.value = getVolumeData(true);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -177,14 +175,9 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            musicSlider.value = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-        if (Camera.main.GetComponent<AudioSource>())
-        {
-            Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            Camera.main.GetComponent<AudioSource>().Play();
-        }
+        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Play();
         if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
         {
             Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
@@ -222,8 +215,6 @@ public class GameController : MonoBehaviour
         gameOverMenu.enabled = false;
         levelCompletedMenu.enabled = false;
         settingsMenu.enabled = false;
-        graphicsQualityMenu.enabled = false;
-        soundMenu.enabled = false;
         quitGameMenu.enabled = false;
         restartPrompt.enabled = false;
         newHighScoreText.enabled = false;
@@ -235,7 +226,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape)) pause();
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame(); // B/Circle (Xbox/PS Controller)
@@ -254,14 +244,6 @@ public class GameController : MonoBehaviour
                 {
                     levelCompletedMenu.enabled = true;
                 }
-            } else if (graphicsQualityMenu.enabled)
-            {
-                graphicsQualityMenu.enabled = false;
-                settingsMenu.enabled = true;
-            } else if (soundMenu.enabled)
-            {
-                soundMenu.enabled = false;
-                settingsMenu.enabled = true;
             } else if (quitGameMenu.enabled)
             {
                 quitGameMenu.enabled = false;
@@ -333,7 +315,7 @@ public class GameController : MonoBehaviour
             if (audioSource && loseJingle && !playedLoseSound)
             {
                 playedLoseSound = true;
-                audioSource.PlayOneShot(loseJingle, getVolumeData(true));
+                audioSource.PlayOneShot(loseJingle);
             }
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             if (!sentGameOverData)
@@ -397,7 +379,7 @@ public class GameController : MonoBehaviour
                         if (audioSource && winJingle && !playedWinSound)
                         {
                             playedWinSound = true;
-                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                            audioSource.PlayOneShot(winJingle);
                         }
                         if (!sentLevelCompleted)
                         {
@@ -447,11 +429,6 @@ public class GameController : MonoBehaviour
                 endlessMoneyReward += 25;
             }
         }
-
-        //Updates volume data to match the slider values
-        PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.Save();
 
         if (isCampaignLevel)
         {
@@ -819,7 +796,7 @@ public class GameController : MonoBehaviour
                 gamePausedMenu.enabled = true;
             } else //Unpauses the game
             {
-                if (!settingsMenu.enabled && !graphicsQualityMenu.enabled && !soundMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
+                if (!settingsMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
                 {
                     paused = false;
                     Time.timeScale = 1;
@@ -832,16 +809,15 @@ public class GameController : MonoBehaviour
 
     public void resumeGame()
     {
-        if (!settingsMenu.enabled && !graphicsQualityMenu.enabled && !soundMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
+        if (!settingsMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
         {
             if (audioSource)
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -858,10 +834,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -876,10 +851,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -895,10 +869,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -913,10 +886,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -931,54 +903,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void clickGraphicsQuality()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!graphicsQualityMenu.enabled)
-        {
-            graphicsQualityMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            graphicsQualityMenu.enabled = false;
-            settingsMenu.enabled = true;
-        }
-    }
-
-    public void clickSoundMenu()
-    {
-        if (audioSource)
-        {
-            if (buttonClick)
-            {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
-            } else
-            {
-                audioSource.volume = getVolumeData(true);
-                audioSource.Play();
-            }
-        }
-        if (!soundMenu.enabled)
-        {
-            soundMenu.enabled = true;
-            settingsMenu.enabled = false;
-        } else
-        {
-            soundMenu.enabled = false;
-            settingsMenu.enabled = true;
-        }
-    }
-
     public void openCanvasFromClickSource(Canvas canvas)
     {
         if (canvas)
@@ -987,10 +911,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -1022,19 +945,6 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     IEnumerator loadScene(string scene)
@@ -1069,8 +979,6 @@ public class GameController : MonoBehaviour
                 gameOverMenu.enabled = false;
                 levelCompletedMenu.enabled = false;
                 settingsMenu.enabled = false;
-                graphicsQualityMenu.enabled = false;
-                soundMenu.enabled = false;
                 quitGameMenu.enabled = false;
                 restartPrompt.enabled = false;
                 yield return null;

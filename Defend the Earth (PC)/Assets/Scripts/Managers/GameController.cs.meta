@@ -11,27 +11,28 @@ MonoImporter:
   - gameOverMenu: {instanceID: 0}
   - levelCompletedMenu: {instanceID: 0}
   - settingsMenu: {instanceID: 0}
-  - graphicsQualityMenu: {instanceID: 0}
-  - soundMenu: {instanceID: 0}
   - quitGameMenu: {instanceID: 0}
   - restartPrompt: {instanceID: 0}
   - levelCount: {instanceID: 0}
+  - scoreCount: {instanceID: 0}
   - waveCount: {instanceID: 0}
   - moneyCount: {instanceID: 0}
   - bossName: {instanceID: 0}
   - bossHealthBar: {instanceID: 0}
   - bossHealthText: {instanceID: 0}
-  - soundSlider: {instanceID: 0}
-  - musicSlider: {instanceID: 0}
+  - newHighScoreText: {instanceID: 0}
   - deathMessage: {instanceID: 0}
   - controllerShootIcon: {instanceID: 0}
-  - loadingText: {instanceID: 0}
+  - loadingScreen: {instanceID: 0}
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
+  - anyKeyPrompt: {instanceID: 0}
+  - loadingTip: {instanceID: 0}
   - buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   - loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   - winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
   - currentBoss: {instanceID: 0}
+  - audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
