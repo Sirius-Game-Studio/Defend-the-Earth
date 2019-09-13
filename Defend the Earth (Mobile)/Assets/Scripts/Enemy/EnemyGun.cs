@@ -16,6 +16,7 @@ public class EnemyGun : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject bullet = null;
+    [Tooltip("Nightmare only (used only if the value is set to a GameObject).")] [SerializeField] private GameObject nightmareBullet = null;
 
     private AudioSource audioSource;
     private float nextShot = 0;
@@ -29,7 +30,7 @@ public class EnemyGun : MonoBehaviour
             if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
             {
                 damage = (long)(damage * 0.8);
-                RPM *= 0.9f;
+                RPM *= 0.85f;
             } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
             {
                 damage = (long)(damage * 1.15);
@@ -62,7 +63,20 @@ public class EnemyGun : MonoBehaviour
             {
                 if (bulletSpawn.CompareTag("BulletSpawn") && bulletSpawn.gameObject.activeSelf)
                 {
-                    GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+                    GameObject newBullet;
+                    if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal, Hard
+                    {
+                        newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+                    } else
+                    {
+                        if (nightmareBullet)
+                        {
+                            newBullet = Instantiate(nightmareBullet, bulletSpawn.position, bulletSpawn.rotation);
+                        } else
+                        {
+                            newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+                        }
+                    }
                     newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
                     if (skinPicker)
                     {
