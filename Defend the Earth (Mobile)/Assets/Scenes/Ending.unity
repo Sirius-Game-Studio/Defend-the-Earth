@@ -2282,7 +2282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   creditsY: 530
-  creditsScrollSpeed: 0.25
+  creditsScrollSpeed: 0.375
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   endingMenu: {fileID: 1004614330}
   creditsMenu: {fileID: 400375241}
