@@ -5699,7 +5699,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004614327}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -6264,7 +6264,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041384305}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -11980,8 +11980,6 @@ MonoBehaviour:
   upgradeSpeedButton: {fileID: 955937598}
   upgradeHealthButton: {fileID: 2059130173}
   upgradeMoneyButton: {fileID: 2128962718}
-  soundSlider: {fileID: 471273626}
-  musicSlider: {fileID: 1429454445}
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   mainMenu: {fileID: 1004614330}
   shopMenu: {fileID: 445606114}
