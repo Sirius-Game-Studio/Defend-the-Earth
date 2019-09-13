@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 847cfe20ceec48d42bfd2d2e4ab077f4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sound: {fileID: 9204756421500558348, guid: 09a709e2eddfc9c49aab3c44fea93b88, type: 3}
+  - orb: {fileID: 3283681802976587987, guid: 641b4cfcec9d09f41abe27b270b018f0, type: 3}
+  - split: {fileID: 3283681802976587987, guid: ee5e1500d5377334aa13a3761804261c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
