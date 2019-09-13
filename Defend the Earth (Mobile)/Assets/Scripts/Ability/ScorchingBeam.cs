@@ -43,11 +43,19 @@ public class ScorchingBeam : MonoBehaviour
         if (Physics.Raycast(beamRay, out RaycastHit beamHit, 50))
         {
             line.SetPosition(1, beamHit.point);
-            if (hitGlow) hitGlow.gameObject.SetActive(true);
+            if (hitGlow)
+            {
+                if (hitGlow.GetComponent<Light>()) hitGlow.GetComponent<Light>().enabled = true;
+                hitGlow.gameObject.SetActive(true);
+            }
         } else
         {
             line.SetPosition(1, beamRay.origin + beamRay.direction * 15);
-            if (hitGlow) hitGlow.gameObject.SetActive(false);
+            if (hitGlow)
+            {
+                if (hitGlow.GetComponent<Light>()) hitGlow.GetComponent<Light>().enabled = false;
+                hitGlow.gameObject.SetActive(false);
+            }
         }
         collider.size = new Vector3(line.endWidth, Vector3.Distance(line.GetPosition(0), line.GetPosition(1)));
         collider.transform.position = (line.GetPosition(0) + line.GetPosition(1)) / 2;
