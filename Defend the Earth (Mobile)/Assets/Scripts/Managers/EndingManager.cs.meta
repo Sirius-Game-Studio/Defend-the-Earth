@@ -9,9 +9,12 @@ MonoImporter:
   - creditsMenu: {instanceID: 0}
   - credits: {instanceID: 0}
   - moneyCount: {instanceID: 0}
-  - loadingText: {instanceID: 0}
+  - loadingScreen: {instanceID: 0}
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
+  - anyKeyPrompt: {instanceID: 0}
+  - loadingTip: {instanceID: 0}
+  - audioMixer: {fileID: 24100000, guid: df105e377a1592e4d849ab4c76cd4861, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
