@@ -4,18 +4,6 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - buySpaceFighterButton: {instanceID: 0}
-  - buyAlienMowerButton: {instanceID: 0}
-  - buyBlazingRocketButton: {instanceID: 0}
-  - buyQuadShooterButton: {instanceID: 0}
-  - buyPointVoidBreakerButton: {instanceID: 0}
-  - buyAnnihilatorButton: {instanceID: 0}
-  - spaceFighterPrice: {instanceID: 0}
-  - alienMowerPrice: {instanceID: 0}
-  - blazingRocketPrice: {instanceID: 0}
-  - quadShooterPrice: {instanceID: 0}
-  - pointVoidBreakerPrice: {instanceID: 0}
-  - annihilatorPrice: {instanceID: 0}
   - moneyCount: {instanceID: 0}
   - damageText: {instanceID: 0}
   - fireRateText: {instanceID: 0}
@@ -29,8 +17,6 @@ MonoImporter:
   - speedPrice: {instanceID: 0}
   - healthPrice: {instanceID: 0}
   - moneyPrice: {instanceID: 0}
-  - soundSlider: {instanceID: 0}
-  - musicSlider: {instanceID: 0}
   - buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   - cannotAfford: {fileID: 8300000, guid: 95eae1e42658e14429853e87a35919e7, type: 3}
   - mainMenu: {instanceID: 0}
@@ -38,10 +24,19 @@ MonoImporter:
   - upgradesMenu: {instanceID: 0}
   - spaceshipsMenu: {instanceID: 0}
   - settingsMenu: {instanceID: 0}
+  - selectGamemodeMenu: {instanceID: 0}
   - selectDifficultyMenu: {instanceID: 0}
-  - loadingText: {instanceID: 0}
+  - buyMoneyMenu: {instanceID: 0}
+  - openBuyMoneyButton: {instanceID: 0}
+  - currentLevelText: {instanceID: 0}
+  - highScoreText: {instanceID: 0}
+  - purchaseNotification: {instanceID: 0}
+  - loadingScreen: {instanceID: 0}
   - loadingSlider: {instanceID: 0}
   - loadingPercentage: {instanceID: 0}
+  - anyKeyPrompt: {instanceID: 0}
+  - loadingTip: {instanceID: 0}
+  - audioMixer: {fileID: 24100000, guid: df105e377a1592e4d849ab4c76cd4861, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
