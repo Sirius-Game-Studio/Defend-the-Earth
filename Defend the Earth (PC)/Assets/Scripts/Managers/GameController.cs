@@ -177,7 +177,6 @@ public class GameController : MonoBehaviour
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Play();
         if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
         {
             Instantiate(playerShips[0], new Vector3(0, -7, 0), Quaternion.Euler(-90, 0, 0));
