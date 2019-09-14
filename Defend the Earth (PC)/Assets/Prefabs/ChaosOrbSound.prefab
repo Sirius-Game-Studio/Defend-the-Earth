@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9204756421500558354}
   - component: {fileID: 9204756421500558349}
   m_Layer: 0
-  m_Name: SharpnelSphereSound
+  m_Name: ChaosOrbSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 9204756421500558348}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: c1ef42722485a0041badfa391742e5c6,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: dd16a0bc01b76054ba18327bc3b2570e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
