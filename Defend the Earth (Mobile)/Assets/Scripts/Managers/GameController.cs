@@ -46,8 +46,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Slider bossHealthBar = null;
     [SerializeField] private Text bossHealthText = null;
     [SerializeField] private Text saveMeCountdown = null;
-    [SerializeField] private Slider soundSlider = null;
-    [SerializeField] private Slider musicSlider = null;
     [SerializeField] private Text newHighScoreText = null;
     [SerializeField] private Text deathMessage = null;
     [SerializeField] private GameObject loadingScreen = null;
@@ -190,11 +188,6 @@ public class GameController : MonoBehaviour
         } else
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
-        }
-        if (Camera.main.GetComponent<AudioSource>())
-        {
-            Camera.main.GetComponent<AudioSource>().volume = PlayerPrefs.GetFloat("MusicVolume");
-            Camera.main.GetComponent<AudioSource>().Play();
         }
         GameObject playerShip;
         if (PlayerPrefs.GetString("Spaceship") == "SpaceFighter")
@@ -452,11 +445,6 @@ public class GameController : MonoBehaviour
                 endlessMoneyReward += 25;
             }
         }
-
-        //Updates volume data to match the slider values
-        PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.Save();
 
         if (isCampaignLevel)
         {
