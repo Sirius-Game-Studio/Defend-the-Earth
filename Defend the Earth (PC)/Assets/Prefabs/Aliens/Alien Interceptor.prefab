@@ -256,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 16
+  spreadDegree: 0
   RPM: 50
   defaultAlbedo: {fileID: 2800000, guid: 25e1fef4178fb574b9af72848dd14c1b, type: 3}
   greenAlbedo: {fileID: 2800000, guid: 3a35a930e0cf7bd41ad98077f73daaf3, type: 3}
