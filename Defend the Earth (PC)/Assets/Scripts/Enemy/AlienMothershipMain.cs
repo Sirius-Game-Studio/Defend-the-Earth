@@ -229,7 +229,7 @@ public class AlienMothershipMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < torpedoBarrageShots; i++)
         {
-            if (PlayerPrefs.GetInt("Difficulty") < 4)
+            if (PlayerPrefs.GetInt("Difficulty") < 4) //Nightmare
             {
                 float random = Random.value;
                 if (random <= 0.5f)
@@ -239,7 +239,7 @@ public class AlienMothershipMain : MonoBehaviour
                 {
                     spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.05f, true);
                 }
-            } else
+            } else //Easy, Normal and Hard
             {
                 spawnProjectile(alienMissile, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.1f, true);
                 spawnProjectile(alienMissile, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, damage, bulletSpeed * 1.1f, true);
