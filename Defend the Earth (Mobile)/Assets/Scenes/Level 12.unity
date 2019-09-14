@@ -764,7 +764,8 @@ AudioSource:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 5691283169016420069, guid: df105e377a1592e4d849ab4c76cd4861,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f8ef79f4ce2b908438735d073ecd499a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1398,8 +1399,6 @@ MonoBehaviour:
   bossHealthBar: {fileID: 1802036953}
   bossHealthText: {fileID: 1802036952}
   saveMeCountdown: {fileID: 1416019163}
-  soundSlider: {fileID: 8570374180042434131}
-  musicSlider: {fileID: 8570374180042434130}
   newHighScoreText: {fileID: 1802036956}
   deathMessage: {fileID: 686168306}
   loadingScreen: {fileID: 40524818}
@@ -1513,6 +1512,7 @@ MonoBehaviour:
   - {fileID: 7646070162773227609, guid: 599ded73684cf0744b13c83a2b5714aa, type: 3}
   - {fileID: 7646070162773227609, guid: 66a0d308554dd8a40b2498da52d238ae, type: 3}
   - {fileID: 7646070162773227609, guid: 5a5f540f4550ae448bdda00b36263893, type: 3}
+  audioMixer: {fileID: 24100000, guid: df105e377a1592e4d849ab4c76cd4861, type: 2}
 --- !u!82 &1944101019
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1522,7 +1522,8 @@ AudioSource:
   m_GameObject: {fileID: 1944101016}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: df105e377a1592e4d849ab4c76cd4861,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2765,27 +2766,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdd1c38d5a2edee49978e33c16727786, type: 3}
---- !u!114 &8570374180042434130 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4270981245144592247, guid: bdd1c38d5a2edee49978e33c16727786,
-    type: 3}
-  m_PrefabInstance: {fileID: 8570374180042434129}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8570374180042434131 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3289931092906095516, guid: bdd1c38d5a2edee49978e33c16727786,
-    type: 3}
-  m_PrefabInstance: {fileID: 8570374180042434129}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
