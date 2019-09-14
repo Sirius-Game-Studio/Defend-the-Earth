@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEditor;
 
@@ -20,10 +21,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text speedPrice = null;
     [SerializeField] private Text healthPrice = null;
     [SerializeField] private Text moneyPrice = null;
-    
-    [Header("Sound Menu")]
-    [SerializeField] private Slider soundSlider = null;
-    [SerializeField] private Slider musicSlider = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -47,6 +44,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private GameObject anyKeyPrompt = null;
     [SerializeField] private Text loadingTip = null;
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private string currentLoadingTip = "";
@@ -67,7 +65,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            soundSlider.value = getVolumeData(true);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -75,10 +73,8 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            musicSlider.value = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-        PlayerPrefs.Save();
         mainMenu.enabled = true;
         shopMenu.enabled = false;
         spaceshipsMenu.enabled = false;
@@ -95,7 +91,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!buyMoneyMenu.enabled)
@@ -135,11 +130,6 @@ public class MainMenuManager : MonoBehaviour
                 openBuyMoneyButton.SetActive(true);
             }
         }
-
-        //Updates volume data to match the slider values
-        PlayerPrefs.SetFloat("SoundVolume", soundSlider.value);
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
-        PlayerPrefs.Save();
 
         //Updates the money counter
         if (PlayerPrefs.GetString("Money") != "")
@@ -246,10 +236,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!selectGamemodeMenu.enabled)
@@ -267,10 +256,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!shopMenu.enabled)
@@ -288,10 +276,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!settingsMenu.enabled)
@@ -309,10 +296,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         Application.Quit();
@@ -325,10 +311,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!selectDifficultyMenu.enabled)
@@ -346,10 +331,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!spaceshipsMenu.enabled)
@@ -372,10 +356,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!upgradesMenu.enabled)
@@ -397,10 +380,9 @@ public class MainMenuManager : MonoBehaviour
     {
         if (buttonClick)
         {
-            audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+            audioSource.PlayOneShot(buttonClick);
         } else
         {
-            audioSource.volume = getVolumeData(true);
             audioSource.Play();
         }
         if (!buyMoneyMenu.enabled)
@@ -420,10 +402,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -459,10 +440,9 @@ public class MainMenuManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -485,7 +465,7 @@ public class MainMenuManager : MonoBehaviour
 
     public void onPurchaseFailure()
     {
-        if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+        if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford);
         if (purchaseNotification)
         {
             CancelInvoke("resetPurchaseNotification");
@@ -496,19 +476,6 @@ public class MainMenuManager : MonoBehaviour
     public void resetPurchaseNotification()
     {
         if (purchaseNotification) purchaseNotification.text = "";
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     IEnumerator loadScene(string scene)
@@ -546,29 +513,6 @@ public class MainMenuManager : MonoBehaviour
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
-            }
-        }
-    }
-
-    void spaceshipButtonState(Text button, string spaceship)
-    {
-        if (button && spaceship != "")
-        {
-            if (PlayerPrefs.GetInt("Has" + spaceship) <= 0)
-            {
-                button.text = "Purchase";
-                button.rectTransform.sizeDelta = new Vector2(115, 41);
-            } else
-            {
-                if (PlayerPrefs.GetString("Spaceship") != spaceship)
-                {
-                    button.text = "Use";
-                    button.rectTransform.sizeDelta = new Vector2(46, 41);
-                } else if (PlayerPrefs.GetString("Spaceship") == spaceship)
-                {
-                    button.text = "Using";
-                    button.rectTransform.sizeDelta = new Vector2(68, 41);
-                }
             }
         }
     }

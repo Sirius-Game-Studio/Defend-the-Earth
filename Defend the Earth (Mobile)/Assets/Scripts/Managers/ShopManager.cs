@@ -138,10 +138,9 @@ public class ShopManager : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -153,19 +152,6 @@ public class ShopManager : MonoBehaviour
                 --page;
             }
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     //Buy Functions
@@ -184,10 +170,9 @@ public class ShopManager : MonoBehaviour
                         {
                             if (purchaseItem)
                             {
-                                audioSource.PlayOneShot(purchaseItem, getVolumeData(true));
+                                audioSource.PlayOneShot(purchaseItem);
                             } else
                             {
-                                audioSource.volume = getVolumeData(true);
                                 audioSource.Play();
                             }
                         }
@@ -201,10 +186,9 @@ public class ShopManager : MonoBehaviour
                         {
                             if (cannotAfford)
                             {
-                                audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                                audioSource.PlayOneShot(cannotAfford);
                             } else
                             {
-                                audioSource.volume = getVolumeData(true);
                                 audioSource.Play();
                             }
                         }
@@ -220,10 +204,9 @@ public class ShopManager : MonoBehaviour
                 {
                     if (buttonClick)
                     {
-                        audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                        audioSource.PlayOneShot(buttonClick);
                     } else
                     {
-                        audioSource.volume = getVolumeData(true);
                         audioSource.Play();
                     }
                 }
@@ -252,10 +235,9 @@ public class ShopManager : MonoBehaviour
                         {
                             if (purchaseItem)
                             {
-                                audioSource.PlayOneShot(purchaseItem, getVolumeData(true));
+                                audioSource.PlayOneShot(purchaseItem);
                             } else
                             {
-                                audioSource.volume = getVolumeData(true);
                                 audioSource.Play();
                             }
                         }
@@ -270,10 +252,9 @@ public class ShopManager : MonoBehaviour
                         {
                             if (cannotAfford)
                             {
-                                audioSource.PlayOneShot(cannotAfford, getVolumeData(true));
+                                audioSource.PlayOneShot(cannotAfford);
                             } else
                             {
-                                audioSource.volume = getVolumeData(true);
                                 audioSource.Play();
                             }
                         }
@@ -284,10 +265,9 @@ public class ShopManager : MonoBehaviour
                     {
                         if (purchaseItem)
                         {
-                            audioSource.PlayOneShot(purchaseItem, getVolumeData(true));
+                            audioSource.PlayOneShot(purchaseItem);
                         } else
                         {
-                            audioSource.volume = getVolumeData(true);
                             audioSource.Play();
                         }
                     }

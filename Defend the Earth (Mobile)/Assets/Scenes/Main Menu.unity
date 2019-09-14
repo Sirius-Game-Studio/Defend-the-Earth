@@ -13714,8 +13714,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2143584396}
   - component: {fileID: 2143584397}
-  - component: {fileID: 2143584398}
   - component: {fileID: 2143584395}
+  - component: {fileID: 2143584398}
   m_Layer: 0
   m_Name: MainMenuManager
   m_TagString: Untagged
@@ -13748,8 +13748,6 @@ MonoBehaviour:
   speedPrice: {fileID: 1508655231}
   healthPrice: {fileID: 329266297}
   moneyPrice: {fileID: 1399138115}
-  soundSlider: {fileID: 471273626}
-  musicSlider: {fileID: 1429454445}
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   cannotAfford: {fileID: 8300000, guid: 95eae1e42658e14429853e87a35919e7, type: 3}
   mainMenu: {fileID: 1004614330}
@@ -13769,6 +13767,7 @@ MonoBehaviour:
   loadingPercentage: {fileID: 1526435072}
   anyKeyPrompt: {fileID: 1526435071}
   loadingTip: {fileID: 1526435070}
+  audioMixer: {fileID: 24100000, guid: df105e377a1592e4d849ab4c76cd4861, type: 2}
 --- !u!4 &2143584396
 Transform:
   m_ObjectHideFlags: 0

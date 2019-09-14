@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class EndingManager : MonoBehaviour
@@ -22,6 +23,7 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Text loadingPercentage = null;
     [SerializeField] private GameObject anyKeyPrompt = null;
     [SerializeField] private Text loadingTip = null;
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private bool spedupCredits = false;
@@ -35,17 +37,23 @@ public class EndingManager : MonoBehaviour
         if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
         AudioListener.pause = false;
-        PlayerPrefs.DeleteKey("Difficulty");
-        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.SetInt("Level", 1);
-        if (!PlayerPrefs.HasKey("SoundVolume")) PlayerPrefs.SetFloat("SoundVolume", 1);
+        if (!PlayerPrefs.HasKey("SoundVolume"))
+        {
+            PlayerPrefs.SetFloat("SoundVolume", 1);
+        } else
+        {
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
+        }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
+        PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
@@ -54,7 +62,6 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.touchCount > 0)
         {
             if (!spedupCredits)
@@ -109,10 +116,9 @@ public class EndingManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -135,10 +141,9 @@ public class EndingManager : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -158,19 +163,6 @@ public class EndingManager : MonoBehaviour
                 yield break;
             }
         }
-    }
-    
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     IEnumerator loadScene(string scene)

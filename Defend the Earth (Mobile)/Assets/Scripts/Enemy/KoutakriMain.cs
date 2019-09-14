@@ -133,20 +133,6 @@ public class KoutakriMain : MonoBehaviour
         return bullet;
     }
 
-    
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
-    }
-
     //Ability Functions
     IEnumerator laserMachine()
     {
@@ -159,10 +145,9 @@ public class KoutakriMain : MonoBehaviour
             {
                 if (fireSound)
                 {
-                    audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(fireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -190,10 +175,9 @@ public class KoutakriMain : MonoBehaviour
         {
             if (fireSound)
             {
-                audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                audioSource.PlayOneShot(fireSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -229,10 +213,9 @@ public class KoutakriMain : MonoBehaviour
         {
             if (circleBombSound)
             {
-                audioSource.PlayOneShot(circleBombSound, getVolumeData(true));
+                audioSource.PlayOneShot(circleBombSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }

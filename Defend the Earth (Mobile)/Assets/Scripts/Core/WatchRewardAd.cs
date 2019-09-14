@@ -40,10 +40,9 @@ public class WatchRewardAd : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -77,18 +76,5 @@ public class WatchRewardAd : MonoBehaviour
         {
             Debug.LogError("Could not finish ad due to a error!");
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

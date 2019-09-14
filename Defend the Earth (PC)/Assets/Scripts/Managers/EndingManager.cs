@@ -37,12 +37,10 @@ public class EndingManager : MonoBehaviour
         if (audioSource) audioSource.ignoreListenerPause = true;
         Time.timeScale = 1;
         AudioListener.pause = false;
-        PlayerPrefs.DeleteKey("Difficulty");
-        PlayerPrefs.DeleteKey("Restarted");
+        PlayerPrefs.SetInt("Level", 1);
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
             PlayerPrefs.SetFloat("SoundVolume", 1);
-            PlayerPrefs.Save();
         } else
         {
             audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
@@ -50,11 +48,13 @@ public class EndingManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
             PlayerPrefs.SetFloat("MusicVolume", 1);
-            PlayerPrefs.Save();
         } else
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
+        PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
+        PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
         currentLoadingTip = "";

@@ -34,10 +34,9 @@ public class ToggleAutofire : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -65,18 +64,5 @@ public class ToggleAutofire : MonoBehaviour
     void resetInfo()
     {
         if (info) info.text = "";
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

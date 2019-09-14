@@ -192,20 +192,6 @@ public class MjolnirMain : MonoBehaviour
         return bullet;
     }
 
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
-    }
-
     //Ability Functions
     IEnumerator longshotGuns()
     {
@@ -218,10 +204,9 @@ public class MjolnirMain : MonoBehaviour
             {
                 if (longshotGunsFireSound)
                 {
-                    audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(longshotGunsFireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -256,10 +241,9 @@ public class MjolnirMain : MonoBehaviour
             {
                 if (longshotGunsFireSound) 
                 {
-                    audioSource.PlayOneShot(longshotGunsFireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(longshotGunsFireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -281,10 +265,9 @@ public class MjolnirMain : MonoBehaviour
             {
                 if (blindSprayFireSound)
                 {
-                    audioSource.PlayOneShot(blindSprayFireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(blindSprayFireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -303,10 +286,9 @@ public class MjolnirMain : MonoBehaviour
             {
                 if (AAMissilesFireSound)
                 {
-                    audioSource.PlayOneShot(AAMissilesFireSound, getVolumeData(true));
+                    audioSource.PlayOneShot(AAMissilesFireSound);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -328,10 +310,9 @@ public class MjolnirMain : MonoBehaviour
         {
             if (chaosOrbFireSound)
             {
-                audioSource.PlayOneShot(chaosOrbFireSound, getVolumeData(true));
+                audioSource.PlayOneShot(chaosOrbFireSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }

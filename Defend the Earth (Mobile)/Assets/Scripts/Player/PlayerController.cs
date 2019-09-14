@@ -118,11 +118,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (lives > 1)
                 {
-                    if (explosion)
-                    {
-                        GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
-                        if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
-                    }
+                    if (explosion) Instantiate(explosion, transform.position, transform.rotation);
                     --lives;
                     health = maxHealth;
                     startInvulnerability(3);
@@ -134,11 +130,7 @@ public class PlayerController : MonoBehaviour
         }
         if (lives <= 0)
         {
-            if (explosion)
-            {
-                GameObject newExplosion = Instantiate(explosion, transform.position, transform.rotation);
-                if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
-            }
+            if (explosion) Instantiate(explosion, transform.position, transform.rotation);
             health = 0;
             if (!GameController.instance.gameOver && !GameController.instance.won)
             {
@@ -171,7 +163,6 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, screenBounds.x * -1 + width, screenBounds.x - width), Mathf.Clamp(transform.position.y, yMin, yMax), 0);
         if (lowHealthSound)
         {
-            lowHealthSound.volume = getVolumeData(true) * 0.15f;
             if (health > maxHealth * 0.25)
             {
                 lowHealthSound.Stop();
@@ -240,10 +231,9 @@ public class PlayerController : MonoBehaviour
         {
             if (fireSound)
             {
-                audioSource.PlayOneShot(fireSound, getVolumeData(true));
+                audioSource.PlayOneShot(fireSound);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -334,18 +324,5 @@ public class PlayerController : MonoBehaviour
             }
             yield break;
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

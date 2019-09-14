@@ -92,11 +92,7 @@ public class EnemyHealth : MonoBehaviour
                 }
                 PlayerPrefs.Save();
             }
-            if (explosion)
-            {
-                GameObject newExplosion = Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
-                if (newExplosion.GetComponent<AudioSource>()) newExplosion.GetComponent<AudioSource>().volume = getVolumeData(true);
-            }
+            if (explosion) Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
             if (powerups.Length > 0)
             {
                 float random = Random.value;
@@ -171,18 +167,5 @@ public class EnemyHealth : MonoBehaviour
                 --health;
             }
         }
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 }

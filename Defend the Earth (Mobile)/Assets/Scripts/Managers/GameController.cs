@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEditor;
@@ -55,7 +56,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject anyKeyPrompt = null;
     [SerializeField] private Text loadingTip = null;
 
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
     [SerializeField] private AudioClip loseJingle = null;
@@ -79,6 +79,7 @@ public class GameController : MonoBehaviour
     [Tooltip("Only used if enemyToLimit is set and the enemy spawns reach the limit.")] [SerializeField] private GameObject[] otherEnemies = new GameObject[0];
     [SerializeField] private GameObject[] asteroids = new GameObject[0];
     [SerializeField] private GameObject[] backgrounds = new GameObject[0];
+    [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
     private PlayerPosition playerPosition;
@@ -180,7 +181,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            soundSlider.value = getVolumeData(true);
+            audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
         }
         if (!PlayerPrefs.HasKey("MusicVolume"))
         {
@@ -188,8 +189,7 @@ public class GameController : MonoBehaviour
             PlayerPrefs.Save();
         } else
         {
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
-            musicSlider.value = getVolumeData(false);
+            audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
         if (Camera.main.GetComponent<AudioSource>())
         {
@@ -251,7 +251,6 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().volume = getVolumeData(false);
         if (Input.GetKeyDown(KeyCode.Escape)) pause(false);
         if (Input.GetKeyDown(KeyCode.Escape) && paused)
         {
@@ -339,7 +338,7 @@ public class GameController : MonoBehaviour
             if (audioSource && loseJingle && !playedLoseSound)
             {
                 playedLoseSound = true;
-                audioSource.PlayOneShot(loseJingle, getVolumeData(true));
+                audioSource.PlayOneShot(loseJingle);
             }
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             if (!sentGameOverData)
@@ -403,7 +402,7 @@ public class GameController : MonoBehaviour
                         if (audioSource && winJingle && !playedWinSound)
                         {
                             playedWinSound = true;
-                            audioSource.PlayOneShot(winJingle, getVolumeData(true));
+                            audioSource.PlayOneShot(winJingle);
                         }
                         if (!sentLevelCompleted)
                         {
@@ -847,10 +846,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -886,10 +884,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -908,10 +905,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -926,10 +922,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -945,10 +940,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -964,10 +958,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -991,10 +984,9 @@ public class GameController : MonoBehaviour
             {
                 if (buttonClick)
                 {
-                    audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                    audioSource.PlayOneShot(buttonClick);
                 } else
                 {
-                    audioSource.volume = getVolumeData(true);
                     audioSource.Play();
                 }
             }
@@ -1034,10 +1026,9 @@ public class GameController : MonoBehaviour
         {
             if (buttonClick)
             {
-                audioSource.PlayOneShot(buttonClick, getVolumeData(true));
+                audioSource.PlayOneShot(buttonClick);
             } else
             {
-                audioSource.volume = getVolumeData(true);
                 audioSource.Play();
             }
         }
@@ -1060,19 +1051,6 @@ public class GameController : MonoBehaviour
     {
         playerPosition.position = newPosition;
         playerPosition.rotation = newRotation;
-    }
-
-    float getVolumeData(bool isSound)
-    {
-        float volume = 1;
-        if (isSound)
-        {
-            if (PlayerPrefs.HasKey("SoundVolume")) volume = PlayerPrefs.GetFloat("SoundVolume");
-        } else
-        {
-            if (PlayerPrefs.HasKey("MusicVolume")) volume = PlayerPrefs.GetFloat("MusicVolume");
-        }
-        return volume;
     }
 
     IEnumerator loadScene(string scene)
