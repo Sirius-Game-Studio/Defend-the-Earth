@@ -839,9 +839,15 @@ public class GameController : MonoBehaviour
                 audioSource.Play();
             }
         }
-        StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("IngameLevel")));
-        PlayerPrefs.SetInt("Restarted", 1);
-        PlayerPrefs.Save();
+        if (!isCampaignLevel)
+        {
+            StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("IngameLevel")));
+            PlayerPrefs.SetInt("Restarted", 1);
+            PlayerPrefs.Save();
+        } else
+        {
+            StartCoroutine(loadScene("Endless"));
+        }
     }
 
     public void exitGame()
