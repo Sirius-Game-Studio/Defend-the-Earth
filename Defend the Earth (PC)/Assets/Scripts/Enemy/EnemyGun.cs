@@ -4,6 +4,7 @@ public class EnemyGun : MonoBehaviour
 {
     [Header("Settings")]
     public long damage = 10;
+    [SerializeField] private float spreadDegree = 0;
     public float RPM = 50;
 
     [Header("Default Skin")]
@@ -78,6 +79,9 @@ public class EnemyGun : MonoBehaviour
                         }
                     }
                     newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
+                    if (turnToPlayer && GameObject.FindWithTag("Player")) newBullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+                    if (spreadDegree != 0) newBullet.transform.Rotate(0, Random.Range(-spreadDegree, spreadDegree), 0);
+                    newBullet.GetComponent<EnemyHit>().damage = damage;
                     if (skinPicker)
                     {
                         if (skinPicker.skin <= 1) //Default
@@ -91,16 +95,42 @@ public class EnemyGun : MonoBehaviour
                             if (whiteAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", whiteAlbedo);
                         }
                     }
-                    newBullet.GetComponent<EnemyHit>().damage = damage;
                     foundBulletSpawns = true;
                 }
             }
             if (!foundBulletSpawns)
             {
-                GameObject newBullet = Instantiate(bullet, transform.position - new Vector3(0, 1, 0), transform.rotation);
+                if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal, Hard
+                {
+                    newBullet = Instantiate(bullet, transform.position - new Vector3(0, 1, 0), transform.rotation);
+                } else
+                {
+                    if (nightmareBullet)
+                    {
+                        newBullet = Instantiate(nightmareBullet, transform.position - new Vector3(0, 1, 0), transform.rotation);
+                    } else
+                    {
+                        newBullet = Instantiate(bullet, transform.position - new Vector3(0, 1, 0), transform.rotation);
+                    }
+                }
                 newBullet.transform.position = new Vector3(newBullet.transform.position.x, newBullet.transform.position.y, 0);
                 if (newBullet.transform.rotation.x != 90) newBullet.transform.rotation = Quaternion.Euler(90, 0, 0);
+                if (turnToPlayer && GameObject.FindWithTag("Player")) newBullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+                if (spreadDegree != 0) newBullet.transform.Rotate(0, Random.Range(-spreadDegree, spreadDegree), 0);
                 newBullet.GetComponent<EnemyHit>().damage = damage;
+                if (skinPicker)
+                {
+                    if (skinPicker.skin <= 1) //Default
+                    {
+                        if (defaultAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", defaultAlbedo);
+                    } else if (skinPicker.skin == 2) //Green
+                    {
+                        if (greenAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", greenAlbedo);
+                    } else if (skinPicker.skin >= 3) //White
+                    {
+                        if (whiteAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", whiteAlbedo);
+                    }
+                }
                 foundBulletSpawns = true;
             }
             if (audioSource && foundBulletSpawns)
