@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
+  spreadDegree: 0
   RPM: 70
   defaultAlbedo: {fileID: 0}
   greenAlbedo: {fileID: 0}
