@@ -58,8 +58,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1163387714109618149, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
-  - {fileID: 2281867096834613631, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
+  - {fileID: 2100000, guid: 6c776a559f4ac07459fc8302ed110107, type: 2}
+  - {fileID: 2100000, guid: bc68c8ae5f40d6044bab1642bc905378, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,7 +159,8 @@ AudioSource:
   m_GameObject: {fileID: 1450454693458920266}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: df105e377a1592e4d849ab4c76cd4861,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -267,6 +268,7 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   countsTowardsKillGoal: 0
   killTracker: AlienKills
+  invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
     type: 3}
@@ -289,6 +291,7 @@ MonoBehaviour:
   whiteAlbedo: {fileID: 0}
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
+  nightmareBullet: {fileID: 0}
 --- !u!114 &-2473834150980811120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,7 +401,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1163387714109618149, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
+  - {fileID: 2100000, guid: d3dc8821fd3b4e841b41438ff970061a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
