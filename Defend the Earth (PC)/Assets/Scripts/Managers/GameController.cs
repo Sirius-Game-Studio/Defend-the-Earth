@@ -159,7 +159,7 @@ public class GameController : MonoBehaviour
         {
             asteroidSpawnTime *= 0.85f;
             enemyAmount += 1;
-            maxAliensReached -= 2;
+            maxAliensReached -= 1;
         }
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
@@ -839,7 +839,7 @@ public class GameController : MonoBehaviour
                 audioSource.Play();
             }
         }
-        if (!isCampaignLevel)
+        if (isCampaignLevel)
         {
             StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("IngameLevel")));
             PlayerPrefs.SetInt("Restarted", 1);
