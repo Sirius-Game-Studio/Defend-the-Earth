@@ -934,7 +934,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2979872460012347922}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.075, y: -0, z: 3.5}
+  m_LocalPosition: {x: 1.75, y: 0, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3693917530599681770}
@@ -1155,10 +1155,11 @@ Transform:
   m_GameObject: {fileID: 3693917530599681773}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 3693917530949498009}
   - {fileID: 2979872460012347926}
+  - {fileID: 8881062712272911443}
   - {fileID: 4299772825581825843}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1303,7 +1304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 80
   defense: 0.9
-  money: 3
+  money: 2
   score: 15
   powerupChance: 0.37
   powerups:
@@ -1328,8 +1329,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b56eb22db5e0324e9ddfc33862d2ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 14
-  RPM: 25
+  damage: 12
+  spreadDegree: 10
+  shots: 4
+  turnToPlayer: 0
+  RPM: 30
   defaultAlbedo: {fileID: 0}
   greenAlbedo: {fileID: 0}
   whiteAlbedo: {fileID: 0}
@@ -2135,7 +2139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4299772825581825843
 Transform:
   m_ObjectHideFlags: 0
@@ -2148,7 +2152,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3693917530599681770}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6517677878280907009
 GameObject:
@@ -2332,6 +2336,36 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &7641134605896689153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8881062712272911443}
+  m_Layer: 0
+  m_Name: LeftBulletSpawn (1)
+  m_TagString: BulletSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8881062712272911443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7641134605896689153}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.75, y: 0, z: 5.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3693917530599681770}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8135749193446566057
 GameObject:
   m_ObjectHideFlags: 0
