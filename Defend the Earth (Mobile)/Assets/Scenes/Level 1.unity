@@ -1607,8 +1607,6 @@ MonoBehaviour:
   bossHealthBar: {fileID: 1802036953}
   bossHealthText: {fileID: 1802036952}
   saveMeCountdown: {fileID: 35959969}
-  soundSlider: {fileID: 8570374180042434131}
-  musicSlider: {fileID: 8570374180042434130}
   newHighScoreText: {fileID: 1802036957}
   deathMessage: {fileID: 686168306}
   loadingScreen: {fileID: 435553766}
@@ -2747,27 +2745,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdd1c38d5a2edee49978e33c16727786, type: 3}
---- !u!114 &8570374180042434130 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4270981245144592247, guid: bdd1c38d5a2edee49978e33c16727786,
-    type: 3}
-  m_PrefabInstance: {fileID: 8570374180042434129}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8570374180042434131 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3289931092906095516, guid: bdd1c38d5a2edee49978e33c16727786,
-    type: 3}
-  m_PrefabInstance: {fileID: 8570374180042434129}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
