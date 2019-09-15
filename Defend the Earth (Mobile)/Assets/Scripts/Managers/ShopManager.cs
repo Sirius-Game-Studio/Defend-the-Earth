@@ -96,11 +96,13 @@ public class ShopManager : MonoBehaviour
             {
                 spaceshipBuyText.text = "Use";
             }
+            spaceshipPrice.text = "";
         } else
         {
             spaceshipBuyText.rectTransform.offsetMin = new Vector2(10, 0);
             spaceshipBuyText.rectTransform.offsetMax = new Vector2(0, 0);
             spaceshipBuyText.alignment = TextAnchor.MiddleLeft;
+            spaceshipBuyText.text = "Buy";
             if (spaceship.price > 0)
             {
                 spaceshipPrice.text = "$" + spaceship.price;
@@ -108,7 +110,6 @@ public class ShopManager : MonoBehaviour
             {
                 spaceshipPrice.text = "Free";
             }
-            spaceshipBuyText.text = "Buy";
         }
         spaceshipInfo.text = "Health: " + spaceship.health + "\nDamage: " + spaceship.damage + "\nFire Rate: " + spaceship.fireRate;
         spaceshipPanel.color = new Color32(spaceship.panelColor.r, spaceship.panelColor.g, spaceship.panelColor.b, 150);
