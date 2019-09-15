@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
         {
             asteroidSpawnTime *= 0.85f;
             enemyAmount += 1;
-            maxAliensReached -= 2;
+            maxAliensReached -= 1;
         }
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
