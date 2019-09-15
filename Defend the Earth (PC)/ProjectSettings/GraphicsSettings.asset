@@ -29,6 +29,11 @@ GraphicsSettings:
     m_Mode: 0
     m_Shader: {fileID: 0}
   m_AlwaysIncludedShaders:
+  - {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 12, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10770, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 16000, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 16001, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 17000, guid: 0000000000000000f000000000000000, type: 0}
@@ -48,19 +53,19 @@ GraphicsSettings:
       standardShaderQuality: 2
       renderingPath: 1
       hdrMode: 1
-      realtimeGICPUUsage: 100
+      realtimeGICPUUsage: 50
       useReflectionProbeBoxProjection: 1
       useReflectionProbeBlending: 1
       useHDR: 0
       useDetailNormalMap: 1
-      useCascadedShadowMaps: 0
+      useCascadedShadowMaps: 1
       prefer32BitShadowMaps: 0
       enableLPPV: 1
-      useDitherMaskForAlphaBlendedShadows: 0
+      useDitherMaskForAlphaBlendedShadows: 1
     m_Automatic: 0
   m_LightmapStripping: 1
   m_FogStripping: 1
-  m_InstancingStripping: 1
+  m_InstancingStripping: 0
   m_LightmapKeepPlain: 0
   m_LightmapKeepDirCombined: 0
   m_LightmapKeepDynamicPlain: 1
