@@ -1417,7 +1417,7 @@ MonoBehaviour:
   maxWaves: 5
   enemySpawnTime: {x: 3, y: 3.5}
   asteroidSpawnTime: {x: 6, y: 6.75}
-  maxAliensReached: 12
+  maxAliensReached: 13
   bossFinalYPosition: 4
   bossRotation: {x: 90, y: 180, z: 0}
   boss: {fileID: 3022969746076777576, guid: b5d894597284fe44d9fab5e45619a5a0, type: 3}
