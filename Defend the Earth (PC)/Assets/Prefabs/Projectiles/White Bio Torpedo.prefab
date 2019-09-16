@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -7093887388901846700}
   m_Layer: 2
   m_Name: White Bio Torpedo
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 16
+  instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &-4960622610072745740
 MonoBehaviour:
