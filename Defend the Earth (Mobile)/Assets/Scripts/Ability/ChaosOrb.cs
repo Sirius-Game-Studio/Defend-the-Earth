@@ -22,7 +22,7 @@ public class ChaosOrb : MonoBehaviour
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             orbSpeed *= 0.95f;
-        } else if (PlayerPrefs.GetInt("Diffiiculty") >= 4) //Nightmare
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             orbSpeed *= 0.9f;
         }
