@@ -108,6 +108,7 @@ public class MjolnirMain : MonoBehaviour
         }
         shield.gameObject.SetActive(false);
         shield.localScale = Vector3.zero;
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         timeTillShieldUse = Random.Range(15, 20);
         StartCoroutine(main());
     }
@@ -158,6 +159,16 @@ public class MjolnirMain : MonoBehaviour
         }
     }
 
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
+    {
+        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
+        if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
+        bullet.GetComponent<EnemyHit>().damage = damage;
+        bullet.GetComponent<Mover>().speed = speed;
+        return bullet;
+    }
+
     IEnumerator animateChargeGlow(Transform charge, float speed, float maxSize, bool forward)
     {
         animatingCharge = true;
@@ -180,16 +191,6 @@ public class MjolnirMain : MonoBehaviour
         }
         animatingCharge = false;
         yield break;
-    }
-
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
-    {
-        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
-        if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
-        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
-        bullet.GetComponent<EnemyHit>().damage = damage;
-        bullet.GetComponent<Mover>().speed = speed;
-        return bullet;
     }
 
     //Ability Functions
