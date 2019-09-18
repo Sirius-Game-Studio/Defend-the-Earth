@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
 
     [Header("Miscellanous")]
+    public long maxHealth = 0;
     public bool invulnerable = false;
 
     [Header("Setup")]
@@ -72,12 +73,16 @@ public class EnemyHealth : MonoBehaviour
             }
             money = 0;
         }
+        maxHealth = health;
         if (PlayerPrefs.HasKey("MoneyMultiplier")) money = (long)(money * PlayerPrefs.GetFloat("MoneyMultiplier"));
     }
 
     void Update()
     {
-        if (health <= 0)
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        } else if (health <= 0)
         {
             if (killTracker != "")
             {
