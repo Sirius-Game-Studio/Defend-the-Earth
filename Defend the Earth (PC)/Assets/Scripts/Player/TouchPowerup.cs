@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using TMPro;
 
 public class TouchPowerup : MonoBehaviour
 {
-    [SerializeField] private GameObject textPopup = null;
-
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !GameController.instance.gameOver && !GameController.instance.won)
