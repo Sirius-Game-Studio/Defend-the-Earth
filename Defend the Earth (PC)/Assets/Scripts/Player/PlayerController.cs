@@ -85,12 +85,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //Debug
         #if UNITY_EDITOR
             if (Input.GetKeyDown(KeyCode.Alpha1)) repair(smallRepairHeal);
             if (Input.GetKeyDown(KeyCode.Alpha2)) repair(largeRepairHeal);
             if (Input.GetKeyDown(KeyCode.Alpha3)) repair(maxHealth);
             if (Input.GetKeyDown(KeyCode.Alpha4)) supercharge();
         #endif
+
         if (health < 0) //Checks if health is less than 0
         {
             health = 0;
