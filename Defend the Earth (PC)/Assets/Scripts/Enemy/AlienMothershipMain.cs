@@ -208,7 +208,7 @@ public class AlienMothershipMain : MonoBehaviour
                     {
                         enemyHit.damage = (long)(damage * 1.05);
                     }
-                    projectile.GetComponent<Mover>().speed = bulletSpeed;
+                    mover.speed = bulletSpeed;
                 }
             }
         }
