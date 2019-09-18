@@ -58,8 +58,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1163387714109618149, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
-  - {fileID: 2281867096834613631, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
+  - {fileID: 2100000, guid: 0e8709b4726c2a54dbe58549477659e2, type: 2}
+  - {fileID: 2100000, guid: 60a6aef4874a1e1459ffdf76cb670515, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -268,6 +268,7 @@ MonoBehaviour:
   - {fileID: 100002, guid: 1fb1789d2762cb048a60b81e759db9fa, type: 3}
   countsTowardsKillGoal: 0
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
@@ -285,6 +286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
+  spreadDegree: 0
+  shots: 1
+  turnToPlayer: 0
   RPM: 75
   defaultAlbedo: {fileID: 0}
   greenAlbedo: {fileID: 0}
@@ -305,8 +309,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 28
+  lifesteal: 0
   instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &-5595221590768939216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,7 +408,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1163387714109618149, guid: 2ebcc2c56582af949b707801130ba815, type: 3}
+  - {fileID: 2100000, guid: 0f82bf8af6e20ec4f919ce76e94155b0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
