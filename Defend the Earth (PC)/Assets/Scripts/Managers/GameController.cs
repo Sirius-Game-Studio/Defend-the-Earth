@@ -225,6 +225,15 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        //Debug
+        #if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss)
+            {
+                enemiesLeft = 0;
+                wave = maxWaves;
+            }
+        #endif
+
         if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
         if (Input.GetKeyDown(KeyCode.Escape)) pause();
         if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame(); // B/Circle (Xbox/PS Controller)
@@ -271,13 +280,6 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss)
-            {
-                enemiesLeft = 0;
-                wave = maxWaves;
-            }
-        #endif
         if (restartPrompt.enabled)
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton0)) // A/Cross (Xbox/PS Controller)
