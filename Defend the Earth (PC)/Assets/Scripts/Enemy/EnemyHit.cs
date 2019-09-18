@@ -2,9 +2,14 @@
 
 public class EnemyHit : MonoBehaviour
 {
-    [Tooltip("Amount of damage dealt to players (used by main collider).")] public long damage = 1;
+    [Header("Settings")]
+    public long damage = 1;
+    [Tooltip("Only works when enemyHealth is set to a GameObject with the EnemyHealth component.")] public float lifesteal = 0;
     [SerializeField] private bool instakill = false;
+
+    [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
+    public EnemyHealth enemyHealth;
 
     private bool hit = false;
 
@@ -25,6 +30,7 @@ public class EnemyHit : MonoBehaviour
     void Update()
     {
         if (damage < 1) damage = 1; //Checks if damage is less than 1 
+        if (lifesteal < 0) lifesteal = 0; //Checks if lifesteal percentage is less than 0
     }
 
     void OnTriggerStay(Collider other)
@@ -42,6 +48,7 @@ public class EnemyHit : MonoBehaviour
                     playerController.health = 0;
                     playerController.lives = 0;
                 }
+                if (enemyHealth) enemyHealth.health += (long)(damage * lifesteal);
                 if (explosion) Instantiate(explosion, transform.position, transform.rotation);
                 hit = true;
                 Destroy(gameObject);
