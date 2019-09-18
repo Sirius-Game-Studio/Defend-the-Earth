@@ -4,14 +4,27 @@ using UnityEngine;
 public class EvilMain : MonoBehaviour
 {
     [Header("Perforating Cannons")]
-    [SerializeField] private float perforatingCannonsFireRate = 0.2f;
-    [SerializeField] private int perforatingCannonsShots = 8;
     [SerializeField] private long longlaserDamage = 17;
     [SerializeField] private float longlaserSpeed = 14;
+    [SerializeField] private float perforatingCannonsFireRate = 0.2f;
+    [SerializeField] private int perforatingCannonsShots = 8;
+
+    [Header("Dying Craft")]
+    [SerializeField] private long shipkillerDamage = 31;
+    [SerializeField] private float shipkillerSpeed = 17.5f;
+    [SerializeField] private float shipkillerSpread = 5;
+    [SerializeField] private float dyingCraftFireRate = 0.25f;
+    [SerializeField] private int dyingCraftShots = 10;
+
+    [Header("Sphericling Demon")]
+    [SerializeField] private long orbDamage = 16;
+    [SerializeField] private float orbSpeed = 16;
+    [SerializeField] private float orbLifesteal = 0.2f;
+    [SerializeField] private float sphericlingDemonFireRate = 0.17f;
 
     [Header("Battering Charge")]
     [SerializeField] private long superlaserDamage = 32;
-    [SerializeField] private float superlaserSpeed = 15;
+    [SerializeField] private float superlaserSpeed = 32;
 
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
@@ -19,17 +32,22 @@ public class EvilMain : MonoBehaviour
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip perforatingCannonsFireSound = null;
+    [SerializeField] private AudioClip sphericlingDemonFireSound = null;
     [SerializeField] private AudioClip batteringChargeFireSound = null;
 
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
+    [SerializeField] private GameObject shipkillerMissile = null;
+    [SerializeField] private GameObject miniOrb = null;
     [SerializeField] private GameObject batteringChargeObject = null;
     [SerializeField] private Transform[] perforatingCannonsGuns = new Transform[0];
-    [SerializeField] private Transform batteringChargeSpawn = null;
+    [SerializeField] private Transform dyingCraftGun = null;
+    [SerializeField] private Transform[] chargeGlows = new Transform[0];
 
     private AudioSource audioSource;
     private EnemyHealth enemyHealth;
     private bool usingAbility = false;
+    private bool animatingCharge = false;
 
     void Start()
     {
@@ -44,23 +62,33 @@ public class EvilMain : MonoBehaviour
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             longlaserDamage = (long)(longlaserDamage * 0.9);
-            superlaserDamage = (long)(superlaserDamage * 0.9);
+            orbDamage = (long)(orbDamage * 0.9);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);
             longlaserSpeed *= 1.05f;
-            superlaserDamage = (long)(superlaserDamage * 1.2);
-            superlaserSpeed *= 1.05f;
+            shipkillerDamage = (long)(shipkillerDamage * 1.2);
+            shipkillerSpeed *= 1.05f;
+            shipkillerSpread *= 1.25f;
+            orbDamage = (long)(orbDamage * 1.2);
+            orbSpeed *= 1.05f;
+            sphericlingDemonFireRate *= 0.9f;
             abilityTime -= new Vector2(0, -0.5f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
-            perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
             longlaserDamage = (long)(longlaserDamage * 1.4);
-            superlaserDamage = (long)(superlaserDamage * 1.4);
             longlaserSpeed *= 1.1f;
-            superlaserSpeed *= 1.1f;
+            shipkillerDamage = (long)(shipkillerDamage * 1.4);
+            shipkillerSpeed *= 1.1f;
+            shipkillerSpread *= 1.5f;
+            orbDamage = (long)(orbDamage * 1.4);
+            orbSpeed *= 1.1f;
+            perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
+            dyingCraftShots = (int)(dyingCraftShots * 1.5);
+            sphericlingDemonFireRate *= 0.8f;
             abilityTime -= new Vector2(-0.5f, -0.5f);
         }
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         StartCoroutine(main());
     }
 
@@ -74,9 +102,17 @@ public class EvilMain : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(abilityTime.x, abilityTime.y));
                 if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && !usingAbility)
                 {
-                    float random = Random.value;
-                    StartCoroutine(perforatingCannons());
-                    batteringCharge();
+                    float random = Random.value; 
+                    if (random <= 0.33f)
+                    {
+                        StartCoroutine(sphericlingDemon());
+                    } else if (random <= 0.66f)
+                    {
+                        StartCoroutine(dyingCraft());
+                    } else
+                    {
+                        StartCoroutine(perforatingCannons());
+                    }
                 }
             } else
             {
@@ -93,6 +129,30 @@ public class EvilMain : MonoBehaviour
         bullet.GetComponent<EnemyHit>().damage = damage;
         bullet.GetComponent<Mover>().speed = speed;
         return bullet;
+    }
+
+    IEnumerator animateChargeGlow(Transform charge, float speed, float maxSize, bool forward)
+    {
+        animatingCharge = true;
+        if (forward)
+        {
+            while (charge.localScale.x < maxSize)
+            {
+                charge.localScale += new Vector3(speed, speed, 0);
+                if (charge.localScale.x > maxSize) charge.localScale = new Vector3(maxSize, maxSize, 0);
+                yield return new WaitForSeconds(speed);
+            }
+        } else
+        {
+            while (charge.localScale.x > maxSize)
+            {
+                charge.localScale -= new Vector3(speed, speed, 0);
+                if (charge.localScale.x < maxSize) charge.localScale = new Vector3(maxSize, maxSize, 0);
+                yield return new WaitForSeconds(speed);
+            }
+        }
+        animatingCharge = false;
+        yield break;
     }
 
     //Ability Functions
@@ -141,9 +201,88 @@ public class EvilMain : MonoBehaviour
         usingAbility = false;
     }
 
-    void batteringCharge()
+    IEnumerator dyingCraft()
     {
-        GameObject ability = Instantiate(batteringChargeObject, batteringChargeSpawn.position, Quaternion.Euler(0, 0, 0));
+        usingAbility = true;
+        for (int i = 0; i < dyingCraftShots; i++)
+        {
+            spawnProjectile(shipkillerMissile, dyingCraftGun.position, new Vector3(90, 0, 0), shipkillerSpread, shipkillerDamage, shipkillerSpeed, true);
+            if (audioSource)
+            {
+                audioSource.Play();
+            }
+            yield return new WaitForSeconds(dyingCraftFireRate);
+        }
+        usingAbility = false;
+    }
+
+    IEnumerator sphericlingDemon()
+    {
+        usingAbility = true;
+        int shots = 46;
+        float chargeSpeed = 0.002f;
+        int point = 0;
+        float random = Random.value;
+        if (random <= 0.5f)
+        {
+            point = 0;
+        } else
+        {
+            point = 1;
+        }
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        {
+            shots = 46;
+            chargeSpeed = 0.001f;
+        } else //Nightmare
+        {
+            shots = 80;
+            chargeSpeed = 0.002f;
+        }
+        StartCoroutine(animateChargeGlow(chargeGlows[point], chargeSpeed, 0.1f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[point], 0.005f, 0, false));
+        float angle = 0;
+        for (int i = 0; i < shots; i++)
+        {
+            GameObject orb = spawnProjectile(miniOrb, new Vector3(chargeGlows[point].position.x, chargeGlows[point].position.y, 0), new Vector3(angle, 90, -90), 0, orbDamage, orbSpeed, false);
+            if (PlayerPrefs.GetInt("Difficulty") >= 4)
+            {
+                orb.GetComponent<EnemyHit>().enemyHealth = enemyHealth;
+                orb.GetComponent<EnemyHit>().lifesteal = 0.2f;
+            }
+            angle += 10;
+            if (audioSource)
+            {
+                if (sphericlingDemonFireSound)
+                {
+                    audioSource.PlayOneShot(sphericlingDemonFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(sphericlingDemonFireRate);
+        }
+        usingAbility = false;
+    }
+
+    IEnumerator batteringCharge()
+    {
+        float chargeSpeed = 0.001f;
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        {
+            chargeSpeed = 0.001f;
+        } else //Nightmare
+        {
+            chargeSpeed = 0.002f;
+        }
+        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
+        GameObject ability = Instantiate(batteringChargeObject, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), Quaternion.Euler(0, 0, 0));
         foreach (Transform projectile in ability.transform)
         {
             if (projectile.CompareTag("Projectile"))
@@ -153,7 +292,7 @@ public class EvilMain : MonoBehaviour
                 if (enemyHit && mover)
                 {
                     enemyHit.damage = superlaserDamage;
-                    projectile.GetComponent<Mover>().speed = superlaserSpeed;
+                    mover.speed = superlaserSpeed;
                 }
             }
         }
