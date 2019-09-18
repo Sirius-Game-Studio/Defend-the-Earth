@@ -2834,6 +2834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
   volume: SoundVolume
+  isBumper: 0
 --- !u!1 &482351470
 GameObject:
   m_ObjectHideFlags: 0
@@ -7957,6 +7958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
   volume: MusicVolume
+  isBumper: 0
 --- !u!1 &1474568245
 GameObject:
   m_ObjectHideFlags: 0
@@ -11488,7 +11490,7 @@ MonoBehaviour:
     preview: {fileID: 7283461143348297379}
     name: Annihilator
     health: 145
-    damage: 7 (x6)
+    damage: 8 (x6)
     fireRate: 130
   upgrades:
   - name: Damage
