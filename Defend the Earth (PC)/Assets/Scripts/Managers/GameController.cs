@@ -272,7 +272,11 @@ public class GameController : MonoBehaviour
             }
         }
         #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha3) && enemiesLeft > 0) enemiesLeft = 0;
+            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss)
+            {
+                enemiesLeft = 0;
+                wave = maxWaves;
+            }
         #endif
         if (restartPrompt.enabled)
         {
