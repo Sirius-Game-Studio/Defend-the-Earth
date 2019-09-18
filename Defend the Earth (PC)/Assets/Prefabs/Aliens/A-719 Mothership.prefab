@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1000
-  defense: 0.8
+  defense: 0.85
   money: 150
   score: 75
   powerupChance: 0
