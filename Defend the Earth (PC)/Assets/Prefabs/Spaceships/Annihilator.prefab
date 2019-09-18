@@ -229,7 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 130
-  damage: 7
+  damage: 8
   RPM: 150
   speed: 7.5
   smallRepairHeal: 15
