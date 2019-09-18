@@ -271,6 +271,9 @@ public class GameController : MonoBehaviour
                 }
             }
         }
+        #if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Alpha3) && enemiesLeft > 0) enemiesLeft = 0;
+        #endif
         if (restartPrompt.enabled)
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton0)) // A/Cross (Xbox/PS Controller)

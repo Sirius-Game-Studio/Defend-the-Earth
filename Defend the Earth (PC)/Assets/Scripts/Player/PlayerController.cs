@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
 
-    [Header("Miscellanous")]
+    [Header("Miscellaneous")]
     [SerializeField] private float yMin = -6.75f, yMax = 2;
     public long lives = 3;
     public bool invulnerable = false;
@@ -85,6 +85,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        #if UNITY_EDITOR
+            if (Input.GetKeyDown(KeyCode.Alpha1)) health = maxHealth;
+            if (Input.GetKeyDown(KeyCode.Alpha2)) supercharge();
+        #endif
         if (health < 0) //Checks if health is less than 0
         {
             health = 0;
