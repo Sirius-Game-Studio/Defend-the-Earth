@@ -19,7 +19,7 @@ public class EvilMain : MonoBehaviour
     [Header("Sphericling Demon")]
     [SerializeField] private long orbDamage = 16;
     [SerializeField] private float orbSpeed = 16;
-    [SerializeField] private float orbLifesteal = 0.2f;
+    [Tooltip("Nightmare only.")] [SerializeField] private float orbLifesteal = 0.2f;
     [SerializeField] private float sphericlingDemonFireRate = 0.17f;
 
     [Header("Battering Charge")]
@@ -250,7 +250,7 @@ public class EvilMain : MonoBehaviour
             if (PlayerPrefs.GetInt("Difficulty") >= 4)
             {
                 orb.GetComponent<EnemyHit>().enemyHealth = enemyHealth;
-                orb.GetComponent<EnemyHit>().lifesteal = 0.2f;
+                if (orbLifesteal > 0) orb.GetComponent<EnemyHit>().lifesteal = orbLifesteal;
             }
             angle += 10;
             if (audioSource)
