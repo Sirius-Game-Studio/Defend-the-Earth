@@ -227,7 +227,7 @@ MonoBehaviour:
   health: 110
   damage: 9
   RPM: 250
-  speed: 7.5
+  speed: 8
   smallRepairHeal: 15
   largeRepairHeal: 25
   superchargeMultiplier: 1.5
