@@ -86,8 +86,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha1)) health = maxHealth;
-            if (Input.GetKeyDown(KeyCode.Alpha2)) supercharge();
+            if (Input.GetKeyDown(KeyCode.Alpha1)) repair(smallRepairHeal);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) repair(largeRepairHeal);
+            if (Input.GetKeyDown(KeyCode.Alpha3)) repair(maxHealth);
+            if (Input.GetKeyDown(KeyCode.Alpha4)) supercharge();
         #endif
         if (health < 0) //Checks if health is less than 0
         {
@@ -266,6 +268,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void repair(long heal)
+    {
+        if (heal > 0)
+        {
+            health += heal;
+            if (textPopup)
+            {
+                if (textPopup.GetComponent<TextMeshPro>())
+                {
+                    GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                    popup.GetComponent<TextMeshPro>().text = "+" + heal;
+                    popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 0, 255);
+                    popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 0, 255);
+                } else
+                {
+                    Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                }
+            }
+        }
+    }
+
     public void supercharge()
     {
         if (!hasSupercharge)
@@ -280,6 +303,19 @@ public class PlayerController : MonoBehaviour
         {
             superchargeDuration = superchargeTime;
             shownSuperchargeText = false;
+        }
+        if (textPopup)
+        {
+            if (textPopup.GetComponent<TextMeshPro>())
+            {
+                GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                popup.GetComponent<TextMeshPro>().text = "Supercharge!";
+                popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 255, 255);
+                popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 127, 255);
+            } else
+            {
+                Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+            }
         }
     }
 
