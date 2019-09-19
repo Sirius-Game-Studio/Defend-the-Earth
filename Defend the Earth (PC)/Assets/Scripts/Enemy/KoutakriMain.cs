@@ -56,20 +56,20 @@ public class KoutakriMain : MonoBehaviour
         {
             laserDamage = (long)(laserDamage * 1.2);
             laserSpeed *= 1.1f;
-            laserMachineFireRate *= 0.95f;
-            laserMachineShots = (int)(laserMachineShots * 1.25);
             scatterlaserDamage = (long)(scatterlaserDamage * 1.2);
             scatterlaserSpeed *= 1.05f;
+            laserMachineFireRate *= 0.95f;
+            laserMachineShots = (int)(laserMachineShots * 1.25);
             scorchingBeamTime *= 1.25f;
             abilityTime -= new Vector2(0, -0.5f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             laserDamage = (long)(laserDamage * 1.4);
             laserSpeed *= 1.2f;
-            laserMachineFireRate *= 0.9f;
-            laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserDamage = (long)(scatterlaserDamage * 1.4);
             scatterlaserSpeed *= 1.1f;
+            laserMachineFireRate *= 0.9f;
+            laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserShots = (int)(scatterlaserShots * 1.5);
             scorchingBeamTime *= 1.5f;
             abilityTime -= new Vector2(-0.5f, -0.5f);
