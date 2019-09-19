@@ -92,7 +92,7 @@ public class EvilMain : MonoBehaviour
         StartCoroutine(main());
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
         while (true)
@@ -157,8 +157,9 @@ public class EvilMain : MonoBehaviour
         animatingCharge = false;
         yield break;
     }
+    #endregion
 
-    //Ability Functions
+    #region Ability Functions
     IEnumerator perforatingCannons()
     {
         usingAbility = true;
@@ -310,4 +311,5 @@ public class EvilMain : MonoBehaviour
         }
         usingAbility = false;
     }
+    #endregion
 }

@@ -77,7 +77,7 @@ public class KoutakriMain : MonoBehaviour
         StartCoroutine(main());
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
         while (true)
@@ -133,8 +133,9 @@ public class KoutakriMain : MonoBehaviour
         bullet.GetComponent<Mover>().speed = speed;
         return bullet;
     }
+    #endregion
 
-    //Ability Functions
+    #region Ability Functions
     IEnumerator laserMachine()
     {
         usingAbility = true;
@@ -241,4 +242,5 @@ public class KoutakriMain : MonoBehaviour
         if (beamObject) Destroy(beamObject);
         usingScorchingBeam = false;
     }
+    #endregion
 }

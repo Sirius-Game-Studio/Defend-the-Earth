@@ -95,7 +95,7 @@ public class AlienMothershipMain : MonoBehaviour
         deployedUFOs = amount;
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
         while (true)
@@ -154,8 +154,9 @@ public class AlienMothershipMain : MonoBehaviour
             return 0;
         }
     }
+    #endregion
 
-    //Ability Functions
+    #region Ability Functions
     void doubleShot()
     {
         int bulletSpawn = 1;
@@ -266,4 +267,5 @@ public class AlienMothershipMain : MonoBehaviour
             newUFO.GetComponent<UFODeployMotion>().y += getFinalUFOPosition();
         }
     }
+    #endregion
 }

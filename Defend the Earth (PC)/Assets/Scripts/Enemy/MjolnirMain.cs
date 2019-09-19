@@ -127,7 +127,7 @@ public class MjolnirMain : MonoBehaviour
         }
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
         while (true)
@@ -192,8 +192,9 @@ public class MjolnirMain : MonoBehaviour
         animatingCharge = false;
         yield break;
     }
+    #endregion
 
-    //Ability Functions
+    #region Main Functions
     IEnumerator longshotGuns()
     {
         int point = 0;
@@ -338,4 +339,5 @@ public class MjolnirMain : MonoBehaviour
             yield break;
         }
     }
+    #endregion
 }
