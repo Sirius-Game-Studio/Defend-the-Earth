@@ -224,7 +224,7 @@ public class MjolnirMain : MonoBehaviour
             point = 1;
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-        float chargeSpeed = 0.0001f;
+        float chargeSpeed;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
             chargeSpeed = 0.0001f;
