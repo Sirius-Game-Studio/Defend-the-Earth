@@ -102,11 +102,14 @@ public class EvilMain : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(abilityTime.x, abilityTime.y));
                 if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && !usingAbility)
                 {
-                    float random = Random.value; 
-                    if (random <= 0.33f)
+                    float random = Random.value;
+                    if (random <= 0.25f)
                     {
                         StartCoroutine(sphericlingDemon());
-                    } else if (random <= 0.66f)
+                    } else if (random <= 0.5f)
+                    {
+                        StartCoroutine(batteringCharge());
+                    } else if (random <= 0.75f)
                     {
                         StartCoroutine(dyingCraft());
                     } else
@@ -216,12 +219,52 @@ public class EvilMain : MonoBehaviour
         usingAbility = false;
     }
 
+    IEnumerator batteringCharge()
+    {
+        float chargeSpeed;
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        {
+            chargeSpeed = 0.001f;
+        } else //Nightmare
+        {
+            chargeSpeed = 0.002f;
+        }
+        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
+        GameObject ability = Instantiate(batteringChargeObject, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), Quaternion.Euler(0, 0, 0));
+        foreach (Transform projectile in ability.transform)
+        {
+            if (projectile.CompareTag("Projectile"))
+            {
+                EnemyHit enemyHit = projectile.GetComponent<EnemyHit>();
+                Mover mover = projectile.GetComponent<Mover>();
+                if (enemyHit && mover)
+                {
+                    enemyHit.damage = superlaserDamage;
+                    mover.speed = superlaserSpeed;
+                }
+            }
+        }
+        if (audioSource)
+        {
+            if (batteringChargeFireSound)
+            {
+                audioSource.PlayOneShot(batteringChargeFireSound);
+            } else
+            {
+                audioSource.Play();
+            }
+        }
+    }
+
     IEnumerator sphericlingDemon()
     {
         usingAbility = true;
-        int shots = 46;
-        float chargeSpeed = 0.002f;
-        int point = 0;
+        int shots;
+        float chargeSpeed;
+        int point;
         float random = Random.value;
         if (random <= 0.5f)
         {
@@ -266,45 +309,5 @@ public class EvilMain : MonoBehaviour
             yield return new WaitForSeconds(sphericlingDemonFireRate);
         }
         usingAbility = false;
-    }
-
-    IEnumerator batteringCharge()
-    {
-        float chargeSpeed = 0.001f;
-        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
-        {
-            chargeSpeed = 0.001f;
-        } else //Nightmare
-        {
-            chargeSpeed = 0.002f;
-        }
-        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
-        while (animatingCharge) yield return null;
-        StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
-        GameObject ability = Instantiate(batteringChargeObject, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), Quaternion.Euler(0, 0, 0));
-        foreach (Transform projectile in ability.transform)
-        {
-            if (projectile.CompareTag("Projectile"))
-            {
-                EnemyHit enemyHit = projectile.GetComponent<EnemyHit>();
-                Mover mover = projectile.GetComponent<Mover>();
-                if (enemyHit && mover)
-                {
-                    enemyHit.damage = superlaserDamage;
-                    mover.speed = superlaserSpeed;
-                }
-            }
-        }
-        if (audioSource)
-        {
-            if (batteringChargeFireSound)
-            {
-                audioSource.PlayOneShot(batteringChargeFireSound);
-            } else
-            {
-                audioSource.Play();
-            }
-        }
     }
 }
