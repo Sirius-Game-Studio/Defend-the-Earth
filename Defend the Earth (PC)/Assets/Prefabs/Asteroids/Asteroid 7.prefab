@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: -1410740297690142886}
   - component: {fileID: 1489371397760798788}
   - component: {fileID: -3725129441583961131}
+  - component: {fileID: 5790004377518649337}
   m_Layer: 8
   m_Name: AsteroidBrown7
   m_TagString: Enemy
@@ -183,6 +184,7 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: 3e84a2cbb9ef0a247915875f417313c9, type: 3}
   countsTowardsKillGoal: 0
   killTracker: AsteroidKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100004, guid: 2a166c067f1bb1a4ab000ad044ca02bc, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
@@ -200,8 +202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 42
+  lifesteal: 0
   instakill: 0
   explosion: {fileID: 100004, guid: 2a166c067f1bb1a4ab000ad044ca02bc, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &-1410740297690142886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +248,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd977e57f16782a4786c63c349931963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5790004377518649337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191193262904786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23965e2b694d7a4da44ad96a878e746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomized: 1
+  textures:
+  - {fileID: 2800000, guid: 678b4375235425545829b7612c6a9f64, type: 3}
+  - {fileID: 2800000, guid: 8def4f4320305114cb8a7ea92028c23e, type: 3}
+  - {fileID: 2800000, guid: 42b2ad35440171b49a2662017a93597b, type: 3}
+  texture: 0
