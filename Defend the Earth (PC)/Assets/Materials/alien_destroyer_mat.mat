@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MissileStylized Black
+  m_Name: alien_destroyer_mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP _NORMALMAP
   m_LightmapFlags: 1
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 545e1cb4ab2f7ca4d8c8b7fcfe29cdad, type: 3}
+        m_Texture: {fileID: 2800000, guid: ed5a0425e7c7b3c48921d55a8ebf24e0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -36,15 +36,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 30a84577ab94eda4b8d7c7b344211168, type: 3}
+        m_Texture: {fileID: 2800000, guid: ca8bb93c48521d34ab2243902d67350f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 287018f3c99eacd46bf553dac82a192f, type: 3}
+        m_Texture: {fileID: 2800000, guid: efb763d12f4c60647b040b1538437cb5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 1d237ed346e8893438d7d59c64bb2271, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3eaab52ea381e7a458b90d436dda1b18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
