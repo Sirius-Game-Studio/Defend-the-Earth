@@ -8,18 +8,14 @@ public class EnemyGun : MonoBehaviour
     [SerializeField] private int shots = 1;
     [SerializeField] private bool turnToPlayer = false;
     public float RPM = 50;
-
-    [Header("Default Skin")]
-    [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture defaultAlbedo = null;
-    [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture greenAlbedo = null;
-    [Tooltip("Used only if SkinPicker is in this GameObject.")] [SerializeField] private Texture whiteAlbedo = null;
+    [SerializeField] private Texture[] textures = new Texture[0];
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
 
     [Header("Setup")]
-    [SerializeField] private GameObject bullet = null;
-    [Tooltip("Nightmare only (used only if the value is set to a GameObject).")] [SerializeField] private GameObject nightmareBullet = null;
+    [Tooltip("Easy, Normal and Hard only (overridden if nightmareBullet is set).")] [SerializeField] private GameObject bullet = null;
+    [Tooltip("Nightmare only.")] [SerializeField] private GameObject nightmareBullet = null;
 
     private AudioSource audioSource;
     private float nextShot = 0;
@@ -86,19 +82,7 @@ public class EnemyGun : MonoBehaviour
                         if (turnToPlayer && GameObject.FindWithTag("Player")) newBullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
                         if (spreadDegree != 0) newBullet.transform.Rotate(0, Random.Range(-spreadDegree, spreadDegree), 0);
                         newBullet.GetComponent<EnemyHit>().damage = damage;
-                        if (skinPicker)
-                        {
-                            if (skinPicker.skin <= 1) //Default
-                            {
-                                if (defaultAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", defaultAlbedo);
-                            } else if (skinPicker.skin == 2) //Green
-                            {
-                                if (greenAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", greenAlbedo);
-                            } else if (skinPicker.skin >= 3) //White
-                            {
-                                if (whiteAlbedo) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", whiteAlbedo);
-                            }
-                        }
+                        if (skinPicker && textures.Length > 0) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", textures[skinPicker.texture]);
                         foundBulletSpawns = true;
                     }
                 }
