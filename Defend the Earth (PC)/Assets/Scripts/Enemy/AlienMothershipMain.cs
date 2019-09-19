@@ -13,8 +13,9 @@ public class AlienMothershipMain : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private long bioTorpedoDamage = 17;
-    [SerializeField] private long missileDamage = 19;
     [SerializeField] private float bioTorpedoSpeed = 12;
+    [SerializeField] private Texture bioTorpedoTexture = null;
+    [SerializeField] private long missileDamage = 19;
     [SerializeField] private float missileSpeed = 13;
     [SerializeField] private Vector2 abilityTime = new Vector2(3.5f, 4);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
@@ -159,14 +160,22 @@ public class AlienMothershipMain : MonoBehaviour
     //Ability Functions
     void doubleShot()
     {
+        int bulletSpawn = 1;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            spawnProjectile(bioTorpedo, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, (long)(bioTorpedoDamage * 1.5), bioTorpedoSpeed * 1.25f, true);
-            spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, (long)(bioTorpedoDamage * 1.5), bioTorpedoSpeed * 1.25f, true);
+            for (int i = 0; i < 2; i++)
+            {
+                GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[bulletSpawn].position, new Vector3(90, 0, 0), 0, (long)(bioTorpedoDamage * 1.5), bioTorpedoSpeed * 1.25f, true);
+                if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
+                ++bulletSpawn;
+            }
         } else
         {
-            spawnProjectile(alienMissile, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, (long)(missileDamage * 1.5), missileSpeed * 1.5f, true);
-            spawnProjectile(alienMissile, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, (long)(missileDamage * 1.5), missileSpeed * 1.5f, true);
+            for (int i = 0; i < 2; i++)
+            {
+                spawnProjectile(alienMissile, bulletSpawns[bulletSpawn].position, new Vector3(90, 0, 0), 0, (long)(missileDamage * 1.5), missileSpeed * 1.5f, true);
+                ++bulletSpawn;
+            }
         }
         if (audioSource)
         {
@@ -231,10 +240,12 @@ public class AlienMothershipMain : MonoBehaviour
                 float random = Random.value;
                 if (random <= 0.5f)
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, bioTorpedoDamage, bioTorpedoSpeed, true);
+                    GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[1].position, new Vector3(90, 0, 0), 0, bioTorpedoDamage, bioTorpedoSpeed, true);
+                    if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
                 } else
                 {
-                    spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, bioTorpedoDamage, bioTorpedoSpeed, true);
+                    GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[2].position, new Vector3(90, 0, 0), 0, bioTorpedoDamage, bioTorpedoSpeed, true);
+                    if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
                 }
             } else //Nightmare
             {
