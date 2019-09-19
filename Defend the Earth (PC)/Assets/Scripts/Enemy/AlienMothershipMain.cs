@@ -27,8 +27,6 @@ public class AlienMothershipMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject bioTorpedo = null;
     [SerializeField] private GameObject alienMissile = null;
-    [Tooltip("Easy, Normal and Hard only.")] [SerializeField] private GameObject weakBustedShot = null;
-    [Tooltip("Nightmare only.")] [SerializeField] private GameObject strongBustedShot = null;
     [Tooltip("Required for UFO Deployment ability.")] [SerializeField] private GameObject UFO = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
 
@@ -191,31 +189,21 @@ public class AlienMothershipMain : MonoBehaviour
 
     void bustedShot()
     {
-        GameObject ability;
-        long damage;
-        float speed;
+        float angle = 0;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            ability = Instantiate(weakBustedShot, bulletSpawns[0].position, Quaternion.Euler(0, 0, 0));
-            damage = bioTorpedoDamage;
-            speed = bioTorpedoSpeed;
+            for (int i = 0; i < 18; i++)
+            {
+                GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[0].position, new Vector3(angle, 90, -90), 0, bioTorpedoDamage, bioTorpedoSpeed, false);
+                if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
+                angle += 20;
+            }
         } else //Nightmare
         {
-            ability = Instantiate(strongBustedShot, bulletSpawns[0].position, Quaternion.Euler(0, 0, 0));
-            damage = missileDamage;
-            speed = missileSpeed;
-        }
-        foreach (Transform projectile in ability.transform)
-        {
-            if (projectile.CompareTag("Projectile"))
+            for (int i = 0; i < 18; i++)
             {
-                EnemyHit enemyHit = projectile.GetComponent<EnemyHit>();
-                Mover mover = projectile.GetComponent<Mover>();
-                if (enemyHit && mover)
-                {
-                    enemyHit.damage = damage;
-                    mover.speed = speed;
-                }
+                spawnProjectile(alienMissile, bulletSpawns[0].position, new Vector3(angle, 90, -90), 0, missileDamage, missileSpeed, false);
+                angle += 20;
             }
         }
         if (audioSource)
