@@ -190,21 +190,17 @@ public class AlienMothershipMain : MonoBehaviour
     void bustedShot()
     {
         float angle = 0;
-        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        for (int i = 0; i < 18; i++)
         {
-            for (int i = 0; i < 18; i++)
+            if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
             {
                 GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[0].position, new Vector3(angle, 90, -90), 0, bioTorpedoDamage, bioTorpedoSpeed, false);
                 if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
-                angle += 20;
-            }
-        } else //Nightmare
-        {
-            for (int i = 0; i < 18; i++)
+            } else //Nightmare
             {
                 spawnProjectile(alienMissile, bulletSpawns[0].position, new Vector3(angle, 90, -90), 0, missileDamage, missileSpeed, false);
-                angle += 20;
             }
+            angle += 20;
         }
         if (audioSource)
         {
