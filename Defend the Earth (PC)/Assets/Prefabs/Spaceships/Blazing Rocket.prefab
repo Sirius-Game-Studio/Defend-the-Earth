@@ -178,8 +178,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b461eb49d84c4a949bd7b95deff6d2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 85
-  damage: 23
+  health: 90
+  damage: 24
   RPM: 125
   speed: 8
   smallRepairHeal: 15
