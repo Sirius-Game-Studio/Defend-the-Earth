@@ -50,6 +50,8 @@ public class MainMenuManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        currentLoadingTip = "";
+        loading = false;
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
@@ -77,7 +79,6 @@ public class MainMenuManager : MonoBehaviour
         settingsMenu.enabled = false;
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
-        currentLoadingTip = "";
         ShopManager.instance.page = 1;
         ShopManager.instance.open = false;
     }
@@ -435,6 +436,8 @@ public class MainMenuManager : MonoBehaviour
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
                 if (load.progress < 0.9f)
                 {
                     load.allowSceneActivation = false;
@@ -443,11 +446,7 @@ public class MainMenuManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown)
-                    {
-                        loading = false;
-                        load.allowSceneActivation = true;
-                    }
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
                     loadingSlider.value = 1;
                     loadingPercentage.text = "100%";
                     anyKeyPrompt.SetActive(true);
