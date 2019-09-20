@@ -108,10 +108,10 @@ public class KoutakriMain : MonoBehaviour
                         if (random <= 0.33f) //Scattered Laser Shot (33% chance)
                         {
                             scatteredLaserShot();
-                        } else if (random <= 0.33f) //Laser Machine (33% chance)
+                        } else if (random <= 0.66f) //Laser Machine (33% chance)
                         {
                             StartCoroutine(laserMachine());
-                        } else if (random <= 0.75f) //Circle Bomb (34% chance)
+                        } else //Circle Bomb (34% chance)
                         {
                             circleBomb();
                         }
