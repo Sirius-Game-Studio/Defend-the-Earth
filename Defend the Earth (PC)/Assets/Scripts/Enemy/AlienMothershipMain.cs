@@ -13,10 +13,10 @@ public class AlienMothershipMain : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private long bioTorpedoDamage = 17;
-    [SerializeField] private float bioTorpedoSpeed = 12;
+    [SerializeField] private float bioTorpedoSpeed = 12.5f;
     [SerializeField] private Texture bioTorpedoTexture = null;
     [SerializeField] private long missileDamage = 19;
-    [SerializeField] private float missileSpeed = 13;
+    [SerializeField] private float missileSpeed = 14;
     [SerializeField] private Vector2 abilityTime = new Vector2(3.5f, 4);
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
@@ -51,8 +51,8 @@ public class AlienMothershipMain : MonoBehaviour
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             bioTorpedoDamage = (long)(bioTorpedoDamage * 1.2);
-            missileDamage = (long)(missileDamage * 1.2);
             bioTorpedoSpeed *= 1.05f;
+            missileDamage = (long)(missileDamage * 1.2);
             missileSpeed *= 1.05f;
             torpedoBarrageShots = (int)(torpedoBarrageShots * 1.25);
             torpedoBarrageFireRate *= 0.9f;
@@ -61,8 +61,8 @@ public class AlienMothershipMain : MonoBehaviour
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             bioTorpedoDamage = (long)(bioTorpedoDamage * 1.4);
-            missileDamage = (long)(missileDamage * 1.4);
             bioTorpedoSpeed *= 1.1f;
+            missileDamage = (long)(missileDamage * 1.4);
             missileSpeed *= 1.1f;
             torpedoBarrageShots = (int)(torpedoBarrageShots * 1.5);
             torpedoBarrageFireRate *= 0.8f;
@@ -164,7 +164,7 @@ public class AlienMothershipMain : MonoBehaviour
         {
             for (int i = 0; i < 2; i++)
             {
-                GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[bulletSpawn].position, new Vector3(90, 0, 0), 0, (long)(bioTorpedoDamage * 1.5), bioTorpedoSpeed * 1.25f, true);
+                GameObject torpedo = spawnProjectile(bioTorpedo, bulletSpawns[bulletSpawn].position, new Vector3(90, 0, 0), 0, (long)(bioTorpedoDamage * 1.5), bioTorpedoSpeed * 1.5f, true);
                 if (bioTorpedoTexture) torpedo.GetComponent<Renderer>().material.SetTexture("_MainTex", bioTorpedoTexture);
                 ++bulletSpawn;
             }
