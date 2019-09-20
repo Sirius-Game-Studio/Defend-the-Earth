@@ -11440,7 +11440,7 @@ MonoBehaviour:
     preview: {fileID: 1624393284}
     name: Space Fighter
     health: 100
-    damage: 26 (x1)
+    damage: 28 (x1)
     fireRate: 115
   - key: AlienMower
     price: 350
@@ -11459,8 +11459,8 @@ MonoBehaviour:
       rgba: 2516590260
     preview: {fileID: 1057239078526749}
     name: Blazing Rocket
-    health: 85
-    damage: 23 (x2)
+    health: 90
+    damage: 24 (x2)
     fireRate: 125
   - key: QuadShooter
     price: 1600
@@ -11479,7 +11479,7 @@ MonoBehaviour:
       rgba: 2529741000
     preview: {fileID: 1405877507023526}
     name: Point-Void Breaker
-    health: 130
+    health: 135
     damage: 4-9 (x6)
     fireRate: 130
   - key: Annihilator
@@ -11489,7 +11489,7 @@ MonoBehaviour:
       rgba: 2516582655
     preview: {fileID: 7283461143348297379}
     name: Annihilator
-    health: 145
+    health: 150
     damage: 8 (x6)
     fireRate: 130
   upgrades:
