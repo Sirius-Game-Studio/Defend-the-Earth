@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class MjolnirMain : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 4;
+    [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
+
     [Header("Longshot Guns")]
     [SerializeField] private long longlaserDamage = 14;
     [SerializeField] private float longlaserSpeed = 15;
@@ -27,10 +32,6 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Protective Shield")]
     [SerializeField] private float protectiveShieldDuration = 7.5f;
-
-    [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
-    [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip longshotGunsFireSound = null;
@@ -130,6 +131,17 @@ public class MjolnirMain : MonoBehaviour
     #region Main Functions
     IEnumerator main()
     {
+        transform.position = new Vector3(0, GameController.instance.bossInitialYPosition, 0);
+        while (transform.position.y > yPosition)
+        {
+            GetComponent<EnemyHealth>().invulnerable = true;
+            GetComponent<Mover>().enabled = true;
+            if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = false;
+            yield return new WaitForEndOfFrame();
+        }
+        GetComponent<EnemyHealth>().invulnerable = false;
+        GetComponent<Mover>().enabled = false;
+        if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = true;
         while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)

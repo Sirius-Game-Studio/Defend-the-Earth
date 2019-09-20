@@ -3,14 +3,6 @@ using UnityEngine;
 
 public class AlienMothershipMain : MonoBehaviour
 {
-    [Header("Torpedo Barrage")]
-    [Tooltip("The amount of shots to fire.")] [SerializeField] private long torpedoBarrageShots = 12;
-    [SerializeField] private float torpedoBarrageFireRate = 0.3f;
-
-    [Header("UFO Deployment")]
-    [SerializeField] private int maxUFOs = 2;
-    [SerializeField] private float UFODeploymentTime = 15;
-
     [Header("Settings")]
     [SerializeField] private long bioTorpedoDamage = 17;
     [SerializeField] private float bioTorpedoSpeed = 12.5f;
@@ -18,7 +10,16 @@ public class AlienMothershipMain : MonoBehaviour
     [SerializeField] private long missileDamage = 19;
     [SerializeField] private float missileSpeed = 14;
     [SerializeField] private Vector2 abilityTime = new Vector2(3.5f, 4);
+    [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 5;
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
+
+    [Header("Torpedo Barrage")]
+    [Tooltip("The amount of shots to fire.")] [SerializeField] private long torpedoBarrageShots = 12;
+    [SerializeField] private float torpedoBarrageFireRate = 0.3f;
+
+    [Header("UFO Deployment")]
+    [SerializeField] private int maxUFOs = 2;
+    [SerializeField] private float UFODeploymentTime = 15;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
@@ -98,6 +99,17 @@ public class AlienMothershipMain : MonoBehaviour
     #region Main Functions
     IEnumerator main()
     {
+        transform.position = new Vector3(0, GameController.instance.bossInitialYPosition, 0);
+        while (transform.position.y > yPosition)
+        {
+            GetComponent<EnemyHealth>().invulnerable = true;
+            GetComponent<Mover>().enabled = true;
+            if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = false;
+            yield return new WaitForEndOfFrame();
+        }
+        GetComponent<EnemyHealth>().invulnerable = false;
+        GetComponent<Mover>().enabled = false;
+        if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = true;
         while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)

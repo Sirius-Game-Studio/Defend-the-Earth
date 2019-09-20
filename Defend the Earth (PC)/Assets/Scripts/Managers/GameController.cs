@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private int maxAliensReached = 15;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3.75f, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7.5f, 8);
-    [SerializeField] private float bossFinalYPosition = 4.5f;
+    public float bossInitialYPosition = 16;
     [SerializeField] private Vector3 bossRotation = new Vector3(90, 180, 0);
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
     [Tooltip("The enemy spawn to limit.")] [SerializeField] private GameObject enemyToLimit = null;
@@ -704,11 +704,10 @@ public class GameController : MonoBehaviour
                                     yield return new WaitForSeconds(3);
                                     if (!gameOver && !won && !paused)
                                     {
-                                        GameObject enemy = Instantiate(boss, new Vector3(0, 16, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                        GameObject enemy = Instantiate(boss, new Vector3(0, bossInitialYPosition, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
                                         enemy.GetComponent<EnemyHealth>().invulnerable = true;
                                         enemy.name = boss.name;
                                         currentBoss = enemy;
-                                        StartCoroutine(scrollEnemy(enemy, bossFinalYPosition));
                                         enemiesLeft = 1;
                                         reachedNextWave = false;
                                         if (wave >= maxWaves) canWin = true;
@@ -755,26 +754,6 @@ public class GameController : MonoBehaviour
     public void addScore(long newScore)
     {
         if (!isCampaignLevel && !gameOver && newScore > 0) score += newScore;
-    }
-
-    IEnumerator scrollEnemy(GameObject enemy, float y)
-    {
-        if (enemy && enemy.CompareTag("Enemy") && y > 0)
-        {
-            while (enemy && enemy.transform.position.y > y)
-            {
-                enemy.GetComponent<EnemyHealth>().invulnerable = true;
-                enemy.GetComponent<Mover>().enabled = true;
-                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = false;
-                yield return new WaitForEndOfFrame();
-            }
-            if (enemy)
-            {
-                enemy.GetComponent<EnemyHealth>().invulnerable = false;
-                enemy.GetComponent<Mover>().enabled = false;
-                if (enemy.GetComponent<HorizontalOnlyMover>()) enemy.GetComponent<HorizontalOnlyMover>().enabled = true;
-            }
-        }
     }
 
     IEnumerator showNewHighScore()

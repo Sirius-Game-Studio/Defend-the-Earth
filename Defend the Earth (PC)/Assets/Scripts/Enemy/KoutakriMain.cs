@@ -5,6 +5,7 @@ public class KoutakriMain : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 3.5f;
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Laser Machine")]
@@ -21,9 +22,6 @@ public class KoutakriMain : MonoBehaviour
     [Header("Scorching Beam")]
     [SerializeField] private float scorchingBeamTime = 5;
 
-    [Header("Ability Objects")]
-    [SerializeField] private GameObject beam = null;
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
     [SerializeField] private AudioClip circleBombSound = null;
@@ -31,6 +29,7 @@ public class KoutakriMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject laser = null;
     [SerializeField] private GameObject scatterlaser = null;
+    [SerializeField] private GameObject beam = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
     [SerializeField] private Transform scorchingBeamSpawn = null;
 
@@ -80,6 +79,17 @@ public class KoutakriMain : MonoBehaviour
     #region Main Functions
     IEnumerator main()
     {
+        transform.position = new Vector3(0, GameController.instance.bossInitialYPosition, 0);
+        while (transform.position.y > yPosition)
+        {
+            GetComponent<EnemyHealth>().invulnerable = true;
+            GetComponent<Mover>().enabled = true;
+            if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = false;
+            yield return new WaitForEndOfFrame();
+        }
+        GetComponent<EnemyHealth>().invulnerable = false;
+        GetComponent<Mover>().enabled = false;
+        if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = true;
         while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)
