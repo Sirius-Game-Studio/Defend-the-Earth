@@ -13,9 +13,10 @@ public class GameController : MonoBehaviour
 
     [Header("Game Settings")]
     [SerializeField] private long maxWaves = 2;
+    public int enemiesLeft = 8;
+    [SerializeField] private int maxAliensReached = 15;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3.75f, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7.5f, 8);
-    [SerializeField] private int maxAliensReached = 15;
     [SerializeField] private float bossFinalYPosition = 4.5f;
     [SerializeField] private Vector3 bossRotation = new Vector3(90, 180, 0);
     [Tooltip("Leave blank to not have a boss in the last wave.")] [SerializeField] private GameObject boss = null;
@@ -51,8 +52,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip loseJingle = null;
     [SerializeField] private AudioClip winJingle = null;
 
-    [Header("Miscellanous")]
-    public int enemiesLeft = 8;
+    [Header("Miscellaneous")]
     public bool isCampaignLevel = true;
     [SerializeField] private AudioClip[] randomMusic = new AudioClip[0];
     [Tooltip("The amount of enemies that reached the bottom.")] public int aliensReached = 0;
@@ -116,6 +116,8 @@ public class GameController : MonoBehaviour
         wavesCleared = 0;
         deathMessageToShow = "";
         storedMaxWaves = maxWaves;
+        currentLoadingTip = "";
+        loading = false;
         Time.timeScale = 1;
         AudioListener.pause = false;
 
@@ -217,7 +219,6 @@ public class GameController : MonoBehaviour
         quitGameMenu.enabled = false;
         restartPrompt.enabled = false;
         newHighScoreText.enabled = false;
-        currentLoadingTip = "";
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
         AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
@@ -778,14 +779,11 @@ public class GameController : MonoBehaviour
 
     IEnumerator showNewHighScore()
     {
-        int a = 0;
-        while (a < 6)
+        for (int i = 0; i < 6; i++)
         {
             newHighScoreText.enabled = true;
-            ++a;
             yield return new WaitForSeconds(0.5f);
             newHighScoreText.enabled = false;
-            ++a;
             yield return new WaitForSeconds(0.5f);
         }
         newHighScoreText.enabled = false;
@@ -971,6 +969,8 @@ public class GameController : MonoBehaviour
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
                 if (load.progress < 0.9f)
                 {
                     load.allowSceneActivation = false;
@@ -979,11 +979,7 @@ public class GameController : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown)
-                    {
-                        loading = false;
-                        load.allowSceneActivation = true;
-                    }
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
                     loadingSlider.value = 1;
                     loadingPercentage.text = "100%";
                     anyKeyPrompt.SetActive(true);
