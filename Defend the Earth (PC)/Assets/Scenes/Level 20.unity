@@ -1415,10 +1415,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWaves: 2
+  enemiesLeft: 15
+  maxAliensReached: 12
   enemySpawnTime: {x: 2.75, y: 3.25}
   asteroidSpawnTime: {x: 6, y: 6.25}
-  maxAliensReached: 12
-  bossFinalYPosition: 3
+  bossInitialYPosition: 14
   bossRotation: {x: 90, y: 0, z: 0}
   boss: {fileID: 2870755580706364987, guid: b14c7d73c567a40479a4c78257aa8771, type: 3}
   enemyToLimit: {fileID: 632701638249580328, guid: a502879cec4393f4d9cc2f94c364e829,
@@ -1449,7 +1450,6 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
-  enemiesLeft: 15
   isCampaignLevel: 1
   randomMusic: []
   aliensReached: 0
