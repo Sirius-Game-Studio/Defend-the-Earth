@@ -35,8 +35,12 @@ public class EndingManager : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        currentLoadingTip = "";
+        loading = false;
         Time.timeScale = 1;
         AudioListener.pause = false;
+        PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.SetInt("Level", 1);
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
@@ -52,12 +56,9 @@ public class EndingManager : MonoBehaviour
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-        PlayerPrefs.DeleteKey("Difficulty");
-        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
-        currentLoadingTip = "";
     }
 
     void Update()
@@ -181,6 +182,8 @@ public class EndingManager : MonoBehaviour
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
                 if (load.progress < 0.9f)
                 {
                     load.allowSceneActivation = false;
@@ -189,11 +192,7 @@ public class EndingManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown)
-                    {
-                        loading = false;
-                        load.allowSceneActivation = true;
-                    }
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
                     loadingSlider.value = 1;
                     loadingPercentage.text = "100%";
                     anyKeyPrompt.SetActive(true);
