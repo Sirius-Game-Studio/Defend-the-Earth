@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2316935566772499987}
   m_Layer: 0
-  m_Name: Alien Long Laser (1)
+  m_Name: LeftBulletSpawn
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,38 +28,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5420663412342396602}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
---- !u!1 &3169314280492867517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3169314280492867513}
-  m_Layer: 0
-  m_Name: Alien Long Laser
-  m_TagString: BulletSpawn
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3169314280492867513
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3169314280492867517}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5420663412342396602}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
 --- !u!1 &4014547736307531617
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4014547736307531621}
   m_Layer: 0
-  m_Name: Alien Long Laser (2)
+  m_Name: RightBulletSpawn
   m_TagString: BulletSpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88,7 +58,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5420663412342396602}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1 &5420663412342396601
 GameObject:
@@ -129,7 +99,6 @@ Transform:
   m_Children:
   - {fileID: 5910957128705532918}
   - {fileID: 7167378182704085159}
-  - {fileID: 3169314280492867513}
   - {fileID: 2316935566772499987}
   - {fileID: 4014547736307531621}
   m_Father: {fileID: 0}
@@ -324,8 +293,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawns:
-  - {fileID: 7167378182704085155}
-  - {fileID: 3169314280492867517}
   - {fileID: 2316935566772499991}
   - {fileID: 4014547736307531617}
 --- !u!114 &303222229814705739
