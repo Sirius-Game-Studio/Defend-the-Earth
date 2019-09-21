@@ -4,10 +4,14 @@ public class UFODeployMotion : MonoBehaviour
 {
     public float y = 2;
 
+    private EnemyGun enemyGun;
+    private HorizontalOnlyMover mover;
     private Vector3 finalPosition;
 
     void Start()
     {
+        enemyGun = GetComponent<EnemyGun>();
+        mover = GetComponent<HorizontalOnlyMover>();
         if (y < 0)
         {
             y = -y;
@@ -23,12 +27,12 @@ public class UFODeployMotion : MonoBehaviour
         if (transform.position.y > finalPosition.y)
         {
             transform.position -= new Vector3(0, 1, 0) * 1.5f * Time.deltaTime;
-            GetComponent<EnemyGun>().enabled = false;
-            GetComponent<HorizontalOnlyMover>().enabled = false;
+            enemyGun.enabled = false;
+            mover.enabled = false;
         } else
         {
-            GetComponent<EnemyGun>().enabled = true;
-            GetComponent<HorizontalOnlyMover>().enabled = true;
+            enemyGun.enabled = true;
+            mover.enabled = true;
             enabled = false;
         }
     }
