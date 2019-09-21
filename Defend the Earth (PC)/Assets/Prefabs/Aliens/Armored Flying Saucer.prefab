@@ -1,5 +1,95 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2316935566772499991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2316935566772499987}
+  m_Layer: 0
+  m_Name: Alien Long Laser (1)
+  m_TagString: BulletSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2316935566772499987
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2316935566772499991}
+  m_LocalRotation: {x: -0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5420663412342396602}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -5, y: 0, z: 0}
+--- !u!1 &3169314280492867517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3169314280492867513}
+  m_Layer: 0
+  m_Name: Alien Long Laser
+  m_TagString: BulletSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3169314280492867513
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3169314280492867517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5420663412342396602}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4014547736307531617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4014547736307531621}
+  m_Layer: 0
+  m_Name: Alien Long Laser (2)
+  m_TagString: BulletSpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4014547736307531621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4014547736307531617}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5420663412342396602}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
 --- !u!1 &5420663412342396601
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +129,9 @@ Transform:
   m_Children:
   - {fileID: 5910957128705532918}
   - {fileID: 7167378182704085159}
+  - {fileID: 3169314280492867513}
+  - {fileID: 2316935566772499987}
+  - {fileID: 4014547736307531621}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 180, z: 0}
@@ -191,6 +284,7 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: 3e84a2cbb9ef0a247915875f417313c9, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
@@ -208,13 +302,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 13
+  spreadDegree: 0
+  shots: 1
+  turnToPlayer: 0
   RPM: 75
-  defaultAlbedo: {fileID: 0}
-  greenAlbedo: {fileID: 0}
-  whiteAlbedo: {fileID: 0}
+  textures: []
   fireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
-  nightmareBullet: {fileID: 0}
+  nightmareBullet: {fileID: 3937757261437629000, guid: 17e0150113393b14baed44a11c1e6727,
+    type: 3}
 --- !u!114 &-1630627430929400299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1a48824ceaf0fd4f949cecb2d44bb20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpawns:
+  - {fileID: 7167378182704085155}
+  - {fileID: 3169314280492867517}
+  - {fileID: 2316935566772499991}
+  - {fileID: 4014547736307531617}
 --- !u!114 &303222229814705739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,8 +341,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 33
+  lifesteal: 0
   instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &6343327695708614505
 MonoBehaviour:
   m_ObjectHideFlags: 0
