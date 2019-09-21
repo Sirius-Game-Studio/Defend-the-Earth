@@ -228,10 +228,11 @@ public class GameController : MonoBehaviour
     {
         //Debug
         #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss)
+            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss && !currentBoss)
             {
                 enemiesLeft = 0;
                 wave = maxWaves;
+                print("Skipped to boss wave");
             }
         #endif
 
