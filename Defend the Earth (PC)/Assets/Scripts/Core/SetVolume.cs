@@ -31,10 +31,10 @@ public class SetVolume : MonoBehaviour
     {
         if (joystickButtons.Length == 2)
         {
-            if (Input.GetKeyDown(joystickButtons[0]))
+            if (Input.GetKey(joystickButtons[0]))
             {
                 slider.value -= (float)0.001;
-            } else if (Input.GetKeyDown(joystickButtons[1]))
+            } else if (Input.GetKey(joystickButtons[1]))
             {
                 slider.value += (float)0.001;
             }
