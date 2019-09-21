@@ -49,7 +49,7 @@ public class EnemyHealth : MonoBehaviour
                 } else //If this enemy is a boss
                 {
                     health = (long)(health * 1.5);
-                    defense -= 0.075f;
+                    defense -= 0.06f;
                 }
             } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
             {
@@ -61,7 +61,7 @@ public class EnemyHealth : MonoBehaviour
                 } else //If this enemy is a boss
                 {
                     health *= 2;
-                    defense -= 0.15f;
+                    defense -= 0.12f;
                 }
             }
         } else
