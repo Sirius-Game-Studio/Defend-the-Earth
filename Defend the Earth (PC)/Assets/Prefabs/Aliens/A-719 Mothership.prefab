@@ -320,6 +320,8 @@ MonoBehaviour:
   alienMissile: {fileID: 1059709308236542, guid: a17ed5f586a904d44a4d6380c48a0e18,
     type: 3}
   UFO: {fileID: 1450454693458920266, guid: 33a8d119a32f42b418a8c40aca107f76, type: 3}
+  nightmareUFO: {fileID: 5420663412342396601, guid: 1c5b8b96ed58a444ca1dcae31e192f39,
+    type: 3}
   bulletSpawns:
   - {fileID: 1016689239544466180}
   - {fileID: 7827424448351679398}
