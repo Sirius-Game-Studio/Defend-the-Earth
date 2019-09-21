@@ -28,7 +28,8 @@ public class AlienMothershipMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject bioTorpedo = null;
     [SerializeField] private GameObject alienMissile = null;
-    [Tooltip("Required for UFO Deployment ability.")] [SerializeField] private GameObject UFO = null;
+    [Tooltip("Required for UFO Deployment ability (Easy, Normal and Hard only).")] [SerializeField] private GameObject UFO = null;
+    [Tooltip("Nightmare only.")] [SerializeField] private GameObject nightmareUFO = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
 
     private AudioSource audioSource;
@@ -91,7 +92,7 @@ public class AlienMothershipMain : MonoBehaviour
         int amount = 0;
         foreach (GameObject deployedUFO in FindObjectsOfType<GameObject>())
         {
-            if (deployedUFO.name.ToLower() == UFO.name.ToLower()) ++amount;
+            if (deployedUFO.name.ToLower() == "boss flying saucer") ++amount;
         }
         deployedUFOs = amount;
     }
@@ -152,7 +153,7 @@ public class AlienMothershipMain : MonoBehaviour
         int amount = 0;
         foreach (GameObject deployedUFO in FindObjectsOfType<GameObject>())
         {
-            if (deployedUFO.name.ToLower() == UFO.name.ToLower())
+            if (deployedUFO.name.ToLower() == "boss flying saucer")
             {
                 ++amount;
                 if (amount > 1) newY += 2;
@@ -268,14 +269,21 @@ public class AlienMothershipMain : MonoBehaviour
     {
         if (deployedUFOs < maxUFOs)
         {
-            GameObject newUFO = Instantiate(UFO, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(90, 180, 0));
-            newUFO.name = UFO.name;
-            if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+            GameObject newUFO;
+            if (nightmareUFO)
             {
-                newUFO.GetComponent<EnemyHealth>().health = (long)(newUFO.GetComponent<EnemyHealth>().health * 1.2);
-                newUFO.GetComponent<EnemyGun>().damage = (long)(UFO.GetComponent<EnemyGun>().damage * 1.3);
-                newUFO.GetComponent<EnemyGun>().RPM *= 1.1f;
+                if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+                {
+                    newUFO = Instantiate(UFO, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(90, 180, 0));
+                } else //Nightmare
+                {
+                    newUFO = Instantiate(nightmareUFO, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(90, 180, 0));
+                }
+            } else
+            {
+                newUFO = Instantiate(UFO, transform.position + new Vector3(0, 0.5f, 0), Quaternion.Euler(90, 180, 0));
             }
+            newUFO.name = "Boss Flying Saucer";
             newUFO.GetComponent<UFODeployMotion>().y += getFinalUFOPosition();
         }
     }
