@@ -17,9 +17,8 @@ public class TougherArmor : MonoBehaviour
             {
                 if (bulletSpawn.CompareTag("BulletSpawn")) bulletSpawn.SetActive(true);
             }
-            bulletSpawns[0].SetActive(false);
             enemyHealth.health = (long)(enemyHealth.health * 1.25);
-            enemyHealth.defense *= 1.1f;
+            enemyHealth.defense *= 0.9f;
             enemyHit.damage = (long)(enemyHit.damage * 1.2);
         } else
         {
@@ -27,7 +26,6 @@ public class TougherArmor : MonoBehaviour
             {
                 if (bulletSpawn.CompareTag("BulletSpawn")) bulletSpawn.SetActive(false);
             }
-            bulletSpawns[0].SetActive(true);
         }
         enabled = false;
     }
