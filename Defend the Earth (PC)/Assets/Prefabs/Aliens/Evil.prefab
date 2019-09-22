@@ -1613,7 +1613,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -3427682480622474688, guid: c1ef42722485a0041badfa391742e5c6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1761,13 +1761,15 @@ MonoBehaviour:
     type: 3}
   sphericlingDemonFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
     type: 3}
-  batteringChargeFireSound: {fileID: 0}
+  batteringChargeFireSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598,
+    type: 3}
   longlaser: {fileID: 3937757261437629000, guid: 17e0150113393b14baed44a11c1e6727,
+    type: 3}
+  superlaser: {fileID: 3937757261437629000, guid: 6c6946c731c8d474a8b6baaee54aca85,
     type: 3}
   shipkillerMissile: {fileID: 1567194746187364, guid: 29f613712c83e684e87ddb421148f2ca,
     type: 3}
   miniOrb: {fileID: 3283681802976587987, guid: d73e2ca93b57b634f8dc3b18cc065dfd, type: 3}
-  batteringChargeObject: {fileID: 0}
   perforatingCannonsGuns:
   - {fileID: 3903298253842582774}
   - {fileID: 7324128731627836235}
@@ -1775,6 +1777,7 @@ MonoBehaviour:
   chargeGlows:
   - {fileID: 3396714199555328751}
   - {fileID: 1498653871137384346}
+  - {fileID: 8710316748366766828}
 --- !u!114 &1857062712373481959
 MonoBehaviour:
   m_ObjectHideFlags: 0
