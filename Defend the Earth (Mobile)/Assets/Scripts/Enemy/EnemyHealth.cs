@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private bool countsTowardsKillGoal = true;
     [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
 
-    [Header("Miscellanous")]
+    [Header("Miscellaneous")]
     public bool invulnerable = false;
 
     [Header("Setup")]
@@ -41,24 +41,24 @@ public class EnemyHealth : MonoBehaviour
                 if (gameObject.layer != 9) //If this enemy isn't a boss
                 {
                     health = (long)(health * 1.1);
-                    defense -= 0.05f;
+                    defense -= 0.03f;
                     powerupChance -= 0.02f;
                 } else //If this enemy is a boss
                 {
                     health = (long)(health * 1.5);
-                    defense -= 0.075f;
+                    defense -= 0.06f;
                 }
             } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
             {
                 if (gameObject.layer != 9) //If this enemy isn't a boss
                 {
                     health = (long)(health * 1.2);
-                    defense -= 0.1f;
+                    defense -= 0.06f;
                     powerupChance -= 0.04f;
                 } else //If this enemy is a boss
                 {
                     health *= 2;
-                    defense -= 0.15f;
+                    defense -= 0.12f;
                 }
             }
         } else
