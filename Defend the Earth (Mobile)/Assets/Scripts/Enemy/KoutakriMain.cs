@@ -5,6 +5,7 @@ public class KoutakriMain : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 3.5f;
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
     [Header("Laser Machine")]
@@ -21,9 +22,6 @@ public class KoutakriMain : MonoBehaviour
     [Header("Scorching Beam")]
     [SerializeField] private float scorchingBeamTime = 5;
 
-    [Header("Ability Objects")]
-    [SerializeField] private GameObject beam = null;
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
     [SerializeField] private AudioClip circleBombSound = null;
@@ -31,6 +29,7 @@ public class KoutakriMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject laser = null;
     [SerializeField] private GameObject scatterlaser = null;
+    [SerializeField] private GameObject beam = null;
     [SerializeField] private Transform[] bulletSpawns = new Transform[0];
     [SerializeField] private Transform scorchingBeamSpawn = null;
 
@@ -56,30 +55,41 @@ public class KoutakriMain : MonoBehaviour
         {
             laserDamage = (long)(laserDamage * 1.2);
             laserSpeed *= 1.1f;
-            laserMachineFireRate *= 0.95f;
-            laserMachineShots = (int)(laserMachineShots * 1.25);
             scatterlaserDamage = (long)(scatterlaserDamage * 1.2);
             scatterlaserSpeed *= 1.05f;
+            laserMachineFireRate *= 0.95f;
+            laserMachineShots = (int)(laserMachineShots * 1.25);
             scorchingBeamTime *= 1.25f;
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             laserDamage = (long)(laserDamage * 1.4);
             laserSpeed *= 1.2f;
-            laserMachineFireRate *= 0.9f;
-            laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserDamage = (long)(scatterlaserDamage * 1.4);
             scatterlaserSpeed *= 1.1f;
+            laserMachineFireRate *= 0.9f;
+            laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserShots = (int)(scatterlaserShots * 1.5);
             scorchingBeamTime *= 1.5f;
-            abilityTime -= new Vector2(-0.5f, -0.5f);
+            abilityTime -= new Vector2(0.25f, 0.25f);
         }
         StartCoroutine(main());
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
+        transform.position = new Vector3(0, GameController.instance.bossInitialYPosition, 0);
+        while (transform.position.y > yPosition)
+        {
+            GetComponent<EnemyHealth>().invulnerable = true;
+            GetComponent<Mover>().enabled = true;
+            if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = false;
+            yield return new WaitForEndOfFrame();
+        }
+        GetComponent<EnemyHealth>().invulnerable = false;
+        GetComponent<Mover>().enabled = false;
+        if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = true;
         while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)
@@ -108,10 +118,10 @@ public class KoutakriMain : MonoBehaviour
                         if (random <= 0.33f) //Scattered Laser Shot (33% chance)
                         {
                             scatteredLaserShot();
-                        } else if (random <= 0.33f) //Laser Machine (33% chance)
+                        } else if (random <= 0.66f) //Laser Machine (33% chance)
                         {
                             StartCoroutine(laserMachine());
-                        } else if (random <= 0.75f) //Circle Bomb (34% chance)
+                        } else //Circle Bomb (34% chance)
                         {
                             circleBomb();
                         }
@@ -124,23 +134,25 @@ public class KoutakriMain : MonoBehaviour
         }
     }
 
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, long damage, float speed, bool turnToPlayer)
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
     {
         GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
         if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
         bullet.GetComponent<EnemyHit>().damage = damage;
         bullet.GetComponent<Mover>().speed = speed;
         return bullet;
     }
+    #endregion
 
-    //Ability Functions
+    #region Ability Functions
     IEnumerator laserMachine()
     {
         usingAbility = true;
-        for (int i = 1; i <= laserMachineShots; i++)
+        for (int i = 0; i < laserMachineShots; i++)
         {
-            spawnProjectile(laser, bulletSpawns[0].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
-            spawnProjectile(laser, bulletSpawns[1].position, new Vector3(90, 90, -90), laserDamage, laserSpeed, true);
+            spawnProjectile(laser, bulletSpawns[0].position, new Vector3(90, 90, -90), 0, laserDamage, laserSpeed, true);
+            spawnProjectile(laser, bulletSpawns[1].position, new Vector3(90, 90, -90), 0, laserDamage, laserSpeed, true);
             if (audioSource)
             {
                 if (fireSound)
@@ -158,18 +170,18 @@ public class KoutakriMain : MonoBehaviour
 
     void scatteredLaserShot()
     {
-        for (int i = 0; i <= scatterlaserShots; i++)
+        for (int i = 0; i < scatterlaserShots; i++)
         {
-            float x = 90;
+            float x;
             if (PlayerPrefs.GetInt("Difficulty") < 4) //Nightmare
             {
-                x = Random.Range(45, 135);
+                x = Random.Range(60, 120);
             } else
             {
-                x = Random.Range(60, 120);
+                x = Random.Range(75, 105);
             }
-            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), scatterlaserDamage, scatterlaserSpeed, false);
-            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
         }
         if (audioSource)
         {
@@ -191,7 +203,7 @@ public class KoutakriMain : MonoBehaviour
             float x = 0;
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[spawn].position, new Vector3(x + Random.Range(-7.5f, 7.5f), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[spawn].position, new Vector3(x + Random.Range(-7.5f, 7.5f), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x += 20;
             }
         } else
@@ -200,12 +212,12 @@ public class KoutakriMain : MonoBehaviour
             float x2 = 0;
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[0].position, new Vector3(x1 + Random.Range(-15, 15), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[0].position, new Vector3(x1 + Random.Range(-15, 15), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x1 += 20;
             }
             for (int i = 0; i < 10; i++)
             {
-                spawnProjectile(laser, bulletSpawns[1].position, new Vector3(x2 + Random.Range(-15, 15), 90, -90), laserDamage, laserSpeed * 0.7f, false);
+                spawnProjectile(laser, bulletSpawns[1].position, new Vector3(x2 + Random.Range(-15, 15), 90, -90), 0, laserDamage, laserSpeed * 0.7f, false);
                 x2 += 20;
             }
         }
@@ -240,4 +252,5 @@ public class KoutakriMain : MonoBehaviour
         if (beamObject) Destroy(beamObject);
         usingScorchingBeam = false;
     }
+    #endregion
 }
