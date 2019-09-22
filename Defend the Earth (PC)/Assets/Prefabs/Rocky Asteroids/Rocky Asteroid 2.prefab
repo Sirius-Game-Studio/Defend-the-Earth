@@ -1,49 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1342382763652856
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4568954468120756}
-  - component: {fileID: 65572850679182528}
-  m_Layer: 8
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4568954468120756
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342382763652856}
-  m_LocalRotation: {x: 0.00000006953546, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4921220618225604}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65572850679182528
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1342382763652856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 2.5, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1630810610957190
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +20,7 @@ GameObject:
   - component: {fileID: -68884417750906508}
   - component: {fileID: 368274529108038407}
   m_Layer: 8
-  m_Name: AsteroidRockyBlue2
+  m_Name: Rocky Asteroid 2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,8 +36,7 @@ Transform:
   m_LocalRotation: {x: -0.00000006953546, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 4568954468120756}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,13 +203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23965e2b694d7a4da44ad96a878e746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomized: 1
   textures:
   - {fileID: 2800000, guid: 591034663ef915547add749ea8095fca, type: 3}
   - {fileID: 2800000, guid: 2a8d0dc8e015c5a4f9f48863ab43c8c1, type: 3}
   - {fileID: 2800000, guid: 9d95d1cfd8fee9b43ac1ee4273c9aef8, type: 3}
   - {fileID: 2800000, guid: c287eee1a259b754da0f7fa9267bcdf1, type: 3}
   - {fileID: 2800000, guid: 5af3808a894bd4c4bb6d82d892c4c08b, type: 3}
+  emissionMaps: []
+  lightColors: []
   texture: 0
 --- !u!114 &368274529108038407
 MonoBehaviour:

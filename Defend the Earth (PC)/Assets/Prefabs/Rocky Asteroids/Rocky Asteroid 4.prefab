@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 7627919161678161769}
   - component: {fileID: 2632878141945740645}
   m_Layer: 8
-  m_Name: AsteroidRockyBlue4
+  m_Name: Rocky Asteroid 4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +36,7 @@ Transform:
   m_LocalRotation: {x: -0.00000006953546, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 4717285891442298}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,13 +203,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23965e2b694d7a4da44ad96a878e746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomized: 1
   textures:
   - {fileID: 2800000, guid: 591034663ef915547add749ea8095fca, type: 3}
   - {fileID: 2800000, guid: 2a8d0dc8e015c5a4f9f48863ab43c8c1, type: 3}
   - {fileID: 2800000, guid: 9d95d1cfd8fee9b43ac1ee4273c9aef8, type: 3}
   - {fileID: 2800000, guid: c287eee1a259b754da0f7fa9267bcdf1, type: 3}
   - {fileID: 2800000, guid: 5af3808a894bd4c4bb6d82d892c4c08b, type: 3}
+  emissionMaps: []
+  lightColors: []
   texture: 0
 --- !u!114 &2632878141945740645
 MonoBehaviour:
@@ -224,47 +224,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd977e57f16782a4786c63c349931963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1607181817927520
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4717285891442298}
-  - component: {fileID: 65238961778617324}
-  m_Layer: 8
-  m_Name: Collider
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4717285891442298
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607181817927520}
-  m_LocalRotation: {x: 0.00000006953546, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4278763380117224}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65238961778617324
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1607181817927520}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5, z: 2.5}
-  m_Center: {x: 0, y: 0, z: 0}
