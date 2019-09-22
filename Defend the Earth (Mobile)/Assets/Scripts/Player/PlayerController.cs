@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour
     [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
     [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
 
-    [Header("Miscellanous")]
-    [SerializeField] private float yMin = -6.75f, yMax = 2;
-    public long lives = 3;
-    public bool invulnerable = false;
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
+
+    [Header("Miscellaneous")]
+    [SerializeField] private float yMin = -6.75f;
+    [SerializeField] private float yMax = 2;
+    public long lives = 3;
+    public bool invulnerable = false;
 
     [Header("Setup")]
     [SerializeField] private AudioSource lowHealthSound = null;
