@@ -55,6 +55,8 @@ public class MainMenuManager : MonoBehaviour
         Application.targetFrameRate = 60;
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        loading = false;
+        currentLoadingTip = "";
         Time.timeScale = 1;
         AudioListener.pause = false;
         PlayerPrefs.DeleteKey("Difficulty");
@@ -496,11 +498,7 @@ public class MainMenuManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown)
-                    {
-                        loading = false;
-                        load.allowSceneActivation = true;
-                    }
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
                     loadingSlider.value = 1;
                     loadingPercentage.text = "100%";
                     anyKeyPrompt.SetActive(true);
