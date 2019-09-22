@@ -21,7 +21,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip fireSound = null;
 
     [Header("Miscellaneous")]
-    [SerializeField] private float yMin = -6.75f, yMax = 2;
+    [SerializeField] private float yMin = -6.75f;
+    [SerializeField] private float yMax = 2;
     public long lives = 3;
     public bool invulnerable = false;
 
