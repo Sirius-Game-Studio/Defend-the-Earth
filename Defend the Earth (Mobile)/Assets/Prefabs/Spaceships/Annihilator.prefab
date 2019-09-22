@@ -228,10 +228,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b461eb49d84c4a949bd7b95deff6d2e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 130
-  damage: 7
+  health: 150
+  damage: 8
   RPM: 150
-  speed: 7.5
+  speed: 8
   repairHeal: 20
   superchargeMultiplier: 1.5
   superchargeTime: 12
