@@ -17,7 +17,8 @@ MonoImporter:
       type: 3}
   - shipkillerMissile: {fileID: 1567194746187364, guid: 9c53dae7f7d6f3a4bb71f0f8dde86142,
       type: 3}
-  - miniOrb: {instanceID: 0}
+  - miniOrb: {fileID: 3283681802976587987, guid: de759c5dd037e4040b72d1e53b13ab7b,
+      type: 3}
   - dyingCraftGun: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
