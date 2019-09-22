@@ -311,7 +311,7 @@ MonoBehaviour:
   yPosition: 5
   music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   torpedoBarrageShots: 12
-  torpedoBarrageFireRate: 0.3
+  torpedoBarrageFireRate: 0.25
   maxUFOs: 2
   UFODeploymentTime: 15
   fireSound: {fileID: 8300000, guid: dd16a0bc01b76054ba18327bc3b2570e, type: 3}
