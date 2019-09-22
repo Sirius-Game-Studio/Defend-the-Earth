@@ -91,10 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847cfe20ceec48d42bfd2d2e4ab077f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orbFireRate: 0.25
   orbSpeed: 1
-  time: 3
+  lifetime: 3
   damage: 20
   speed: 17.5
   sound: {fileID: 9204756421500558348, guid: 09a709e2eddfc9c49aab3c44fea93b88, type: 3}
-  orb: {fileID: 3283681802976587987, guid: 641b4cfcec9d09f41abe27b270b018f0, type: 3}
-  split: {fileID: 3283681802976587987, guid: ee5e1500d5377334aa13a3761804261c, type: 3}
+  orb: {fileID: 3283681802976587987, guid: 26d9f15c3fbf48a4e8cd26f268ae56fd, type: 3}
+  miniOrb: {fileID: 3283681802976587987, guid: 641b4cfcec9d09f41abe27b270b018f0, type: 3}
