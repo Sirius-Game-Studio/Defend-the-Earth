@@ -1442,10 +1442,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWaves: 4
+  enemiesLeft: 10
+  maxAliensReached: 13
   enemySpawnTime: {x: 3.5, y: 3.75}
   asteroidSpawnTime: {x: 6.5, y: 8}
-  maxAliensReached: 13
-  bossFinalYPosition: 4.5
+  bossInitialYPosition: 16
   bossRotation: {x: 90, y: 180, z: 0}
   boss: {fileID: 0}
   enemyToLimit: {fileID: 0}
@@ -1477,7 +1478,6 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   loseJingle: {fileID: 8300000, guid: 7d4039d0a5237f9498763b210c9844b3, type: 3}
   winJingle: {fileID: 8300000, guid: 055eef4fb6957444d8fa26af25c61461, type: 3}
-  enemiesLeft: 10
   isCampaignLevel: 1
   randomMusic: []
   aliensReached: 0
@@ -1510,26 +1510,6 @@ MonoBehaviour:
   - {fileID: 1581323623909028, guid: 972abbb75e59b9d4197c935f4054130a, type: 3}
   - {fileID: 1491407261460684, guid: 4769e9166a9ebc24d8b361bb5d3e60b2, type: 3}
   - {fileID: 1392832899432374, guid: d4c3c7cc0364df24585e3c581e0977f8, type: 3}
-  - {fileID: 1075912379424398, guid: bd12c285d2097844fb3fc544d36e6588, type: 3}
-  - {fileID: 1234848561570380, guid: 1d5980fc3005dd44e91e1558a22395e2, type: 3}
-  - {fileID: 1669270781634762, guid: 45ebcb08be82eec46a0185ab2d0d2c9d, type: 3}
-  - {fileID: 1238246797911008, guid: 5e8a2db0622b63e48905b9b28f80f90b, type: 3}
-  - {fileID: 1393923236987136, guid: d8011af216e463d438e794c93c261689, type: 3}
-  - {fileID: 1851983691132684, guid: e0abd82356fb6524da87f455b9426e02, type: 3}
-  - {fileID: 1543123946336672, guid: 2188b09e966e6c647ae3453133e0452f, type: 3}
-  - {fileID: 1581884032495776, guid: 8827f21a21766c447846ac68a215577a, type: 3}
-  - {fileID: 1762338643171276, guid: 1f895472cbfe44944a9149e088aa980a, type: 3}
-  - {fileID: 1458561588979756, guid: 2de5d442d2528024297e85df7869a685, type: 3}
-  - {fileID: 1857193490896124, guid: 9fc0e2fffa54de14ab9e9839c761cc1f, type: 3}
-  - {fileID: 1797247800199256, guid: c724e32ca6742b54fb26f7c36add3ac3, type: 3}
-  - {fileID: 1906796027868932, guid: 93a80dcc42393d14fa2d153407811771, type: 3}
-  - {fileID: 1555788628467278, guid: b4f53e62f488d4a4098b1f9601e15c83, type: 3}
-  - {fileID: 1706147309837960, guid: 4c16c72f5c9eb82479e8a7b293738ccc, type: 3}
-  - {fileID: 1418810523693724, guid: f2da90603657be74cbaa8c0f7bf69ed5, type: 3}
-  - {fileID: 1769406009198958, guid: 6b37dc0ac19bc9b4bbb5df742329ca85, type: 3}
-  - {fileID: 1729253553337922, guid: a5b9724545af6dd4f8d31be623ac9b1f, type: 3}
-  - {fileID: 1434215796535848, guid: 81242b437a2594a40a3f74772e51931d, type: 3}
-  - {fileID: 1611288572433490, guid: 90a39f05545b69342a7e88573d8abaa6, type: 3}
   - {fileID: 1670538445574650, guid: c4cbe6c492f2da347a243c5d939e654f, type: 3}
   - {fileID: 1718657398631634, guid: 68780bfd56918e94ca636d71b736c799, type: 3}
   - {fileID: 1711622557675844, guid: e416e030d5674f6438e447e34dc61bd8, type: 3}
@@ -1538,22 +1518,6 @@ MonoBehaviour:
   - {fileID: 1459209939081120, guid: 4072c7389fc23164aba05066517d63a2, type: 3}
   - {fileID: 1191193262904786, guid: 2350ab6df55a09f49932614f1f990d1e, type: 3}
   - {fileID: 1143785053813954, guid: 9aa66e6537cb81847abd47947601f898, type: 3}
-  - {fileID: 1029610327899156, guid: 6d766a4caa77a4041a8d68d348178582, type: 3}
-  - {fileID: 1402651967994054, guid: 97d7633815565914a8ac782438e5e3ff, type: 3}
-  - {fileID: 1323629135311418, guid: 6c811c14da943db47a40451a6cbb87a7, type: 3}
-  - {fileID: 1918172603323870, guid: a97aaf6f95fb1c942ae8bd7c4ff285a9, type: 3}
-  - {fileID: 1701644518578124, guid: 66c4acccd15da594b816083da0ff8974, type: 3}
-  - {fileID: 1382117583398658, guid: c75521a60dfc7de48ba2feb45eb34abe, type: 3}
-  - {fileID: 1191545998993086, guid: 21f64b8b46503f2488a75f0032c0f66f, type: 3}
-  - {fileID: 1468260190299036, guid: dda549c2a5893734f8f1cbc1e0c0d55c, type: 3}
-  - {fileID: 1787246923835890, guid: d8816070ca931b44e8f6f277ac8ac457, type: 3}
-  - {fileID: 1177392598811320, guid: 0ba7b460511a70b4baab4ed775332c8a, type: 3}
-  - {fileID: 1841431892206412, guid: c6d10e85c15c1414d89a2cac4e2435ef, type: 3}
-  - {fileID: 1349504006184398, guid: c8ec12255dd543447b3fa7b151f0e3c5, type: 3}
-  - {fileID: 1241585954841234, guid: 26df4ef881a06af47b1ed2db0ac6f13c, type: 3}
-  - {fileID: 1724678935242462, guid: 94a37146bc6ce8343903fa9be2177ca3, type: 3}
-  - {fileID: 1329729191561392, guid: 54fcfe309c0b24e4f96519be4bb149ca, type: 3}
-  - {fileID: 1913878495381238, guid: d6abd66919a4c844e9b272947d24f7c7, type: 3}
   backgrounds:
   - {fileID: 7646070162773227609, guid: 7eb5a75c5e381e34f81cc6958c786766, type: 3}
   - {fileID: 7646070162773227609, guid: 599ded73684cf0744b13c83a2b5714aa, type: 3}
