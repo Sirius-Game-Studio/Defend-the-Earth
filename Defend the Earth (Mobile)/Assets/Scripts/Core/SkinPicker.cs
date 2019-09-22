@@ -2,30 +2,25 @@
 
 public class SkinPicker : MonoBehaviour
 {
-    public int skin = 1; //1 is default, 2 is green, 3 is white
-    [Tooltip("Default Skin")] [SerializeField] private Texture defaultAlbedo = null;
-    [Tooltip("Green Skin")] [SerializeField] private Texture greenAlbedo = null;
-    [Tooltip("White Skin")] [SerializeField] private Texture whiteAlbedo = null;
+    public Texture[] textures = new Texture[0];
+    public Texture[] emissionMaps = new Texture[0];
+    public Color32[] lightColors = new Color32[0];
+    public int texture = 0;
 
-    private MeshRenderer meshRenderer;
+    private new Renderer renderer;
+    private new Light light;
 
     void Start()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        float random = Random.value;
-        if (random <= 0.33)
+        renderer = GetComponent<MeshRenderer>();
+        light = GetComponent<Light>();
+        if (textures.Length > 0)
         {
-            meshRenderer.material.SetTexture("_MainTex", defaultAlbedo);
-            skin = 1;
-        } else if (random <= 0.66)
-        {
-            meshRenderer.material.SetTexture("_MainTex", greenAlbedo);
-            skin = 2;
-        } else
-        {
-            meshRenderer.material.SetTexture("_MainTex", whiteAlbedo);
-            skin = 3;
+            texture = Random.Range(0, textures.Length);
+            renderer.material.SetTexture("_MainTex", textures[texture]);
         }
+        if (emissionMaps.Length > 0 && emissionMaps[texture]) renderer.material.SetTexture("_EmissionMap", emissionMaps[texture]);
+        if (light && lightColors.Length > 0) light.color = lightColors[texture];
         enabled = false;
     }
 }
