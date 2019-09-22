@@ -385,6 +385,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e1088e70aa44ab9bde69f39a3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityTime: {x: 3, y: 4}
+  yPosition: 4
+  music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   longlaserDamage: 14
   longlaserSpeed: 15
   longshotGunsFireRate: 0.25
@@ -398,11 +401,8 @@ MonoBehaviour:
   AAMissilesFireRate: 0.2
   AAMissilesShots: 8
   chaosOrbDamage: 20
-  chaosOrbSpeed: 17.5
-  protectiveShieldDuration: 7.5
-  abilityTime: {x: 3, y: 4}
-  yPosition: 4
-  music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
+  protectiveShieldDuration: 8
+  protectiveShieldUseTime: {x: 20, y: 30}
   longshotGunsFireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f,
     type: 3}
   blindSprayFireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
