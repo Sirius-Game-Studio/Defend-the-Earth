@@ -28,10 +28,10 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Chaos Orb")]
     [SerializeField] private long chaosOrbDamage = 20;
-    [SerializeField] private float chaosOrbSpeed = 17.5f;
 
     [Header("Protective Shield")]
-    [SerializeField] private float protectiveShieldDuration = 7.5f;
+    [SerializeField] private float protectiveShieldDuration = 8;
+    [SerializeField] private Vector2 protectiveShieldUseTime = new Vector2(20, 30);
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip longshotGunsFireSound = null;
@@ -73,8 +73,7 @@ public class MjolnirMain : MonoBehaviour
             scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
             shipkillerDamage = (long)(shipkillerDamage * 0.9);
             chaosOrbDamage = (long)(chaosOrbDamage * 0.9);
-            scatterlaserSpread *= 0.8f;
-            protectiveShieldDuration = 5;
+            protectiveShieldDuration *= 0.75f;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);
@@ -84,11 +83,11 @@ public class MjolnirMain : MonoBehaviour
             longlaserSpeed *= 1.1f;
             scatterlaserSpeed *= 1.1f;
             shipkillerSpeed *= 1.1f;
-            chaosOrbSpeed *= 1.1f;
             scatterlaserSpread *= 1.15f;
             longshotGunsShots = (int)(longshotGunsShots * 1.5);
             blindSprayShots = (int)(blindSprayShots * 1.25);
             AAMissilesShots = (int)(AAMissilesShots * 1.25);
+            protectiveShieldUseTime *= 0.9f;
             abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
@@ -99,18 +98,18 @@ public class MjolnirMain : MonoBehaviour
             longlaserSpeed *= 1.2f;
             scatterlaserSpeed *= 1.2f;
             shipkillerSpeed *= 1.2f;
-            chaosOrbSpeed *= 1.2f;
             scatterlaserSpread *= 1.3f;
             longshotGunsShots *= 2;
             blindSprayShots = (int)(blindSprayShots * 1.5);
             AAMissilesShots = (int)(AAMissilesShots * 1.5);
-            protectiveShieldDuration = 10;
+            protectiveShieldDuration *= 1.25f;
+            protectiveShieldUseTime *= 0.8f;
             abilityTime -= new Vector2(0.25f, 0.25f);
         }
         shield.gameObject.SetActive(false);
         shield.localScale = Vector3.zero;
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-        timeTillShieldUse = Random.Range(15, 20);
+        timeTillShieldUse = Random.Range(protectiveShieldUseTime.x, protectiveShieldUseTime.y);
         StartCoroutine(main());
     }
 
@@ -271,10 +270,7 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < blindSprayShots; i++)
         {
-            for (int s = 0; s < 6; s++)
-            {
-                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
-            }
+            for (int s = 0; s < 6; s++) spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
             if (audioSource)
             {
                 if (blindSprayFireSound)
