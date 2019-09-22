@@ -2,14 +2,20 @@
 
 public class EnemyHit : MonoBehaviour
 {
-    [Tooltip("Amount of damage dealt to players.")] public long damage = 1;
+    [Header("Settings")]
+    public long damage = 1;
+    [Tooltip("Only works when enemyHealth is set to a GameObject with the EnemyHealth component.")] public float lifesteal = 0;
+    [SerializeField] private bool instakill = false;
+
+    [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
+    public EnemyHealth enemyHealth;
 
     private bool hit = false;
 
     void Start()
     {
-        if (PlayerPrefs.GetInt("Difficulty") <= 1)  //Easy
+        if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             damage = (long)(damage * 0.75);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
@@ -23,7 +29,8 @@ public class EnemyHit : MonoBehaviour
 
     void Update()
     {
-        if (damage < 1) damage = 1; //Checks if damage is less than 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1 
+        if (lifesteal < 0) lifesteal = 0; //Checks if lifesteal percentage is less than 0
     }
 
     void OnTriggerStay(Collider other)
@@ -33,7 +40,15 @@ public class EnemyHit : MonoBehaviour
             PlayerController playerController = other.GetComponent<PlayerController>();
             if (playerController && !playerController.invulnerable)
             {
-                playerController.takeDamage(damage);
+                if (!instakill)
+                {
+                    playerController.takeDamage(damage);
+                } else
+                {
+                    playerController.health = 0;
+                    playerController.lives = 0;
+                }
+                if (enemyHealth) enemyHealth.health += (long)(damage * lifesteal);
                 if (explosion) Instantiate(explosion, transform.position, transform.rotation);
                 hit = true;
                 Destroy(gameObject);
