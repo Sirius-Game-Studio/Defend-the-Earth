@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 1972970305383647202}
   - component: {fileID: -4874452613086124840}
   m_Layer: 8
-  m_Name: AsteroidLavaBlue1
+  m_Name: Lava Asteroid 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
