@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class MjolnirMain : MonoBehaviour
 {
+    [Header("Settings")]
+    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 4;
+    [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
+
     [Header("Longshot Guns")]
     [SerializeField] private long longlaserDamage = 14;
     [SerializeField] private float longlaserSpeed = 15;
@@ -23,14 +28,10 @@ public class MjolnirMain : MonoBehaviour
 
     [Header("Chaos Orb")]
     [SerializeField] private long chaosOrbDamage = 20;
-    [SerializeField] private float chaosOrbSpeed = 17.5f;
 
     [Header("Protective Shield")]
-    [SerializeField] private float protectiveShieldDuration = 7.5f;
-
-    [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
-    [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
+    [SerializeField] private float protectiveShieldDuration = 8;
+    [SerializeField] private Vector2 protectiveShieldUseTime = new Vector2(20, 30);
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip longshotGunsFireSound = null;
@@ -72,8 +73,7 @@ public class MjolnirMain : MonoBehaviour
             scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
             shipkillerDamage = (long)(shipkillerDamage * 0.9);
             chaosOrbDamage = (long)(chaosOrbDamage * 0.9);
-            scatterlaserSpread *= 0.8f;
-            protectiveShieldDuration = 5;
+            protectiveShieldDuration *= 0.75f;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);
@@ -83,12 +83,12 @@ public class MjolnirMain : MonoBehaviour
             longlaserSpeed *= 1.1f;
             scatterlaserSpeed *= 1.1f;
             shipkillerSpeed *= 1.1f;
-            chaosOrbSpeed *= 1.1f;
             scatterlaserSpread *= 1.15f;
             longshotGunsShots = (int)(longshotGunsShots * 1.5);
             blindSprayShots = (int)(blindSprayShots * 1.25);
             AAMissilesShots = (int)(AAMissilesShots * 1.25);
-            abilityTime -= new Vector2(0, -0.5f);
+            protectiveShieldUseTime *= 0.9f;
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             longlaserDamage = (long)(longlaserDamage * 1.4);
@@ -98,17 +98,18 @@ public class MjolnirMain : MonoBehaviour
             longlaserSpeed *= 1.2f;
             scatterlaserSpeed *= 1.2f;
             shipkillerSpeed *= 1.2f;
-            chaosOrbSpeed *= 1.2f;
             scatterlaserSpread *= 1.3f;
             longshotGunsShots *= 2;
             blindSprayShots = (int)(blindSprayShots * 1.5);
             AAMissilesShots = (int)(AAMissilesShots * 1.5);
-            protectiveShieldDuration = 10;
-            abilityTime -= new Vector2(-0.5f, -0.5f);
+            protectiveShieldDuration *= 1.25f;
+            protectiveShieldUseTime *= 0.8f;
+            abilityTime -= new Vector2(0.25f, 0.25f);
         }
         shield.gameObject.SetActive(false);
         shield.localScale = Vector3.zero;
-        timeTillShieldUse = Random.Range(15, 20);
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        timeTillShieldUse = Random.Range(protectiveShieldUseTime.x, protectiveShieldUseTime.y);
         StartCoroutine(main());
     }
 
@@ -126,9 +127,20 @@ public class MjolnirMain : MonoBehaviour
         }
     }
 
-    //Main Functions
+    #region Main Functions
     IEnumerator main()
     {
+        transform.position = new Vector3(0, GameController.instance.bossInitialYPosition, 0);
+        while (transform.position.y > yPosition)
+        {
+            GetComponent<EnemyHealth>().invulnerable = true;
+            GetComponent<Mover>().enabled = true;
+            if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = false;
+            yield return new WaitForEndOfFrame();
+        }
+        GetComponent<EnemyHealth>().invulnerable = false;
+        GetComponent<Mover>().enabled = false;
+        if (GetComponent<HorizontalOnlyMover>()) GetComponent<HorizontalOnlyMover>().enabled = true;
         while (true)
         {
             if (!GameController.instance.gameOver && !GameController.instance.won && !usingAbility)
@@ -158,6 +170,16 @@ public class MjolnirMain : MonoBehaviour
         }
     }
 
+    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
+    {
+        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
+        if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
+        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
+        bullet.GetComponent<EnemyHit>().damage = damage;
+        bullet.GetComponent<Mover>().speed = speed;
+        return bullet;
+    }
+
     IEnumerator animateChargeGlow(Transform charge, float speed, float maxSize, bool forward)
     {
         animatingCharge = true;
@@ -181,18 +203,9 @@ public class MjolnirMain : MonoBehaviour
         animatingCharge = false;
         yield break;
     }
+    #endregion
 
-    GameObject spawnProjectile(GameObject projectile, Vector3 spawnPosition, Vector3 spawnRotation, float spreadDegree, long damage, float speed, bool turnToPlayer)
-    {
-        GameObject bullet = Instantiate(projectile, spawnPosition, Quaternion.Euler(spawnRotation.x, spawnRotation.y, spawnRotation.z));
-        if (turnToPlayer && GameObject.FindWithTag("Player")) bullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
-        if (spreadDegree != 0) bullet.transform.Rotate(Random.Range(-spreadDegree, spreadDegree), 0, 0);
-        bullet.GetComponent<EnemyHit>().damage = damage;
-        bullet.GetComponent<Mover>().speed = speed;
-        return bullet;
-    }
-
-    //Ability Functions
+    #region Main Functions
     IEnumerator longshotGuns()
     {
         int point = 0;
@@ -223,7 +236,7 @@ public class MjolnirMain : MonoBehaviour
             point = 1;
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
-        float chargeSpeed = 0.0001f;
+        float chargeSpeed;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
             chargeSpeed = 0.0001f;
@@ -239,7 +252,7 @@ public class MjolnirMain : MonoBehaviour
             spawnProjectile(longlaser, longlaserGuns[point].position, new Vector3(90, 0, 0), 0, (long)(longlaserDamage * 1.1), longlaserSpeed * 1.05f, true);
             if (audioSource)
             {
-                if (longshotGunsFireSound) 
+                if (longshotGunsFireSound)
                 {
                     audioSource.PlayOneShot(longshotGunsFireSound);
                 } else
@@ -257,10 +270,7 @@ public class MjolnirMain : MonoBehaviour
         usingAbility = true;
         for (int i = 0; i < blindSprayShots; i++)
         {
-            for (int s = 0; s < 6; s++)
-            {
-                GameObject laser = spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
-            }
+            for (int s = 0; s < 6; s++) spawnProjectile(scatterlaser, longlaserGuns[Random.Range(0, longlaserGuns.Length)].position, new Vector3(90, 90, -90), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
             if (audioSource)
             {
                 if (blindSprayFireSound)
@@ -337,4 +347,5 @@ public class MjolnirMain : MonoBehaviour
             yield break;
         }
     }
+    #endregion
 }
