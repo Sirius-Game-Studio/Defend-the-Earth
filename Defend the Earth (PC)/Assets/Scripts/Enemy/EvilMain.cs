@@ -74,7 +74,7 @@ public class EvilMain : MonoBehaviour
             orbDamage = (long)(orbDamage * 1.2);
             orbSpeed *= 1.05f;
             sphericlingDemonFireRate *= 0.9f;
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             longlaserDamage = (long)(longlaserDamage * 1.4);
@@ -87,7 +87,7 @@ public class EvilMain : MonoBehaviour
             perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
             dyingCraftShots = (int)(dyingCraftShots * 1.5);
             sphericlingDemonFireRate *= 0.8f;
-            abilityTime -= new Vector2(-0.5f, -0.5f);
+            abilityTime -= new Vector2(0.5f, 0.25f);
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         StartCoroutine(main());

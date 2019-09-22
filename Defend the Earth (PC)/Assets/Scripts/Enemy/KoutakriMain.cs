@@ -60,7 +60,7 @@ public class KoutakriMain : MonoBehaviour
             laserMachineFireRate *= 0.95f;
             laserMachineShots = (int)(laserMachineShots * 1.25);
             scorchingBeamTime *= 1.25f;
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             laserDamage = (long)(laserDamage * 1.4);
@@ -71,7 +71,7 @@ public class KoutakriMain : MonoBehaviour
             laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserShots = (int)(scatterlaserShots * 1.5);
             scorchingBeamTime *= 1.5f;
-            abilityTime -= new Vector2(-0.5f, -0.5f);
+            abilityTime -= new Vector2(0.5f, 0.25f);
         }
         StartCoroutine(main());
     }

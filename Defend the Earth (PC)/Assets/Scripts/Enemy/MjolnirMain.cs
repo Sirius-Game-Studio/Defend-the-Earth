@@ -89,7 +89,7 @@ public class MjolnirMain : MonoBehaviour
             longshotGunsShots = (int)(longshotGunsShots * 1.5);
             blindSprayShots = (int)(blindSprayShots * 1.25);
             AAMissilesShots = (int)(AAMissilesShots * 1.25);
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             longlaserDamage = (long)(longlaserDamage * 1.4);
@@ -105,7 +105,7 @@ public class MjolnirMain : MonoBehaviour
             blindSprayShots = (int)(blindSprayShots * 1.5);
             AAMissilesShots = (int)(AAMissilesShots * 1.5);
             protectiveShieldDuration = 10;
-            abilityTime -= new Vector2(-0.5f, -0.5f);
+            abilityTime -= new Vector2(0.5f, 0.25f);
         }
         shield.gameObject.SetActive(false);
         shield.localScale = Vector3.zero;

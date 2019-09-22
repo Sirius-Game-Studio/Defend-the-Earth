@@ -59,7 +59,7 @@ public class AlienMothershipMain : MonoBehaviour
             torpedoBarrageShots = (int)(torpedoBarrageShots * 1.25);
             torpedoBarrageFireRate *= 0.9f;
             UFODeploymentTime -= 2.5f;
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             bioTorpedoDamage = (long)(bioTorpedoDamage * 1.4);
@@ -69,7 +69,7 @@ public class AlienMothershipMain : MonoBehaviour
             torpedoBarrageShots = (int)(torpedoBarrageShots * 1.5);
             torpedoBarrageFireRate *= 0.8f;
             UFODeploymentTime -= 5;
-            abilityTime -= new Vector2(0, -0.5f);
+            abilityTime -= new Vector2(0.5f, 0.25f);
         }
         StartCoroutine(main());
     }
