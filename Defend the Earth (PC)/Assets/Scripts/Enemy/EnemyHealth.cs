@@ -44,7 +44,7 @@ public class EnemyHealth : MonoBehaviour
                 if (gameObject.layer != 9) //If this enemy isn't a boss
                 {
                     health = (long)(health * 1.1);
-                    defense -= 0.05f;
+                    defense -= 0.03f;
                     powerupChance -= 0.02f;
                 } else //If this enemy is a boss
                 {
@@ -56,7 +56,7 @@ public class EnemyHealth : MonoBehaviour
                 if (gameObject.layer != 9) //If this enemy isn't a boss
                 {
                     health = (long)(health * 1.2);
-                    defense -= 0.1f;
+                    defense -= 0.06f;
                     powerupChance -= 0.04f;
                 } else //If this enemy is a boss
                 {
