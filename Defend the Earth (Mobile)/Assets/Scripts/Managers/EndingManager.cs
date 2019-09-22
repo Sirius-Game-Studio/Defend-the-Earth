@@ -35,8 +35,12 @@ public class EndingManager : MonoBehaviour
         Application.targetFrameRate = 60;
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        currentLoadingTip = "";
+        loading = false;
         Time.timeScale = 1;
         AudioListener.pause = false;
+        PlayerPrefs.DeleteKey("Difficulty");
+        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.SetInt("Level", 1);
         if (!PlayerPrefs.HasKey("SoundVolume"))
         {
@@ -52,12 +56,9 @@ public class EndingManager : MonoBehaviour
         {
             audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         }
-        PlayerPrefs.DeleteKey("Difficulty");
-        PlayerPrefs.DeleteKey("Restarted");
         PlayerPrefs.Save();
         endingMenu.enabled = true;
         creditsMenu.enabled = false;
-        currentLoadingTip = "";
     }
 
     void Update()
@@ -183,11 +184,7 @@ public class EndingManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown)
-                    {
-                        loading = false;
-                        load.allowSceneActivation = true;
-                    }
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
                     loadingSlider.value = 1;
                     loadingPercentage.text = "100%";
                     anyKeyPrompt.SetActive(true);
