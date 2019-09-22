@@ -228,8 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 120
   damage: 8
-  RPM: 190
-  speed: 7.5
+  RPM: 200
+  speed: 8
   repairHeal: 20
   superchargeMultiplier: 1.5
   superchargeTime: 12
