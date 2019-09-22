@@ -38,9 +38,9 @@ public class EvilMain : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
+    [SerializeField] private GameObject superlaser = null;
     [SerializeField] private GameObject shipkillerMissile = null;
     [SerializeField] private GameObject miniOrb = null;
-    [SerializeField] private GameObject batteringChargeObject = null;
     [SerializeField] private Transform[] perforatingCannonsGuns = new Transform[0];
     [SerializeField] private Transform dyingCraftGun = null;
     [SerializeField] private Transform[] chargeGlows = new Transform[0];
@@ -246,19 +246,11 @@ public class EvilMain : MonoBehaviour
         StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
         while (animatingCharge) yield return null;
         StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
-        GameObject ability = Instantiate(batteringChargeObject, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), Quaternion.Euler(0, 0, 0));
-        foreach (Transform projectile in ability.transform)
+        float angle = 0;
+        for (int i = 0; i < 12; i++)
         {
-            if (projectile.CompareTag("Projectile"))
-            {
-                EnemyHit enemyHit = projectile.GetComponent<EnemyHit>();
-                Mover mover = projectile.GetComponent<Mover>();
-                if (enemyHit && mover)
-                {
-                    enemyHit.damage = superlaserDamage;
-                    mover.speed = superlaserSpeed;
-                }
-            }
+            spawnProjectile(superlaser, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), new Vector3(angle, 90, -90), 0, superlaserDamage, superlaserSpeed, false);
+            angle += 30;
         }
         if (audioSource)
         {
