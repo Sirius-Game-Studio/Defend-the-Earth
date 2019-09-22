@@ -4,18 +4,17 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - bioTorpedoTexture: {instanceID: 0}
   - music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
-  - weakBustedShot: {fileID: 1528543826248096, guid: 56952386b11219c4a82575fdc0536d67,
-      type: 3}
-  - strongBustedShot: {fileID: 1528543826248096, guid: e0b01d5cdbd2e9d47bb84a7716307af5,
-      type: 3}
-  - UFO: {fileID: 1450454693458920266, guid: 33a8d119a32f42b418a8c40aca107f76, type: 3}
   - fireSound: {fileID: 8300000, guid: dd16a0bc01b76054ba18327bc3b2570e, type: 3}
   - bustedShotFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
       type: 3}
-  - bioTorpedo: {fileID: 1528543826248096, guid: 0eb1dc9b0d8505f45a18313076e1e653,
+  - bioTorpedo: {fileID: 1906374043378120, guid: 79eac1308df01c1459d5833c9cb6055c,
       type: 3}
   - alienMissile: {fileID: 1059709308236542, guid: a17ed5f586a904d44a4d6380c48a0e18,
+      type: 3}
+  - UFO: {fileID: 1450454693458920266, guid: 33a8d119a32f42b418a8c40aca107f76, type: 3}
+  - nightmareUFO: {fileID: 5420663412342396601, guid: 1c5b8b96ed58a444ca1dcae31e192f39,
       type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
