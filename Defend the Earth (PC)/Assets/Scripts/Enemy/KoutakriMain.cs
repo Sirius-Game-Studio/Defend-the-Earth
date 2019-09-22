@@ -172,13 +172,13 @@ public class KoutakriMain : MonoBehaviour
     {
         for (int i = 0; i < scatterlaserShots; i++)
         {
-            float x = 90;
+            float x;
             if (PlayerPrefs.GetInt("Difficulty") < 4) //Nightmare
             {
-                x = Random.Range(45, 135);
+                x = Random.Range(60, 120);
             } else
             {
-                x = Random.Range(60, 120);
+                x = Random.Range(75, 105);
             }
             spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
             spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
