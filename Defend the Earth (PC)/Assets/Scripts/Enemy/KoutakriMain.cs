@@ -71,7 +71,7 @@ public class KoutakriMain : MonoBehaviour
             laserMachineShots = (int)(laserMachineShots * 1.5);
             scatterlaserShots = (int)(scatterlaserShots * 1.5);
             scorchingBeamTime *= 1.5f;
-            abilityTime -= new Vector2(0.5f, 0.25f);
+            abilityTime -= new Vector2(0.25f, 0.25f);
         }
         StartCoroutine(main());
     }

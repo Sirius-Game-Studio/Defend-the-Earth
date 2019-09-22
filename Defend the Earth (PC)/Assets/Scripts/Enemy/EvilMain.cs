@@ -87,7 +87,7 @@ public class EvilMain : MonoBehaviour
             perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
             dyingCraftShots = (int)(dyingCraftShots * 1.5);
             sphericlingDemonFireRate *= 0.8f;
-            abilityTime -= new Vector2(0.5f, 0.25f);
+            abilityTime -= new Vector2(0.25f, 0.25f);
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         StartCoroutine(main());

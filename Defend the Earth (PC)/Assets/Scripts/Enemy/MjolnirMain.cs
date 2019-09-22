@@ -105,7 +105,7 @@ public class MjolnirMain : MonoBehaviour
             blindSprayShots = (int)(blindSprayShots * 1.5);
             AAMissilesShots = (int)(AAMissilesShots * 1.5);
             protectiveShieldDuration = 10;
-            abilityTime -= new Vector2(0.5f, 0.25f);
+            abilityTime -= new Vector2(0.25f, 0.25f);
         }
         shield.gameObject.SetActive(false);
         shield.localScale = Vector3.zero;
