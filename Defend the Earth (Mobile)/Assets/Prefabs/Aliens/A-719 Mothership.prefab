@@ -283,6 +283,7 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
@@ -335,7 +336,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9223372036854775807
+  lifesteal: 0
+  instakill: 1
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &-7045643749672922722
 MonoBehaviour:
   m_ObjectHideFlags: 0

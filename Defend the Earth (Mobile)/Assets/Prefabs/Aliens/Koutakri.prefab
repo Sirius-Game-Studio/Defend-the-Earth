@@ -337,6 +337,7 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
@@ -354,6 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityTime: {x: 3, y: 4}
+  yPosition: 3.5
   music: {fileID: 8300000, guid: 4bf488ec7cc942641939a84ff217a998, type: 3}
   laserDamage: 15
   laserSpeed: 15
@@ -363,12 +365,12 @@ MonoBehaviour:
   scatterlaserSpeed: 17
   scatterlaserShots: 6
   scorchingBeamTime: 5
-  beam: {fileID: 1509662052000183132, guid: e109e7c5e02023a4c94549aa0a8bb62c, type: 3}
   fireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}
   circleBombSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598, type: 3}
   laser: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
   scatterlaser: {fileID: 3937757261437629000, guid: 973d3e143b1eef443983de606c683164,
     type: 3}
+  beam: {fileID: 1509662052000183132, guid: e109e7c5e02023a4c94549aa0a8bb62c, type: 3}
   bulletSpawns:
   - {fileID: 4735691563580547394}
   - {fileID: 4818746308389863387}
@@ -386,7 +388,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9223372036854775807
+  lifesteal: 0
+  instakill: 1
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &2590379792321946573
 MonoBehaviour:
   m_ObjectHideFlags: 0

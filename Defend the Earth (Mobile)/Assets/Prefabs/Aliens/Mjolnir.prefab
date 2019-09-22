@@ -367,6 +367,7 @@ MonoBehaviour:
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
@@ -383,6 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f06dd2d7185cb9438a0315a84db599d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityTime: {x: 3, y: 4}
+  yPosition: 4
+  music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   longlaserDamage: 14
   longlaserSpeed: 15
   longshotGunsFireRate: 0.25
@@ -396,10 +400,8 @@ MonoBehaviour:
   AAMissilesFireRate: 0.2
   AAMissilesShots: 8
   chaosOrbDamage: 20
-  chaosOrbSpeed: 17.5
   protectiveShieldDuration: 7.5
-  abilityTime: {x: 3, y: 4}
-  music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
+  protectiveShieldUseTime: {x: 20, y: 30}
   longshotGunsFireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f,
     type: 3}
   blindSprayFireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
@@ -439,7 +441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 9223372036854775807
+  lifesteal: 0
+  instakill: 1
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &-3827161701056916705
 MonoBehaviour:
   m_ObjectHideFlags: 0
