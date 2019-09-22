@@ -3,7 +3,7 @@
 public class EnemyHit : MonoBehaviour
 {
     [Header("Settings")]
-    public long damage = 1;
+    public long damage = 30;
     [Tooltip("Only works when enemyHealth is set to a GameObject with the EnemyHealth component.")] public float lifesteal = 0;
     [SerializeField] private bool instakill = false;
 
