@@ -17,7 +17,7 @@ public class EvilMain : MonoBehaviour
     [Header("Dying Craft")]
     [SerializeField] private long shipkillerDamage = 31;
     [SerializeField] private float shipkillerSpeed = 17.5f;
-    [SerializeField] private float shipkillerSpread = 5;
+    [SerializeField] private float shipkillerSpread = 4;
     [SerializeField] private float dyingCraftFireRate = 0.25f;
     [SerializeField] private int dyingCraftShots = 10;
 
@@ -25,11 +25,13 @@ public class EvilMain : MonoBehaviour
     [SerializeField] private long orbDamage = 16;
     [SerializeField] private float orbSpeed = 16;
     [Tooltip("Nightmare only.")] [SerializeField] private float orbLifesteal = 0.2f;
-    [SerializeField] private float sphericlingDemonFireRate = 0.17f;
+    [SerializeField] private float sphericlingDemonFireRate = 0.2f;
 
     [Header("Battering Charge")]
     [SerializeField] private long superlaserDamage = 32;
-    [SerializeField] private float superlaserSpeed = 32;
+    [SerializeField] private float superlaserSpeed = 15;
+    [SerializeField] private float batteringChargeFireRate = 1;
+    [SerializeField] private int batteringChargeShots = 2;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip perforatingCannonsFireSound = null;
@@ -73,7 +75,9 @@ public class EvilMain : MonoBehaviour
             shipkillerSpread *= 1.25f;
             orbDamage = (long)(orbDamage * 1.2);
             orbSpeed *= 1.05f;
-            sphericlingDemonFireRate *= 0.9f;
+            sphericlingDemonFireRate *= 0.95f;
+            batteringChargeFireRate *= 0.85f;
+            batteringChargeShots = (int)(batteringChargeShots * 1.5);
             abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
@@ -86,7 +90,9 @@ public class EvilMain : MonoBehaviour
             orbSpeed *= 1.1f;
             perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
             dyingCraftShots = (int)(dyingCraftShots * 1.5);
-            sphericlingDemonFireRate *= 0.8f;
+            sphericlingDemonFireRate *= 0.9f;
+            batteringChargeFireRate *= 0.7f;
+            batteringChargeShots *= 2;
             abilityTime -= new Vector2(0.25f, 0.25f);
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
@@ -235,6 +241,7 @@ public class EvilMain : MonoBehaviour
     IEnumerator batteringCharge()
     {
         float chargeSpeed;
+        usingAbility = true;
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
@@ -246,22 +253,27 @@ public class EvilMain : MonoBehaviour
         StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
         while (animatingCharge) yield return null;
         StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
-        float angle = 0;
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < batteringChargeShots; i++)
         {
-            spawnProjectile(superlaser, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), new Vector3(angle, 90, -90), 0, superlaserDamage, superlaserSpeed, false);
-            angle += 30;
-        }
-        if (audioSource)
-        {
-            if (batteringChargeFireSound)
+            float angle = Random.Range(-180, 180);
+            for (int s = 0; s < 12; s++)
             {
-                audioSource.PlayOneShot(batteringChargeFireSound);
-            } else
-            {
-                audioSource.Play();
+                spawnProjectile(superlaser, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), new Vector3(angle, 90, -90), 0, superlaserDamage, superlaserSpeed, false);
+                angle += 30;
             }
+            if (audioSource)
+            {
+                if (batteringChargeFireSound)
+                {
+                    audioSource.PlayOneShot(batteringChargeFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(batteringChargeFireRate);
         }
+        usingAbility = false;
     }
 
     IEnumerator sphericlingDemon()
@@ -281,11 +293,11 @@ public class EvilMain : MonoBehaviour
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            shots = 46;
+            shots = 55;
             chargeSpeed = 0.001f;
         } else //Nightmare
         {
-            shots = 80;
+            shots = 91;
             chargeSpeed = 0.002f;
         }
         StartCoroutine(animateChargeGlow(chargeGlows[point], chargeSpeed, 0.1f, true));
