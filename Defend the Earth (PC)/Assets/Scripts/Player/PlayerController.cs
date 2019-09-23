@@ -12,10 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 7.5f;
 
     [Header("Powerup Settings")]
-    [Range(1, 15)] public long smallRepairHeal = 15;
-    [Range(1, 25)] public long largeRepairHeal = 25;
-    [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
-    [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
+    [Tooltip("Amount of health restored by Small Repairs.")] [Range(1, 15)] public long smallRepairHeal = 15;
+    [Tooltip("Amount of health restored by Large Repairs.")] [Range(1, 25)] public long largeRepairHeal = 25;
+    [Tooltip("Supercharge damage multiplier.")] [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
+    [Tooltip("Supercharge powerup duration.")] [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
