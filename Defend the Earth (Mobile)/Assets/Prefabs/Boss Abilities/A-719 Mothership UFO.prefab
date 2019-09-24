@@ -262,13 +262,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f484cf7a85440df4bb79f1a1205b475d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
+  health: 30
   defense: 1
   money: 0
   score: 0
   powerupChance: 0.34
   powerups:
+  - {fileID: 100002, guid: b6a019fbed1a6fc4bb8db6f2ca2feadc, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
+  - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 0
   killTracker: AlienKills
   maxHealth: 0
