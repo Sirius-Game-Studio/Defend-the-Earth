@@ -8,11 +8,12 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     public long health = 100;
     [SerializeField] private long damage = 10;
-    [SerializeField] private float RPM = 200;
-    [SerializeField] private float speed = 7.5f;
+    [SerializeField] private float RPM = 150;
+    [SerializeField] private float speed = 8;
 
     [Header("Powerup Settings")]
-    [Tooltip("Amount of health restored by Repairs.")] [Range(1, 15)] public long repairHeal = 20;
+    [Tooltip("Amount of health restored by Small Repairs.")] [Range(1, 15)] public long smallRepairHeal = 15;
+    [Tooltip("Amount of health restored by Large Repairs.")] [Range(1, 25)] public long largeRepairHeal = 25;
     [Tooltip("Supercharge damage multiplier.")] [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
     [Tooltip("Supercharge powerup duration.")] [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
 
@@ -203,9 +204,6 @@ public class PlayerController : MonoBehaviour
         }
         if (damage < 0) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
-        if (repairHeal < 1) repairHeal = 1; //Checks if Large Repair heal amount is less than 1
-        if (superchargeMultiplier < 1.05f) superchargeMultiplier = 1.05f; //Checks if Supercharge damage multiplier is less than +5%
-        if (superchargeTime < 5) superchargeTime = 5; //Checks if Supercharge time is less than 5
     }
 
     void fire()
@@ -240,6 +238,35 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void repair(long heal)
+    {
+        if (heal != 0)
+        {
+            health += heal;
+            if (textPopup)
+            {
+                if (textPopup.GetComponent<TextMeshPro>())
+                {
+                    GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                    if (heal > 0)
+                    {
+                        popup.GetComponent<TextMeshPro>().text = "+" + heal;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 0, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 0, 255);
+                    } else
+                    {
+                        popup.GetComponent<TextMeshPro>().text = "-" + heal;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(255, 0, 0, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 0, 0, 255);
+                    }
+                } else
+                {
+                    Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                }
+            }
+        }
+    }
+
     public void supercharge()
     {
         if (!hasSupercharge)
@@ -250,11 +277,23 @@ public class PlayerController : MonoBehaviour
             damage = (long)(damage * superchargeMultiplier);
             superchargeDuration = superchargeTime;
             shownSuperchargeText = false;
-        }
-        else
+        } else
         {
             superchargeDuration = superchargeTime;
             shownSuperchargeText = false;
+        }
+        if (textPopup)
+        {
+            if (textPopup.GetComponent<TextMeshPro>())
+            {
+                GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                popup.GetComponent<TextMeshPro>().text = "Supercharge!";
+                popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 255, 255);
+                popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 127, 255);
+            } else
+            {
+                Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+            }
         }
     }
 
