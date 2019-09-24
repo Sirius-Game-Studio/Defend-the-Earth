@@ -10,7 +10,8 @@ TagManager:
   - Projectile
   - BulletSpawn
   - HealthBar
-  - Repair
+  - SmallRepair
+  - LargeRepair
   - Supercharge
   - LivesCount
   layers:
