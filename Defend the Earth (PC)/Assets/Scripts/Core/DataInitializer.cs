@@ -50,24 +50,7 @@ public class DataInitializer : MonoBehaviour
         {
             PlayerPrefs.SetInt("MaxLevels", 1);
         }
-
-        /*
-        //Set up player upgrade data
-        if (!PlayerPrefs.HasKey("DamageMultiplier")) PlayerPrefs.SetFloat("DamageMultiplier", 1);
-        if (!PlayerPrefs.HasKey("SpeedMultiplier")) PlayerPrefs.SetFloat("SpeedMultiplier", 1);
-        if (!PlayerPrefs.HasKey("HealthMultiplier")) PlayerPrefs.SetFloat("HealthMultiplier", 1);
-        if (!PlayerPrefs.HasKey("MoneyMultiplier")) PlayerPrefs.SetFloat("MoneyMultiplier", 1);
-
-        //Set up player upgrade price data
-        if (!PlayerPrefs.HasKey("DamagePrice")) PlayerPrefs.SetInt("DamagePrice", 8);
-        if (!PlayerPrefs.HasKey("SpeedPrice")) PlayerPrefs.SetInt("SpeedPrice", 5);
-        if (!PlayerPrefs.HasKey("HealthPrice")) PlayerPrefs.SetInt("HealthPrice", 7);
-        if (!PlayerPrefs.HasKey("MoneyPrice")) PlayerPrefs.SetInt("MoneyPrice", 4);
-        */
-
-        //Set up money data
         if (!PlayerPrefs.HasKey("Money")) PlayerPrefs.SetString("Money", "0");
-
         PlayerPrefs.Save();
         Destroy(gameObject);
     }
