@@ -14,7 +14,13 @@ public class SetVolume : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        slider.value = PlayerPrefs.GetFloat(volume);
+        if (PlayerPrefs.HasKey(volume))
+        {
+            slider.value = PlayerPrefs.GetFloat(volume);
+        } else
+        {
+            slider.value = 1;
+        }
         joystickButtons = new KeyCode[2];
         if (isBumper) //Xbox is LB & RB, PS is L1 & R1
         {
@@ -29,6 +35,7 @@ public class SetVolume : MonoBehaviour
 
     void Update()
     {
+        audioMixer.SetFloat(volume, Mathf.Log10(slider.value) * 20);
         if (joystickButtons.Length == 2)
         {
             if (Input.GetKey(joystickButtons[0]))
@@ -43,7 +50,6 @@ public class SetVolume : MonoBehaviour
 
     public void setVolume()
     {
-        audioMixer.SetFloat(volume, Mathf.Log10(slider.value) * 20);
         PlayerPrefs.SetFloat(volume, slider.value);
         PlayerPrefs.Save();
     }
