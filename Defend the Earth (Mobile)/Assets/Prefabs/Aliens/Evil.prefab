@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4000
-  defense: 0.8
+  defense: 0.9
   money: 500
   score: 300
   powerupChance: 0
