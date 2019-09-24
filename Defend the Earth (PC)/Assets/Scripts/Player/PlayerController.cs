@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     [Header("Settings")]
     public long health = 100;
     [SerializeField] private long damage = 10;
-    [SerializeField] private float RPM = 200;
-    [SerializeField] private float speed = 7.5f;
+    [SerializeField] private float RPM = 150;
+    [SerializeField] private float speed = 8;
 
     [Header("Powerup Settings")]
     [Tooltip("Amount of health restored by Small Repairs.")] [Range(1, 15)] public long smallRepairHeal = 15;
@@ -231,10 +231,6 @@ public class PlayerController : MonoBehaviour
         }
         if (damage < 0) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
-        if (smallRepairHeal < 1) smallRepairHeal = 1; //Checks if Small Repair heal amount is less than 1
-        if (largeRepairHeal < 1) largeRepairHeal = 1; //Checks if Large Repair heal amount is less than 1
-        if (superchargeMultiplier < 1.05f) superchargeMultiplier = 1.05f; //Checks if Supercharge damage multiplier is less than +5%
-        if (superchargeTime < 5) superchargeTime = 5; //Checks if Supercharge time is less than 5
     }
 
     public void takeDamage(long hitDamage)
