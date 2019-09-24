@@ -47,7 +47,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private AudioClip purchaseItem = null;
     [SerializeField] private AudioClip cannotAfford = null;
 
-    [Header("Miscellanous")]
+    [Header("Miscellaneous")]
     public int page = 1;
     public bool open = false;
 
