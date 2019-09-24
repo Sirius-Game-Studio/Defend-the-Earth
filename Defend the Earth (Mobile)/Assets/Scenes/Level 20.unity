@@ -1377,12 +1377,12 @@ MonoBehaviour:
   maxAliensReached: 12
   enemySpawnTime: {x: 2.75, y: 3.25}
   asteroidSpawnTime: {x: 6, y: 6.25}
-  bossInitialYPosition: 16
+  bossInitialYPosition: 14
   bossRotation: {x: 90, y: 180, z: 0}
-  boss: {fileID: 3022969746076777576, guid: 667476b085105d546ab9369e4f0bc106, type: 3}
+  boss: {fileID: 2870755580706364987, guid: c5b1b4fab868072418b9cc31312cdde8, type: 3}
   enemyToLimit: {fileID: 632701638249580328, guid: 776063f6daa3a4944b9e4c7d338668d9,
     type: 3}
-  limitedEnemySpawns: 2
+  limitedEnemySpawns: 3
   gameHUD: {fileID: 1802036951}
   gamePausedMenu: {fileID: 1589551668}
   gameOverMenu: {fileID: 4239533325917265998}
