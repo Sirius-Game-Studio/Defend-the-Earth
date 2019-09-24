@@ -1382,7 +1382,7 @@ MonoBehaviour:
   boss: {fileID: 0}
   enemyToLimit: {fileID: 632701638249580328, guid: 776063f6daa3a4944b9e4c7d338668d9,
     type: 3}
-  limitedEnemySpawns: 2
+  limitedEnemySpawns: 3
   gameHUD: {fileID: 1802036951}
   gamePausedMenu: {fileID: 1589551668}
   gameOverMenu: {fileID: 4239533325917265998}
