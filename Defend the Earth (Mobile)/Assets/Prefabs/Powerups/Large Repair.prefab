@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 4839323291990872610}
   - component: {fileID: 2220761450136899481}
   m_Layer: 2
-  m_Name: Repair
-  m_TagString: Repair
+  m_Name: Large Repair
+  m_TagString: LargeRepair
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
