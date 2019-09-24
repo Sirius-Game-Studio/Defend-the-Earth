@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxWaves: 5
   enemiesLeft: 14
-  maxAliensReached: 12
+  maxAliensReached: 13
   enemySpawnTime: {x: 3, y: 3.5}
   asteroidSpawnTime: {x: 6, y: 6.5}
   bossInitialYPosition: 16
@@ -1453,11 +1453,11 @@ MonoBehaviour:
   - {fileID: 1459209939081120, guid: 4072c7389fc23164aba05066517d63a2, type: 3}
   - {fileID: 1191193262904786, guid: 2350ab6df55a09f49932614f1f990d1e, type: 3}
   - {fileID: 1143785053813954, guid: 9aa66e6537cb81847abd47947601f898, type: 3}
-  - {fileID: 1870533537087504, guid: 3d75efea2d4394f41836d50671b13ecd, type: 3}
-  - {fileID: 1630810610957190, guid: 26313dd67027b9648a8320c8fb4a88b8, type: 3}
-  - {fileID: 1581323623909028, guid: 972abbb75e59b9d4197c935f4054130a, type: 3}
-  - {fileID: 1491407261460684, guid: 4769e9166a9ebc24d8b361bb5d3e60b2, type: 3}
-  - {fileID: 1392832899432374, guid: d4c3c7cc0364df24585e3c581e0977f8, type: 3}
+  - {fileID: 1996729434383100, guid: a0dd3874ddcff2746812c36f90baa9f2, type: 3}
+  - {fileID: 1919587679375178, guid: edecc7c47ae885646b477dcb0552a97d, type: 3}
+  - {fileID: 1392877985953660, guid: dad66468463485b4390d0b3ea6dc04b3, type: 3}
+  - {fileID: 1368811047504322, guid: e6c9599ae75a4ff48866242a932ddbb1, type: 3}
+  - {fileID: 1411507063451414, guid: 0629e14e431e0ec40b4821c53cd72da0, type: 3}
   backgrounds:
   - {fileID: 7646070162773227609, guid: 7eb5a75c5e381e34f81cc6958c786766, type: 3}
   - {fileID: 7646070162773227609, guid: 599ded73684cf0744b13c83a2b5714aa, type: 3}
