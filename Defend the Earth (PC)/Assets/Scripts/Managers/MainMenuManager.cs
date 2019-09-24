@@ -398,6 +398,7 @@ public class MainMenuManager : MonoBehaviour
             StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
         } else
         {
+            PlayerPrefs.SetInt("Level", 1);
             PlayerPrefs.SetInt("Difficulty", difficulty);
             if (PlayerPrefs.GetInt("Difficulty") < 1)
             {
@@ -424,43 +425,6 @@ public class MainMenuManager : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Endless"));
-    }
-
-    IEnumerator loadScene(string scene)
-    {
-        if (!loading)
-        {
-            loading = true;
-            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            while (!load.isDone)
-            {
-                Time.timeScale = 0;
-                AudioListener.pause = true;
-                if (load.progress < 0.9f)
-                {
-                    load.allowSceneActivation = false;
-                    loadingSlider.value = load.progress;
-                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
-                    anyKeyPrompt.SetActive(false);
-                } else
-                {
-                    if (Input.anyKeyDown) load.allowSceneActivation = true;
-                    loadingSlider.value = 1;
-                    loadingPercentage.text = "100%";
-                    anyKeyPrompt.SetActive(true);
-                }
-                mainMenu.enabled = false;
-                shopMenu.enabled = false;
-                spaceshipsMenu.enabled = false;
-                upgradesMenu.enabled = false;
-                settingsMenu.enabled = false;
-                selectGamemodeMenu.enabled = false;
-                selectDifficultyMenu.enabled = false;
-                yield return null;
-            }
-        }
     }
 
     void priceTextState(Text main, Text button, bool isUpgrade, bool change, bool useDataKey, string statKey, string priceKey, int price, int max, bool isFloat)
@@ -553,6 +517,43 @@ public class MainMenuManager : MonoBehaviour
                         button.text = "";
                     }
                 }
+            }
+        }
+    }
+
+    IEnumerator loadScene(string scene)
+    {
+        if (!loading)
+        {
+            loading = true;
+            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            while (!load.isDone)
+            {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (Input.anyKeyDown) load.allowSceneActivation = true;
+                    loadingSlider.value = 1;
+                    loadingPercentage.text = "100%";
+                    anyKeyPrompt.SetActive(true);
+                }
+                mainMenu.enabled = false;
+                shopMenu.enabled = false;
+                spaceshipsMenu.enabled = false;
+                upgradesMenu.enabled = false;
+                settingsMenu.enabled = false;
+                selectGamemodeMenu.enabled = false;
+                selectDifficultyMenu.enabled = false;
+                yield return null;
             }
         }
     }
