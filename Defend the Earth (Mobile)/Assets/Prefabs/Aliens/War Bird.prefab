@@ -1306,10 +1306,12 @@ MonoBehaviour:
   score: 15
   powerupChance: 0.37
   powerups:
+  - {fileID: 100002, guid: b6a019fbed1a6fc4bb8db6f2ca2feadc, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
   killTracker: AlienKills
+  maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
   textPopup: {fileID: 3546921227744333752, guid: 97d98345fa26da643bab2bf3bff0e4ff,
@@ -1331,9 +1333,7 @@ MonoBehaviour:
   shots: 4
   turnToPlayer: 0
   RPM: 30
-  defaultAlbedo: {fileID: 0}
-  greenAlbedo: {fileID: 0}
-  whiteAlbedo: {fileID: 0}
+  textures: []
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   bullet: {fileID: 3937757261437629000, guid: 973d3e143b1eef443983de606c683164, type: 3}
   nightmareBullet: {fileID: 0}
@@ -1350,7 +1350,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 38
+  lifesteal: 0
+  instakill: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &2641952558019507706
 MonoBehaviour:
   m_ObjectHideFlags: 0

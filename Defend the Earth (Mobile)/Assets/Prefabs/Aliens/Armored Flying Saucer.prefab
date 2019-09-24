@@ -248,6 +248,7 @@ MonoBehaviour:
   score: 10
   powerupChance: 0.37
   powerups:
+  - {fileID: 100002, guid: b6a019fbed1a6fc4bb8db6f2ca2feadc, type: 3}
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
