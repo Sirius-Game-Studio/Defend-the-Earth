@@ -52,7 +52,7 @@ public class ShopManager : MonoBehaviour
     public bool open = false;
 
     private AudioSource audioSource;
-    private bool pressedBumper = false;
+    private Controls input;
 
     void Awake()
     {
@@ -64,6 +64,7 @@ public class ShopManager : MonoBehaviour
             Destroy(gameObject);
         }
         audioSource = GetComponent<AudioSource>();
+        input = new Controls();
         page = 1;
         open = false;
         for (int i = 0; i < upgrades.Length; i++)
@@ -74,29 +75,25 @@ public class ShopManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    void OnEnable()
+    {
+        input.Enable();
+        input.Menu.SpaceshipsLeft.performed += context => changeSpaceshipForController(false);
+        input.Menu.SpaceshipsRight.performed += context => changeSpaceshipForController(true);
+        input.Menu.BuySpaceship.performed += context => buySpaceship(false);
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Menu.SpaceshipsLeft.performed -= context => changeSpaceshipForController(false);
+        input.Menu.SpaceshipsRight.performed -= context => changeSpaceshipForController(true);
+        input.Menu.BuySpaceship.performed -= context => buySpaceship(false);
+    }
+
     void Update()
     {
         Spaceship spaceship = spaceships[page - 1];
-        if (open)
-        {
-            if (Input.GetKeyDown(KeyCode.JoystickButton4) && page > 1) // LB/L1 (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(false);
-                pressedBumper = false;
-            } else if (Input.GetKeyDown(KeyCode.JoystickButton5) && page < spaceships.Length) // RB/R1 (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                changeSpaceshipsPage(true);
-                pressedBumper = false;
-            }
-            if (Input.GetKeyDown(KeyCode.JoystickButton2)) // X/Square (Xbox/PS Controller)
-            {
-                pressedBumper = true;
-                buySpaceship();
-                pressedBumper = false;
-            }
-        }
         if (page < 1)
         {
             page = 1;
@@ -154,11 +151,11 @@ public class ShopManager : MonoBehaviour
     }
 
     //Main Functions
-    public void changeSpaceshipsPage(bool next)
+    public void changeSpaceship(bool next)
     {
         if (open)
         {
-            if (!pressedBumper && audioSource)
+            if (audioSource)
             {
                 if (buttonClick)
                 {
@@ -178,8 +175,22 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    void changeSpaceshipForController(bool next)
+    {
+        if (open)
+        {
+            if (next && page < spaceships.Length)
+            {
+                ++page;
+            } else if (!next && page > 1)
+            {
+                --page;
+            }
+        }
+    }
+
     //Buy Functions
-    public void buySpaceship()
+    public void buySpaceship(bool wasClicked)
     {
         if (open)
         {
@@ -224,7 +235,7 @@ public class ShopManager : MonoBehaviour
                 PlayerPrefs.Save();
             } else
             {
-                if (!pressedBumper && audioSource)
+                if (audioSource && wasClicked)
                 {
                     if (buttonClick)
                     {

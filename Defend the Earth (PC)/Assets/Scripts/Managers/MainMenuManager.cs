@@ -42,12 +42,14 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
+    private Controls input;
     private string currentLoadingTip = "";
     private bool loading = false;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
         currentLoadingTip = "";
         loading = false;
@@ -82,40 +84,22 @@ public class MainMenuManager : MonoBehaviour
         ShopManager.instance.open = false;
     }
 
+    void OnEnable()
+    {
+        input.Enable();
+        input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
+        input.Menu.CloseMenu.performed += context => closeMenu();
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
+        input.Menu.CloseMenu.performed -= context => closeMenu();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
-        {
-            if (shopMenu.enabled)
-            {
-                shopMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (spaceshipsMenu.enabled)
-            {
-                spaceshipsMenu.enabled = false;
-                shopMenu.enabled = true;
-                ShopManager.instance.page = 1;
-                ShopManager.instance.open = false;
-            } else if (upgradesMenu.enabled)
-            {
-                upgradesMenu.enabled = false;
-                shopMenu.enabled = true;
-            } else if (settingsMenu.enabled)
-            {
-                settingsMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (selectGamemodeMenu.enabled)
-            {
-                selectGamemodeMenu.enabled = false;
-                mainMenu.enabled = true;
-            } else if (selectDifficultyMenu.enabled)
-            {
-                selectDifficultyMenu.enabled = false;
-                selectGamemodeMenu.enabled = true;
-            }
-        }
-
         //Updates the money counter
         if (PlayerPrefs.GetString("Money") != "")
         {
@@ -215,6 +199,42 @@ public class MainMenuManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
+    }
+
+    void toggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    void closeMenu()
+    {
+        if (shopMenu.enabled)
+        {
+            shopMenu.enabled = false;
+            mainMenu.enabled = true;
+        } else if (spaceshipsMenu.enabled)
+        {
+            spaceshipsMenu.enabled = false;
+            shopMenu.enabled = true;
+            ShopManager.instance.page = 1;
+            ShopManager.instance.open = false;
+        } else if (upgradesMenu.enabled)
+        {
+            upgradesMenu.enabled = false;
+            shopMenu.enabled = true;
+        } else if (settingsMenu.enabled)
+        {
+            settingsMenu.enabled = false;
+            mainMenu.enabled = true;
+        } else if (selectGamemodeMenu.enabled)
+        {
+            selectGamemodeMenu.enabled = false;
+            mainMenu.enabled = true;
+        } else if (selectDifficultyMenu.enabled)
+        {
+            selectDifficultyMenu.enabled = false;
+            selectGamemodeMenu.enabled = true;
+        }
     }
 
     public void clickPlayGame()
