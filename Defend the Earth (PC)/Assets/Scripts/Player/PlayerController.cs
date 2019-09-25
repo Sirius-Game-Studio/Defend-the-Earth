@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
@@ -34,10 +35,13 @@ public class PlayerController : MonoBehaviour
 
     private new Renderer renderer;
     private AudioSource audioSource;
+    private Controls input;
     private Slider healthBar;
     private Text healthText;
     private Text livesCount;
     private long maxHealth = 0;
+    private bool shooting = false;
+    private Vector2 movement;
     private bool hasSupercharge = false;
     private float superchargeDuration = 0;
     private long oldDamage = 0;
@@ -84,16 +88,45 @@ public class PlayerController : MonoBehaviour
         if (healthText) healthText.text = health + " / " + maxHealth;
     }
 
+    void Awake()
+    {
+        input = new Controls();
+    }
+
+    void OnEnable()
+    {
+        input.Enable();
+        input.Player.Move.performed += context => move(context.ReadValue<Vector2>());
+        input.Player.Fire.performed += context => fire(true);
+        input.Player.Move.canceled += context => move(Vector2.zero);
+        input.Player.Fire.canceled += context => fire(false);
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.SmallRepair.performed += context => repair(smallRepairHeal);
+        input.Debug.LargeRepair.performed += context => repair(largeRepairHeal);
+        input.Debug.MaxHealth.performed += context => repair(maxHealth);
+        input.Debug.Supercharge.performed += context => supercharge();
+        #endif
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Player.Move.performed -= context => move(context.ReadValue<Vector2>());
+        input.Player.Fire.performed -= context => fire(true);
+        input.Player.Move.canceled -= context => move(Vector2.zero);
+        input.Player.Fire.canceled -= context => fire(false);
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.SmallRepair.performed -= context => repair(smallRepairHeal);
+        input.Debug.LargeRepair.performed -= context => repair(largeRepairHeal);
+        input.Debug.MaxHealth.performed -= context => repair(maxHealth);
+        input.Debug.Supercharge.performed -= context => supercharge();
+        #endif
+    }
+
     void Update()
     {
-        //Debug
-        #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha1)) repair(smallRepairHeal);
-            if (Input.GetKeyDown(KeyCode.Alpha2)) repair(largeRepairHeal);
-            if (Input.GetKeyDown(KeyCode.Alpha3)) repair(maxHealth);
-            if (Input.GetKeyDown(KeyCode.Alpha4)) supercharge();
-        #endif
-
         if (health < 0) //Checks if health is less than 0
         {
             health = 0;
@@ -154,8 +187,8 @@ public class PlayerController : MonoBehaviour
         }
         if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused)
         {
-            transform.position += new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0).normalized * speed * Time.deltaTime;
-            if (Input.GetButton("Shoot") && Time.time >= nextShot)
+            transform.position += new Vector3(movement.x, movement.y, 0).normalized * speed * Time.deltaTime;
+            if (shooting && Time.time >= nextShot)
             {
                 bool foundBulletSpawns = false;
                 nextShot = Time.time + 60 / RPM;
@@ -231,6 +264,16 @@ public class PlayerController : MonoBehaviour
         }
         if (damage < 1) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
+    }
+
+    public void move(Vector2 direction)
+    {
+        movement = direction;
+    }
+
+    public void fire(bool state)
+    {
+        shooting = state;
     }
 
     public void takeDamage(long hitDamage)
