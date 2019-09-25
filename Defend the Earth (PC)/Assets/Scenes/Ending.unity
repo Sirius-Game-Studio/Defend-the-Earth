@@ -2253,6 +2253,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: PCButton
+      value: 
+      objectReference: {fileID: 21300002, guid: 179cb3a3dc172f84f9d63d186b2b85d6,
+        type: 3}
     - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Text
