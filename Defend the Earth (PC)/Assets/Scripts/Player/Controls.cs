@@ -456,6 +456,30 @@ public class Controls : IInputActionCollection
             ""id"": ""b373f2b5-c71c-48ef-a94b-f061aec5f7bc"",
             ""actions"": [
                 {
+                    ""name"": ""BuySpaceship"",
+                    ""type"": ""Button"",
+                    ""id"": ""d660bd35-035a-4b37-b3f2-0e826eb525b0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SpaceshipsLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""b5487503-f746-40ab-84f5-842e48c23e42"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SpaceshipsRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1aad275-b4d6-4781-bd5b-731be2570690"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""CloseMenu"",
                     ""type"": ""Button"",
                     ""id"": ""d4a702e3-3b11-4be9-beea-b66454e84fc3"",
@@ -473,6 +497,39 @@ public class Controls : IInputActionCollection
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8de2256f-03fa-4d7d-8e13-8bf6d6476ec6"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SpaceshipsLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e646f503-4297-4755-bbab-3989836dc0a7"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""BuySpaceship"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d273a9b-772b-47c0-a9f6-f22a8814abbd"",
+                    ""path"": ""<Joystick>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Joystick"",
+                    ""action"": ""BuySpaceship"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
                 {
                     ""name"": """",
                     ""id"": ""e0277a4c-36fd-444e-b46c-62eafdcb5337"",
@@ -512,8 +569,19 @@ public class Controls : IInputActionCollection
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""SpeedUpCredits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14136928-7fa0-43a8-b891-9d321b21d3ee"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SpaceshipsRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -587,7 +655,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""f4e60ea9-9522-41aa-ada7-f16d282add4a"",
-                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -609,7 +677,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""a8ea6d16-d7e6-4d2f-97df-83ec0a45ad2d"",
-                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -631,7 +699,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""8530e089-e058-4074-a064-34cd69231479"",
-                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -653,7 +721,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""6c9ce740-bb37-4798-a45d-603921e58e62"",
-                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -761,6 +829,9 @@ public class Controls : IInputActionCollection
         m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
+        m_Menu_BuySpaceship = m_Menu.FindAction("BuySpaceship", throwIfNotFound: true);
+        m_Menu_SpaceshipsLeft = m_Menu.FindAction("SpaceshipsLeft", throwIfNotFound: true);
+        m_Menu_SpaceshipsRight = m_Menu.FindAction("SpaceshipsRight", throwIfNotFound: true);
         m_Menu_CloseMenu = m_Menu.FindAction("CloseMenu", throwIfNotFound: true);
         m_Menu_SpeedUpCredits = m_Menu.FindAction("SpeedUpCredits", throwIfNotFound: true);
         // Debug
@@ -918,12 +989,18 @@ public class Controls : IInputActionCollection
     // Menu
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
+    private readonly InputAction m_Menu_BuySpaceship;
+    private readonly InputAction m_Menu_SpaceshipsLeft;
+    private readonly InputAction m_Menu_SpaceshipsRight;
     private readonly InputAction m_Menu_CloseMenu;
     private readonly InputAction m_Menu_SpeedUpCredits;
     public struct MenuActions
     {
         private Controls m_Wrapper;
         public MenuActions(Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BuySpaceship => m_Wrapper.m_Menu_BuySpaceship;
+        public InputAction @SpaceshipsLeft => m_Wrapper.m_Menu_SpaceshipsLeft;
+        public InputAction @SpaceshipsRight => m_Wrapper.m_Menu_SpaceshipsRight;
         public InputAction @CloseMenu => m_Wrapper.m_Menu_CloseMenu;
         public InputAction @SpeedUpCredits => m_Wrapper.m_Menu_SpeedUpCredits;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
@@ -935,6 +1012,15 @@ public class Controls : IInputActionCollection
         {
             if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
+                BuySpaceship.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                BuySpaceship.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                BuySpaceship.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                SpaceshipsLeft.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                SpaceshipsLeft.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                SpaceshipsLeft.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                SpaceshipsRight.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
+                SpaceshipsRight.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
+                SpaceshipsRight.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
                 CloseMenu.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
                 CloseMenu.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
                 CloseMenu.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
@@ -945,6 +1031,15 @@ public class Controls : IInputActionCollection
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
+                BuySpaceship.started += instance.OnBuySpaceship;
+                BuySpaceship.performed += instance.OnBuySpaceship;
+                BuySpaceship.canceled += instance.OnBuySpaceship;
+                SpaceshipsLeft.started += instance.OnSpaceshipsLeft;
+                SpaceshipsLeft.performed += instance.OnSpaceshipsLeft;
+                SpaceshipsLeft.canceled += instance.OnSpaceshipsLeft;
+                SpaceshipsRight.started += instance.OnSpaceshipsRight;
+                SpaceshipsRight.performed += instance.OnSpaceshipsRight;
+                SpaceshipsRight.canceled += instance.OnSpaceshipsRight;
                 CloseMenu.started += instance.OnCloseMenu;
                 CloseMenu.performed += instance.OnCloseMenu;
                 CloseMenu.canceled += instance.OnCloseMenu;
@@ -1069,6 +1164,9 @@ public class Controls : IInputActionCollection
     }
     public interface IMenuActions
     {
+        void OnBuySpaceship(InputAction.CallbackContext context);
+        void OnSpaceshipsLeft(InputAction.CallbackContext context);
+        void OnSpaceshipsRight(InputAction.CallbackContext context);
         void OnCloseMenu(InputAction.CallbackContext context);
         void OnSpeedUpCredits(InputAction.CallbackContext context);
     }
