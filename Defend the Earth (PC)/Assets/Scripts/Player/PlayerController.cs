@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         renderer = GetComponent<Renderer>();
         audioSource = GetComponent<AudioSource>();
 
-        //Gets sliders and texts tagged as HealthBar, then sets health bar and health text
+        //Gets all sliders and text objects tagged as HealthBar, then sets health bar and health text
         foreach (Slider slider in FindObjectsOfType<Slider>())
         {
             if (slider.CompareTag("HealthBar")) healthBar = slider;
@@ -229,7 +229,7 @@ public class PlayerController : MonoBehaviour
                 superchargeDuration = superchargeTime;
             }
         }
-        if (damage < 0) damage = 1; //Checks if damage is less than 1
+        if (damage < 1) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
     }
 
