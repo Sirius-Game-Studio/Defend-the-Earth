@@ -6,6 +6,7 @@ public class ShowControllerButton : MonoBehaviour
     [SerializeField] private Sprite xboxButton = null;
     [SerializeField] private Sprite PSButton = null;
     [SerializeField] private Sprite switchButton = null;
+    [SerializeField] private Sprite PCButton = null;
 
     private Image image;
 
@@ -32,7 +33,14 @@ public class ShowControllerButton : MonoBehaviour
             }
         } else
         {
-            gameObject.SetActive(false);
+            if (PCButton)
+            {
+                gameObject.SetActive(true);
+                image.sprite = PCButton;
+            } else
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 }
