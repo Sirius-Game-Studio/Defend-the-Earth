@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
-using UnityEditor;
 
 public class MainMenuManager : MonoBehaviour
 {
@@ -298,7 +297,7 @@ public class MainMenuManager : MonoBehaviour
         }
         Application.Quit();
         #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 

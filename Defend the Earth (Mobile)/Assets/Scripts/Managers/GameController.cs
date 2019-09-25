@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
-using UnityEditor;
 
 struct PlayerPosition
 {
@@ -907,7 +906,7 @@ public class GameController : MonoBehaviour
         }
         Application.Quit();
         #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
