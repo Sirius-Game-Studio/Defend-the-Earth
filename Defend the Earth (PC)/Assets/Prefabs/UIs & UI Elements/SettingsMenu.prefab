@@ -217,7 +217,7 @@ RectTransform:
   m_Children:
   - {fileID: 3670830041899991382}
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -748,7 +748,7 @@ RectTransform:
   m_Children:
   - {fileID: 5419393027199344469}
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1120,7 +1120,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1435,8 +1435,6 @@ RectTransform:
   m_Children:
   - {fileID: 8570374179902812026}
   - {fileID: 8570374179702873673}
-  - {fileID: 8049424670065369787}
-  - {fileID: 3771073018506301431}
   - {fileID: 34087484238259874}
   - {fileID: 1129421494382377836}
   - {fileID: 7512047935636524673}
@@ -1543,7 +1541,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1789,173 +1787,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &2031482723376382417
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8570374180532975145}
-    m_Modifications:
-    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Name
-      value: ControllerButtonLeft (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: xboxButton
-      value: 
-      objectReference: {fileID: 21300032, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
-    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: PSButton
-      value: 
-      objectReference: {fileID: 21300036, guid: 10045ad39fef69944b33bedc39310592,
-        type: 3}
-    - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300032, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
-    - target: {fileID: 2910675731584890015, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Text
-      value: Change Music
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 918d48fe9978d4148ae29dfac6ddec45, type: 3}
---- !u!224 &3771073018506301431 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-    type: 3}
-  m_PrefabInstance: {fileID: 2031482723376382417}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2890702152401905796
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 8570374180532975145}
-    m_Modifications:
-    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Name
-      value: ControllerButtonLeft (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: xboxButton
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
-    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: PSButton
-      value: 
-      objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
-        type: 3}
-    - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
-        type: 3}
-    - target: {fileID: 2910675731584890015, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_Text
-      value: Back
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 918d48fe9978d4148ae29dfac6ddec45, type: 3}
---- !u!224 &34087484238259874 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-    type: 3}
-  m_PrefabInstance: {fileID: 2890702152401905796}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5175059553830743197
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -2002,39 +1834,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 70
-      objectReference: {fileID: 0}
     - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: xboxButton
       value: 
-      objectReference: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922,
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: PSButton
       value: 
-      objectReference: {fileID: 21300028, guid: 10045ad39fef69944b33bedc39310592,
+      objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
         type: 3}
     - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922,
+      objectReference: {fileID: 21300054, guid: fe9aa33e50412c242bd73e9324bc7922,
         type: 3}
     - target: {fileID: 2910675731584890015, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: m_Text
-      value: Change Sound
+      value: Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 918d48fe9978d4148ae29dfac6ddec45, type: 3}
---- !u!224 &8049424670065369787 stripped
+--- !u!224 &34087484238259874 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
     type: 3}
-  m_PrefabInstance: {fileID: 5175059553830743197}
+  m_PrefabInstance: {fileID: 2890702152401905796}
   m_PrefabAsset: {fileID: 0}
