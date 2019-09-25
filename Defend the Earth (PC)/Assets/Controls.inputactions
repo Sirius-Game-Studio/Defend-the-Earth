@@ -444,6 +444,30 @@
             "id": "b373f2b5-c71c-48ef-a94b-f061aec5f7bc",
             "actions": [
                 {
+                    "name": "BuySpaceship",
+                    "type": "Button",
+                    "id": "d660bd35-035a-4b37-b3f2-0e826eb525b0",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SpaceshipsLeft",
+                    "type": "Button",
+                    "id": "b5487503-f746-40ab-84f5-842e48c23e42",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SpaceshipsRight",
+                    "type": "Button",
+                    "id": "d1aad275-b4d6-4781-bd5b-731be2570690",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "CloseMenu",
                     "type": "Button",
                     "id": "d4a702e3-3b11-4be9-beea-b66454e84fc3",
@@ -461,6 +485,39 @@
                 }
             ],
             "bindings": [
+                {
+                    "name": "",
+                    "id": "8de2256f-03fa-4d7d-8e13-8bf6d6476ec6",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpaceshipsLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e646f503-4297-4755-bbab-3989836dc0a7",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "BuySpaceship",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d273a9b-772b-47c0-a9f6-f22a8814abbd",
+                    "path": "<Joystick>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Joystick",
+                    "action": "BuySpaceship",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
                 {
                     "name": "",
                     "id": "e0277a4c-36fd-444e-b46c-62eafdcb5337",
@@ -500,8 +557,19 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Gamepad",
                     "action": "SpeedUpCredits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "14136928-7fa0-43a8-b891-9d321b21d3ee",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "SpaceshipsRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -575,7 +643,7 @@
                 {
                     "name": "",
                     "id": "f4e60ea9-9522-41aa-ada7-f16d282add4a",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -597,7 +665,7 @@
                 {
                     "name": "",
                     "id": "a8ea6d16-d7e6-4d2f-97df-83ec0a45ad2d",
-                    "path": "<Gamepad>/dpad/right",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -619,7 +687,7 @@
                 {
                     "name": "",
                     "id": "8530e089-e058-4074-a064-34cd69231479",
-                    "path": "<Gamepad>/dpad/down",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
@@ -641,7 +709,7 @@
                 {
                     "name": "",
                     "id": "6c9ce740-bb37-4798-a45d-603921e58e62",
-                    "path": "<Gamepad>/dpad/up",
+                    "path": "<Gamepad>/rightStickPress",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
