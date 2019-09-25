@@ -3807,7 +3807,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2068057270}
-        m_MethodName: changeSpaceshipsPage
+        m_MethodName: changeSpaceship
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5617,7 +5617,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1002154992}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -5719,7 +5719,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004614327}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -6691,14 +6691,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2068057270}
         m_MethodName: buySpaceship
-        m_Mode: 1
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -8249,7 +8249,7 @@ GameObject:
   - component: {fileID: 1549581454}
   - component: {fileID: 1549581453}
   m_Layer: 5
-  m_Name: LeftBumper
+  m_Name: DPadLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8286,9 +8286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca7fba58ca1a014989635fee9135d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xboxButton: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
-  PSButton: {fileID: 21300028, guid: 10045ad39fef69944b33bedc39310592, type: 3}
-  switchButton: {fileID: 0}
+  xboxButton: {fileID: 21300002, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  PSButton: {fileID: 21300002, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+  switchButton: {fileID: 21300002, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  PCButton: {fileID: 0}
 --- !u!114 &1549581454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8309,7 +8310,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  m_Sprite: {fileID: 21300002, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8340,7 +8341,7 @@ GameObject:
   - component: {fileID: 1560575317}
   - component: {fileID: 1560575316}
   m_Layer: 5
-  m_Name: RightBumper
+  m_Name: DPadRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8377,9 +8378,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ca7fba58ca1a014989635fee9135d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xboxButton: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
-  PSButton: {fileID: 21300030, guid: 10045ad39fef69944b33bedc39310592, type: 3}
-  switchButton: {fileID: 0}
+  xboxButton: {fileID: 21300006, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  PSButton: {fileID: 21300006, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+  switchButton: {fileID: 21300006, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}
+  PCButton: {fileID: 0}
 --- !u!114 &1560575317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8400,7 +8402,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
+  m_Sprite: {fileID: 21300006, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9438,7 +9440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2068057270}
-        m_MethodName: changeSpaceshipsPage
+        m_MethodName: changeSpaceship
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
