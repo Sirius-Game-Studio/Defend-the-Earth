@@ -257,7 +257,7 @@ PrefabInstance:
     - target: {fileID: 5562829052573971079, guid: 2c0d7c9f5d2721b4a84d06b93135e65f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5562829052573971079, guid: 2c0d7c9f5d2721b4a84d06b93135e65f,
         type: 3}
@@ -268,6 +268,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5562829052573971079, guid: 2c0d7c9f5d2721b4a84d06b93135e65f,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5562829052809250186, guid: 2c0d7c9f5d2721b4a84d06b93135e65f,
         type: 3}
@@ -1173,10 +1178,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxWaves: 5
+  enemiesLeft: 13
+  maxAliensReached: 12
   enemySpawnTime: {x: 3.25, y: 3.5}
   asteroidSpawnTime: {x: 6.25, y: 7.25}
-  maxAliensReached: 12
-  bossFinalYPosition: 4.5
+  bossInitialYPosition: 16
   bossRotation: {x: 90, y: 180, z: 0}
   boss: {fileID: 0}
   enemyToLimit: {fileID: 632701638249580328, guid: a502879cec4393f4d9cc2f94c364e829,
@@ -1207,7 +1213,6 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
-  enemiesLeft: 13
   isCampaignLevel: 1
   randomMusic: []
   aliensReached: 0
@@ -1757,6 +1762,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1944101018}
+    - target: {fileID: 1629012848169908063, guid: 73d1d278df9a79940ac14c78eaa30006,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629012848169908063, guid: 73d1d278df9a79940ac14c78eaa30006,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1629012846561438571, guid: 73d1d278df9a79940ac14c78eaa30006,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
