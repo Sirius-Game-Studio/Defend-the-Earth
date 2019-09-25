@@ -988,6 +988,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
         type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Sprite
@@ -1274,6 +1280,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
         type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -3388,6 +3400,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
         type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
@@ -7183,6 +7201,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
         type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Sprite
@@ -7728,6 +7752,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
         type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Sprite
@@ -8258,6 +8288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xboxButton: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
   PSButton: {fileID: 21300028, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+  switchButton: {fileID: 0}
 --- !u!114 &1549581454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8348,6 +8379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xboxButton: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
   PSButton: {fileID: 21300030, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+  switchButton: {fileID: 0}
 --- !u!114 &1560575317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8654,6 +8686,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
         type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
       propertyPath: m_Sprite
@@ -8917,6 +8955,12 @@ PrefabInstance:
       propertyPath: PSButton
       value: 
       objectReference: {fileID: 21300046, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300046, guid: e35b1509688e6294cad1ada6c91b7693,
         type: 3}
     - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
         type: 3}
