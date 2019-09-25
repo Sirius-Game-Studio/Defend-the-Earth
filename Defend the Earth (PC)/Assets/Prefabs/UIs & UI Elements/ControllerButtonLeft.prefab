@@ -170,3 +170,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xboxButton: {fileID: 21300052, guid: fe9aa33e50412c242bd73e9324bc7922, type: 3}
   PSButton: {fileID: 21300052, guid: 10045ad39fef69944b33bedc39310592, type: 3}
+  switchButton: {fileID: 21300042, guid: e35b1509688e6294cad1ada6c91b7693, type: 3}

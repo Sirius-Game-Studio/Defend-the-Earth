@@ -5,6 +5,7 @@ public class ShowControllerButton : MonoBehaviour
 {
     [SerializeField] private Sprite xboxButton = null;
     [SerializeField] private Sprite PSButton = null;
+    [SerializeField] private Sprite switchButton = null;
 
     private Image image;
 
@@ -22,9 +23,12 @@ public class ShowControllerButton : MonoBehaviour
             if (controllers[0].ToLower().Contains("xbox"))
             {
                 image.sprite = xboxButton;
-            } else if (controllers[0].Length == 19)
+            } else if (controllers[0].ToLower() == "wireless controller")
             {
                 image.sprite = PSButton;
+            } else if (controllers[0].ToLower() == "pro controller" || controllers[0].ToLower().Contains("joy-con"))
+            {
+                image.sprite = switchButton;
             }
         } else
         {
