@@ -1017,6 +1017,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300050, guid: 10045ad39fef69944b33bedc39310592,
         type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300040, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
     - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: m_Sprite
