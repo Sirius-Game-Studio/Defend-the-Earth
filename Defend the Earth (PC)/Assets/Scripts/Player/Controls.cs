@@ -498,7 +498,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""54870bf6-4ed9-4cce-8772-b1ac64ed47b9"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
