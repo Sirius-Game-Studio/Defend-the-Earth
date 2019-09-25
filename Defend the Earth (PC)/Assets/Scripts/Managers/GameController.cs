@@ -874,40 +874,46 @@ public class GameController : MonoBehaviour
 
     public void restart()
     {
-        if (audioSource)
+        if (restartPrompt.enabled)
         {
-            if (buttonClick)
+            if (audioSource)
             {
-                audioSource.PlayOneShot(buttonClick);
-            } else
-            {
-                audioSource.Play();
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick);
+                } else
+                {
+                    audioSource.Play();
+                }
             }
+            if (isCampaignLevel)
+            {
+                PlayerPrefs.SetInt("Restarted", 1);
+                PlayerPrefs.Save();
+            }
+            StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
         }
-        if (isCampaignLevel)
-        {
-            PlayerPrefs.SetInt("Restarted", 1);
-            PlayerPrefs.Save();
-        }
-        StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
     }
 
     public void exitGame()
     {
-        if (audioSource)
+        if (quitGameMenu.enabled)
         {
-            if (buttonClick)
+            if (audioSource)
             {
-                audioSource.PlayOneShot(buttonClick);
-            } else
-            {
-                audioSource.Play();
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick);
+                } else
+                {
+                    audioSource.Play();
+                }
             }
-        }
-        Application.Quit();
-        #if UNITY_EDITOR
+            Application.Quit();
+            #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+            #endif
+        }
     }
 
     public void exitToMainMenu()
