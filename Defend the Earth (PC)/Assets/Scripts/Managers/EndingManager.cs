@@ -27,13 +27,14 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
-    private bool spedupCredits = false;
+    private Controls input;
     private string currentLoadingTip = "";
     private bool loading = false;
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
         currentLoadingTip = "";
         loading = false;
@@ -61,35 +62,26 @@ public class EndingManager : MonoBehaviour
         creditsMenu.enabled = false;
     }
 
+    void OnEnable()
+    {
+        input.Enable();
+        input.Gameplay.Fullscreen.performed += context => toggleFullScreen();
+        input.Menu.CloseMenu.performed += context => stopCredits();
+        input.Menu.SpeedUpCredits.performed += context => speedUpCredits(true);
+        input.Menu.SpeedUpCredits.canceled += context => speedUpCredits(false);
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Gameplay.Fullscreen.performed -= context => toggleFullScreen();
+        input.Menu.CloseMenu.performed -= context => stopCredits();
+        input.Menu.SpeedUpCredits.performed -= context => speedUpCredits(true);
+        input.Menu.SpeedUpCredits.canceled -= context => speedUpCredits(false);
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.JoystickButton0)) // X/Cross (Xbox/PS Controller)
-        {
-            if (!spedupCredits)
-            {
-                spedupCredits = true;
-                creditsScrollSpeed *= 2;
-                controllerSpeedUpButton.text = "Slow Down";
-            }
-        } else if (!Input.GetKey(KeyCode.Space) || !Input.GetKey(KeyCode.JoystickButton0)) // X/Cross (Xbox/PS Controller)
-        {
-            if (spedupCredits)
-            {
-                spedupCredits = false;
-                creditsScrollSpeed *= 0.5f;
-                controllerSpeedUpButton.text = "Speed Up";
-            }
-        }
-        if (creditsMenu.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
-            {
-                creditsMenu.enabled = false;
-                endingMenu.enabled = true;
-                StopCoroutine(scrollCredits());
-            }
-        }
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
         if (PlayerPrefs.GetString("Money") != "")
         {
@@ -115,6 +107,34 @@ public class EndingManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
+    }
+
+    void toggleFullScreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    void stopCredits()
+    {
+        if (creditsMenu.enabled)
+        {
+            creditsMenu.enabled = false;
+            endingMenu.enabled = true;
+            StopCoroutine(scrollCredits());
+        }
+    }
+
+    void speedUpCredits(bool state)
+    {
+        if (state)
+        {
+            creditsScrollSpeed *= 2;
+            controllerSpeedUpButton.text = "Slow Down";
+        } else
+        {
+            creditsScrollSpeed *= 0.5f;
+            controllerSpeedUpButton.text = "Speed Up";
+        }
     }
 
     public void clickCredits()
