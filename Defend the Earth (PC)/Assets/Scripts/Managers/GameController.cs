@@ -813,6 +813,31 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void toNextLevel()
+    {
+        if (won && levelCompletedMenu.enabled)
+        {
+            if (audioSource)
+            {
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+            {
+                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
+            } else
+            {
+                StartCoroutine(loadScene("Ending"));
+            }
+            PlayerPrefs.DeleteKey("Restarted");
+        }
+    }
+
     public void restart()
     {
         if (audioSource)
@@ -827,13 +852,10 @@ public class GameController : MonoBehaviour
         }
         if (isCampaignLevel)
         {
-            StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("IngameLevel")));
             PlayerPrefs.SetInt("Restarted", 1);
             PlayerPrefs.Save();
-        } else
-        {
-            StartCoroutine(loadScene("Endless"));
         }
+        StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
     }
 
     public void exitGame()
@@ -867,31 +889,6 @@ public class GameController : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Main Menu"));
-    }
-
-    public void toNextLevel()
-    {
-        if (won && levelCompletedMenu.enabled)
-        {
-            if (audioSource)
-            {
-                if (buttonClick)
-                {
-                    audioSource.PlayOneShot(buttonClick);
-                } else
-                {
-                    audioSource.Play();
-                }
-            }
-            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
-            {
-                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
-            } else
-            {
-                StartCoroutine(loadScene("Ending"));
-            }
-            PlayerPrefs.DeleteKey("Restarted");
-        }
     }
 
     public void openCanvasFromClickSource(Canvas canvas)
