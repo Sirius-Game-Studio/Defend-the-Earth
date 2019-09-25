@@ -11,7 +11,6 @@ public class EnemyHealth : MonoBehaviour
     [Range(0, 1)] [SerializeField] private float powerupChance = 0.37f;
     [SerializeField] private GameObject[] powerups = new GameObject[0];
     [SerializeField] private bool countsTowardsKillGoal = true;
-    [Tooltip("The kill tracker to update (leave blank to not update).")] [SerializeField] private string killTracker = "";
 
     [Header("Miscellaneous")]
     public long maxHealth = 0;
@@ -88,19 +87,6 @@ public class EnemyHealth : MonoBehaviour
             health = maxHealth;
         } else if (health <= 0)
         {
-            if (killTracker != "")
-            {
-                if (!PlayerPrefs.HasKey(killTracker))
-                {
-                    PlayerPrefs.SetString(killTracker, "1");
-                } else
-                {
-                    long newKill = long.Parse(PlayerPrefs.GetString(killTracker));
-                    ++newKill;
-                    PlayerPrefs.SetString(killTracker, newKill.ToString());
-                }
-                PlayerPrefs.Save();
-            }
             if (explosion) Instantiate(explosion, transform.position, Quaternion.Euler(0, 0, 0));
             if (powerups.Length > 0)
             {
