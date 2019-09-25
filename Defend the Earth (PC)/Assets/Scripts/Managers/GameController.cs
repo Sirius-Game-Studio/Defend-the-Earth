@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
+    private Controls input;
     private long wave = 1;
     private long score = 0;
     private long endlessMoneyReward = 150;
@@ -101,6 +102,7 @@ public class GameController : MonoBehaviour
             Destroy(gameObject);
         }
         audioSource = GetComponent<AudioSource>();
+        input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
         if (maxWaves < 2) maxWaves = 2;
         gameOver = false;
@@ -223,74 +225,38 @@ public class GameController : MonoBehaviour
         AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
     }
 
+    void OnEnable()
+    {
+        input.Enable();
+        input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
+        input.Gameplay.Pause.performed += context => pause();
+        input.Gameplay.Resume.performed += context => resumeGame();
+        input.Gameplay.Restart.performed += context => restart();
+        input.Menu.CloseMenu.performed += context => closeMenu();
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.NextWave.performed += context => nextWave();
+        input.Debug.SkipToBoss.performed += context => skipToBoss();
+        #endif
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
+        input.Gameplay.Pause.performed -= context => pause();
+        input.Gameplay.Resume.performed -= context => resumeGame();
+        input.Gameplay.Restart.performed -= context => restart();
+        input.Menu.CloseMenu.performed -= context => closeMenu();
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.NextWave.performed -= context => nextWave();
+        input.Debug.SkipToBoss.performed -= context => skipToBoss();
+        #endif
+    }
+
     void Update()
     {
-        //Debug
-        #if UNITY_EDITOR
-            if (Input.GetKeyDown(KeyCode.Alpha5) && enemiesLeft > 0 && boss && !currentBoss)
-            {
-                enemiesLeft = 0;
-                wave = maxWaves;
-                print("Skipped to boss wave");
-            }
-        #endif
-
-        if (Input.GetKeyDown(KeyCode.F11)) Screen.fullScreen = !Screen.fullScreen;
-        if (Input.GetKeyDown(KeyCode.Escape)) pause();
-        if (Input.GetKeyDown(KeyCode.JoystickButton1) && paused) resumeGame(); // B/Circle (Xbox/PS Controller)
-        if (paused && Input.GetKeyDown(KeyCode.Escape) || paused && Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
-        {
-            if (settingsMenu.enabled)
-            {
-                settingsMenu.enabled = false;
-                if (clickSource <= 1)
-                {
-                    gamePausedMenu.enabled = true;
-                } else if (clickSource == 2)
-                {
-                    gameOverMenu.enabled = true;
-                } else if (clickSource >= 3)
-                {
-                    levelCompletedMenu.enabled = true;
-                }
-            } else if (quitGameMenu.enabled)
-            {
-                quitGameMenu.enabled = false;
-                if (clickSource <= 1)
-                {
-                    gamePausedMenu.enabled = true;
-                } else if (clickSource == 2)
-                {
-                    gameOverMenu.enabled = true;
-                } else if (clickSource >= 3)
-                {
-                    levelCompletedMenu.enabled = true;
-                }
-            } else if (restartPrompt.enabled)
-            {
-                restartPrompt.enabled = false;
-                if (clickSource <= 1)
-                {
-                    gamePausedMenu.enabled = true;
-                } else if (clickSource == 2)
-                {
-                    gameOverMenu.enabled = true;
-                } else if (clickSource >= 3)
-                {
-                    levelCompletedMenu.enabled = true;
-                }
-            }
-        }
-        if (restartPrompt.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.JoystickButton0)) // A/Cross (Xbox/PS Controller)
-            {
-                restart();
-            } else if (Input.GetKeyDown(KeyCode.JoystickButton1)) // B/Circle (Xbox/PS Controller)
-            {
-                openCanvasFromClickSource(restartPrompt);
-            }
-        }
         if (storedMaxWaves > 2)
         {
             maxWaves = storedMaxWaves;
@@ -579,6 +545,74 @@ public class GameController : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
     }
+
+    void toggleFullscreen()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+    }
+
+    void closeMenu()
+    {
+        if (paused)
+        {
+            if (settingsMenu.enabled)
+            {
+                settingsMenu.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
+            } else if (quitGameMenu.enabled)
+            {
+                quitGameMenu.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
+            } else if (restartPrompt.enabled)
+            {
+                restartPrompt.enabled = false;
+                if (clickSource <= 1)
+                {
+                    gamePausedMenu.enabled = true;
+                } else if (clickSource == 2)
+                {
+                    gameOverMenu.enabled = true;
+                } else if (clickSource >= 3)
+                {
+                    levelCompletedMenu.enabled = true;
+                }
+            }
+        }
+    }
+
+    #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+    void nextWave()
+    {
+        if (!gameOver && !won && !paused && wave < maxWaves) enemiesLeft = 0;
+    }
+
+    void skipToBoss()
+    {
+        if (!gameOver && !won && !paused && boss && !currentBoss)
+        {
+            enemiesLeft = 0;
+            wave = maxWaves;
+        }
+    }
+    #endif
 
     IEnumerator spawnWaves()
     {
