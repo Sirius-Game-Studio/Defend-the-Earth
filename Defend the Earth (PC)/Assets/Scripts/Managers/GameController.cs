@@ -230,8 +230,8 @@ public class GameController : MonoBehaviour
         input.Enable();
         input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Gameplay.Pause.performed += context => pause();
-        input.Gameplay.Resume.performed += context => resumeGame();
-        input.Gameplay.Restart.performed += context => restart();
+        input.Gameplay.Resume.performed += context => resumeGame(false);
+        input.Gameplay.Restart.performed += context => restart(false);
         input.Menu.CloseMenu.performed += context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -245,8 +245,8 @@ public class GameController : MonoBehaviour
         input.Disable();
         input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Gameplay.Pause.performed -= context => pause();
-        input.Gameplay.Resume.performed -= context => resumeGame();
-        input.Gameplay.Restart.performed -= context => restart();
+        input.Gameplay.Resume.performed -= context => resumeGame(false);
+        input.Gameplay.Restart.performed -= context => restart(false);
         input.Menu.CloseMenu.performed -= context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -826,11 +826,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void resumeGame()
+    public void resumeGame(bool wasClicked)
     {
         if (!settingsMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
         {
-            if (audioSource)
+            if (audioSource && wasClicked)
             {
                 if (buttonClick)
                 {
@@ -872,11 +872,11 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void restart()
+    public void restart(bool wasClicked)
     {
         if (restartPrompt.enabled)
         {
-            if (audioSource)
+            if (audioSource && wasClicked)
             {
                 if (buttonClick)
                 {
