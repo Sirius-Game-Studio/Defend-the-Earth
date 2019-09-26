@@ -21,7 +21,7 @@ public class Controls : IInputActionCollection
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""2ba4f28d-580e-4a42-bc06-9094fd358b0f"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
