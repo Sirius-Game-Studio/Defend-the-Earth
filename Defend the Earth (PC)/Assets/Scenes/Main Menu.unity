@@ -9340,7 +9340,12 @@ PrefabInstance:
     - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 70
+      value: -170
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
         type: 3}
@@ -12365,7 +12370,19 @@ MonoBehaviour:
   spaceshipPanel: {fileID: 1474568247}
   leftButton: {fileID: 1766291425}
   rightButton: {fileID: 630728902}
-  controllerXText: {fileID: 1266690941}
+  controllerBuyText: {fileID: 1266690941}
+  damagePercentage: {fileID: 1960001748}
+  speedPercentage: {fileID: 53955296}
+  healthPercentage: {fileID: 267383547}
+  moneyPercentage: {fileID: 32723923}
+  damagePrice: {fileID: 176536102}
+  speedPrice: {fileID: 1508655231}
+  healthPrice: {fileID: 329266297}
+  moneyPrice: {fileID: 1399138115}
+  damageButton: {fileID: 1032177964}
+  speedButton: {fileID: 955937598}
+  healthButton: {fileID: 2059130173}
+  moneyButton: {fileID: 2128962718}
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   purchaseItem: {fileID: 8300000, guid: 10cbf318929984d4cace2d718707fa80, type: 3}
   cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
@@ -12811,18 +12828,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff57ca5a606068646a78ad03a8ed8b2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageText: {fileID: 1960001748}
-  fireRateText: {fileID: 32723923}
-  speedText: {fileID: 53955296}
-  healthText: {fileID: 267383547}
-  damagePrice: {fileID: 176536102}
-  speedPrice: {fileID: 1508655231}
-  healthPrice: {fileID: 329266297}
-  moneyPrice: {fileID: 1399138115}
-  upgradeDamageButton: {fileID: 1032177964}
-  upgradeSpeedButton: {fileID: 955937598}
-  upgradeHealthButton: {fileID: 2059130173}
-  upgradeMoneyButton: {fileID: 2128962718}
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   mainMenu: {fileID: 1004614330}
   shopMenu: {fileID: 445606114}
