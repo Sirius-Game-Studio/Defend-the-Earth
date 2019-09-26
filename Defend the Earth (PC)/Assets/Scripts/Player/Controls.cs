@@ -677,7 +677,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""a8ea6d16-d7e6-4d2f-97df-83ec0a45ad2d"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -699,7 +699,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""8530e089-e058-4074-a064-34cd69231479"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
