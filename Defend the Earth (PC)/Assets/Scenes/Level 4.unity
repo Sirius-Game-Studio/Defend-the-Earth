@@ -1431,7 +1431,7 @@ MonoBehaviour:
   maxWaves: 4
   enemiesLeft: 10
   maxAliensReached: 13
-  enemySpawnTime: {x: 3.5, y: 3.75}
+  enemySpawnTime: {x: 3.5, y: 4}
   asteroidSpawnTime: {x: 6.5, y: 8}
   bossInitialYPosition: 16
   bossRotation: {x: 90, y: 180, z: 0}
