@@ -6,20 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Upgrades Menu")]
-    [SerializeField] private Text damageText = null;
-    [SerializeField] private Text fireRateText = null;
-    [SerializeField] private Text speedText = null;
-    [SerializeField] private Text healthText = null;
-    [SerializeField] private Text damagePrice = null;
-    [SerializeField] private Text speedPrice = null;
-    [SerializeField] private Text healthPrice = null;
-    [SerializeField] private Text moneyPrice = null;
-    [SerializeField] private Text upgradeDamageButton = null;
-    [SerializeField] private Text upgradeSpeedButton = null;
-    [SerializeField] private Text upgradeHealthButton = null;
-    [SerializeField] private Text upgradeMoneyButton = null;
-    
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
 
@@ -108,18 +94,6 @@ public class MainMenuManager : MonoBehaviour
         {
             moneyCount.text = "$0";
         }
-
-        //Updates the upgrade price text
-        damageText.text = "+" + PlayerPrefs.GetInt("DamagePercentage") + "% Damage";
-        speedText.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
-        healthText.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
-        fireRateText.text = "+" + PlayerPrefs.GetInt("MoneyPercentage") + "% Money";
-
-        //Sets the states of upgrade price text
-        priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 50, false);
-        priceTextState(speedPrice, upgradeSpeedButton, true, true, true, "SpeedPercentage", "SpeedPrice", 5, 20, false);
-        priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 100, false);
-        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 200, false);
 
         if (PlayerPrefs.GetInt("Level") > 0)
         {
@@ -444,100 +418,6 @@ public class MainMenuManager : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Endless"));
-    }
-
-    void priceTextState(Text main, Text button, bool isUpgrade, bool change, bool useDataKey, string statKey, string priceKey, int price, int max, bool isFloat)
-    {
-        if (main && statKey != "")
-        {
-            if (!isFloat)
-            {
-                if (PlayerPrefs.GetInt(statKey) < max)
-                {
-                    if (useDataKey)
-                    {
-                        if (PlayerPrefs.GetInt(priceKey) > 0)
-                        {
-                            main.text = "$" + PlayerPrefs.GetInt(priceKey);
-                        } else
-                        {
-                            main.text = "Free";
-                        }
-                    } else
-                    {
-                        if (price > 0)
-                        {
-                            main.text = "$" + price;
-                        } else
-                        {
-                            main.text = "Free";
-                        }
-                    }
-                    main.color = new Color32(133, 187, 101, 255);
-                    main.GetComponent<Outline>().effectColor = new Color32(67, 94, 50, 255);
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = new Vector2(100, 41);
-                        button.text = "Upgrade";
-                    }
-                } else if (PlayerPrefs.GetInt(statKey) >= max)
-                {
-                    if (isUpgrade)
-                    {
-                        main.text = "Maxed out!";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    } else
-                    {
-                        main.text = "Owned";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    }
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = Vector2.zero;
-                        button.text = "";
-                    }
-                }
-            } else
-            {
-                if (PlayerPrefs.GetFloat(statKey) < max)
-                {
-                    if (PlayerPrefs.GetInt(priceKey) > 0)
-                    {
-                        main.text = "$" + PlayerPrefs.GetInt(priceKey);
-                    } else
-                    {
-                        main.text = "Free";
-                    }
-                    main.color = new Color32(133, 187, 101, 255);
-                    main.GetComponent<Outline>().effectColor = new Color32(67, 94, 50, 255);
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = new Vector2(100, 41);
-                        button.text = "Upgrade";
-                    }
-                } else if (PlayerPrefs.GetFloat(statKey) >= max)
-                {
-                    if (isUpgrade)
-                    {
-                        main.text = "Maxed out!";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    } else
-                    {
-                        main.text = "Owned";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    }
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = Vector2.zero;
-                        button.text = "";
-                    }
-                }
-            }
-        }
     }
 
     IEnumerator loadScene(string scene)
