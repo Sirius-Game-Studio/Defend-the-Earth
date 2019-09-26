@@ -3027,6 +3027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  menu: {fileID: 1041384308}
   volume: SoundVolume
   isBumper: 0
 --- !u!1 &482351470
@@ -8474,6 +8475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  menu: {fileID: 1041384308}
   volume: MusicVolume
   isBumper: 0
 --- !u!1 &1474568245
