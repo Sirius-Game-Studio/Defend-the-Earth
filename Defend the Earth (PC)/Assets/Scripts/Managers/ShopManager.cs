@@ -78,17 +78,25 @@ public class ShopManager : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
+        input.Menu.BuySpaceship.performed += context => buySpaceship(false);
+        input.Menu.UpgradeDamage.performed += context => buyUpgrade(0);
+        input.Menu.UpgradeSpeed.performed += context => buyUpgrade(1);
+        input.Menu.UpgradeHealth.performed += context => buyUpgrade(2);
+        input.Menu.UpgradeMoney.performed += context => buyUpgrade(3);
         input.Menu.SpaceshipsLeft.performed += context => changeSpaceshipForController(false);
         input.Menu.SpaceshipsRight.performed += context => changeSpaceshipForController(true);
-        input.Menu.BuySpaceship.performed += context => buySpaceship(false);
     }
 
     void OnDisable()
     {
         input.Disable();
+        input.Menu.BuySpaceship.performed -= context => buySpaceship(false);
+        input.Menu.UpgradeDamage.performed -= context => buyUpgrade(0);
+        input.Menu.UpgradeSpeed.performed -= context => buyUpgrade(1);
+        input.Menu.UpgradeHealth.performed -= context => buyUpgrade(2);
+        input.Menu.UpgradeMoney.performed -= context => buyUpgrade(3);
         input.Menu.SpaceshipsLeft.performed -= context => changeSpaceshipForController(false);
         input.Menu.SpaceshipsRight.performed -= context => changeSpaceshipForController(true);
-        input.Menu.BuySpaceship.performed -= context => buySpaceship(false);
     }
 
     void Update()
