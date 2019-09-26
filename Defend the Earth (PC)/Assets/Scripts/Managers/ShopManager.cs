@@ -32,7 +32,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Spaceship[] spaceships = new Spaceship[0];
     [SerializeField] private Upgrade[] upgrades = new Upgrade[0];
 
-    [Header("UI")]
+    [Header("Spaceships Menu")]
     [SerializeField] private Text spaceshipName = null;
     [SerializeField] private Text spaceshipPrice = null;
     [SerializeField] private Text spaceshipBuyText = null;
@@ -40,7 +40,21 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Image spaceshipPanel = null;
     [SerializeField] private GameObject leftButton = null;
     [SerializeField] private GameObject rightButton = null;
-    [SerializeField] private Text controllerXText = null;
+    [SerializeField] private Text controllerBuyText = null;
+
+    [Header("Upgrades Menu")]
+    [SerializeField] private Text damagePercentage = null;
+    [SerializeField] private Text speedPercentage = null;
+    [SerializeField] private Text healthPercentage = null;
+    [SerializeField] private Text moneyPercentage = null;
+    [SerializeField] private Text damagePrice = null;
+    [SerializeField] private Text speedPrice = null;
+    [SerializeField] private Text healthPrice = null;
+    [SerializeField] private Text moneyPrice = null;
+    [SerializeField] private Text damageButton = null;
+    [SerializeField] private Text speedButton = null;
+    [SerializeField] private Text healthButton = null;
+    [SerializeField] private Text moneyButton = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -123,7 +137,7 @@ public class ShopManager : MonoBehaviour
                 spaceshipBuyText.text = "Use";
             }
             spaceshipPrice.text = "";
-            if (controllerXText) controllerXText.text = "Use";
+            if (controllerBuyText) controllerBuyText.text = "Use";
         } else
         {
             spaceshipBuyText.rectTransform.offsetMin = new Vector2(10, 0);
@@ -137,7 +151,7 @@ public class ShopManager : MonoBehaviour
             {
                 spaceshipPrice.text = "Free";
             }
-            if (controllerXText) controllerXText.text = "Buy";
+            if (controllerBuyText) controllerBuyText.text = "Buy";
         }
         spaceshipInfo.text = "Health: " + spaceship.health + "\nDamage: " + spaceship.damage + "\nFire Rate: " + spaceship.fireRate;
         spaceshipPanel.color = new Color32(spaceship.panelColor.r, spaceship.panelColor.g, spaceship.panelColor.b, 150);
@@ -156,9 +170,21 @@ public class ShopManager : MonoBehaviour
         }
         foreach (GameObject shipPreview in GameObject.FindGameObjectsWithTag("Player")) shipPreview.SetActive(false);
         if (spaceship.preview) spaceship.preview.SetActive(true);
+        
+        //Updates upgrade percentage visuals
+        damagePercentage.text = "+" + PlayerPrefs.GetInt("DamagePercentage") + "% Damage";
+        speedPercentage.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
+        healthPercentage.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
+        moneyPercentage.text = "+" + PlayerPrefs.GetInt("MoneyPercentage") + "% Money";
+
+        //Sets upgrade text states
+        upgradeState(damagePrice, damageButton, "DamagePercentage", "DamagePrice", 50);
+        upgradeState(speedPrice, speedButton, "SpeedPercentage", "SpeedPrice", 20);
+        upgradeState(healthPrice, healthButton, "HealthPercentage", "HealthPrice", 100);
+        upgradeState(moneyPrice, moneyButton, "MoneyPercentage", "MoneyPrice", 200);
     }
 
-    //Main Functions
+    #region Main Functions
     public void changeSpaceship(bool next)
     {
         if (open)
@@ -197,7 +223,36 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    //Buy Functions
+    void upgradeState(Text main, Text button, string statKey, string priceKey, int max)
+    {
+        if (statKey != "")
+        {
+            if (PlayerPrefs.GetInt(statKey) < max)
+            {
+                if (PlayerPrefs.GetInt(priceKey) > 0)
+                {
+                    main.text = "$" + PlayerPrefs.GetInt(priceKey);
+                } else
+                {
+                    main.text = "Free";
+                }
+                main.color = new Color32(133, 187, 101, 255);
+                main.GetComponent<Outline>().effectColor = new Color32(67, 94, 50, 255);
+                button.rectTransform.sizeDelta = new Vector2(100, 41);
+                button.text = "Upgrade";
+            } else
+            {
+                main.text = "Maxed out!";
+                main.color = new Color32(255, 215, 0, 255);
+                main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
+                button.rectTransform.sizeDelta = Vector2.zero;
+                button.text = "";
+            }
+        }
+    }
+    #endregion
+
+    #region Purchase Functions
     public void buySpaceship(bool wasClicked)
     {
         if (open)
@@ -322,4 +377,5 @@ public class ShopManager : MonoBehaviour
             }
         }
     }
+    #endregion
 }
