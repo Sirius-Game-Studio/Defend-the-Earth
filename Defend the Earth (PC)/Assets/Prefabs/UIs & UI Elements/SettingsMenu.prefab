@@ -217,7 +217,7 @@ RectTransform:
   m_Children:
   - {fileID: 3670830041899991382}
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 4
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -748,7 +748,7 @@ RectTransform:
   m_Children:
   - {fileID: 5419393027199344469}
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1120,7 +1120,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 5
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1415,6 +1415,8 @@ GameObject:
   - component: {fileID: 8570374180532975142}
   - component: {fileID: 8570374180532975143}
   - component: {fileID: 8570374180532975140}
+  - component: {fileID: 5104319761696408039}
+  - component: {fileID: 3068895749658401701}
   m_Layer: 5
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -1436,6 +1438,10 @@ RectTransform:
   - {fileID: 8570374179902812026}
   - {fileID: 8570374179702873673}
   - {fileID: 34087484238259874}
+  - {fileID: 7408486692877934548}
+  - {fileID: 7527839834219033871}
+  - {fileID: 8245905171373427409}
+  - {fileID: 1261470474604020866}
   - {fileID: 1129421494382377836}
   - {fileID: 7512047935636524673}
   - {fileID: 8570374179970979101}
@@ -1455,7 +1461,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8570374180532975141}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1508,6 +1514,32 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5104319761696408039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570374180532975141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ca01dae16c407489b447890c6754cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 8089114911120223575}
+--- !u!114 &3068895749658401701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570374180532975141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf78663ba4f6d948ac0a4a1f833bbb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 65892706003547278}
 --- !u!1 &8570374180704050537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1573,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8570374180532975145}
-  m_RootOrder: 6
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1870,4 +1902,360 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
     type: 3}
   m_PrefabInstance: {fileID: 2890702152401905796}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4171855660486167204
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8570374180532975145}
+    m_Modifications:
+    - target: {fileID: 2910675731964071457, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Name
+      value: ControllerButtonRight (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071457, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: xboxButton
+      value: 
+      objectReference: {fileID: 21300040, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: PSButton
+      value: 
+      objectReference: {fileID: 21300034, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300036, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300040, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Text
+      value: Increase Music
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8a419417089d4e40bab21a33fd9cf54, type: 3}
+--- !u!224 &1261470474604020866 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+    type: 3}
+  m_PrefabInstance: {fileID: 4171855660486167204}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4619723834046069545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8570374180532975145}
+    m_Modifications:
+    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Name
+      value: ControllerButtonLeft (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: xboxButton
+      value: 
+      objectReference: {fileID: 21300032, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: PSButton
+      value: 
+      objectReference: {fileID: 21300036, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300034, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300032, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731584890015, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Text
+      value: Lower Music
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 918d48fe9978d4148ae29dfac6ddec45, type: 3}
+--- !u!224 &7527839834219033871 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+    type: 3}
+  m_PrefabInstance: {fileID: 4619723834046069545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5671429741121573362
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8570374180532975145}
+    m_Modifications:
+    - target: {fileID: 2910675731964071457, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Name
+      value: ControllerButtonLeft (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: xboxButton
+      value: 
+      objectReference: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: PSButton
+      value: 
+      objectReference: {fileID: 21300028, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300058, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300028, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731584890015, guid: 918d48fe9978d4148ae29dfac6ddec45,
+        type: 3}
+      propertyPath: m_Text
+      value: Lower Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 918d48fe9978d4148ae29dfac6ddec45, type: 3}
+--- !u!224 &7408486692877934548 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: 918d48fe9978d4148ae29dfac6ddec45,
+    type: 3}
+  m_PrefabInstance: {fileID: 5671429741121573362}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6488450355852248311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8570374180532975145}
+    m_Modifications:
+    - target: {fileID: 2910675731964071457, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Name
+      value: ControllerButtonRight
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071457, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: xboxButton
+      value: 
+      objectReference: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: PSButton
+      value: 
+      objectReference: {fileID: 21300030, guid: 10045ad39fef69944b33bedc39310592,
+        type: 3}
+    - target: {fileID: 2910675731964071463, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: switchButton
+      value: 
+      objectReference: {fileID: 21300060, guid: e35b1509688e6294cad1ada6c91b7693,
+        type: 3}
+    - target: {fileID: 2910675731964071460, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300036, guid: fe9aa33e50412c242bd73e9324bc7922,
+        type: 3}
+    - target: {fileID: 2910675731584890015, guid: b8a419417089d4e40bab21a33fd9cf54,
+        type: 3}
+      propertyPath: m_Text
+      value: Increase Sound
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8a419417089d4e40bab21a33fd9cf54, type: 3}
+--- !u!224 &8245905171373427409 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2910675731964071462, guid: b8a419417089d4e40bab21a33fd9cf54,
+    type: 3}
+  m_PrefabInstance: {fileID: 6488450355852248311}
   m_PrefabAsset: {fileID: 0}
