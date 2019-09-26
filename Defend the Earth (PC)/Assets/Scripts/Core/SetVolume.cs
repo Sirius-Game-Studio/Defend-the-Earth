@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SetVolume : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer = null;
+    [SerializeField] private Canvas menu = null;
     [SerializeField] private string volume = "";
     [Tooltip("Xbox/PS/Switch controller only.")] [SerializeField] private bool isBumper = false;
 
@@ -38,8 +39,18 @@ public class SetVolume : MonoBehaviour
 
     public void controllerAdjust(bool i, bool l)
     {
-        increasing = i;
-        lowering = l;
+        if (menu)
+        {
+            if (menu.enabled)
+            {
+                increasing = i;
+                lowering = l;
+            }
+        } else
+        {
+            increasing = i;
+            lowering = l;
+        }
     }
 
     public void controllerCancel()
