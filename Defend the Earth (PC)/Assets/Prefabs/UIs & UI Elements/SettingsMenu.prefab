@@ -221,7 +221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91, y: 67.5}
+  m_AnchoredPosition: {x: -91, y: 22.5}
   m_SizeDelta: {x: 176, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &359237696001564301
@@ -382,6 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  menu: {fileID: 8570374180532975142}
   volume: SoundVolume
   isBumper: 1
 --- !u!1 &3615018720916095969
@@ -752,7 +753,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -91, y: 22.5}
+  m_AnchoredPosition: {x: -91, y: 67.5}
   m_SizeDelta: {x: 176, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6619547939089030236
@@ -913,6 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  menu: {fileID: 8570374180532975142}
   volume: MusicVolume
   isBumper: 0
 --- !u!1 &8570374179702873670
@@ -1461,7 +1463,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8570374180532975141}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
