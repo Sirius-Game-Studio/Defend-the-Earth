@@ -3,8 +3,8 @@
 public class BulletHit : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt to enemies.")] public long damage = 5;
-    [SerializeField] private float doubleDamageMultiplier = 1.5f;
-    [SerializeField] private LayerMask doubleDamageLayer = -1;
+    [SerializeField] private float highDamageMultiplier = 1.5f;
+    [SerializeField] private int highDamageLayer = -1;
     [SerializeField] private GameObject explosion = null;
 
     private bool hit = false;
@@ -21,14 +21,14 @@ public class BulletHit : MonoBehaviour
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             if (enemyHealth)
             {
-                if (other.gameObject.layer != doubleDamageLayer)
+                if (other.gameObject.layer != highDamageLayer)
                 {
                     enemyHealth.takeDamage((long)(damage * enemyHealth.defense));
                 } else
                 {
-                    long dealtDamage = (long)(damage * doubleDamageMultiplier);
-                    dealtDamage = (long)(dealtDamage * enemyHealth.defense);
-                    enemyHealth.takeDamage(dealtDamage);
+                    long highDamage = (long)(damage * highDamageMultiplier);
+                    highDamage = (long)(highDamage * enemyHealth.defense);
+                    enemyHealth.takeDamage(highDamage);
                 }
                 if (explosion) Instantiate(explosion, transform.position, transform.rotation);
                 hit = true;
