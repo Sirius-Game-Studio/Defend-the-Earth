@@ -464,6 +464,38 @@ public class Controls : IInputActionCollection
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""UpgradeDamage"",
+                    ""type"": ""Button"",
+                    ""id"": ""a54fe1b8-0114-436b-a25e-fbdd7517ce6f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpgradeSpeed"",
+                    ""type"": ""Button"",
+                    ""id"": ""8fbce35d-4c06-4a17-950f-b1efc055e481"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpgradeHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d4b37cb-7445-4c1e-b1a4-df3cb475ddc2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpgradeMoney"",
+                    ""type"": ""Button"",
+                    ""id"": ""d0e855f0-0204-4237-a5e2-502160a31825"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""SpaceshipsLeft"",
                     ""type"": ""Button"",
                     ""id"": ""b5487503-f746-40ab-84f5-842e48c23e42"",
@@ -584,12 +616,140 @@ public class Controls : IInputActionCollection
                     ""action"": ""SpaceshipsRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4bcd60ef-7c6b-4820-b475-318fff66407d"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UpgradeDamage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""edd79193-679e-4648-bbfe-f22818084c37"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UpgradeSpeed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a821c6f2-142d-464c-83d5-5c2f4d2a3eee"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UpgradeHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df4381ca-d031-4eee-9240-cafbea060461"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UpgradeMoney"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Sound"",
+            ""id"": ""b9eaf0e9-b3a6-4dbc-826e-9bcc178c18c2"",
+            ""actions"": [
+                {
+                    ""name"": ""LowerSound"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dd4be3b-229c-43b5-9c10-6902123f62c5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""LowerMusic"",
+                    ""type"": ""Button"",
+                    ""id"": ""78382bd4-87c7-4773-85d0-4bcf79637fdc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""IncreaseSound"",
+                    ""type"": ""Button"",
+                    ""id"": ""789239f9-4a68-495d-8e71-e3783e3eb818"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""IncreaseMusic"",
+                    ""type"": ""Button"",
+                    ""id"": ""08d855ce-483d-41bb-bb2e-dd835889a066"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2dbaf40c-9b32-422d-8534-48bc908e6660"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LowerSound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1180b777-562e-4ada-88ce-b9b0218e21f4"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LowerMusic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8de879d-7a2a-49f1-8b58-52622785fd59"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""IncreaseMusic"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5676a86-8541-4063-91ef-d9b76de3871a"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""IncreaseSound"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
         {
             ""name"": ""Debug"",
-            ""id"": ""b9eaf0e9-b3a6-4dbc-826e-9bcc178c18c2"",
+            ""id"": ""a9bc132e-fb10-40fd-8220-0da359f41a8b"",
             ""actions"": [
                 {
                     ""name"": ""SmallRepair"",
@@ -830,10 +990,20 @@ public class Controls : IInputActionCollection
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_BuySpaceship = m_Menu.FindAction("BuySpaceship", throwIfNotFound: true);
+        m_Menu_UpgradeDamage = m_Menu.FindAction("UpgradeDamage", throwIfNotFound: true);
+        m_Menu_UpgradeSpeed = m_Menu.FindAction("UpgradeSpeed", throwIfNotFound: true);
+        m_Menu_UpgradeHealth = m_Menu.FindAction("UpgradeHealth", throwIfNotFound: true);
+        m_Menu_UpgradeMoney = m_Menu.FindAction("UpgradeMoney", throwIfNotFound: true);
         m_Menu_SpaceshipsLeft = m_Menu.FindAction("SpaceshipsLeft", throwIfNotFound: true);
         m_Menu_SpaceshipsRight = m_Menu.FindAction("SpaceshipsRight", throwIfNotFound: true);
         m_Menu_CloseMenu = m_Menu.FindAction("CloseMenu", throwIfNotFound: true);
         m_Menu_SpeedUpCredits = m_Menu.FindAction("SpeedUpCredits", throwIfNotFound: true);
+        // Sound
+        m_Sound = asset.FindActionMap("Sound", throwIfNotFound: true);
+        m_Sound_LowerSound = m_Sound.FindAction("LowerSound", throwIfNotFound: true);
+        m_Sound_LowerMusic = m_Sound.FindAction("LowerMusic", throwIfNotFound: true);
+        m_Sound_IncreaseSound = m_Sound.FindAction("IncreaseSound", throwIfNotFound: true);
+        m_Sound_IncreaseMusic = m_Sound.FindAction("IncreaseMusic", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_SmallRepair = m_Debug.FindAction("SmallRepair", throwIfNotFound: true);
@@ -990,6 +1160,10 @@ public class Controls : IInputActionCollection
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_BuySpaceship;
+    private readonly InputAction m_Menu_UpgradeDamage;
+    private readonly InputAction m_Menu_UpgradeSpeed;
+    private readonly InputAction m_Menu_UpgradeHealth;
+    private readonly InputAction m_Menu_UpgradeMoney;
     private readonly InputAction m_Menu_SpaceshipsLeft;
     private readonly InputAction m_Menu_SpaceshipsRight;
     private readonly InputAction m_Menu_CloseMenu;
@@ -999,6 +1173,10 @@ public class Controls : IInputActionCollection
         private Controls m_Wrapper;
         public MenuActions(Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @BuySpaceship => m_Wrapper.m_Menu_BuySpaceship;
+        public InputAction @UpgradeDamage => m_Wrapper.m_Menu_UpgradeDamage;
+        public InputAction @UpgradeSpeed => m_Wrapper.m_Menu_UpgradeSpeed;
+        public InputAction @UpgradeHealth => m_Wrapper.m_Menu_UpgradeHealth;
+        public InputAction @UpgradeMoney => m_Wrapper.m_Menu_UpgradeMoney;
         public InputAction @SpaceshipsLeft => m_Wrapper.m_Menu_SpaceshipsLeft;
         public InputAction @SpaceshipsRight => m_Wrapper.m_Menu_SpaceshipsRight;
         public InputAction @CloseMenu => m_Wrapper.m_Menu_CloseMenu;
@@ -1015,6 +1193,18 @@ public class Controls : IInputActionCollection
                 BuySpaceship.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
                 BuySpaceship.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
                 BuySpaceship.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                UpgradeDamage.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                UpgradeDamage.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                UpgradeDamage.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                UpgradeSpeed.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                UpgradeSpeed.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                UpgradeSpeed.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                UpgradeHealth.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                UpgradeHealth.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                UpgradeHealth.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                UpgradeMoney.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
+                UpgradeMoney.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
+                UpgradeMoney.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
                 SpaceshipsLeft.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
                 SpaceshipsLeft.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
                 SpaceshipsLeft.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
@@ -1034,6 +1224,18 @@ public class Controls : IInputActionCollection
                 BuySpaceship.started += instance.OnBuySpaceship;
                 BuySpaceship.performed += instance.OnBuySpaceship;
                 BuySpaceship.canceled += instance.OnBuySpaceship;
+                UpgradeDamage.started += instance.OnUpgradeDamage;
+                UpgradeDamage.performed += instance.OnUpgradeDamage;
+                UpgradeDamage.canceled += instance.OnUpgradeDamage;
+                UpgradeSpeed.started += instance.OnUpgradeSpeed;
+                UpgradeSpeed.performed += instance.OnUpgradeSpeed;
+                UpgradeSpeed.canceled += instance.OnUpgradeSpeed;
+                UpgradeHealth.started += instance.OnUpgradeHealth;
+                UpgradeHealth.performed += instance.OnUpgradeHealth;
+                UpgradeHealth.canceled += instance.OnUpgradeHealth;
+                UpgradeMoney.started += instance.OnUpgradeMoney;
+                UpgradeMoney.performed += instance.OnUpgradeMoney;
+                UpgradeMoney.canceled += instance.OnUpgradeMoney;
                 SpaceshipsLeft.started += instance.OnSpaceshipsLeft;
                 SpaceshipsLeft.performed += instance.OnSpaceshipsLeft;
                 SpaceshipsLeft.canceled += instance.OnSpaceshipsLeft;
@@ -1050,6 +1252,63 @@ public class Controls : IInputActionCollection
         }
     }
     public MenuActions @Menu => new MenuActions(this);
+
+    // Sound
+    private readonly InputActionMap m_Sound;
+    private ISoundActions m_SoundActionsCallbackInterface;
+    private readonly InputAction m_Sound_LowerSound;
+    private readonly InputAction m_Sound_LowerMusic;
+    private readonly InputAction m_Sound_IncreaseSound;
+    private readonly InputAction m_Sound_IncreaseMusic;
+    public struct SoundActions
+    {
+        private Controls m_Wrapper;
+        public SoundActions(Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LowerSound => m_Wrapper.m_Sound_LowerSound;
+        public InputAction @LowerMusic => m_Wrapper.m_Sound_LowerMusic;
+        public InputAction @IncreaseSound => m_Wrapper.m_Sound_IncreaseSound;
+        public InputAction @IncreaseMusic => m_Wrapper.m_Sound_IncreaseMusic;
+        public InputActionMap Get() { return m_Wrapper.m_Sound; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SoundActions set) { return set.Get(); }
+        public void SetCallbacks(ISoundActions instance)
+        {
+            if (m_Wrapper.m_SoundActionsCallbackInterface != null)
+            {
+                LowerSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                LowerSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                LowerSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                LowerMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                LowerMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                LowerMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                IncreaseSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                IncreaseSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                IncreaseSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                IncreaseMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+                IncreaseMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+                IncreaseMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+            }
+            m_Wrapper.m_SoundActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                LowerSound.started += instance.OnLowerSound;
+                LowerSound.performed += instance.OnLowerSound;
+                LowerSound.canceled += instance.OnLowerSound;
+                LowerMusic.started += instance.OnLowerMusic;
+                LowerMusic.performed += instance.OnLowerMusic;
+                LowerMusic.canceled += instance.OnLowerMusic;
+                IncreaseSound.started += instance.OnIncreaseSound;
+                IncreaseSound.performed += instance.OnIncreaseSound;
+                IncreaseSound.canceled += instance.OnIncreaseSound;
+                IncreaseMusic.started += instance.OnIncreaseMusic;
+                IncreaseMusic.performed += instance.OnIncreaseMusic;
+                IncreaseMusic.canceled += instance.OnIncreaseMusic;
+            }
+        }
+    }
+    public SoundActions @Sound => new SoundActions(this);
 
     // Debug
     private readonly InputActionMap m_Debug;
@@ -1165,10 +1424,21 @@ public class Controls : IInputActionCollection
     public interface IMenuActions
     {
         void OnBuySpaceship(InputAction.CallbackContext context);
+        void OnUpgradeDamage(InputAction.CallbackContext context);
+        void OnUpgradeSpeed(InputAction.CallbackContext context);
+        void OnUpgradeHealth(InputAction.CallbackContext context);
+        void OnUpgradeMoney(InputAction.CallbackContext context);
         void OnSpaceshipsLeft(InputAction.CallbackContext context);
         void OnSpaceshipsRight(InputAction.CallbackContext context);
         void OnCloseMenu(InputAction.CallbackContext context);
         void OnSpeedUpCredits(InputAction.CallbackContext context);
+    }
+    public interface ISoundActions
+    {
+        void OnLowerSound(InputAction.CallbackContext context);
+        void OnLowerMusic(InputAction.CallbackContext context);
+        void OnIncreaseSound(InputAction.CallbackContext context);
+        void OnIncreaseMusic(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

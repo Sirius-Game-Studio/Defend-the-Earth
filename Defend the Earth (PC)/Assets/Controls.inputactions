@@ -452,6 +452,38 @@
                     "interactions": ""
                 },
                 {
+                    "name": "UpgradeDamage",
+                    "type": "Button",
+                    "id": "a54fe1b8-0114-436b-a25e-fbdd7517ce6f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UpgradeSpeed",
+                    "type": "Button",
+                    "id": "8fbce35d-4c06-4a17-950f-b1efc055e481",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UpgradeHealth",
+                    "type": "Button",
+                    "id": "6d4b37cb-7445-4c1e-b1a4-df3cb475ddc2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UpgradeMoney",
+                    "type": "Button",
+                    "id": "d0e855f0-0204-4237-a5e2-502160a31825",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SpaceshipsLeft",
                     "type": "Button",
                     "id": "b5487503-f746-40ab-84f5-842e48c23e42",
@@ -572,12 +604,140 @@
                     "action": "SpaceshipsRight",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4bcd60ef-7c6b-4820-b475-318fff66407d",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "UpgradeDamage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "edd79193-679e-4648-bbfe-f22818084c37",
+                    "path": "<Gamepad>/dpad/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "UpgradeSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a821c6f2-142d-464c-83d5-5c2f4d2a3eee",
+                    "path": "<Gamepad>/dpad/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "UpgradeHealth",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df4381ca-d031-4eee-9240-cafbea060461",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "UpgradeMoney",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Sound",
+            "id": "b9eaf0e9-b3a6-4dbc-826e-9bcc178c18c2",
+            "actions": [
+                {
+                    "name": "LowerSound",
+                    "type": "Button",
+                    "id": "3dd4be3b-229c-43b5-9c10-6902123f62c5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "LowerMusic",
+                    "type": "Button",
+                    "id": "78382bd4-87c7-4773-85d0-4bcf79637fdc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "IncreaseSound",
+                    "type": "Button",
+                    "id": "789239f9-4a68-495d-8e71-e3783e3eb818",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "IncreaseMusic",
+                    "type": "Button",
+                    "id": "08d855ce-483d-41bb-bb2e-dd835889a066",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2dbaf40c-9b32-422d-8534-48bc908e6660",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LowerSound",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1180b777-562e-4ada-88ce-b9b0218e21f4",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LowerMusic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8de879d-7a2a-49f1-8b58-52622785fd59",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "IncreaseMusic",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5676a86-8541-4063-91ef-d9b76de3871a",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "IncreaseSound",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
         {
             "name": "Debug",
-            "id": "b9eaf0e9-b3a6-4dbc-826e-9bcc178c18c2",
+            "id": "a9bc132e-fb10-40fd-8220-0da359f41a8b",
             "actions": [
                 {
                     "name": "SmallRepair",
