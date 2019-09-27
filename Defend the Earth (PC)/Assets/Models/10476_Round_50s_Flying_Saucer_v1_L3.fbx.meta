@@ -3,7 +3,12 @@ guid: 3fc8adf7e9fe1094588b085c333b5d2d
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 10476_Round_50s_Flying_Saucer_v1
+    second: {fileID: 2100000, guid: 3a2663a4fcdf8d24782f4723b405a61d, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -68,7 +73,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 3
