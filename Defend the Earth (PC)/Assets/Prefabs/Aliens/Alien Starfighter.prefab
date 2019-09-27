@@ -402,7 +402,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: 3e84a2cbb9ef0a247915875f417313c9, type: 3}
   countsTowardsKillGoal: 1
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
@@ -425,9 +424,7 @@ MonoBehaviour:
   shots: 1
   turnToPlayer: 0
   RPM: 60
-  defaultAlbedo: {fileID: 0}
-  greenAlbedo: {fileID: 0}
-  whiteAlbedo: {fileID: 0}
+  textures: []
   fireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
   nightmareBullet: {fileID: 0}
@@ -531,7 +528,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6556492257818319635}
-  m_Mesh: {fileID: 2267576429927447327, guid: 65de5ee8c4038e64db8ab3295c1af486, type: 3}
+  m_Mesh: {fileID: 2267576429927447327, guid: f872b59615aa2034aacc3cad085e4f62, type: 3}
 --- !u!23 &6556492257818319660
 MeshRenderer:
   m_ObjectHideFlags: 0
