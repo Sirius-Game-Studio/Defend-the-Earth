@@ -501,6 +501,13 @@ public class GameController : MonoBehaviour
             loadingScreen.SetActive(true);
             loadingTip.text = currentLoadingTip;
         }
+        if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
+        {
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Levels"));
+        } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
+        {
+            PlayerPrefs.SetInt("Level", 1);
+        }
 
         //Checks if the player upgrades are above maximum values
         if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
@@ -849,7 +856,7 @@ public class GameController : MonoBehaviour
 
     public void toNextLevel()
     {
-        if (won && levelCompletedMenu.enabled)
+        if (isCampaignLevel && won && levelCompletedMenu.enabled)
         {
             if (audioSource)
             {
@@ -874,7 +881,7 @@ public class GameController : MonoBehaviour
 
     public void restart(bool wasClicked)
     {
-        if (restartPrompt.enabled)
+        if (gameOverMenu.enabled || restartPrompt.enabled)
         {
             if (audioSource && wasClicked)
             {
