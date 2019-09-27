@@ -127,12 +127,12 @@ public class MainMenuManager : MonoBehaviour
             loadingTip.text = currentLoadingTip;
             moneyCount.gameObject.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Level") < 1) //Checks if the current level is less than 1
+        if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
+        {
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Levels"));
+        } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
         {
             PlayerPrefs.SetInt("Level", 1);
-        } else if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if the current level is more than the maximum amount of levels
-        {
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("MaxLevels"));
         }
 
         //Checks if the player upgrades are above maximum values
@@ -291,7 +291,7 @@ public class MainMenuManager : MonoBehaviour
         }
         Application.Quit();
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 

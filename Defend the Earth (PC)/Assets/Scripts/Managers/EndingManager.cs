@@ -101,6 +101,13 @@ public class EndingManager : MonoBehaviour
             loadingTip.text = currentLoadingTip; 
             moneyCount.gameObject.SetActive(false);
         }
+        if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
+        {
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Levels"));
+        } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
+        {
+            PlayerPrefs.SetInt("Level", 1);
+        }
     }
 
     void OnApplicationQuit()
