@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 1cc11ffbe578fa547b800e780e45b9c1
 ModelImporter:
-  serializedVersion: 25
+  serializedVersion: 26
   internalIDToNameTable:
   - first:
       1: 100000
@@ -56,8 +56,9 @@ ModelImporter:
     meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
-    importVisibility: 0
-    importBlendShapes: 0
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
     importCameras: 0
     importLights: 0
     swapUVChannels: 0
@@ -78,10 +79,10 @@ ModelImporter:
     useFileScale: 0
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
-    tangentImportMode: 4
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
