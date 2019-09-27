@@ -7,7 +7,6 @@ public class SetVolume : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer = null;
     [SerializeField] private Canvas menu = null;
     [SerializeField] private string volume = "";
-    [Tooltip("Xbox/PS/Switch controller only.")] [SerializeField] private bool isBumper = false;
 
     private Slider slider;
     private bool lowering = false;
