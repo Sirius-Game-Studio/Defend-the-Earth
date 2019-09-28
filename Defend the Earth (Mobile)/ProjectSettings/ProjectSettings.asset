@@ -763,6 +763,6 @@ PlayerSettings:
   projectName: Defend the Earth
   organizationId: wasik_farhan_roopkotha
   cloudEnabled: 0
-  enableNativePlatformBackendsForNewInputSystem: 0
+  enableNativePlatformBackendsForNewInputSystem: 1
   disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 0
