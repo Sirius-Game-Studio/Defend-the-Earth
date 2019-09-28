@@ -669,7 +669,7 @@ PlayerSettings:
     Standalone: 2
   managedStrippingLevel:
     Android: 2
-    Standalone: 1
+    Standalone: 2
   incrementalIl2cppBuild: {}
   allowUnsafeCode: 0
   additionalIl2CppArgs: 
@@ -763,6 +763,6 @@ PlayerSettings:
   projectName: Defend the Earth
   organizationId: wasik_farhan_roopkotha
   cloudEnabled: 0
-  enableNativePlatformBackendsForNewInputSystem: 1
+  enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 0
