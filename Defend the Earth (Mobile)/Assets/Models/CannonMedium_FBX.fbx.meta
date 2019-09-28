@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 27ae1315ca7386c4380ea66773476fc4
+guid: fc337d7f756bf70428099ccda4319532
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable:
-  - first:
-      43: 4300000
-    second: CannonMedium
-  - first:
-      1001: 100100000
-    second: DataTemplate __Singleton__
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: None__Cannon.png.001
-    second: {fileID: 2100000, guid: 695658abc32ac6443b703f4b51cdb926, type: 2}
+    second: {fileID: 2100000, guid: e5f63a9ff03f14d4e8c5df76da2d0721, type: 2}
   materials:
     importMaterials: 1
-    materialName: 3
+    materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -42,7 +36,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -50,7 +44,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
@@ -73,13 +67,13 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
-    normalCalculationMode: 0
-    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 3
