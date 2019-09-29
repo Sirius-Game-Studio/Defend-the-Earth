@@ -265,6 +265,7 @@ public class PlayerController : MonoBehaviour
         if (speed < 0) speed = 0; //Checks if speed is less than 0
     }
 
+    #region Input Functions
     public void move(Vector2 direction)
     {
         movement = direction;
@@ -274,6 +275,7 @@ public class PlayerController : MonoBehaviour
     {
         shooting = state;
     }
+    #endregion
 
     public void takeDamage(long hitDamage)
     {
@@ -309,6 +311,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    #region Powerup Functions
     public void repair(long heal)
     {
         if (heal != 0)
@@ -367,6 +370,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    #endregion
 
     IEnumerator invulnerabilityFadeEffect()
     {
