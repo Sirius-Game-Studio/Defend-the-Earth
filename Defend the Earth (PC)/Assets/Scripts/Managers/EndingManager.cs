@@ -69,6 +69,12 @@ public class EndingManager : MonoBehaviour
         input.Menu.CloseMenu.performed += context => stopCredits();
         input.Menu.SpeedUpCredits.performed += context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled += context => speedUpCredits(false);
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.ResetSpaceships.performed += context => resetSpaceships();
+        input.Debug.ResetUpgrades.performed += context => resetUpgrades();
+        input.Debug.ResetLevel.performed += context => resetLevel();
+        #endif
     }
 
     void OnDisable()
@@ -78,6 +84,12 @@ public class EndingManager : MonoBehaviour
         input.Menu.CloseMenu.performed -= context => stopCredits();
         input.Menu.SpeedUpCredits.performed -= context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled -= context => speedUpCredits(false);
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.ResetSpaceships.performed -= context => resetSpaceships();
+        input.Debug.ResetUpgrades.performed -= context => resetUpgrades();
+        input.Debug.ResetLevel.performed -= context => resetLevel();
+        #endif
     }
 
     void Update()
@@ -108,6 +120,42 @@ public class EndingManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level", 1);
         }
+
+        //Checks if the player has a unowned spaceship equipped
+        if (PlayerPrefs.GetInt("Has" + PlayerPrefs.GetString("Spaceship")) <= 0) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
+
+        //Checks if the player upgrades are above maximum values
+        if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
+        {
+            PlayerPrefs.SetFloat("DamageMultiplier", 1.5f);
+            PlayerPrefs.SetInt("DamagePercentage", 50);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("SpeedMultiplier") > 1.2f)
+        {
+            PlayerPrefs.SetFloat("SpeedMultiplier", 1.2f);
+            PlayerPrefs.SetInt("SpeedPercentage", 20);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("HealthMultiplier") > 2)
+        {
+            PlayerPrefs.SetFloat("HealthMultiplier", 2);
+            PlayerPrefs.SetInt("HealthPercentage", 100);
+            PlayerPrefs.Save();
+        }
+        if (PlayerPrefs.GetFloat("MoneyMultiplier") > 3)
+        {
+            PlayerPrefs.SetFloat("MoneyMultiplier", 3);
+            PlayerPrefs.SetInt("MoneyPercentage", 200);
+            PlayerPrefs.Save();
+        }
+
+        //Checks if money is below 0
+        if (long.Parse(PlayerPrefs.GetString("Money")) < 0)
+        {
+            PlayerPrefs.SetString("Money", "0");
+            PlayerPrefs.Save();
+        }
     }
 
     void OnApplicationQuit()
@@ -115,7 +163,8 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
     }
-
+    
+    #region Input Functions
     void toggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
@@ -143,7 +192,44 @@ public class EndingManager : MonoBehaviour
             controllerSpeedUpButton.text = "Speed Up";
         }
     }
+    #endregion
 
+    #region Input Debug Functions
+    #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+    void resetSpaceships()
+    {
+        PlayerPrefs.SetInt("HasSpaceFighter", 1);
+        PlayerPrefs.SetInt("HasAlienMower", 0);
+        PlayerPrefs.SetInt("HasBlazingRocket", 0);
+        PlayerPrefs.SetInt("HasQuadShooter", 0);
+        PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
+        PlayerPrefs.SetInt("HasAnnihilator", 0);
+    }
+
+    void resetUpgrades()
+    {
+        void reset(string name, int price)
+        {
+            PlayerPrefs.SetInt(name + "Price", price);
+            PlayerPrefs.SetFloat(name + "Multiplier", 1);
+            PlayerPrefs.SetInt(name + "Percentage", 0);
+        }
+
+        reset("Damage", 8);
+        reset("Speed", 5);
+        reset("Health", 7);
+        reset("Money", 4);
+    }
+
+    void resetLevel()
+    {
+        PlayerPrefs.SetInt("Level", 1);
+        PlayerPrefs.Save();
+    }
+    #endif
+    #endregion
+
+    #region Menu Functions
     public void clickCredits()
     {
         if (audioSource)
@@ -183,6 +269,7 @@ public class EndingManager : MonoBehaviour
         }
         StartCoroutine(loadScene("Main Menu"));
     }
+    #endregion
 
     IEnumerator scrollCredits()
     {

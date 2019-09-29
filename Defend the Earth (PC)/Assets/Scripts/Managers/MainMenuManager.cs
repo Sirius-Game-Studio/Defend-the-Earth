@@ -75,6 +75,12 @@ public class MainMenuManager : MonoBehaviour
         input.Enable();
         input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Menu.CloseMenu.performed += context => closeMenu();
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.ResetSpaceships.performed += context => resetSpaceships();
+        input.Debug.ResetUpgrades.performed += context => resetUpgrades();
+        input.Debug.ResetLevel.performed += context => resetLevel();
+        #endif
     }
 
     void OnDisable()
@@ -82,6 +88,12 @@ public class MainMenuManager : MonoBehaviour
         input.Disable();
         input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Menu.CloseMenu.performed -= context => closeMenu();
+
+        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+        input.Debug.ResetSpaceships.performed -= context => resetSpaceships();
+        input.Debug.ResetUpgrades.performed -= context => resetUpgrades();
+        input.Debug.ResetLevel.performed -= context => resetLevel();
+        #endif
     }
 
     void Update()
@@ -135,6 +147,9 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.SetInt("Level", 1);
         }
 
+        //Checks if the player has a unowned spaceship equipped
+        if (PlayerPrefs.GetInt("Has" + PlayerPrefs.GetString("Spaceship")) <= 0) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
+
         //Checks if the player upgrades are above maximum values
         if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
         {
@@ -175,6 +190,7 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Restarted");
     }
 
+    #region Input Functions
     void toggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
@@ -210,7 +226,44 @@ public class MainMenuManager : MonoBehaviour
             selectGamemodeMenu.enabled = true;
         }
     }
+    #endregion
 
+    #region Input Debug Functions
+    #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
+    void resetSpaceships()
+    {
+        PlayerPrefs.SetInt("HasSpaceFighter", 1);
+        PlayerPrefs.SetInt("HasAlienMower", 0);
+        PlayerPrefs.SetInt("HasBlazingRocket", 0);
+        PlayerPrefs.SetInt("HasQuadShooter", 0);
+        PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
+        PlayerPrefs.SetInt("HasAnnihilator", 0);
+    }
+
+    void resetUpgrades()
+    {
+        void reset(string name, int price)
+        {
+            PlayerPrefs.SetInt(name + "Price", price);
+            PlayerPrefs.SetFloat(name + "Multiplier", 1);
+            PlayerPrefs.SetInt(name + "Percentage", 0);
+        }
+
+        reset("Damage", 8);
+        reset("Speed", 5);
+        reset("Health", 7);
+        reset("Money", 4);
+    }
+
+    void resetLevel()
+    {
+        PlayerPrefs.SetInt("Level", 1);
+        PlayerPrefs.Save();
+    }
+    #endif
+    #endregion
+
+    #region Menu Functions
     public void clickPlayGame()
     {
         if (buttonClick)
@@ -419,6 +472,7 @@ public class MainMenuManager : MonoBehaviour
         }
         StartCoroutine(loadScene("Endless"));
     }
+    #endregion
 
     IEnumerator loadScene(string scene)
     {
