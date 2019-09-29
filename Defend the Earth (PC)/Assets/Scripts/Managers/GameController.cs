@@ -553,6 +553,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.DeleteKey("Restarted");
     }
 
+    #region Input Functions
     void toggleFullscreen()
     {
         Screen.fullScreen = !Screen.fullScreen;
@@ -604,7 +605,9 @@ public class GameController : MonoBehaviour
             }
         }
     }
+    #endregion
 
+    #region Input Debug Functions
     #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
     void nextWave()
     {
@@ -620,7 +623,9 @@ public class GameController : MonoBehaviour
         }
     }
     #endif
+    #endregion
 
+    #region Main Functions
     IEnumerator spawnWaves()
     {
         while (!gameOver && !won && wave < maxWaves + 1)
@@ -808,7 +813,9 @@ public class GameController : MonoBehaviour
         }
         newHighScoreText.enabled = false;
     }
+    #endregion
 
+    #region Menu Functions
     void pause()
     {
         if (!gameOver && !won && !gameOverMenu.enabled && !levelCompletedMenu.enabled)
@@ -981,6 +988,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
+    #endregion
 
     IEnumerator loadScene(string scene)
     {
