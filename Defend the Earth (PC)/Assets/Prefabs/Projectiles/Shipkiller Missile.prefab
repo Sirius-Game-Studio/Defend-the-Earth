@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567194746187364}
-  m_Mesh: {fileID: 4300018, guid: 8877092c49d4cd445a536cee36849209, type: 3}
+  m_Mesh: {fileID: 1545883553370349939, guid: 076d97c7b35473944a6dd4ae1f96b885, type: 3}
 --- !u!23 &23930997137563744
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,8 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 31
+  lifesteal: 0
   instakill: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
+  enemyHealth: {fileID: 0}
 --- !u!114 &-2350742649821955899
 MonoBehaviour:
   m_ObjectHideFlags: 0

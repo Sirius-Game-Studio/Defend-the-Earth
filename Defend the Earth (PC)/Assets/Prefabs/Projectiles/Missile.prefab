@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070339840893364}
-  m_Mesh: {fileID: 4300014, guid: 8877092c49d4cd445a536cee36849209, type: 3}
+  m_Mesh: {fileID: -9158876758851665062, guid: e91362c1fe23809488fbb77c2b19b75c, type: 3}
 --- !u!23 &23301907247706570
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 24
-  doubleDamageMultiplier: 1.5
+  highDamageMultiplier: 1.5
   highDamageLayer: 8
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &8513550893873227408
