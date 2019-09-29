@@ -798,6 +798,30 @@ public class Controls : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ResetSpaceships"",
+                    ""type"": ""Button"",
+                    ""id"": ""1b02fb56-48e4-468f-b3f4-40f817e72777"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ResetUpgrades"",
+                    ""type"": ""Button"",
+                    ""id"": ""60867d41-2470-43ab-bfed-f61ca0f25a83"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""ResetLevel"",
+                    ""type"": ""Button"",
+                    ""id"": ""9527c6eb-f9f4-4e9c-8229-6a1cea7960ce"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -932,6 +956,72 @@ public class Controls : IInputActionCollection
                     ""action"": ""SkipToBoss"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89716c36-d136-4db7-b1f7-5ea8dc44803d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ResetSpaceships"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""224490ab-a912-4478-a24c-7047b0a482eb"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ResetSpaceships"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d23113a6-3fd7-455b-9e39-530ddc16d3e0"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ResetUpgrades"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a54e237a-fa4a-4215-984a-153e7fa3c8a0"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetUpgrades"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a66c3bbf-3b34-42ba-8550-ee2e14f1bed2"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard & Mouse"",
+                    ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8906699-8835-43c6-919e-7bfb02e2e798"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetLevel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1012,6 +1102,9 @@ public class Controls : IInputActionCollection
         m_Debug_Supercharge = m_Debug.FindAction("Supercharge", throwIfNotFound: true);
         m_Debug_NextWave = m_Debug.FindAction("NextWave", throwIfNotFound: true);
         m_Debug_SkipToBoss = m_Debug.FindAction("SkipToBoss", throwIfNotFound: true);
+        m_Debug_ResetSpaceships = m_Debug.FindAction("ResetSpaceships", throwIfNotFound: true);
+        m_Debug_ResetUpgrades = m_Debug.FindAction("ResetUpgrades", throwIfNotFound: true);
+        m_Debug_ResetLevel = m_Debug.FindAction("ResetLevel", throwIfNotFound: true);
     }
 
     ~Controls()
@@ -1319,6 +1412,9 @@ public class Controls : IInputActionCollection
     private readonly InputAction m_Debug_Supercharge;
     private readonly InputAction m_Debug_NextWave;
     private readonly InputAction m_Debug_SkipToBoss;
+    private readonly InputAction m_Debug_ResetSpaceships;
+    private readonly InputAction m_Debug_ResetUpgrades;
+    private readonly InputAction m_Debug_ResetLevel;
     public struct DebugActions
     {
         private Controls m_Wrapper;
@@ -1329,6 +1425,9 @@ public class Controls : IInputActionCollection
         public InputAction @Supercharge => m_Wrapper.m_Debug_Supercharge;
         public InputAction @NextWave => m_Wrapper.m_Debug_NextWave;
         public InputAction @SkipToBoss => m_Wrapper.m_Debug_SkipToBoss;
+        public InputAction @ResetSpaceships => m_Wrapper.m_Debug_ResetSpaceships;
+        public InputAction @ResetUpgrades => m_Wrapper.m_Debug_ResetUpgrades;
+        public InputAction @ResetLevel => m_Wrapper.m_Debug_ResetLevel;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1356,6 +1455,15 @@ public class Controls : IInputActionCollection
                 SkipToBoss.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
                 SkipToBoss.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
                 SkipToBoss.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
+                ResetSpaceships.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
+                ResetSpaceships.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
+                ResetSpaceships.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
+                ResetUpgrades.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
+                ResetUpgrades.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
+                ResetUpgrades.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
+                ResetLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
+                ResetLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
+                ResetLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -1378,6 +1486,15 @@ public class Controls : IInputActionCollection
                 SkipToBoss.started += instance.OnSkipToBoss;
                 SkipToBoss.performed += instance.OnSkipToBoss;
                 SkipToBoss.canceled += instance.OnSkipToBoss;
+                ResetSpaceships.started += instance.OnResetSpaceships;
+                ResetSpaceships.performed += instance.OnResetSpaceships;
+                ResetSpaceships.canceled += instance.OnResetSpaceships;
+                ResetUpgrades.started += instance.OnResetUpgrades;
+                ResetUpgrades.performed += instance.OnResetUpgrades;
+                ResetUpgrades.canceled += instance.OnResetUpgrades;
+                ResetLevel.started += instance.OnResetLevel;
+                ResetLevel.performed += instance.OnResetLevel;
+                ResetLevel.canceled += instance.OnResetLevel;
             }
         }
     }
@@ -1448,5 +1565,8 @@ public class Controls : IInputActionCollection
         void OnSupercharge(InputAction.CallbackContext context);
         void OnNextWave(InputAction.CallbackContext context);
         void OnSkipToBoss(InputAction.CallbackContext context);
+        void OnResetSpaceships(InputAction.CallbackContext context);
+        void OnResetUpgrades(InputAction.CallbackContext context);
+        void OnResetLevel(InputAction.CallbackContext context);
     }
 }
