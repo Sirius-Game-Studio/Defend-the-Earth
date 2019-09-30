@@ -9,6 +9,7 @@ public class DataInitializer : MonoBehaviour
 
     void Awake()
     {
+        if (!PlayerPrefs.HasKey("Tips")) PlayerPrefs.SetInt("Tips", 1);
         if (!PlayerPrefs.HasKey("Spaceship")) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
 
         //Set up owned spaceship data

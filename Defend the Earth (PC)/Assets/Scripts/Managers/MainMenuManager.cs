@@ -480,7 +480,7 @@ public class MainMenuManager : MonoBehaviour
         {
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
@@ -494,10 +494,19 @@ public class MainMenuManager : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown) load.allowSceneActivation = true;
-                    loadingSlider.value = 1;
-                    loadingPercentage.text = "100%";
-                    anyKeyPrompt.SetActive(true);
+                    if (PlayerPrefs.GetInt("Tips") >= 1)
+                    {
+                        if (Input.anyKeyDown) load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(true);
+                    } else
+                    {
+                        load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(false);
+                    }
                 }
                 mainMenu.enabled = false;
                 shopMenu.enabled = false;
