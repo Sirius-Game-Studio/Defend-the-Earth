@@ -231,7 +231,7 @@ public class GameController : MonoBehaviour
         input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Gameplay.Pause.performed += context => pause();
         input.Gameplay.Resume.performed += context => resumeGame(false);
-        input.Gameplay.Restart.performed += context => restart(false);
+        input.Gameplay.Restart.performed += context => restartForController();
         input.Menu.CloseMenu.performed += context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -246,7 +246,7 @@ public class GameController : MonoBehaviour
         input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Gameplay.Pause.performed -= context => pause();
         input.Gameplay.Resume.performed -= context => resumeGame(false);
-        input.Gameplay.Restart.performed -= context => restart(false);
+        input.Gameplay.Restart.performed -= context => restartForController();
         input.Menu.CloseMenu.performed -= context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -888,25 +888,27 @@ public class GameController : MonoBehaviour
 
     public void restart(bool wasClicked)
     {
-        if (gameOverMenu.enabled || restartPrompt.enabled)
+        if (audioSource && wasClicked)
         {
-            if (audioSource && wasClicked)
+            if (buttonClick)
             {
-                if (buttonClick)
-                {
-                    audioSource.PlayOneShot(buttonClick);
-                } else
-                {
-                    audioSource.Play();
-                }
-            }
-            if (isCampaignLevel)
+                audioSource.PlayOneShot(buttonClick);
+            } else
             {
-                PlayerPrefs.SetInt("Restarted", 1);
-                PlayerPrefs.Save();
+                audioSource.Play();
             }
-            StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
         }
+        if (isCampaignLevel)
+        {
+            PlayerPrefs.SetInt("Restarted", 1);
+            PlayerPrefs.Save();
+        }
+        StartCoroutine(loadScene(SceneManager.GetActiveScene().name));
+    }
+
+    void restartForController()
+    {
+        if (restartPrompt.enabled) restart(false);
     }
 
     public void exitGame()
