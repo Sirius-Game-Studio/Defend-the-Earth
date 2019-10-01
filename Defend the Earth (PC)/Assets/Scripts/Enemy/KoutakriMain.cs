@@ -17,6 +17,7 @@ public class KoutakriMain : MonoBehaviour
     [Header("Scattered Laser Shot")]
     [SerializeField] private long scatterlaserDamage = 12;
     [SerializeField] private float scatterlaserSpeed = 17;
+    [SerializeField] private Vector2 scatterlaserSpread = new Vector2(70, 110);
     [SerializeField] private int scatterlaserShots = 6;
 
     [Header("Scorching Beam")]
@@ -172,16 +173,8 @@ public class KoutakriMain : MonoBehaviour
     {
         for (int i = 0; i < scatterlaserShots; i++)
         {
-            float x;
-            if (PlayerPrefs.GetInt("Difficulty") < 4) //Nightmare
-            {
-                x = Random.Range(60, 120);
-            } else
-            {
-                x = Random.Range(75, 105);
-            }
-            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
-            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(x, 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[0].position, new Vector3(Random.Range(scatterlaserSpread.x, scatterlaserSpread.y), 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
+            spawnProjectile(scatterlaser, bulletSpawns[1].position, new Vector3(Random.Range(scatterlaserSpread.x, scatterlaserSpread.y), 90, -90), 0, scatterlaserDamage, scatterlaserSpeed, false);
         }
         if (audioSource)
         {
