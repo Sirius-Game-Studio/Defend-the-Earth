@@ -1712,7 +1712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 4000
-  defense: 0.9
+  defense: 0.85
   money: 500
   score: 300
   powerupChance: 0
@@ -1721,7 +1721,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: 3e84a2cbb9ef0a247915875f417313c9, type: 3}
   countsTowardsKillGoal: 1
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
@@ -1751,22 +1750,39 @@ MonoBehaviour:
   shipkillerSpread: 4
   dyingCraftFireRate: 0.25
   dyingCraftShots: 10
+  scatterlaserDamage: 12
+  scatterlaserSpeed: 17
+  scatterlaserSpread: 12.5
+  scatterlaserShots: 16
+  bombasticSprayFireRate: 0.5
+  bombasticSprayShots: 2
+  longlaserSpread: 12.5
+  spreadingRaysFireRate: 0.3
+  spreadingRaysShots: 12
+  superlaserDamage: 32
+  superlaserSpeed: 15
+  batteringChargeFireRate: 1
+  batteringChargeShots: 3
   orbDamage: 16
   orbSpeed: 16
   orbLifesteal: 0.2
   sphericlingDemonFireRate: 0.2
-  superlaserDamage: 32
-  superlaserSpeed: 15
-  batteringChargeFireRate: 1
-  batteringChargeShots: 2
   perforatingCannonsFireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7,
     type: 3}
-  sphericlingDemonFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
+  dyingCraftFireSound: {fileID: 8300000, guid: 2fe490fb8c3d2514c97229ce9392de8a, type: 3}
+  bombasticSprayFireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96,
+    type: 3}
+  spreadingRaysFireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f,
     type: 3}
   batteringChargeFireSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598,
     type: 3}
+  sphericlingDemonFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
+    type: 3}
   longlaser: {fileID: 3937757261437629000, guid: 17e0150113393b14baed44a11c1e6727,
     type: 3}
+  scatterlaser: {fileID: 3937757261437629000, guid: ae52e54c923a7c54094612b651c36ded,
+    type: 3}
+  laser: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
   superlaser: {fileID: 3937757261437629000, guid: 6c6946c731c8d474a8b6baaee54aca85,
     type: 3}
   shipkillerMissile: {fileID: 1567194746187364, guid: 29f613712c83e684e87ddb421148f2ca,
