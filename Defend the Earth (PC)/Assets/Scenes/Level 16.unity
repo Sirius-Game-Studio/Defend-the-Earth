@@ -1479,6 +1479,7 @@ MonoBehaviour:
   aliensReached: 0
   currentBoss: {fileID: 0}
   wavesCleared: 0
+  canRestart: 0
   deathMessageToShow: 
   gameOver: 0
   won: 0
@@ -1992,6 +1993,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1944101018}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2347279031928549291, guid: e9c371af83ca92942b653e323fd2256e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
