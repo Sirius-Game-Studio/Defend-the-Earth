@@ -205,7 +205,7 @@ public class MjolnirMain : MonoBehaviour
     }
     #endregion
 
-    #region Main Functions
+    #region Ability Functions
     IEnumerator longshotGuns()
     {
         int point = 0;
@@ -332,15 +332,23 @@ public class MjolnirMain : MonoBehaviour
     {
         if (!shielded)
         {
+            float previousDefense = enemyHealth.defense;
             shielded = true;
             shield.gameObject.SetActive(true);
             shield.localScale = Vector3.Lerp(Vector3.zero, new Vector3(0.08f, 0.08f, 0.08f), 5);
-            enemyHealth.invulnerable = true;
+            if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+            {
+                enemyHealth.defense = 0.01f;
+            } else //Nightmare
+            {
+                enemyHealth.invulnerable = true;
+            }
             yield return new WaitForSeconds(protectiveShieldDuration);
             shielded = false;
             timeTillShieldUse = Random.Range(15, 20);
             shield.gameObject.SetActive(false);
             shield.localScale = Vector3.Lerp(new Vector3(0.08f, 0.08f, 0.08f), Vector3.zero, 5);
+            enemyHealth.defense = previousDefense;
             enemyHealth.invulnerable = false;
         } else
         {
