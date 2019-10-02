@@ -566,6 +566,7 @@ public class GameController : MonoBehaviour
         PlayerPrefs.DeleteKey("Restarted");
     }
 
+    #region Main Functions
     IEnumerator spawnWaves()
     {
         while (!gameOver && !won && wave < maxWaves + 1)
@@ -807,7 +808,9 @@ public class GameController : MonoBehaviour
         }
         newHighScoreText.enabled = false;
     }
+    #endregion
 
+    #region Menu Functions
     public void pause(bool clicked)
     {
         if (!gameOver && !won && !gameOverMenu.enabled && !levelCompletedMenu.enabled)
@@ -869,6 +872,32 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void toNextLevel()
+    {
+        if (won && levelCompletedMenu.enabled)
+        {
+            if (audioSource)
+            {
+                if (buttonClick)
+                {
+                    audioSource.PlayOneShot(buttonClick);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
+            {
+                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
+            } else
+            {
+                StartCoroutine(loadScene("Ending"));
+            }
+            PlayerPrefs.DeleteKey("Restarted");
+            PlayerPrefs.DeleteKey("WatchedAd");
+        }
+    }
+
     public void restart()
     {
         if (audioSource)
@@ -906,7 +935,7 @@ public class GameController : MonoBehaviour
         }
         Application.Quit();
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
@@ -923,32 +952,6 @@ public class GameController : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Main Menu"));
-    }
-
-    public void toNextLevel()
-    {
-        if (won && levelCompletedMenu.enabled)
-        {
-            if (audioSource)
-            {
-                if (buttonClick)
-                {
-                    audioSource.PlayOneShot(buttonClick);
-                } else
-                {
-                    audioSource.Play();
-                }
-            }
-            if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
-            {
-                StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
-            } else
-            {
-                StartCoroutine(loadScene("Ending"));
-            }
-            PlayerPrefs.DeleteKey("Restarted");
-            PlayerPrefs.DeleteKey("WatchedAd");
-        }
     }
 
     public void openCanvasFromClickSource(Canvas canvas)
@@ -994,6 +997,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
+    #endregion
 
     public void closeRevivePrompt()
     {
