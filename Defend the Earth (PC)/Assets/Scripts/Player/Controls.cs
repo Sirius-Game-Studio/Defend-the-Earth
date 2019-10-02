@@ -800,25 +800,17 @@ public class Controls : IInputActionCollection
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ResetSpaceships"",
+                    ""name"": ""IncreaseLevel"",
                     ""type"": ""Button"",
-                    ""id"": ""1b02fb56-48e4-468f-b3f4-40f817e72777"",
+                    ""id"": ""09cb7540-42a2-4357-b620-c562077c452a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""ResetUpgrades"",
+                    ""name"": ""DecreaseLevel"",
                     ""type"": ""Button"",
-                    ""id"": ""60867d41-2470-43ab-bfed-f61ca0f25a83"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""ResetLevel"",
-                    ""type"": ""Button"",
-                    ""id"": ""9527c6eb-f9f4-4e9c-8229-6a1cea7960ce"",
+                    ""id"": ""cdf852c2-5c67-4a26-ade5-5a991109c5f7"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -828,21 +820,10 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""9260e02a-1682-4817-b539-045951965f93"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<Keyboard>/numpad4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""SmallRepair"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f4e60ea9-9522-41aa-ada7-f16d282add4a"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""SmallRepair"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -850,21 +831,10 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""46099c3f-4ac3-47bd-aa71-ae0b72d01a8d"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<Keyboard>/numpad5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""LargeRepair"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a8ea6d16-d7e6-4d2f-97df-83ec0a45ad2d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""LargeRepair"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -872,21 +842,10 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""b79b50bd-71c5-4e21-87f9-5d54a490e2c5"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/numpad6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""MaxHealth"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8530e089-e058-4074-a064-34cd69231479"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""MaxHealth"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -894,21 +853,10 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""3d06e7cf-cdd7-4901-b092-7177e0b78f25"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<Keyboard>/numpad0"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Supercharge"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6c9ce740-bb37-4798-a45d-603921e58e62"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""Supercharge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -916,21 +864,10 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""033c63a6-e4bf-4063-9636-670144b2196d"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""path"": ""<Keyboard>/numpadDivide"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""NextWave"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""80873819-088a-4ebf-8513-6d3243ee884a"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
                     ""action"": ""NextWave"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -938,7 +875,7 @@ public class Controls : IInputActionCollection
                 {
                     ""name"": """",
                     ""id"": ""2decb665-4cb6-45f6-891d-d727c5bde056"",
-                    ""path"": ""<Keyboard>/6"",
+                    ""path"": ""<Keyboard>/numpadMultiply"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
@@ -948,78 +885,23 @@ public class Controls : IInputActionCollection
                 },
                 {
                     ""name"": """",
-                    ""id"": ""b5269d75-8181-4d2d-8ba7-02812c083c0d"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SkipToBoss"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""89716c36-d136-4db7-b1f7-5ea8dc44803d"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""1fb768f6-ee43-4996-a8c0-496dbb9568db"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""ResetSpaceships"",
+                    ""action"": ""IncreaseLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""224490ab-a912-4478-a24c-7047b0a482eb"",
-                    ""path"": ""<Gamepad>/leftStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""ResetSpaceships"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d23113a6-3fd7-455b-9e39-530ddc16d3e0"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""id"": ""21afa04f-f479-46aa-b006-c7bddf33060b"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""ResetUpgrades"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a54e237a-fa4a-4215-984a-153e7fa3c8a0"",
-                    ""path"": ""<Gamepad>/rightStickPress"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ResetUpgrades"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a66c3bbf-3b34-42ba-8550-ee2e14f1bed2"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""ResetLevel"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""c8906699-8835-43c6-919e-7bfb02e2e798"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ResetLevel"",
+                    ""action"": ""DecreaseLevel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1102,9 +984,8 @@ public class Controls : IInputActionCollection
         m_Debug_Supercharge = m_Debug.FindAction("Supercharge", throwIfNotFound: true);
         m_Debug_NextWave = m_Debug.FindAction("NextWave", throwIfNotFound: true);
         m_Debug_SkipToBoss = m_Debug.FindAction("SkipToBoss", throwIfNotFound: true);
-        m_Debug_ResetSpaceships = m_Debug.FindAction("ResetSpaceships", throwIfNotFound: true);
-        m_Debug_ResetUpgrades = m_Debug.FindAction("ResetUpgrades", throwIfNotFound: true);
-        m_Debug_ResetLevel = m_Debug.FindAction("ResetLevel", throwIfNotFound: true);
+        m_Debug_IncreaseLevel = m_Debug.FindAction("IncreaseLevel", throwIfNotFound: true);
+        m_Debug_DecreaseLevel = m_Debug.FindAction("DecreaseLevel", throwIfNotFound: true);
     }
 
     ~Controls()
@@ -1412,9 +1293,8 @@ public class Controls : IInputActionCollection
     private readonly InputAction m_Debug_Supercharge;
     private readonly InputAction m_Debug_NextWave;
     private readonly InputAction m_Debug_SkipToBoss;
-    private readonly InputAction m_Debug_ResetSpaceships;
-    private readonly InputAction m_Debug_ResetUpgrades;
-    private readonly InputAction m_Debug_ResetLevel;
+    private readonly InputAction m_Debug_IncreaseLevel;
+    private readonly InputAction m_Debug_DecreaseLevel;
     public struct DebugActions
     {
         private Controls m_Wrapper;
@@ -1425,9 +1305,8 @@ public class Controls : IInputActionCollection
         public InputAction @Supercharge => m_Wrapper.m_Debug_Supercharge;
         public InputAction @NextWave => m_Wrapper.m_Debug_NextWave;
         public InputAction @SkipToBoss => m_Wrapper.m_Debug_SkipToBoss;
-        public InputAction @ResetSpaceships => m_Wrapper.m_Debug_ResetSpaceships;
-        public InputAction @ResetUpgrades => m_Wrapper.m_Debug_ResetUpgrades;
-        public InputAction @ResetLevel => m_Wrapper.m_Debug_ResetLevel;
+        public InputAction @IncreaseLevel => m_Wrapper.m_Debug_IncreaseLevel;
+        public InputAction @DecreaseLevel => m_Wrapper.m_Debug_DecreaseLevel;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1455,15 +1334,12 @@ public class Controls : IInputActionCollection
                 SkipToBoss.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
                 SkipToBoss.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
                 SkipToBoss.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
-                ResetSpaceships.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
-                ResetSpaceships.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
-                ResetSpaceships.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetSpaceships;
-                ResetUpgrades.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
-                ResetUpgrades.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
-                ResetUpgrades.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetUpgrades;
-                ResetLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
-                ResetLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
-                ResetLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnResetLevel;
+                IncreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                IncreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                IncreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                DecreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
+                DecreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
+                DecreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
@@ -1486,15 +1362,12 @@ public class Controls : IInputActionCollection
                 SkipToBoss.started += instance.OnSkipToBoss;
                 SkipToBoss.performed += instance.OnSkipToBoss;
                 SkipToBoss.canceled += instance.OnSkipToBoss;
-                ResetSpaceships.started += instance.OnResetSpaceships;
-                ResetSpaceships.performed += instance.OnResetSpaceships;
-                ResetSpaceships.canceled += instance.OnResetSpaceships;
-                ResetUpgrades.started += instance.OnResetUpgrades;
-                ResetUpgrades.performed += instance.OnResetUpgrades;
-                ResetUpgrades.canceled += instance.OnResetUpgrades;
-                ResetLevel.started += instance.OnResetLevel;
-                ResetLevel.performed += instance.OnResetLevel;
-                ResetLevel.canceled += instance.OnResetLevel;
+                IncreaseLevel.started += instance.OnIncreaseLevel;
+                IncreaseLevel.performed += instance.OnIncreaseLevel;
+                IncreaseLevel.canceled += instance.OnIncreaseLevel;
+                DecreaseLevel.started += instance.OnDecreaseLevel;
+                DecreaseLevel.performed += instance.OnDecreaseLevel;
+                DecreaseLevel.canceled += instance.OnDecreaseLevel;
             }
         }
     }
@@ -1565,8 +1438,7 @@ public class Controls : IInputActionCollection
         void OnSupercharge(InputAction.CallbackContext context);
         void OnNextWave(InputAction.CallbackContext context);
         void OnSkipToBoss(InputAction.CallbackContext context);
-        void OnResetSpaceships(InputAction.CallbackContext context);
-        void OnResetUpgrades(InputAction.CallbackContext context);
-        void OnResetLevel(InputAction.CallbackContext context);
+        void OnIncreaseLevel(InputAction.CallbackContext context);
+        void OnDecreaseLevel(InputAction.CallbackContext context);
     }
 }
