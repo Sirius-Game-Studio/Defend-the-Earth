@@ -69,12 +69,6 @@ public class EndingManager : MonoBehaviour
         input.Menu.CloseMenu.performed += context => stopCredits();
         input.Menu.SpeedUpCredits.performed += context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled += context => speedUpCredits(false);
-
-        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-        input.Debug.ResetSpaceships.performed += context => resetSpaceships();
-        input.Debug.ResetUpgrades.performed += context => resetUpgrades();
-        input.Debug.ResetLevel.performed += context => resetLevel();
-        #endif
     }
 
     void OnDisable()
@@ -84,12 +78,6 @@ public class EndingManager : MonoBehaviour
         input.Menu.CloseMenu.performed -= context => stopCredits();
         input.Menu.SpeedUpCredits.performed -= context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled -= context => speedUpCredits(false);
-
-        #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-        input.Debug.ResetSpaceships.performed -= context => resetSpaceships();
-        input.Debug.ResetUpgrades.performed -= context => resetUpgrades();
-        input.Debug.ResetLevel.performed -= context => resetLevel();
-        #endif
     }
 
     void Update()
@@ -115,7 +103,7 @@ public class EndingManager : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
         {
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Levels"));
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("MaxLevels"));
         } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
         {
             PlayerPrefs.SetInt("Level", 1);
@@ -192,41 +180,6 @@ public class EndingManager : MonoBehaviour
             controllerSpeedUpButton.text = "Speed Up";
         }
     }
-    #endregion
-
-    #region Input Debug Functions
-    #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-    void resetSpaceships()
-    {
-        PlayerPrefs.SetInt("HasSpaceFighter", 1);
-        PlayerPrefs.SetInt("HasAlienMower", 0);
-        PlayerPrefs.SetInt("HasBlazingRocket", 0);
-        PlayerPrefs.SetInt("HasQuadShooter", 0);
-        PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
-        PlayerPrefs.SetInt("HasAnnihilator", 0);
-    }
-
-    void resetUpgrades()
-    {
-        void reset(string name, int price)
-        {
-            PlayerPrefs.SetInt(name + "Price", price);
-            PlayerPrefs.SetFloat(name + "Multiplier", 1);
-            PlayerPrefs.SetInt(name + "Percentage", 0);
-        }
-
-        reset("Damage", 8);
-        reset("Speed", 5);
-        reset("Health", 7);
-        reset("Money", 4);
-    }
-
-    void resetLevel()
-    {
-        PlayerPrefs.SetInt("Level", 1);
-        PlayerPrefs.Save();
-    }
-    #endif
     #endregion
 
     #region Menu Functions
