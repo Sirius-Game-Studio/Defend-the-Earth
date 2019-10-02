@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ToggleTips : MonoBehaviour
 {
     [SerializeField] private Vector2 enableTextSize = new Vector2(138, 41);
-    [SerializeField] private Vector2 disableTextSize = new Vector2(145, 41);
+    [SerializeField] private Vector2 disableTextSize = new Vector2(147, 41);
     [SerializeField] private AudioClip buttonClick = null;
 
     private Text toggleText;
