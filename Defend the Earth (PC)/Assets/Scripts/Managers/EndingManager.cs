@@ -222,7 +222,6 @@ public class EndingManager : MonoBehaviour
         }
         StartCoroutine(loadScene("Main Menu"));
     }
-    #endregion
 
     IEnumerator scrollCredits()
     {
@@ -238,6 +237,7 @@ public class EndingManager : MonoBehaviour
             }
         }
     }
+    #endregion
 
     IEnumerator loadScene(string scene)
     {
