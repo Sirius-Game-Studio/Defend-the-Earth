@@ -6,21 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Upgrades Menu")]
-    [SerializeField] private Text moneyCount = null;
-    [SerializeField] private Text damageText = null;
-    [SerializeField] private Text fireRateText = null;
-    [SerializeField] private Text upgradeDamageButton = null;
-    [SerializeField] private Text upgradeSpeedButton = null;
-    [SerializeField] private Text upgradeHealthButton = null;
-    [SerializeField] private Text upgradeMoneyButton = null;
-    [SerializeField] private Text speedText = null;
-    [SerializeField] private Text healthText = null;
-    [SerializeField] private Text damagePrice = null;
-    [SerializeField] private Text speedPrice = null;
-    [SerializeField] private Text healthPrice = null;
-    [SerializeField] private Text moneyPrice = null;
-
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
     [SerializeField] private AudioClip cannotAfford = null;
@@ -37,6 +22,7 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject openBuyMoneyButton = null;
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
+    [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text purchaseNotification = null;
     [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
@@ -132,7 +118,7 @@ public class MainMenuManager : MonoBehaviour
             }
         }
 
-        //Updates the money counter
+       //Updates the money counter
         if (PlayerPrefs.GetString("Money") != "")
         {
             moneyCount.text = "$" + PlayerPrefs.GetString("Money");
@@ -140,18 +126,6 @@ public class MainMenuManager : MonoBehaviour
         {
             moneyCount.text = "$0";
         }
-
-        //Updates the upgrade price text
-        damageText.text = "+" + PlayerPrefs.GetInt("DamagePercentage") + "% Damage";
-        speedText.text = "+" + PlayerPrefs.GetInt("SpeedPercentage") + "% Speed";
-        healthText.text = "+" + PlayerPrefs.GetInt("HealthPercentage") + "% Health";
-        fireRateText.text = "+" + PlayerPrefs.GetInt("MoneyPercentage") + "% Money";
-
-        //Sets the states of upgrade price text
-        priceTextState(damagePrice, upgradeDamageButton, true, true, true, "DamagePercentage", "DamagePrice", 8, 50, false);
-        priceTextState(speedPrice, upgradeSpeedButton, true, true, true, "SpeedPercentage", "SpeedPrice", 5, 20, false);
-        priceTextState(healthPrice, upgradeHealthButton, true, true, true, "HealthPercentage", "HealthPrice", 7, 100, false);
-        priceTextState(moneyPrice, upgradeMoneyButton, true, true, true, "MoneyPercentage", "MoneyPrice", 4, 200, false);
 
         if (PlayerPrefs.GetInt("Level") > 0)
         {
@@ -182,16 +156,19 @@ public class MainMenuManager : MonoBehaviour
         } else
         {
             loadingScreen.SetActive(true);
-            loadingTip.text = currentLoadingTip; 
+            loadingTip.text = currentLoadingTip;
             moneyCount.gameObject.SetActive(false);
         }
-        if (PlayerPrefs.GetInt("Level") < 1) //Checks if the current level is less than 1
-        {
-            PlayerPrefs.SetInt("Level", 1);
-        } else if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if the current level is more than the maximum amount of levels
+        if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
         {
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("MaxLevels"));
+        } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
+        {
+            PlayerPrefs.SetInt("Level", 1);
         }
+
+        //Checks if the player has a unowned spaceship equipped
+        if (PlayerPrefs.GetInt("Has" + PlayerPrefs.GetString("Spaceship")) <= 0) PlayerPrefs.SetString("Spaceship", "SpaceFighter");
 
         //Checks if the player upgrades are above maximum values
         if (PlayerPrefs.GetFloat("DamageMultiplier") > 1.5f)
@@ -233,6 +210,7 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Restarted");
     }
 
+    #region Menu Functions
     public void clickPlayGame()
     {
         if (buttonClick)
@@ -304,7 +282,7 @@ public class MainMenuManager : MonoBehaviour
         }
         Application.Quit();
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 
@@ -449,7 +427,9 @@ public class MainMenuManager : MonoBehaviour
         }
         StartCoroutine(loadScene("Endless"));
     }
+    #endregion
 
+    #region IAP Functions
     public void grantMoney(int amount)
     {
         if (PlayerPrefs.GetString("Money") != "")
@@ -478,6 +458,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (purchaseNotification) purchaseNotification.text = "";
     }
+    #endregion
 
     IEnumerator loadScene(string scene)
     {
@@ -510,100 +491,6 @@ public class MainMenuManager : MonoBehaviour
                 selectGamemodeMenu.enabled = false;
                 selectDifficultyMenu.enabled = false;
                 yield return null;
-            }
-        }
-    }
-
-    void priceTextState(Text main, Text button, bool isUpgrade, bool change, bool useDataKey, string statKey, string priceKey, int price, int max, bool isFloat)
-    {
-        if (main && statKey != "")
-        {
-            if (!isFloat)
-            {
-                if (PlayerPrefs.GetInt(statKey) < max)
-                {
-                    if (useDataKey)
-                    {
-                        if (PlayerPrefs.GetInt(priceKey) > 0)
-                        {
-                            main.text = "$" + PlayerPrefs.GetInt(priceKey);
-                        } else
-                        {
-                            main.text = "Free";
-                        }
-                    } else
-                    {
-                        if (price > 0)
-                        {
-                            main.text = "$" + price;
-                        } else
-                        {
-                            main.text = "Free";
-                        }
-                    }
-                    main.color = new Color32(133, 187, 101, 255);
-                    main.GetComponent<Outline>().effectColor = new Color32(67, 94, 50, 255);
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = new Vector2(100, 41);
-                        button.text = "Upgrade";
-                    }
-                } else if (PlayerPrefs.GetInt(statKey) >= max)
-                {
-                    if (isUpgrade)
-                    {
-                        main.text = "Maxed out!";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    } else
-                    {
-                        main.text = "Owned";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    }
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = Vector2.zero;
-                        button.text = "";
-                    }
-                }
-            } else
-            {
-                if (PlayerPrefs.GetFloat(statKey) < max)
-                {
-                    if (PlayerPrefs.GetInt(priceKey) > 0)
-                    {
-                        main.text = "$" + PlayerPrefs.GetInt(priceKey);
-                    } else
-                    {
-                        main.text = "Free";
-                    }
-                    main.color = new Color32(133, 187, 101, 255);
-                    main.GetComponent<Outline>().effectColor = new Color32(67, 94, 50, 255);
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = new Vector2(100, 41);
-                        button.text = "Upgrade";
-                    }
-                } else if (PlayerPrefs.GetFloat(statKey) >= max)
-                {
-                    if (isUpgrade)
-                    {
-                        main.text = "Maxed out!";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    } else
-                    {
-                        main.text = "Owned";
-                        main.color = new Color32(255, 215, 0, 255);
-                        main.GetComponent<Outline>().effectColor = new Color32(127, 107, 0, 255);
-                    }
-                    if (button && change)
-                    {
-                        button.rectTransform.sizeDelta = Vector2.zero;
-                        button.text = "";
-                    }
-                }
             }
         }
     }
