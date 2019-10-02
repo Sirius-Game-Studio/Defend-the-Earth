@@ -7,12 +7,12 @@ public class ToggleFullscreen : MonoBehaviour
     [SerializeField] private Vector2 windowedModeTextSize = new Vector2(330, 41);
     [SerializeField] private AudioClip buttonClick = null;
 
-    private Text fullscreenText;
+    private Text toggleText;
     private AudioSource audioSource;
 
     void Start()
     {
-        fullscreenText = GetComponent<Text>();
+        toggleText = GetComponent<Text>();
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
     }
@@ -21,12 +21,12 @@ public class ToggleFullscreen : MonoBehaviour
     {
         if (!Screen.fullScreen)
         {
-            fullscreenText.text = "Change to Fullscreen";
-            fullscreenText.rectTransform.sizeDelta = fullscreenTextSize;
+            toggleText.text = "Change to Fullscreen";
+            toggleText.rectTransform.sizeDelta = fullscreenTextSize;
         } else
         {
-            fullscreenText.text = "Change to Windowed Mode";
-            fullscreenText.rectTransform.sizeDelta = windowedModeTextSize;
+            toggleText.text = "Change to Windowed Mode";
+            toggleText.rectTransform.sizeDelta = windowedModeTextSize;
         }
     }
 
