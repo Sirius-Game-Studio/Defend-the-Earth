@@ -788,25 +788,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "ResetSpaceships",
+                    "name": "IncreaseLevel",
                     "type": "Button",
-                    "id": "1b02fb56-48e4-468f-b3f4-40f817e72777",
+                    "id": "09cb7540-42a2-4357-b620-c562077c452a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "ResetUpgrades",
+                    "name": "DecreaseLevel",
                     "type": "Button",
-                    "id": "60867d41-2470-43ab-bfed-f61ca0f25a83",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "ResetLevel",
-                    "type": "Button",
-                    "id": "9527c6eb-f9f4-4e9c-8229-6a1cea7960ce",
+                    "id": "cdf852c2-5c67-4a26-ade5-5a991109c5f7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -816,21 +808,10 @@
                 {
                     "name": "",
                     "id": "9260e02a-1682-4817-b539-045951965f93",
-                    "path": "<Keyboard>/1",
+                    "path": "<Keyboard>/numpad4",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "SmallRepair",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f4e60ea9-9522-41aa-ada7-f16d282add4a",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "SmallRepair",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -838,21 +819,10 @@
                 {
                     "name": "",
                     "id": "46099c3f-4ac3-47bd-aa71-ae0b72d01a8d",
-                    "path": "<Keyboard>/2",
+                    "path": "<Keyboard>/numpad5",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "LargeRepair",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a8ea6d16-d7e6-4d2f-97df-83ec0a45ad2d",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "LargeRepair",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -860,21 +830,10 @@
                 {
                     "name": "",
                     "id": "b79b50bd-71c5-4e21-87f9-5d54a490e2c5",
-                    "path": "<Keyboard>/3",
+                    "path": "<Keyboard>/numpad6",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "MaxHealth",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8530e089-e058-4074-a064-34cd69231479",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "MaxHealth",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -882,21 +841,10 @@
                 {
                     "name": "",
                     "id": "3d06e7cf-cdd7-4901-b092-7177e0b78f25",
-                    "path": "<Keyboard>/4",
+                    "path": "<Keyboard>/numpad0",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "Supercharge",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6c9ce740-bb37-4798-a45d-603921e58e62",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "Supercharge",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -904,21 +852,10 @@
                 {
                     "name": "",
                     "id": "033c63a6-e4bf-4063-9636-670144b2196d",
-                    "path": "<Keyboard>/5",
+                    "path": "<Keyboard>/numpadDivide",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "NextWave",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "80873819-088a-4ebf-8513-6d3243ee884a",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "NextWave",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -926,7 +863,7 @@
                 {
                     "name": "",
                     "id": "2decb665-4cb6-45f6-891d-d727c5bde056",
-                    "path": "<Keyboard>/6",
+                    "path": "<Keyboard>/numpadMultiply",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
@@ -936,78 +873,23 @@
                 },
                 {
                     "name": "",
-                    "id": "b5269d75-8181-4d2d-8ba7-02812c083c0d",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "SkipToBoss",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "89716c36-d136-4db7-b1f7-5ea8dc44803d",
-                    "path": "<Keyboard>/1",
+                    "id": "1fb768f6-ee43-4996-a8c0-496dbb9568db",
+                    "path": "<Keyboard>/numpadPlus",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "ResetSpaceships",
+                    "action": "IncreaseLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "224490ab-a912-4478-a24c-7047b0a482eb",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "ResetSpaceships",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d23113a6-3fd7-455b-9e39-530ddc16d3e0",
-                    "path": "<Keyboard>/2",
+                    "id": "21afa04f-f479-46aa-b006-c7bddf33060b",
+                    "path": "<Keyboard>/numpadMinus",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard & Mouse",
-                    "action": "ResetUpgrades",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a54e237a-fa4a-4215-984a-153e7fa3c8a0",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ResetUpgrades",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a66c3bbf-3b34-42ba-8550-ee2e14f1bed2",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "ResetLevel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c8906699-8835-43c6-919e-7bfb02e2e798",
-                    "path": "<Gamepad>/buttonNorth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ResetLevel",
+                    "action": "DecreaseLevel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
