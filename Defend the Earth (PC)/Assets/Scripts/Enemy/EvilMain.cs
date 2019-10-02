@@ -312,7 +312,6 @@ public class EvilMain : MonoBehaviour
 
     IEnumerator spreadingRays()
     {
-        float chargeSpeed;
         usingAbility = true;
         for (int i = 0; i < spreadingRaysShots; i++)
         {
@@ -329,19 +328,20 @@ public class EvilMain : MonoBehaviour
             }
             yield return new WaitForSeconds(spreadingRaysFireRate);
         }
+        float chargeSpeed;
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            chargeSpeed = 0.0015f;
+            chargeSpeed = 0.001f;
         } else //Nightmare
         {
-            chargeSpeed = 0.003f;
+            chargeSpeed = 0.002f;
         }
-        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.06f, true));
         while (animatingCharge) yield return null;
         StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
         float angle = 0;
-        for (int i = 0; i < 19; i++)
+        for (int i = 0; i < 20; i++)
         {
             spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(angle, 90, -90), 0, (long)(longlaserDamage * 0.85), longlaserSpeed, false);
             angle += 20;
@@ -355,15 +355,15 @@ public class EvilMain : MonoBehaviour
                     audioSource.Play();
                 }
             }
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.25f);
         }
         usingAbility = false;
     }
 
     IEnumerator batteringCharge()
     {
-        float chargeSpeed;
         usingAbility = true;
+        float chargeSpeed;
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
@@ -372,9 +372,9 @@ public class EvilMain : MonoBehaviour
         {
             chargeSpeed = 0.002f;
         }
-        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        StartCoroutine(animateChargeGlow(chargeGlows[3], chargeSpeed, 0.1f, true));
         while (animatingCharge) yield return null;
-        StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
+        StartCoroutine(animateChargeGlow(chargeGlows[3], 0.005f, 0, false));
         for (int i = 0; i < batteringChargeShots; i++)
         {
             float angle = Random.Range(-180, 180);
