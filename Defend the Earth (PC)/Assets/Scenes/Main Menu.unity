@@ -3323,7 +3323,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: If you are looking for a real challenge, then this mode is for you. Aliens
-    deal 30% more damage, have 10% more fire rate and 20% more health. Bosses have
+    deal 30% more damage, have 5% more fire rate and 20% more health. Bosses have
     100% more health, 40% more damage and their abilities are improved. Asteroids
     spawn more frequently.
 --- !u!222 &489387620
@@ -3873,8 +3873,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: This mode is good for players who want a challenge. Aliens deal 15% more
-    damage, have 5% more fire rate and 10% more health. Bosses have 50% more health
-    and deal 20% more damage. Asteroids spawn slightly more frequently.
+    damage and 10% more health. Bosses have 50% more health and deal 20% more damage.
+    Asteroids spawn slightly more frequently.
 --- !u!222 &547296554
 CanvasRenderer:
   m_ObjectHideFlags: 0
