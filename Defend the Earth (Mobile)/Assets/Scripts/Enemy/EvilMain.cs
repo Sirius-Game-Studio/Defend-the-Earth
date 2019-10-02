@@ -17,27 +17,47 @@ public class EvilMain : MonoBehaviour
     [Header("Dying Craft")]
     [SerializeField] private long shipkillerDamage = 31;
     [SerializeField] private float shipkillerSpeed = 17.5f;
-    [SerializeField] private float shipkillerSpread = 5;
+    [SerializeField] private float shipkillerSpread = 4;
     [SerializeField] private float dyingCraftFireRate = 0.25f;
     [SerializeField] private int dyingCraftShots = 10;
+
+    [Header("Bombastic Spray")]
+    [SerializeField] private long scatterlaserDamage = 12;
+    [SerializeField] private float scatterlaserSpeed = 17;
+    [SerializeField] private float scatterlaserSpread = 8.5f;
+    [SerializeField] private int scatterlaserShots = 12;
+    [SerializeField] private float bombasticSprayFireRate = 0.3f;
+    [SerializeField] private int bombasticSprayShots = 4;
+
+    [Header("Spreading Rays")]
+    [SerializeField] private float longlaserSpread = 8;
+    [SerializeField] private float spreadingRaysFireRate = 0.25f;
+    [SerializeField] private int spreadingRaysShots = 12;
+
+    [Header("Battering Charge")]
+    [SerializeField] private long superlaserDamage = 32;
+    [SerializeField] private float superlaserSpeed = 15;
+    [SerializeField] private float batteringChargeFireRate = 1;
+    [SerializeField] private int batteringChargeShots = 3;
 
     [Header("Sphericling Demon")]
     [SerializeField] private long orbDamage = 16;
     [SerializeField] private float orbSpeed = 16;
     [Tooltip("Nightmare only.")] [SerializeField] private float orbLifesteal = 0.2f;
-    [SerializeField] private float sphericlingDemonFireRate = 0.17f;
-
-    [Header("Battering Charge")]
-    [SerializeField] private long superlaserDamage = 32;
-    [SerializeField] private float superlaserSpeed = 32;
+    [SerializeField] private float sphericlingDemonFireRate = 0.2f;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip perforatingCannonsFireSound = null;
-    [SerializeField] private AudioClip sphericlingDemonFireSound = null;
+    [SerializeField] private AudioClip dyingCraftFireSound = null;
+    [SerializeField] private AudioClip bombasticSprayFireSound = null;
+    [SerializeField] private AudioClip spreadingRaysFireSound = null;
     [SerializeField] private AudioClip batteringChargeFireSound = null;
+    [SerializeField] private AudioClip sphericlingDemonFireSound = null;
 
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
+    [SerializeField] private GameObject scatterlaser = null;
+    [SerializeField] private GameObject laser = null;
     [SerializeField] private GameObject superlaser = null;
     [SerializeField] private GameObject shipkillerMissile = null;
     [SerializeField] private GameObject miniOrb = null;
@@ -63,22 +83,43 @@ public class EvilMain : MonoBehaviour
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
             longlaserDamage = (long)(longlaserDamage * 0.9);
+            scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
+            superlaserDamage = (long)(superlaserDamage * 0.9);
+            shipkillerDamage = (long)(shipkillerDamage * 0.9);
             orbDamage = (long)(orbDamage * 0.9);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);
             longlaserSpeed *= 1.05f;
+            longlaserSpread *= 1.1f;
+            scatterlaserDamage = (long)(scatterlaserDamage * 1.2);
+            scatterlaserSpeed *= 1.05f;
+            scatterlaserSpread *= 1.1f;
+            superlaserDamage = (long)(superlaserDamage * 1.2);
+            superlaserSpeed *= 1.05f;
             shipkillerDamage = (long)(shipkillerDamage * 1.2);
             shipkillerSpeed *= 1.05f;
             shipkillerSpread *= 1.25f;
             orbDamage = (long)(orbDamage * 1.2);
             orbSpeed *= 1.05f;
-            sphericlingDemonFireRate *= 0.9f;
+            scatterlaserShots = (int)(scatterlaserShots * 1.25);
+            bombasticSprayShots = (int)(bombasticSprayShots * 1.25);
+            spreadingRaysFireRate *= 0.95f;
+            spreadingRaysShots = (int)(spreadingRaysShots * 1.25);
+            batteringChargeFireRate *= 0.85f;
+            ++batteringChargeShots;
+            sphericlingDemonFireRate *= 0.95f;
             abilityTime -= new Vector2(0, 0.25f);
         } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
         {
             longlaserDamage = (long)(longlaserDamage * 1.4);
             longlaserSpeed *= 1.1f;
+            longlaserSpread *= 1.2f;
+            scatterlaserDamage = (long)(scatterlaserDamage * 1.4);
+            scatterlaserSpeed *= 1.1f;
+            scatterlaserSpread *= 1.2f;
+            superlaserDamage = (long)(superlaserDamage * 1.4);
+            superlaserSpeed *= 1.1f;
             shipkillerDamage = (long)(shipkillerDamage * 1.4);
             shipkillerSpeed *= 1.1f;
             shipkillerSpread *= 1.5f;
@@ -86,7 +127,13 @@ public class EvilMain : MonoBehaviour
             orbSpeed *= 1.1f;
             perforatingCannonsShots = (int)(perforatingCannonsShots * 1.25);
             dyingCraftShots = (int)(dyingCraftShots * 1.5);
-            sphericlingDemonFireRate *= 0.8f;
+            scatterlaserShots = (int)(scatterlaserShots * 1.25);
+            bombasticSprayShots = (int)(bombasticSprayShots * 1.5);
+            spreadingRaysFireRate *= 0.9f;
+            spreadingRaysShots = (int)(spreadingRaysShots * 1.5);
+            batteringChargeFireRate *= 0.7f;
+            batteringChargeShots += 2;
+            sphericlingDemonFireRate *= 0.9f;
             abilityTime -= new Vector2(0.25f, 0.25f);
         }
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
@@ -115,16 +162,22 @@ public class EvilMain : MonoBehaviour
                 if (!GameController.instance.gameOver && !GameController.instance.won && !GameController.instance.paused && !usingAbility)
                 {
                     float random = Random.value;
-                    if (random <= 0.25f)
+                    if (random <= 0.15f) //Sphericling Demon (15% chance)
                     {
                         StartCoroutine(sphericlingDemon());
-                    } else if (random <= 0.5f)
+                    } else if (random <= 0.3f) //Battering Charge (15% chance)
                     {
                         StartCoroutine(batteringCharge());
-                    } else if (random <= 0.75f)
+                    } else if (random <= 0.45f) //Spreading Rays (15% chance)
+                    {
+                        StartCoroutine(spreadingRays());
+                    } else if (random <= 0.6f) //Bombastic Spray (15% chance)
+                    {
+                        StartCoroutine(bombasticSpray());
+                    } else if (random <= 0.8f) //Dying Craft (20% chance)
                     {
                         StartCoroutine(dyingCraft());
-                    } else
+                    } else //Perforating Cannons (20% chance)
                     {
                         StartCoroutine(perforatingCannons());
                     }
@@ -225,15 +278,58 @@ public class EvilMain : MonoBehaviour
             spawnProjectile(shipkillerMissile, dyingCraftGun.position, new Vector3(90, 0, 0), shipkillerSpread, shipkillerDamage, shipkillerSpeed, true);
             if (audioSource)
             {
-                audioSource.Play();
+                if (dyingCraftFireSound)
+                {
+                    audioSource.PlayOneShot(dyingCraftFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
             }
             yield return new WaitForSeconds(dyingCraftFireRate);
         }
         usingAbility = false;
     }
 
-    IEnumerator batteringCharge()
+    IEnumerator bombasticSpray()
     {
+        usingAbility = true;
+        for (int i = 0; i < bombasticSprayShots; i++)
+        {
+            for (int s = 0; s < scatterlaserShots; s++) spawnProjectile(scatterlaser, dyingCraftGun.position, new Vector3(90, 0, 0), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
+            if (audioSource)
+            {
+                if (bombasticSprayFireSound)
+                {
+                    audioSource.PlayOneShot(bombasticSprayFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(bombasticSprayFireRate);
+        }
+        usingAbility = false;
+    }
+
+    IEnumerator spreadingRays()
+    {
+        usingAbility = true;
+        for (int i = 0; i < spreadingRaysShots; i++)
+        {
+            spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(90, 0, 0), longlaserSpread, (long)(longlaserDamage * 0.85), longlaserSpeed * 1.1f, true);
+            if (audioSource)
+            {
+                if (spreadingRaysFireSound)
+                {
+                    audioSource.PlayOneShot(spreadingRaysFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(spreadingRaysFireRate);
+        }
         float chargeSpeed;
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
@@ -243,25 +339,73 @@ public class EvilMain : MonoBehaviour
         {
             chargeSpeed = 0.002f;
         }
-        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.06f, true));
         while (animatingCharge) yield return null;
         StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
+        float fireRate = 0.15f;
+        if (PlayerPrefs.GetFloat("Difficulty") == 3) //Hard
+        {
+            fireRate *= 0.95f;
+        } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+        {
+            fireRate *= 0.9f;
+        }
         float angle = 0;
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 37; i++)
         {
-            spawnProjectile(superlaser, new Vector3(chargeGlows[2].position.x, chargeGlows[2].position.y, 0), new Vector3(angle, 90, -90), 0, superlaserDamage, superlaserSpeed, false);
-            angle += 30;
-        }
-        if (audioSource)
-        {
-            if (batteringChargeFireSound)
+            spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(angle, 90, -90), 0, (long)(longlaserDamage * 0.85), longlaserSpeed * 1.1f, false);
+            angle += 20;
+            if (audioSource)
             {
-                audioSource.PlayOneShot(batteringChargeFireSound);
-            } else
-            {
-                audioSource.Play();
+                if (spreadingRaysFireSound)
+                {
+                    audioSource.PlayOneShot(spreadingRaysFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
             }
+            yield return new WaitForSeconds(fireRate);
         }
+        usingAbility = false;
+    }
+
+    IEnumerator batteringCharge()
+    {
+        usingAbility = true;
+        float chargeSpeed;
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        {
+            chargeSpeed = 0.001f;
+        } else //Nightmare
+        {
+            chargeSpeed = 0.002f;
+        }
+        StartCoroutine(animateChargeGlow(chargeGlows[3], chargeSpeed, 0.1f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[3], 0.005f, 0, false));
+        for (int i = 0; i < batteringChargeShots; i++)
+        {
+            float angle = Random.Range(-180, 180);
+            for (int s = 0; s < 12; s++)
+            {
+                spawnProjectile(superlaser, new Vector3(chargeGlows[3].position.x, chargeGlows[3].position.y, 0), new Vector3(angle, 90, -90), 0, superlaserDamage, superlaserSpeed, false);
+                angle += 30;
+            }
+            if (audioSource)
+            {
+                if (batteringChargeFireSound)
+                {
+                    audioSource.PlayOneShot(batteringChargeFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(batteringChargeFireRate);
+        }
+        usingAbility = false;
     }
 
     IEnumerator sphericlingDemon()
@@ -281,11 +425,11 @@ public class EvilMain : MonoBehaviour
         foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
         if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
         {
-            shots = 46;
+            shots = 55;
             chargeSpeed = 0.001f;
         } else //Nightmare
         {
-            shots = 80;
+            shots = 91;
             chargeSpeed = 0.002f;
         }
         StartCoroutine(animateChargeGlow(chargeGlows[point], chargeSpeed, 0.1f, true));
