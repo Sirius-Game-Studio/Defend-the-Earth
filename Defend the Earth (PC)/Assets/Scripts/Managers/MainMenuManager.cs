@@ -77,9 +77,10 @@ public class MainMenuManager : MonoBehaviour
         input.Menu.CloseMenu.performed += context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-        input.Debug.ResetSpaceships.performed += context => resetSpaceships();
-        input.Debug.ResetUpgrades.performed += context => resetUpgrades();
-        input.Debug.ResetLevel.performed += context => resetLevel();
+        input.Debug.SmallRepair.performed += context => resetSpaceships();
+        input.Debug.MaxHealth.performed += context => resetUpgrades();
+        input.Debug.IncreaseLevel.performed += context => changeLevel(1);
+        input.Debug.DecreaseLevel.performed += context => changeLevel(-1);
         #endif
     }
 
@@ -90,9 +91,10 @@ public class MainMenuManager : MonoBehaviour
         input.Menu.CloseMenu.performed -= context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
-        input.Debug.ResetSpaceships.performed -= context => resetSpaceships();
-        input.Debug.ResetUpgrades.performed -= context => resetUpgrades();
-        input.Debug.ResetLevel.performed -= context => resetLevel();
+        input.Debug.SmallRepair.performed -= context => resetSpaceships();
+        input.Debug.MaxHealth.performed -= context => resetUpgrades();
+        input.Debug.IncreaseLevel.performed -= context => changeLevel(1);
+        input.Debug.DecreaseLevel.performed -= context => changeLevel(-1);
         #endif
     }
 
@@ -141,7 +143,7 @@ public class MainMenuManager : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
         {
-            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Levels"));
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("MaxLevels"));
         } else if (PlayerPrefs.GetInt("Level") < 1) //Checks if current level is less than 1
         {
             PlayerPrefs.SetInt("Level", 1);
@@ -232,12 +234,15 @@ public class MainMenuManager : MonoBehaviour
     #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
     void resetSpaceships()
     {
-        PlayerPrefs.SetInt("HasSpaceFighter", 1);
-        PlayerPrefs.SetInt("HasAlienMower", 0);
-        PlayerPrefs.SetInt("HasBlazingRocket", 0);
-        PlayerPrefs.SetInt("HasQuadShooter", 0);
-        PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
-        PlayerPrefs.SetInt("HasAnnihilator", 0);
+        if (!loading)
+        {
+            PlayerPrefs.SetInt("HasSpaceFighter", 1);
+            PlayerPrefs.SetInt("HasAlienMower", 0);
+            PlayerPrefs.SetInt("HasBlazingRocket", 0);
+            PlayerPrefs.SetInt("HasQuadShooter", 0);
+            PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
+            PlayerPrefs.SetInt("HasAnnihilator", 0);
+        }
     }
 
     void resetUpgrades()
@@ -249,16 +254,22 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.SetInt(name + "Percentage", 0);
         }
 
-        reset("Damage", 8);
-        reset("Speed", 5);
-        reset("Health", 7);
-        reset("Money", 4);
+        if (!loading)
+        {
+            reset("Damage", 8);
+            reset("Speed", 5);
+            reset("Health", 7);
+            reset("Money", 4);
+        }
     }
 
-    void resetLevel()
+    void changeLevel(int increment)
     {
-        PlayerPrefs.SetInt("Level", 1);
-        PlayerPrefs.Save();
+        if (increment != 0 && !spaceshipsMenu.enabled && !upgradesMenu.enabled && !loading)
+        {
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + increment);
+            PlayerPrefs.Save();
+        }
     }
     #endif
     #endregion
