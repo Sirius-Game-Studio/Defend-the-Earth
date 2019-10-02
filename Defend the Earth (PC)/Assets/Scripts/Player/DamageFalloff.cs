@@ -11,12 +11,7 @@ public class DamageFalloff : MonoBehaviour
     void Start()
     {
         bulletHit = GetComponent<BulletHit>();
-        if (!bulletHit)
-        {
-            Debug.LogError("Could not find BulletHit in GameObject " + name + "!");
-            return;
-        }
-        if (bulletHit) InvokeRepeating("dropDamage", falloffTime, falloffTime);
+        InvokeRepeating("dropDamage", falloffTime, falloffTime);
     }
 
     void Update()
