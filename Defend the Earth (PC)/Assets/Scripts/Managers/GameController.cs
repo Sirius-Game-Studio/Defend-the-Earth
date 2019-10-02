@@ -611,12 +611,12 @@ public class GameController : MonoBehaviour
     #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
     void nextWave()
     {
-        if (!gameOver && !won && !paused && wave < maxWaves) enemiesLeft = 0;
+        if (!gameOver && !won && !paused && !loading && wave < maxWaves) enemiesLeft = 0;
     }
 
     void skipToBoss()
     {
-        if (!gameOver && !won && !paused && boss && !currentBoss)
+        if (!gameOver && !won && !paused && !loading && boss && !currentBoss)
         {
             enemiesLeft = 0;
             wave = maxWaves;
