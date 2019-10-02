@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 14
+  nightmareDamage: 14
   spreadDegree: 0
   shots: 1
   turnToPlayer: 0
