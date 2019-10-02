@@ -1598,7 +1598,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2870755580706364987}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.475
@@ -1753,12 +1753,12 @@ MonoBehaviour:
   dyingCraftShots: 10
   scatterlaserDamage: 12
   scatterlaserSpeed: 17
-  scatterlaserSpread: 12.5
-  scatterlaserShots: 16
-  bombasticSprayFireRate: 0.5
-  bombasticSprayShots: 2
-  longlaserSpread: 12.5
-  spreadingRaysFireRate: 0.3
+  scatterlaserSpread: 8.5
+  scatterlaserShots: 12
+  bombasticSprayFireRate: 0.3
+  bombasticSprayShots: 4
+  longlaserSpread: 8
+  spreadingRaysFireRate: 0.25
   spreadingRaysShots: 12
   superlaserDamage: 32
   superlaserSpeed: 15
