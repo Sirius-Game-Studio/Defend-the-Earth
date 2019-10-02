@@ -3,19 +3,23 @@
 public class EnemyGun : MonoBehaviour
 {
     [Header("Settings")]
-    public long damage = 10;
+    [Tooltip("Easy, Normal and Hard only.")] public long damage = 10;
+    [Tooltip("Overrides bullet damage if nightmareBullet is set (Nightmare only).")] [SerializeField] private long nightmareDamage = 20;
     [SerializeField] private float spreadDegree = 0;
     [SerializeField] private int shots = 1;
     [SerializeField] private bool turnToPlayer = false;
     public float RPM = 50;
+
+    [Header("Projectile Texture")]
+    [SerializeField] private bool useOnNightmare = false;
     [SerializeField] private Texture[] textures = new Texture[0];
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
 
     [Header("Setup")]
-    [Tooltip("Easy, Normal and Hard only (overridden if nightmareBullet is set).")] [SerializeField] private GameObject bullet = null;
-    [Tooltip("Nightmare only.")] [SerializeField] private GameObject nightmareBullet = null;
+    [Tooltip("Easy, Normal and Hard only.")] [SerializeField] private GameObject bullet = null;
+    [Tooltip("Overrides bullet to fire if set to a GameObject (Nightmare only).")] [SerializeField] private GameObject nightmareBullet = null;
 
     private AudioSource audioSource;
     private float nextShot = 0;
@@ -33,11 +37,11 @@ public class EnemyGun : MonoBehaviour
             } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
             {
                 damage = (long)(damage * 1.15);
-                RPM *= 1.05f;
             } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
             {
+                if (nightmareBullet) damage = nightmareDamage;
                 damage = (long)(damage * 1.3);
-                RPM *= 1.1f;
+                RPM *= 1.05f;
             }
         } else
         {
@@ -82,7 +86,19 @@ public class EnemyGun : MonoBehaviour
                         if (turnToPlayer && GameObject.FindWithTag("Player")) newBullet.transform.LookAt(GameObject.FindWithTag("Player").transform);
                         if (spreadDegree != 0) newBullet.transform.Rotate(0, Random.Range(-spreadDegree, spreadDegree), 0);
                         newBullet.GetComponent<EnemyHit>().damage = damage;
-                        if (skinPicker && textures.Length > 0) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", textures[skinPicker.texture]);
+                        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+                        {
+                            if (skinPicker && textures.Length > 0) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", textures[skinPicker.texture]);
+                        } else //Nightmare
+                        {
+                            if (nightmareBullet)
+                            {
+                                if (useOnNightmare && skinPicker && textures.Length > 0) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", textures[skinPicker.texture]);
+                            } else
+                            {
+                                if (skinPicker && textures.Length > 0) newBullet.GetComponent<Renderer>().material.SetTexture("_MainTex", textures[skinPicker.texture]);
+                            }
+                        }
                         foundBulletSpawns = true;
                     }
                 }
