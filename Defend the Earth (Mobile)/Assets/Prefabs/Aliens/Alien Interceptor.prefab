@@ -243,7 +243,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
@@ -262,10 +261,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 16
+  nightmareDamage: 16
   spreadDegree: 0
   shots: 1
   turnToPlayer: 0
   RPM: 50
+  useOnNightmare: 0
   textures:
   - {fileID: 2800000, guid: 25e1fef4178fb574b9af72848dd14c1b, type: 3}
   - {fileID: 2800000, guid: 3a35a930e0cf7bd41ad98077f73daaf3, type: 3}
