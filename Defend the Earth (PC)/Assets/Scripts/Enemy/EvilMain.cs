@@ -291,6 +291,7 @@ public class EvilMain : MonoBehaviour
 
     IEnumerator bombasticSpray()
     {
+        usingAbility = false;
         for (int i = 0; i < bombasticSprayShots; i++)
         {
             for (int s = 0; s < scatterlaserShots; s++) spawnProjectile(scatterlaser, dyingCraftGun.position, new Vector3(90, 0, 0), scatterlaserSpread, scatterlaserDamage, scatterlaserSpeed, true);
@@ -306,13 +307,16 @@ public class EvilMain : MonoBehaviour
             }
             yield return new WaitForSeconds(bombasticSprayFireRate);
         }
+        usingAbility = true;
     }
 
     IEnumerator spreadingRays()
     {
+        float chargeSpeed;
+        usingAbility = true;
         for (int i = 0; i < spreadingRaysShots; i++)
         {
-            spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(90, 0, 0), longlaserSpread, (long)(longlaserDamage * 0.8), longlaserSpeed, true);
+            spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(90, 0, 0), longlaserSpread, (long)(longlaserDamage * 0.85), longlaserSpeed, true);
             if (audioSource)
             {
                 if (spreadingRaysFireSound)
@@ -325,6 +329,35 @@ public class EvilMain : MonoBehaviour
             }
             yield return new WaitForSeconds(spreadingRaysFireRate);
         }
+        foreach (Transform chargeGlow in chargeGlows) chargeGlow.localScale = Vector3.zero;
+        if (PlayerPrefs.GetInt("Difficulty") < 4) //Easy, Normal and Hard
+        {
+            chargeSpeed = 0.0015f;
+        } else //Nightmare
+        {
+            chargeSpeed = 0.003f;
+        }
+        StartCoroutine(animateChargeGlow(chargeGlows[2], chargeSpeed, 0.1f, true));
+        while (animatingCharge) yield return null;
+        StartCoroutine(animateChargeGlow(chargeGlows[2], 0.005f, 0, false));
+        float angle = 0;
+        for (int i = 0; i < 19; i++)
+        {
+            spawnProjectile(longlaser, dyingCraftGun.position, new Vector3(angle, 90, -90), 0, (long)(longlaserDamage * 0.85), longlaserSpeed, false);
+            angle += 20;
+            if (audioSource)
+            {
+                if (spreadingRaysFireSound)
+                {
+                    audioSource.PlayOneShot(spreadingRaysFireSound);
+                } else
+                {
+                    audioSource.Play();
+                }
+            }
+            yield return new WaitForSeconds(0.05f);
+        }
+        usingAbility = false;
     }
 
     IEnumerator batteringCharge()
