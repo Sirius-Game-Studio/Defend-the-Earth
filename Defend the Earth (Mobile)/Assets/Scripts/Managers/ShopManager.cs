@@ -40,7 +40,6 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Image spaceshipPanel = null;
     [SerializeField] private GameObject leftButton = null;
     [SerializeField] private GameObject rightButton = null;
-    [SerializeField] private Text controllerBuyText = null;
 
     [Header("Upgrades Menu")]
     [SerializeField] private Text damagePercentage = null;
@@ -111,7 +110,6 @@ public class ShopManager : MonoBehaviour
                 spaceshipBuyText.text = "Use";
             }
             spaceshipPrice.text = "";
-            if (controllerBuyText) controllerBuyText.text = "Use";
         } else
         {
             spaceshipBuyText.rectTransform.offsetMin = new Vector2(10, 0);
@@ -125,7 +123,6 @@ public class ShopManager : MonoBehaviour
             {
                 spaceshipPrice.text = "Free";
             }
-            if (controllerBuyText) controllerBuyText.text = "Buy";
         }
         spaceshipInfo.text = "Health: " + spaceship.health + "\nDamage: " + spaceship.damage + "\nFire Rate: " + spaceship.fireRate;
         spaceshipPanel.color = new Color32(spaceship.panelColor.r, spaceship.panelColor.g, spaceship.panelColor.b, 150);
