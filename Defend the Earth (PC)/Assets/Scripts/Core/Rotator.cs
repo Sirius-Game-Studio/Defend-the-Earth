@@ -16,12 +16,14 @@ public class Rotator : MonoBehaviour
 
     void Update()
     {
-        if (useInsideUnitSphere && rb) rb.isKinematic = false;
         if (!useInsideUnitSphere)
         {
             transform.Rotate(rotation * Time.deltaTime);
-            if (rb) rb.isKinematic = true;
+            rb.isKinematic = true;
+        } else
+        {
+            rb.isKinematic = false;
         }
-        if (rb) rb.velocity = Vector3.zero;
+        rb.velocity = Vector3.zero;
     }
 }
