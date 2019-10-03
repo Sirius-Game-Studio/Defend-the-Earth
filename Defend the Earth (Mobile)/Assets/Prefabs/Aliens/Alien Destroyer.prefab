@@ -122,7 +122,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 5c929a1e7e6053f499c799f0b76fc965, type: 3}
+  m_Mesh: {fileID: -3078980528855682115, guid: 8ab6677ce34046c449dc67ba6c11584e, type: 3}
 --- !u!82 &-4113819702479574869
 AudioSource:
   m_ObjectHideFlags: 0

@@ -217,7 +217,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: -462981019419857548, guid: df68ad32ff64eda419b3d0252997b303, type: 3}
+  m_Mesh: {fileID: -462981019419857548, guid: db2859694a95f434d938854d104c8a70, type: 3}
 --- !u!82 &4542384402253318153
 AudioSource:
   m_ObjectHideFlags: 0
@@ -337,7 +337,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
@@ -364,6 +363,7 @@ MonoBehaviour:
   laserMachineShots: 30
   scatterlaserDamage: 12
   scatterlaserSpeed: 17
+  scatterlaserSpread: {x: 70, y: 110}
   scatterlaserShots: 6
   scorchingBeamTime: 5
   fireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96, type: 3}

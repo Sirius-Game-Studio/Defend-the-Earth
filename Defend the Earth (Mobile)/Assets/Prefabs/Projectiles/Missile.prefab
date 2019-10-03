@@ -112,7 +112,7 @@ MeshCollider:
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
-  m_Mesh: {fileID: 4300014, guid: 8877092c49d4cd445a536cee36849209, type: 3}
+  m_Mesh: {fileID: -9158876758851665062, guid: 9f5b02bb42af395448ca7f191a9c0f4c, type: 3}
 --- !u!114 &1646131011537254979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 21
-  doubleDamageMultiplier: 1.5
-  doubleDamageLayer: 8
+  highDamageMultiplier: 1.5
+  highDamageLayer: -1
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &8513550893873227408
 MonoBehaviour:
