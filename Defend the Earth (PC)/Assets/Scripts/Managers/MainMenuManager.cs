@@ -79,6 +79,7 @@ public class MainMenuManager : MonoBehaviour
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
         input.Debug.SmallRepair.performed += context => resetSpaceships();
         input.Debug.MaxHealth.performed += context => resetUpgrades();
+        input.Debug.Supercharge.performed += context => resetMoney();
         input.Debug.IncreaseLevel.performed += context => changeLevel(1);
         input.Debug.DecreaseLevel.performed += context => changeLevel(-1);
         #endif
@@ -93,6 +94,7 @@ public class MainMenuManager : MonoBehaviour
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
         input.Debug.SmallRepair.performed -= context => resetSpaceships();
         input.Debug.MaxHealth.performed -= context => resetUpgrades();
+        input.Debug.Supercharge.performed -= context => resetMoney();
         input.Debug.IncreaseLevel.performed -= context => changeLevel(1);
         input.Debug.DecreaseLevel.performed -= context => changeLevel(-1);
         #endif
@@ -242,6 +244,7 @@ public class MainMenuManager : MonoBehaviour
             PlayerPrefs.SetInt("HasQuadShooter", 0);
             PlayerPrefs.SetInt("HasPointVoidBreaker", 0);
             PlayerPrefs.SetInt("HasAnnihilator", 0);
+            PlayerPrefs.Save();
         }
     }
 
@@ -260,7 +263,14 @@ public class MainMenuManager : MonoBehaviour
             reset("Speed", 5);
             reset("Health", 7);
             reset("Money", 4);
+            PlayerPrefs.Save();
         }
+    }
+
+    void resetMoney()
+    {
+        PlayerPrefs.SetString("Money", "0");
+        PlayerPrefs.Save();
     }
 
     void changeLevel(int increment)
