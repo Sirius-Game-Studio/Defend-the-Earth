@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 3168323912323169034}
   - component: {fileID: 8978392540567160636}
   m_Layer: 2
-  m_Name: LeftSphericlingDemonGlow
+  m_Name: LeftSphericlingDemonChargeGlow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8f622a69ddae3eb418d93eaef27986b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1566,6 +1566,7 @@ Transform:
   - {fileID: 2898305991171571174}
   - {fileID: 3396714199555328751}
   - {fileID: 1498653871137384346}
+  - {fileID: 5495050227254986557}
   - {fileID: 8710316748366766828}
   - {fileID: 3903298253842582774}
   - {fileID: 7324128731627836235}
@@ -1721,7 +1722,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 1
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100008, guid: 5fe7b25ee5d07ff4e95b8d595d7b4bc5, type: 3}
@@ -1739,7 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bb8acc6810b47438f3661def9101f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityTime: {x: 3, y: 4}
+  abilityTime: {x: 3, y: 3.5}
   yPosition: 3
   music: {fileID: 8300000, guid: d315736d56ddaac49a3c2bb717c61bc1, type: 3}
   longlaserDamage: 17
@@ -1748,22 +1748,40 @@ MonoBehaviour:
   perforatingCannonsShots: 8
   shipkillerDamage: 31
   shipkillerSpeed: 17.5
-  shipkillerSpread: 5
+  shipkillerSpread: 4
   dyingCraftFireRate: 0.25
   dyingCraftShots: 10
+  scatterlaserDamage: 12
+  scatterlaserSpeed: 17
+  scatterlaserSpread: 8.5
+  scatterlaserShots: 12
+  bombasticSprayFireRate: 0.3
+  bombasticSprayShots: 4
+  longlaserSpread: 8
+  spreadingRaysFireRate: 0.25
+  spreadingRaysShots: 12
+  superlaserDamage: 32
+  superlaserSpeed: 15
+  batteringChargeFireRate: 1
+  batteringChargeShots: 3
   orbDamage: 16
   orbSpeed: 16
   orbLifesteal: 0.2
-  sphericlingDemonFireRate: 0.17
-  superlaserDamage: 32
-  superlaserSpeed: 32
+  sphericlingDemonFireRate: 0.2
   perforatingCannonsFireSound: {fileID: 8300000, guid: 6f8efae2a70a9f54cbdb5dc8dd4e9fd7,
     type: 3}
-  sphericlingDemonFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
+  dyingCraftFireSound: {fileID: 8300000, guid: 2fe490fb8c3d2514c97229ce9392de8a, type: 3}
+  bombasticSprayFireSound: {fileID: 8300000, guid: 4a14985fcced5674bb9a3ec19845dc96,
+    type: 3}
+  spreadingRaysFireSound: {fileID: 8300000, guid: fa5a8beea5991cb4e8fa6302dc57c59f,
     type: 3}
   batteringChargeFireSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598,
     type: 3}
+  sphericlingDemonFireSound: {fileID: 8300000, guid: 27af53e9cbd7f0c41be61b1248ef216c,
+    type: 3}
   longlaser: {fileID: 3937757261437629000, guid: b230229d3a3433c4c91ea893cbc6a2d3,
+    type: 3}
+  scatterlaser: {fileID: 3937757261437629000, guid: 973d3e143b1eef443983de606c683164,
     type: 3}
   superlaser: {fileID: 3937757261437629000, guid: db7c92ae71bec4246bdc6beea3292715,
     type: 3}
@@ -2579,7 +2597,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1264844251979574312}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &4049258741901597342
 GameObject:
@@ -3066,7 +3084,7 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1264844251979574312}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &6977542212242577291
 MeshFilter:
@@ -3093,7 +3111,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 5aaeef725e5929d468c93aeec7110faf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3205,6 +3223,84 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &5206933171163985377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5495050227254986557}
+  - component: {fileID: 1123798623361250955}
+  - component: {fileID: 1018105253193070787}
+  m_Layer: 2
+  m_Name: SpreadingRaysChargeGlow
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5495050227254986557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206933171163985377}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0.275}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1264844251979574312}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!33 &1123798623361250955
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206933171163985377}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &1018105253193070787
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206933171163985377}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a2ca3ea03f46f204c9b5b789d9df6c08, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &5411650881098129275
 GameObject:
   m_ObjectHideFlags: 0
@@ -3324,7 +3420,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1264844251979574312}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5476031189628217001
 GameObject:
@@ -3536,7 +3632,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1264844251979574312}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5840318151138486703
 GameObject:
@@ -4586,7 +4682,7 @@ GameObject:
   - component: {fileID: 5505615302293557048}
   - component: {fileID: 9033479632688820571}
   m_Layer: 2
-  m_Name: RightSphericlingDemonGlow
+  m_Name: RightSphericlingDemonChargeGlow
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4631,7 +4727,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 8f622a69ddae3eb418d93eaef27986b7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
