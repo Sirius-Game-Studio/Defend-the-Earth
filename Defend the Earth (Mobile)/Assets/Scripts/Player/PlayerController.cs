@@ -205,7 +205,8 @@ public class PlayerController : MonoBehaviour
         if (damage < 0) damage = 1; //Checks if damage is less than 1
         if (speed < 0) speed = 0; //Checks if speed is less than 0
     }
-
+    
+    #region Main Functions
     void fire()
     {
         bool foundBulletSpawns = false;
@@ -234,65 +235,6 @@ public class PlayerController : MonoBehaviour
             } else
             {
                 audioSource.Play();
-            }
-        }
-    }
-
-    public void repair(long heal)
-    {
-        if (heal != 0)
-        {
-            health += heal;
-            if (textPopup)
-            {
-                if (textPopup.GetComponent<TextMeshPro>())
-                {
-                    GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
-                    if (heal > 0)
-                    {
-                        popup.GetComponent<TextMeshPro>().text = "+" + heal;
-                        popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 0, 255);
-                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 0, 255);
-                    } else
-                    {
-                        popup.GetComponent<TextMeshPro>().text = "-" + heal;
-                        popup.GetComponent<TextMeshPro>().color = new Color32(255, 0, 0, 255);
-                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 0, 0, 255);
-                    }
-                } else
-                {
-                    Debug.LogError("TextPopup object does not have a TextMeshPro component!");
-                }
-            }
-        }
-    }
-
-    public void supercharge()
-    {
-        if (!hasSupercharge)
-        {
-            hasSupercharge = true;
-            oldDamage = damage;
-            if (oldDamage < 1) oldDamage = 1;
-            damage = (long)(damage * superchargeMultiplier);
-            superchargeDuration = superchargeTime;
-            shownSuperchargeText = false;
-        } else
-        {
-            superchargeDuration = superchargeTime;
-            shownSuperchargeText = false;
-        }
-        if (textPopup)
-        {
-            if (textPopup.GetComponent<TextMeshPro>())
-            {
-                GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
-                popup.GetComponent<TextMeshPro>().text = "Supercharge!";
-                popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 255, 255);
-                popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 127, 255);
-            } else
-            {
-                Debug.LogError("TextPopup object does not have a TextMeshPro component!");
             }
         }
     }
@@ -365,4 +307,66 @@ public class PlayerController : MonoBehaviour
             yield break;
         }
     }
+    #endregion
+
+    #region Powerup Functions
+    public void repair(long heal)
+    {
+        if (heal != 0)
+        {
+            health += heal;
+            if (textPopup)
+            {
+                if (textPopup.GetComponent<TextMeshPro>())
+                {
+                    GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                    if (heal > 0)
+                    {
+                        popup.GetComponent<TextMeshPro>().text = "+" + heal;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 0, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 0, 255);
+                    } else
+                    {
+                        popup.GetComponent<TextMeshPro>().text = "-" + heal;
+                        popup.GetComponent<TextMeshPro>().color = new Color32(255, 0, 0, 255);
+                        popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 0, 0, 255);
+                    }
+                } else
+                {
+                    Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+                }
+            }
+        }
+    }
+
+    public void supercharge()
+    {
+        if (!hasSupercharge)
+        {
+            hasSupercharge = true;
+            oldDamage = damage;
+            if (oldDamage < 1) oldDamage = 1;
+            damage = (long)(damage * superchargeMultiplier);
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
+        } else
+        {
+            superchargeDuration = superchargeTime;
+            shownSuperchargeText = false;
+        }
+        if (textPopup)
+        {
+            if (textPopup.GetComponent<TextMeshPro>())
+            {
+                GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
+                popup.GetComponent<TextMeshPro>().text = "Supercharge!";
+                popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 255, 255);
+                popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 127, 255);
+            } else
+            {
+                Debug.LogError("TextPopup object does not have a TextMeshPro component!");
+            }
+        }
+    }
+    #endregion
 }
