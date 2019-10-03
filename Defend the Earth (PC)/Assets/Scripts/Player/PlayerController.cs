@@ -266,50 +266,16 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Input Functions
-    public void move(Vector2 direction)
+    void move(Vector2 direction)
     {
         movement = direction;
     }
 
-    public void fire(bool state)
+    void fire(bool state)
     {
         shooting = state;
     }
     #endregion
-
-    public void takeDamage(long hitDamage)
-    {
-        if (!invulnerable)
-        {
-            if (hitDamage > 0)
-            {
-                health -= hitDamage;
-            } else
-            {
-                --health;
-            }
-        }
-    }
-
-    public void startInvulnerability(float duration)
-    {
-        if (!invulnerable && duration > 0)
-        {
-            invulnerable = true;
-            StartCoroutine(invulnerabilityFadeEffect());
-            Invoke("stopInvulnerability", duration);
-        }
-    }
-
-    void stopInvulnerability()
-    {
-        invulnerable = false;
-        if (renderer) renderer.enabled = true;
-        foreach (Renderer child in GetComponentsInChildren<Renderer>())
-        {
-            if (child) child.enabled = true;
-        }
-    }
 
     #region Powerup Functions
     public void repair(long heal)
@@ -372,6 +338,41 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region Main Functions
+    public void takeDamage(long hitDamage)
+    {
+        if (!invulnerable)
+        {
+            if (hitDamage > 0)
+            {
+                health -= hitDamage;
+            } else
+            {
+                --health;
+            }
+        }
+    }
+
+    public void startInvulnerability(float duration)
+    {
+        if (!invulnerable && duration > 0)
+        {
+            invulnerable = true;
+            StartCoroutine(invulnerabilityFadeEffect());
+            Invoke("stopInvulnerability", duration);
+        }
+    }
+
+    void stopInvulnerability()
+    {
+        invulnerable = false;
+        if (renderer) renderer.enabled = true;
+        foreach (Renderer child in GetComponentsInChildren<Renderer>())
+        {
+            if (child) child.enabled = true;
+        }
+    }
+
     IEnumerator invulnerabilityFadeEffect()
     {
         if (invulnerable)
@@ -406,4 +407,5 @@ public class PlayerController : MonoBehaviour
             yield break;
         }
     }
+    #endregion
 }
