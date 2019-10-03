@@ -73,7 +73,6 @@ public class MainMenuManager : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
-        input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Menu.CloseMenu.performed += context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -88,7 +87,6 @@ public class MainMenuManager : MonoBehaviour
     void OnDisable()
     {
         input.Disable();
-        input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Menu.CloseMenu.performed -= context => closeMenu();
 
         #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
@@ -195,11 +193,6 @@ public class MainMenuManager : MonoBehaviour
     }
 
     #region Input Functions
-    void toggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-    }
-
     void closeMenu()
     {
         if (shopMenu.enabled)

@@ -65,7 +65,6 @@ public class EndingManager : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
-        input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Menu.CloseMenu.performed += context => stopCredits();
         input.Menu.SpeedUpCredits.performed += context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled += context => speedUpCredits(false);
@@ -74,7 +73,6 @@ public class EndingManager : MonoBehaviour
     void OnDisable()
     {
         input.Disable();
-        input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Menu.CloseMenu.performed -= context => stopCredits();
         input.Menu.SpeedUpCredits.performed -= context => speedUpCredits(true);
         input.Menu.SpeedUpCredits.canceled -= context => speedUpCredits(false);
@@ -153,11 +151,6 @@ public class EndingManager : MonoBehaviour
     }
     
     #region Input Functions
-    void toggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-    }
-
     void stopCredits()
     {
         if (creditsMenu.enabled)

@@ -228,7 +228,6 @@ public class GameController : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
-        input.Gameplay.Fullscreen.performed += context => toggleFullscreen();
         input.Gameplay.Pause.performed += context => pause();
         input.Gameplay.Resume.performed += context => resumeGame(false);
         input.Gameplay.Restart.performed += context => restartForController();
@@ -243,7 +242,6 @@ public class GameController : MonoBehaviour
     void OnDisable()
     {
         input.Disable();
-        input.Gameplay.Fullscreen.performed -= context => toggleFullscreen();
         input.Gameplay.Pause.performed -= context => pause();
         input.Gameplay.Resume.performed -= context => resumeGame(false);
         input.Gameplay.Restart.performed -= context => restartForController();
@@ -554,11 +552,6 @@ public class GameController : MonoBehaviour
     }
 
     #region Input Functions
-    void toggleFullscreen()
-    {
-        Screen.fullScreen = !Screen.fullScreen;
-    }
-
     void closeMenu()
     {
         if (paused)
