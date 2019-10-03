@@ -1050,10 +1050,19 @@ public class GameController : MonoBehaviour
                     anyKeyPrompt.SetActive(false);
                 } else
                 {
-                    if (Input.anyKeyDown) load.allowSceneActivation = true;
-                    loadingSlider.value = 1;
-                    loadingPercentage.text = "100%";
-                    anyKeyPrompt.SetActive(true);
+                    if (PlayerPrefs.GetInt("Tips") >= 1)
+                    {
+                        if (Input.anyKeyDown) load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(true);
+                    } else
+                    {
+                        load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(false);
+                    }
                 }
                 gameHUD.enabled = false;
                 gamePausedMenu.enabled = false;
