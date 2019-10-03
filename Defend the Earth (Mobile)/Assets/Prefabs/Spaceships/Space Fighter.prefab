@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 4300000, guid: d5f02142fd614bc429559c3d9c05482c, type: 3}
+  m_Mesh: {fileID: 4240359960069438546, guid: e3f73f9a138ace84bb4c6ef45c9c2419, type: 3}
 --- !u!23 &4266018468059611872
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100010}
-  m_Mesh: {fileID: 4300000, guid: 27ae1315ca7386c4380ea66773476fc4, type: 3}
+  m_Mesh: {fileID: 6435853251097335646, guid: fc337d7f756bf70428099ccda4319532, type: 3}
 --- !u!23 &611802715637675539
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -336,7 +336,8 @@ MonoBehaviour:
   damage: 28
   RPM: 115
   speed: 8
-  repairHeal: 20
+  smallRepairHeal: 15
+  largeRepairHeal: 25
   superchargeMultiplier: 1.5
   superchargeTime: 12
   fireSound: {fileID: 8300000, guid: 181c68120cf5c6048897a415bc077598, type: 3}
