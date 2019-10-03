@@ -4,7 +4,7 @@ using UnityEngine;
 public class EvilMain : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
+    [SerializeField] private Vector2 abilityTime = new Vector2(3, 3.5f);
     [Tooltip("The Y position this enemy stops at.")] [SerializeField] private float yPosition = 3;
     [Tooltip("The music to play after this enemy spawns.")] [SerializeField] private AudioClip music = null;
 
@@ -57,7 +57,6 @@ public class EvilMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
     [SerializeField] private GameObject scatterlaser = null;
-    [SerializeField] private GameObject laser = null;
     [SerializeField] private GameObject superlaser = null;
     [SerializeField] private GameObject shipkillerMissile = null;
     [SerializeField] private GameObject miniOrb = null;
