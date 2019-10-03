@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2484391616660123993}
   - component: {fileID: 1543651120069785782}
-  - component: {fileID: 2573655373167896815}
+  - component: {fileID: 3071365533198869790}
   - component: {fileID: 8501815208417965327}
   - component: {fileID: 3973978989672783495}
   - component: {fileID: -4061231970185013492}
@@ -140,8 +140,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!135 &2573655373167896815
-SphereCollider:
+--- !u!65 &3071365533198869790
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -151,8 +151,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.865
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.75, y: 1.75, z: 0.7}
+  m_Center: {x: 0, y: 0, z: -0.05}
 --- !u!82 &8501815208417965327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -272,7 +272,6 @@ MonoBehaviour:
   - {fileID: 122894, guid: 464cc23de24213d40a8315294edd1c3d, type: 3}
   - {fileID: 709764095147015039, guid: d5fa6a236c0df774d92c817f73edb145, type: 3}
   countsTowardsKillGoal: 0
-  killTracker: AlienKills
   maxHealth: 0
   invulnerable: 0
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
@@ -291,10 +290,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
+  nightmareDamage: 18
   spreadDegree: 0
   shots: 1
   turnToPlayer: 0
   RPM: 70
+  useOnNightmare: 0
   textures: []
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   bullet: {fileID: 3937757261437629000, guid: f39075d56908f7c4d89eec1dad0915a7, type: 3}
