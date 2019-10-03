@@ -19,11 +19,11 @@ public class Rotator : MonoBehaviour
         if (!useInsideUnitSphere)
         {
             transform.Rotate(rotation * Time.deltaTime);
-            rb.isKinematic = true;
+            if (rb) rb.isKinematic = true;
         } else
         {
             rb.isKinematic = false;
         }
-        rb.velocity = Vector3.zero;
+        if (rb) rb.velocity = Vector3.zero;
     }
 }
