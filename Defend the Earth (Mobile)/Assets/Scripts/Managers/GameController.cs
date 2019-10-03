@@ -794,6 +794,12 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void updatePlayerPosition(Vector3 newPosition, Quaternion newRotation)
+    {
+        playerPosition.position = newPosition;
+        playerPosition.rotation = newRotation;
+    }
+
     IEnumerator showNewHighScore()
     {
         int a = 0;
@@ -997,7 +1003,6 @@ public class GameController : MonoBehaviour
             }
         }
     }
-    #endregion
 
     public void closeRevivePrompt()
     {
@@ -1025,12 +1030,7 @@ public class GameController : MonoBehaviour
         }
         canSetNewHighScore = true;
     }
-
-    public void updatePlayerPosition(Vector3 newPosition, Quaternion newRotation)
-    {
-        playerPosition.position = newPosition;
-        playerPosition.rotation = newRotation;
-    }
+    #endregion
 
     IEnumerator loadScene(string scene)
     {
@@ -1038,7 +1038,7 @@ public class GameController : MonoBehaviour
         {
             loading = true;
             AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
             if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
             while (!load.isDone)
             {
