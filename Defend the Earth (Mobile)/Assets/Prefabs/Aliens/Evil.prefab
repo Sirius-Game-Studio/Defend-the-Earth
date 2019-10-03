@@ -1783,6 +1783,7 @@ MonoBehaviour:
     type: 3}
   scatterlaser: {fileID: 3937757261437629000, guid: 973d3e143b1eef443983de606c683164,
     type: 3}
+  laser: {fileID: 0}
   superlaser: {fileID: 3937757261437629000, guid: db7c92ae71bec4246bdc6beea3292715,
     type: 3}
   shipkillerMissile: {fileID: 1567194746187364, guid: 9c53dae7f7d6f3a4bb71f0f8dde86142,
