@@ -8,40 +8,159 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: earth_mat
-  m_Shader: {fileID: 4800000, guid: b1fac95321091764e8f70867c2a349fd, type: 3}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_Shader: {fileID: 4800000, guid: 2e0c34b3774c93542a711016b97aeb1f, type: 3}
+  m_ShaderKeywords: ATMO_ON MOBILE_OFF
+  m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _CloudAndNightTex:
-        m_Texture: {fileID: 2800000, guid: fe291fffbbf2f834fb076ded04466eda, type: 3}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 8e725d86ffee06841aa827d836e8af67, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DiffuseTex:
-        m_Texture: {fileID: 2800000, guid: 521c473bd713eff468f556acaf453a9c, type: 3}
+    - _CloudMap:
+        m_Texture: {fileID: 2800000, guid: affb76b28ded56c4fba5cd0d38450932, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
+    - _CloudMap1:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _NormalAndSpecularTex:
-        m_Texture: {fileID: 2800000, guid: 3070d0b18ee1303498b4a16fe6066ad0, type: 3}
+    - _CloudMap2:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudMap3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CloudMap4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap:
+        m_Texture: {fileID: 2800000, guid: 1b75c3e214d35d24390449bd72a75ef8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap1:
+        m_Texture: {fileID: 2800000, guid: c66248e52e4c10f43a2ab8622a8eac3d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap2:
+        m_Texture: {fileID: 2800000, guid: 8acda705922b1c445b6057d123730ecd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap3:
+        m_Texture: {fileID: 2800000, guid: 66576972cd9f3f648b74fcb2b49f5f5e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap4:
+        m_Texture: {fileID: 2800000, guid: 20634f4fc901ccd498e6cebe5c94bd1f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap5:
+        m_Texture: {fileID: 2800000, guid: 911d96d5716441548b3bb1e9a0e3314a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap6:
+        m_Texture: {fileID: 2800000, guid: 62154ebdbeedb0d42aa601f482bb3a4d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap7:
+        m_Texture: {fileID: 2800000, guid: d2afaacb91ae3ce4989576a3244cdf69, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _LightMap8:
+        m_Texture: {fileID: 2800000, guid: 30b1fb1184bd72841bab172ef3d73b39, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: f54f3c23108450b41a9f137c58c9efac, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex1:
+        m_Texture: {fileID: 2800000, guid: 764a323d39c176843bd70699b7bfc084, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex2:
+        m_Texture: {fileID: 2800000, guid: 92873d5834674d748a863b071a5934d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex3:
+        m_Texture: {fileID: 2800000, guid: 5d5d7a6756ab2834fa6db4d196084000, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex4:
+        m_Texture: {fileID: 2800000, guid: aa5a02c073172d2428f57841f030240e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SpecMap:
+        m_Texture: {fileID: 2800000, guid: 0ffbf5e7304a41248b34f692b9a6f1e7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _AtmosphereMultiply: 1.5
-    - _AtmospherePow: 3.1607144
-    - _SunsetIntensity: 0.7464286
+    - _AirGlowStrength: 0.25
+    - _Atmosphere: 1
+    - _BumpMapStrength: 0.5
+    - _BumpScale: 1
+    - _CloudShadowsStrength: 0.05
+    - _CloudSpeed: -0.1
+    - _CloudStrength: 2
+    - _Contrast: 0.6
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Glossiness: 0.5
+    - _LightMapIntensity: 1
+    - _LightScale: 1
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _Refraction: 1
+    - _Shininess: 4
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _ZWrite: 1
+    - _atmosphere: 1
     m_Colors:
-    - _AtmosphereColor: {r: 0.6313726, g: 0.7411765, b: 1, a: 1}
+    - _AtmoColor: {r: 0.89705884, g: 0.77934545, b: 0.70577425, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _LightDir: {r: -1, g: 0, b: 0, a: 1}
-    - _SkyColor: {r: 0.08235294, g: 0.18431373, b: 0.3529412, a: 1}
-    - _SunsetColor: {r: 0.8980392, g: 0.4117647, b: 0.14509805, a: 1}
+    - _Color1: {r: 0, g: 1, b: 0.12332631, a: 0}
+    - _Color2: {r: 0.8862745, g: 0.7176471, b: 0.09803922, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _ReflectionColor: {r: 0.28676468, g: 0.25727397, b: 0.20453069, a: 1}
+    - _SpecColor: {r: 0.3897059, g: 0.36188117, b: 0.32666522, a: 1}
