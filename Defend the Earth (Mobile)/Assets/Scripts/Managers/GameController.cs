@@ -587,13 +587,15 @@ public class GameController : MonoBehaviour
                                 Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                             } else
                             {
-                                if (wave < 6)
+                                int length = enemies.Length;
+                                if (wave < 4)
                                 {
-                                    Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
-                                } else
+                                    length -= 2;
+                                } else if (wave < 6)
                                 {
-                                    Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                    --length;
                                 }
+                                Instantiate(enemies[Random.Range(0, length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                             }
                         } else
                         {
