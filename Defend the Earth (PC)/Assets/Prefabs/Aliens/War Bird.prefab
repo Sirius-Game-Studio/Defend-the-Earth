@@ -1334,6 +1334,7 @@ MonoBehaviour:
   shots: 4
   turnToPlayer: 0
   RPM: 30
+  useOnNightmare: 0
   textures: []
   fireSound: {fileID: 8300000, guid: 321c57076d528934aa5e2ed5eb2798ce, type: 3}
   bullet: {fileID: 3937757261437629000, guid: ae52e54c923a7c54094612b651c36ded, type: 3}
@@ -1465,7 +1466,7 @@ MeshRenderer:
   - {fileID: 2100000, guid: 56392abab8730f64683a2a9c5521efb1, type: 2}
   - {fileID: 2100000, guid: e8751aad7f04b5844b20a122e04f9fc7, type: 2}
   - {fileID: 2100000, guid: e8751aad7f04b5844b20a122e04f9fc7, type: 2}
-  - {fileID: 2100000, guid: 285343cc82234dc41b81f42515677299, type: 2}
+  - {fileID: 2100000, guid: f5c441e05a8c4894a86d0ec72392973c, type: 2}
   - {fileID: 2100000, guid: 2d1ef3e77c85fbf42aef47dc8de1388a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
