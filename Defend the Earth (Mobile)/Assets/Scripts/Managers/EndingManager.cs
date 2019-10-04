@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class EndingManager : MonoBehaviour
 {
     [Header("Credits Settings")]
-    [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 530;
-    [SerializeField] private float creditsScrollSpeed = 0.375f;
+    [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 600;
+    [SerializeField] private float creditsScrollSpeed = 0.5f;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
