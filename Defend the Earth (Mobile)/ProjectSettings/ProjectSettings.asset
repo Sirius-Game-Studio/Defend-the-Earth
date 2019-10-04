@@ -120,7 +120,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.3.1
+  bundleVersion: 0.3a
   preloadedAssets:
   - {fileID: 11400000, guid: ef624bef1d9a9344a9b45597a6fdb805, type: 2}
   metroInputSource: 0
@@ -169,7 +169,7 @@ PlayerSettings:
     Standalone: com.roopkothastudio.defendtheearth
     iPhone: com.roopkothastudio.defendtheearth
   buildNumber: {}
-  AndroidBundleVersionCode: 11
+  AndroidBundleVersionCode: 12
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -264,7 +264,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 7
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: 78f3f951a0656a1498aab35bc8deca99, type: 3}
-  AndroidKeystoreName: '{inproject}: user.keystore'
+  AndroidKeystoreName: D:/Unity Projects/Main Projects/user.keystore
   AndroidKeyaliasName: defend-the-earth
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
