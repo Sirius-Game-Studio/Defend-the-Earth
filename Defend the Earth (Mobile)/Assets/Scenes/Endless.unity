@@ -1669,6 +1669,7 @@ MonoBehaviour:
   - {fileID: 5420663412342396601, guid: b7a8162f1729f05478cd25ee66dd9cce, type: 3}
   - {fileID: 6556492256011581412, guid: 512d42f0c3c09bc48a05dbd6295219c7, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
+  - {fileID: 3693917530599681773, guid: 0b770b60337452a40bd91d9c764950a5, type: 3}
   - {fileID: 632701638249580328, guid: 776063f6daa3a4944b9e4c7d338668d9, type: 3}
   otherEnemies:
   - {fileID: 1458391615630120, guid: 6d18ca3ac0d2ecd4aa99a8099af486bb, type: 3}
@@ -1676,6 +1677,7 @@ MonoBehaviour:
   - {fileID: 5420663412342396601, guid: b7a8162f1729f05478cd25ee66dd9cce, type: 3}
   - {fileID: 6556492256011581412, guid: 512d42f0c3c09bc48a05dbd6295219c7, type: 3}
   - {fileID: 1048570700629992, guid: 8e35ec7e332c3d243ac23e3686bafe01, type: 3}
+  - {fileID: 3693917530599681773, guid: 0b770b60337452a40bd91d9c764950a5, type: 3}
   asteroids:
   - {fileID: 1870533537087504, guid: 3d75efea2d4394f41836d50671b13ecd, type: 3}
   - {fileID: 1630810610957190, guid: 26313dd67027b9648a8320c8fb4a88b8, type: 3}
