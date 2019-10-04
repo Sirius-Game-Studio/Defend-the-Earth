@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b82e0d2b8cc9ee64cacfa0b6e51ff1a3
+guid: d103ffa837233534daa68d733386bac5
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
@@ -17,16 +17,21 @@ ModelImporter:
     second: //RootNode
   - first:
       43: 4300000
-    second: Earth16128Tris
+    second: Earth3968tris
   - first:
       95: 9500000
     second: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #25'
+    second: {fileID: 2100000, guid: 9129bad9aad7f394aa91b2eb46de21c8, type: 2}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -53,11 +58,11 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 2
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 1
+    importVisibility: 0
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
