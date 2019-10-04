@@ -569,7 +569,7 @@ public class GameController : MonoBehaviour
     #region Main Functions
     IEnumerator spawnWaves()
     {
-        while (!gameOver && !won && wave < maxWaves + 1)
+        while (true)
         {
             if (!gameOver && !won)
             {
@@ -601,10 +601,7 @@ public class GameController : MonoBehaviour
                             GameObject[] enemyArray = GameObject.FindGameObjectsWithTag("Enemy");
                             for (int i = 0; i < enemyArray.Length; i++)
                             {
-                                if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)")
-                                {
-                                    ++foundEnemies;
-                                }
+                                if (enemyArray[i].CompareTag("Enemy") && enemyArray[i].name == enemyToLimit.name + "(Clone)") ++foundEnemies;
                             }
                             if (foundEnemies < limitedEnemySpawns)
                             {
@@ -613,13 +610,15 @@ public class GameController : MonoBehaviour
                                     Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                                 } else
                                 {
-                                    if (wave < 6)
+                                    int length = enemies.Length;
+                                    if (wave < 4)
                                     {
-                                        Instantiate(enemies[Random.Range(0, enemies.Length - 1)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
-                                    } else
+                                        length -= 2;
+                                    } else if (wave < 6)
                                     {
-                                        Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
+                                        --length;
                                     }
+                                    Instantiate(enemies[Random.Range(0, length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                                 }
                             } else
                             {
@@ -629,60 +628,62 @@ public class GameController : MonoBehaviour
                     }
                 } else
                 {
+                    yield return new WaitForSeconds(3);
                     if (isCampaignLevel)
                     {
                         if (!boss)
                         {
-                            yield return new WaitForSeconds(3);
                             if (!gameOver && !won && !paused)
                             {
                                 if (wave >= maxWaves) canWin = true;
                                 enemiesLeft = enemyAmount;
+                                if (PlayerPrefs.GetInt("Difficulty") < 2) //Easy
+                                {
+                                    aliensReached -= 2;
+                                } else //Normal, Hard and Nightmare
+                                {
+                                    --aliensReached;
+                                }
+                                if (aliensReached < 0) aliensReached = 0;
                                 reachedNextWave = false;
                             }
                         } else
                         {
                             if (wave < maxWaves)
                             {
-                                yield return new WaitForSeconds(3);
                                 if (!gameOver && !won && !paused)
                                 {
                                     if (wave >= maxWaves) canWin = true;
                                     enemiesLeft = enemyAmount;
+                                    if (PlayerPrefs.GetInt("Difficulty") < 2) //Easy
+                                    {
+                                        aliensReached -= 2;
+                                    } else //Normal, Hard and Nightmare
+                                    {
+                                        --aliensReached;
+                                    }
+                                    if (aliensReached < 0) aliensReached = 0;
                                     reachedNextWave = false;
                                 }
                             } else
                             {
-                                if (wave < maxWaves)
+                                if (!gameOver && !won && !paused)
                                 {
-                                    yield return new WaitForSeconds(3);
-                                    if (!gameOver && !won && !paused)
-                                    {
-                                        if (wave >= maxWaves) canWin = true;
-                                        enemiesLeft = enemyAmount;
-                                        reachedNextWave = false;
-                                    }
-                                } else
-                                {
-                                    yield return new WaitForSeconds(3);
-                                    if (!gameOver && !won && !paused)
-                                    {
-                                        GameObject enemy = Instantiate(boss, new Vector3(0, bossInitialYPosition, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
-                                        enemy.GetComponent<EnemyHealth>().invulnerable = true;
-                                        enemy.name = boss.name;
-                                        currentBoss = enemy;
-                                        enemiesLeft = 1;
-                                        reachedNextWave = false;
-                                        if (wave >= maxWaves) canWin = true;
-                                    }
-                                    yield break;
+                                    GameObject enemy = Instantiate(boss, new Vector3(0, bossInitialYPosition, 0), Quaternion.Euler(bossRotation.x, bossRotation.y, bossRotation.z));
+                                    enemy.GetComponent<EnemyHealth>().invulnerable = true;
+                                    enemy.name = boss.name;
+                                    currentBoss = enemy;
+                                    enemiesLeft = 1;
+                                    reachedNextWave = false;
+                                    if (wave >= maxWaves) canWin = true;
                                 }
+                                yield break;
                             }
                         }
                     } else
                     {
-                        yield return new WaitForSeconds(3);
                         enemiesLeft = enemyAmount;
+                        aliensReached = 0;
                         reachedNextWave = false;
                     }
                 }
@@ -695,12 +696,12 @@ public class GameController : MonoBehaviour
 
     IEnumerator spawnAsteroids()
     {
-        while (!gameOver && !won)
+        while (true)
         {
             if (!gameOver && !won)
             {
                 yield return new WaitForSeconds(Random.Range(asteroidSpawnTime.x, asteroidSpawnTime.y));
-                if (!currentBoss && !gameOver && !won && !paused)
+                if (!gameOver && !won && !paused && !currentBoss)
                 {
                     Vector3 left = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
                     Vector3 right = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
@@ -715,7 +716,7 @@ public class GameController : MonoBehaviour
 
     public void addScore(long newScore)
     {
-        if (!isCampaignLevel && !gameOver && newScore > 0) score += newScore;
+        if (!isCampaignLevel && !gameOver && !won && newScore > 0) score += newScore;
     }
 
     public void startSaveMe()
@@ -727,8 +728,6 @@ public class GameController : MonoBehaviour
         saveMeCountdown.text = "3";
         revivePrompt.enabled = false;
         gameOverMenu.enabled = false;
-        StopCoroutine(spawnWaves());
-        StopCoroutine(spawnAsteroids());
         StartCoroutine(saveMe());
     }
 
@@ -778,8 +777,6 @@ public class GameController : MonoBehaviour
         saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);
         pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
-        if (!currentBoss) StartCoroutine(spawnWaves());
-        StartCoroutine(spawnAsteroids());
         canSetNewHighScore = true;
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Play();
     }
