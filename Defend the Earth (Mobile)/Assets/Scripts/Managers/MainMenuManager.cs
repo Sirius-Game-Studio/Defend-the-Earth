@@ -37,7 +37,9 @@ public class MainMenuManager : MonoBehaviour
 
     void Awake()
     {
+        #if !UNITY_EDITOR
         Application.targetFrameRate = 60;
+        #endif
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
         loading = false;

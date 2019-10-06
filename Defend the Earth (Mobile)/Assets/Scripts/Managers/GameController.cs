@@ -111,7 +111,9 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        #if !UNITY_EDITOR
         Application.targetFrameRate = 60;
+        #endif
         audioSource = GetComponent<AudioSource>();
         if (audioSource) audioSource.ignoreListenerPause = true;
         if (maxWaves < 2) maxWaves = 2;
