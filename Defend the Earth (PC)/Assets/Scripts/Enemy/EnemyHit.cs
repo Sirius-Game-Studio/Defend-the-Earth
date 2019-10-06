@@ -9,7 +9,7 @@ public class EnemyHit : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
-    public EnemyHealth enemyHealth;
+    [HideInInspector] public EnemyHealth enemyHealth;
 
     private bool hit = false;
 
