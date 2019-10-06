@@ -185,10 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 7
-  doubleDamageMultiplier: 1
-  doubleDamageLayer:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  highDamageMultiplier: 1.5
+  highDamageLayer: -1
   explosion: {fileID: 0}
 --- !u!114 &3565738850329549525
 MonoBehaviour:
@@ -203,5 +201,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 13
-  movement: {x: 0, y: -1, z: 0}
+  movement: {x: 0, y: 1, z: 0}
   useForwardMovement: 1

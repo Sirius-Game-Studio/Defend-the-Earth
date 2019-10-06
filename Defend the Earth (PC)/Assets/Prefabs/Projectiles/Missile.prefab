@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  movement: {x: 0, y: -1, z: 0}
+  movement: {x: 0, y: 1, z: 0}
   useForwardMovement: 1
 --- !u!114 &4328700321080127335
 MonoBehaviour:
