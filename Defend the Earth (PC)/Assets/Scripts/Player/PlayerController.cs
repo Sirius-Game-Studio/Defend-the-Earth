@@ -6,9 +6,9 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [Header("Settings")]
-    public long health = 100;
-    [SerializeField] private long damage = 10;
-    [SerializeField] private float RPM = 150;
+    [Range(50, 250)] public long health = 100;
+    [Range(5, 30)] [SerializeField] private long damage = 10;
+    [Range(100, 300)] [SerializeField] private float RPM = 150;
     [SerializeField] private float speed = 8;
 
     [Header("Powerup Settings")]
@@ -17,19 +17,17 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Supercharge damage multiplier.")] [Range(1.05f, 2)] [SerializeField] private float superchargeMultiplier = 1.5f;
     [Tooltip("Supercharge powerup duration.")] [Range(5, 15)] [SerializeField] private float superchargeTime = 12;
 
+    [Header("Boundary Settings")]
+    [SerializeField] private float yMin = -6.75f;
+    [SerializeField] private float yMax = 2;
+
     [Header("Sound Effects")]
     [SerializeField] private AudioClip fireSound = null;
 
-    [Header("Miscellaneous")]
-    [SerializeField] private float yMin = -6.75f;
-    [SerializeField] private float yMax = 2;
-    public long lives = 3;
-    public bool invulnerable = false;
-
     [Header("Setup")]
-    [SerializeField] private AudioSource lowHealthSound = null;
     [SerializeField] private GameObject bullet = null;
     [SerializeField] private GameObject explosion = null;
+    [SerializeField] private AudioSource lowHealthSound = null;
     [SerializeField] private GameObject textPopup = null;
 
     private new Renderer renderer;
@@ -39,6 +37,8 @@ public class PlayerController : MonoBehaviour
     private Text healthText;
     private Text livesCount;
     private long maxHealth = 0;
+    [HideInInspector] public long lives = 3;
+    [HideInInspector] public bool invulnerable = false;
     private bool shooting = false;
     private Vector2 movement;
     private bool hasSupercharge = false;
