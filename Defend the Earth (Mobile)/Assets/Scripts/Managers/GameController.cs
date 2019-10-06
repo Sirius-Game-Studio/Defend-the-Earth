@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
     [Header("Game Settings")]
     [SerializeField] private long maxWaves = 2;
-    public int enemiesLeft = 8;
+    [Tooltip("Amount of enemies to spawn in a wave.")] public int enemiesLeft = 8;
     [SerializeField] private int maxAliensReached = 15;
     [SerializeField] private Vector2 enemySpawnTime = new Vector2(3.75f, 4);
     [SerializeField] private Vector2 asteroidSpawnTime = new Vector2(7.5f, 8);
@@ -62,13 +62,6 @@ public class GameController : MonoBehaviour
     [Header("Miscellaneous")]
     public bool isCampaignLevel = true;
     [SerializeField] private AudioClip[] randomMusic = new AudioClip[0];
-    [Tooltip("The amount of enemies that reached the bottom.")] public int aliensReached = 0;
-    public GameObject currentBoss;
-    [Tooltip("Used for handling consecutive enemy health and damage increases in Endless.")] public long wavesCleared = 0;
-    public string deathMessageToShow = "";
-    public bool gameOver = false;
-    public bool won = false;
-    public bool paused = false;
 
     [Header("Setup")]
     [SerializeField] private GameObject[] playerShips = new GameObject[0];
@@ -85,6 +78,13 @@ public class GameController : MonoBehaviour
     private long endlessMoneyReward = 150;
     private int enemyAmount = 0; //Stores the amount of enemies
     private long bossMaxHealth = 0; //If the value is above 0, the boss health bar's max value is not updated
+    [HideInInspector] public int aliensReached = 0; //Amount of enemies that reached the bottom
+    [HideInInspector] public GameObject currentBoss;
+    [HideInInspector] public long wavesCleared = 0; //Used for handling consecutive enemy health and damage increases in Endless
+    [HideInInspector] public string deathMessageToShow = ""; //The death message to show after a Game Over
+    [HideInInspector] public bool gameOver = false;
+    [HideInInspector] public bool won = false;
+    [HideInInspector] public bool paused = false;
     private bool reachedNextWave = false; //Checks if the player just reached the next wave, preventing wave skyrocketing
     private bool canWin = false; //Checks if the player is on the last wave, thus allowing the player to win
     private long endlessWavesClearedForEnemyAmount = 0;
