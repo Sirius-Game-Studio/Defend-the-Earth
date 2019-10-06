@@ -61,12 +61,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private AudioClip purchaseItem = null;
     [SerializeField] private AudioClip cannotAfford = null;
 
-    [Header("Miscellaneous")]
-    public int page = 1;
-    public bool open = false;
-
     private AudioSource audioSource;
     private Controls input;
+    [HideInInspector] public int page = 1;
+    [HideInInspector] public bool open = false;
 
     void Awake()
     {
