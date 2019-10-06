@@ -12,15 +12,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject[] powerups = new GameObject[0];
     [SerializeField] private bool countsTowardsKillGoal = true;
 
-    [Header("Miscellaneous")]
-    public long maxHealth = 0;
-    public bool invulnerable = false;
-
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
     [SerializeField] private GameObject textPopup = null;
 
-    private long mh = 0;
+    [HideInInspector] public long maxHealth = 0;
+    [HideInInspector] public bool invulnerable = false;
+    private long mh = 0; //Stores the max health value
 
     void Start()
     {
@@ -81,7 +79,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        if (maxHealth != mh) maxHealth = mh;
+        if (maxHealth != mh) maxHealth = mh; //Checks if max health is different than the stored value
         if (health > maxHealth)
         {
             health = maxHealth;
