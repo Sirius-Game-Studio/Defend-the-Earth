@@ -148,13 +148,23 @@ public class GameController : MonoBehaviour
             if (projectile) Destroy(projectile);
         }
 
-        //If backgrounds array's length is more than 0, destroy all background objects in the scene
+        //Destroys all backgrounds in the scene and instantiates a new background (only if backgrounds array's length is 1 or up)
         if (backgrounds.Length > 0)
         {
             foreach (GameObject background in GameObject.FindGameObjectsWithTag("Background"))
             {
                 if (background) Destroy(background);
             }
+            Instantiate(backgrounds[Random.Range(0, backgrounds.Length)], new Vector3(0, 0, 5), Quaternion.Euler(0, 0, 0));
+        }
+
+        //Randomizes music (only if randomMusic array's length is 1 or up)
+        if (Camera.main.GetComponent<AudioSource>() && randomMusic.Length > 0)
+        {
+            Camera.main.GetComponent<AudioSource>().clip = randomMusic[Random.Range(0, randomMusic.Length)];
+            Camera.main.GetComponent<AudioSource>().loop = true;
+            Camera.main.GetComponent<AudioSource>().Stop();
+            Camera.main.GetComponent<AudioSource>().Play();
         }
 
         if (!PlayerPrefs.HasKey("Difficulty")) //Sets the difficulty to Normal if no difficulty key is found
@@ -219,14 +229,6 @@ public class GameController : MonoBehaviour
         }
         playerPosition.position = playerShip.transform.position;
         playerPosition.rotation = playerShip.transform.rotation;
-        if (backgrounds.Length > 0) Instantiate(backgrounds[Random.Range(0, backgrounds.Length)], new Vector3(0, 0, 5), Quaternion.Euler(0, 0, 0));
-        if (Camera.main.GetComponent<AudioSource>() && randomMusic.Length > 0)
-        {
-            Camera.main.GetComponent<AudioSource>().clip = randomMusic[Random.Range(0, randomMusic.Length)];
-            Camera.main.GetComponent<AudioSource>().loop = true;
-            Camera.main.GetComponent<AudioSource>().Stop();
-            Camera.main.GetComponent<AudioSource>().Play();
-        }
         gameHUD.enabled = true;
         gamePausedMenu.enabled = false;
         gameOverMenu.enabled = false;
