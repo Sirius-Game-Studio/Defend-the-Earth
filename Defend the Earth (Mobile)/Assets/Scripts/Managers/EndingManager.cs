@@ -8,7 +8,7 @@ public class EndingManager : MonoBehaviour
 {
     [Header("Credits Settings")]
     [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 600;
-    [SerializeField] private float creditsScrollSpeed = 0.5f;
+    [SerializeField] private float creditsScrollSpeed = 0.375f;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -27,6 +27,7 @@ public class EndingManager : MonoBehaviour
 
     private AudioSource audioSource;
     private Controls input;
+    private float creditsFastScrollSpeed = 0.75f;
     private string currentLoadingTip = "";
     private bool loading = false;
 
@@ -38,6 +39,7 @@ public class EndingManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        creditsFastScrollSpeed = creditsScrollSpeed * 2;
         currentLoadingTip = "";
         loading = false;
         Time.timeScale = 1;
@@ -161,10 +163,10 @@ public class EndingManager : MonoBehaviour
     {
         if (state)
         {
-            creditsScrollSpeed *= 2;
+            creditsScrollSpeed = creditsFastScrollSpeed;
         } else
         {
-            creditsScrollSpeed *= 0.5f;
+            creditsScrollSpeed = creditsFastScrollSpeed * 0.5f;
         }
     }
     #endregion

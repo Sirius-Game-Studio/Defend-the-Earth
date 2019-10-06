@@ -28,6 +28,7 @@ public class EndingManager : MonoBehaviour
 
     private AudioSource audioSource;
     private Controls input;
+    private float creditsFastScrollSpeed = 1;
     private string currentLoadingTip = "";
     private bool loading = false;
 
@@ -36,6 +37,7 @@ public class EndingManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
+        creditsFastScrollSpeed = creditsScrollSpeed * 2;
         currentLoadingTip = "";
         loading = false;
         Time.timeScale = 1;
@@ -165,11 +167,11 @@ public class EndingManager : MonoBehaviour
     {
         if (state)
         {
-            creditsScrollSpeed *= 2;
+            creditsScrollSpeed = creditsFastScrollSpeed;
             controllerSpeedUpButton.text = "Slow Down";
         } else
         {
-            creditsScrollSpeed *= 0.5f;
+            creditsScrollSpeed = creditsFastScrollSpeed * 0.5f;
             controllerSpeedUpButton.text = "Speed Up";
         }
     }
