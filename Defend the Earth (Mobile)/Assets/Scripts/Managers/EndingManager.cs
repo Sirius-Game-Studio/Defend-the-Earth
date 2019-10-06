@@ -26,14 +26,17 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private AudioMixer audioMixer = null;
 
     private AudioSource audioSource;
-    private bool spedupCredits = false;
+    private Controls input;
     private string currentLoadingTip = "";
     private bool loading = false;
 
     void Awake()
     {
+        #if !UNITY_EDITOR
         Application.targetFrameRate = 60;
+        #endif
         audioSource = GetComponent<AudioSource>();
+        input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
         currentLoadingTip = "";
         loading = false;
@@ -61,23 +64,22 @@ public class EndingManager : MonoBehaviour
         creditsMenu.enabled = false;
     }
 
+    void OnEnable()
+    {
+        input.Enable();
+        input.Gameplay.Press.performed += context => speedUpCredits(true);
+        input.Gameplay.Press.canceled += context => speedUpCredits(false);
+    }
+
+    void OnDisable()
+    {
+        input.Disable();
+        input.Gameplay.Press.performed -= context => speedUpCredits(true);
+        input.Gameplay.Press.canceled -= context => speedUpCredits(false);
+    }
+
     void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            if (!spedupCredits)
-            {
-                spedupCredits = true;
-                creditsScrollSpeed *= 2;
-            }
-        } else
-        {
-            if (spedupCredits)
-            {
-                spedupCredits = false;
-                creditsScrollSpeed *= 0.5f;
-            }
-        }
         if (Input.GetKeyDown(KeyCode.Escape) && creditsMenu.enabled)
         {
             creditsMenu.enabled = false;
@@ -153,6 +155,19 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
     }
+
+    #region Input Functions
+    void speedUpCredits(bool state)
+    {
+        if (state)
+        {
+            creditsScrollSpeed *= 2;
+        } else
+        {
+            creditsScrollSpeed *= 0.5f;
+        }
+    }
+    #endregion
 
     #region Menu Functions
     public void clickCredits()
