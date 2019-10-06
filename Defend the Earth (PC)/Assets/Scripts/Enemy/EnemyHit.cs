@@ -9,9 +9,9 @@ public class EnemyHit : MonoBehaviour
 
     [Header("Setup")]
     [SerializeField] private GameObject explosion = null;
-    [HideInInspector] public EnemyHealth enemyHealth;
 
     private bool hit = false;
+    [HideInInspector] public EnemyHealth enemyHealth; //Required for lifesteal to work
 
     void Start()
     {
