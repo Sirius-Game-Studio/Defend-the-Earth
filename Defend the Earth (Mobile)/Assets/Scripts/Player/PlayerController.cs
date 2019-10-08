@@ -233,7 +233,7 @@ public class PlayerController : MonoBehaviour
         {
             if (bulletSpawn.CompareTag("BulletSpawn") && bulletSpawn.gameObject.activeSelf)
             {
-                GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
+                GameObject newBullet = Instantiate(bullet, new Vector3(bulletSpawn.position.x, bulletSpawn.position.y, 0), bulletSpawn.rotation);
                 newBullet.GetComponent<Bullet>().damage = damage;
                 foundBulletSpawns = true;
             }
