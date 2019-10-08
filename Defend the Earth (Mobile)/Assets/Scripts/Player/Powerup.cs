@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TouchPowerup : MonoBehaviour
+public class Powerup : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
