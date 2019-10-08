@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
                 nextShot = Time.time + 60 / RPM;
                 foreach (Transform bulletSpawn in transform)
                 {
-                    if (bulletSpawn.CompareTag("BulletSpawn"))
+                    if (bulletSpawn.CompareTag("BulletSpawn") && bulletSpawn.gameObject.activeSelf)
                     {
                         GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
                         newBullet.GetComponent<BulletHit>().damage = damage;
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (!foundBulletSpawns)
                 {
-                    GameObject newBullet = Instantiate(bullet, transform.position + new Vector3(0, 1, 0), Quaternion.Euler(-90, 0, 0));
+                    GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.Euler(-90, 0, 0));
                     if (newBullet.transform.rotation.y != 90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
                     newBullet.GetComponent<BulletHit>().damage = damage;
                     foundBulletSpawns = true;
