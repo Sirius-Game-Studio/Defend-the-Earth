@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BulletHit : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [Tooltip("Amount of damage dealt to enemies.")] public long damage = 5;
     [SerializeField] private float highDamageMultiplier = 1.5f;
