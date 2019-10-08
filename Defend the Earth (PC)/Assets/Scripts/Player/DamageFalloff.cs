@@ -6,7 +6,7 @@ public class DamageFalloff : MonoBehaviour
     [SerializeField] private long damageDecrement = 1;
     [SerializeField] private float falloffTime = 0.8f;
 
-    private BulletHit bulletHit;
+    private BulletHit bullet;
 
     void Start()
     {
