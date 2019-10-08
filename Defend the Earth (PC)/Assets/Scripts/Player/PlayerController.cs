@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
                     if (bulletSpawn.CompareTag("BulletSpawn") && bulletSpawn.gameObject.activeSelf)
                     {
                         GameObject newBullet = Instantiate(bullet, bulletSpawn.position, bulletSpawn.rotation);
-                        newBullet.GetComponent<BulletHit>().damage = damage;
+                        newBullet.GetComponent<Bullet>().damage = damage;
                         foundBulletSpawns = true;
                     }
                 }
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.Euler(-90, 0, 0));
                     if (newBullet.transform.rotation.y != 90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
-                    newBullet.GetComponent<BulletHit>().damage = damage;
+                    newBullet.GetComponent<Bullet>().damage = damage;
                     foundBulletSpawns = true;
                 }
                 if (audioSource && foundBulletSpawns)
