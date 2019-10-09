@@ -1459,14 +1459,6 @@ MonoBehaviour:
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
   isCampaignLevel: 1
   randomMusic: []
-  aliensReached: 0
-  currentBoss: {fileID: 0}
-  wavesCleared: 0
-  canRestart: 0
-  deathMessageToShow: 
-  gameOver: 0
-  won: 0
-  paused: 0
   playerShips:
   - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
   - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
@@ -1500,6 +1492,13 @@ MonoBehaviour:
   - {fileID: 7646070162773227609, guid: cc933fd09c276dd46bc1fef8e42de522, type: 3}
   - {fileID: 7646070162773227609, guid: b165a5473427081459620cdd07bf90d1, type: 3}
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  aliensReached: 0
+  currentBoss: {fileID: 0}
+  wavesCleared: 0
+  deathMessageToShow: 
+  gameOver: 0
+  won: 0
+  paused: 0
 --- !u!82 &1944101019
 AudioSource:
   m_ObjectHideFlags: 0
