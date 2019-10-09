@@ -1429,13 +1429,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b2c88b34038081a42b4c9987aeeb2151, type: 3}
   - {fileID: 8300000, guid: d4305f3e6073c2a4f948fb30ee94b41d, type: 3}
   - {fileID: 8300000, guid: 6515811dc7373aa46bb5afaa6f08c101, type: 3}
-  aliensReached: 0
-  currentBoss: {fileID: 0}
-  wavesCleared: 0
-  deathMessageToShow: 
-  gameOver: 0
-  won: 0
-  paused: 0
   playerShips:
   - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
   - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
@@ -1483,6 +1476,13 @@ MonoBehaviour:
   - {fileID: 7646070162773227609, guid: cc933fd09c276dd46bc1fef8e42de522, type: 3}
   - {fileID: 7646070162773227609, guid: b165a5473427081459620cdd07bf90d1, type: 3}
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  aliensReached: 0
+  currentBoss: {fileID: 0}
+  wavesCleared: 0
+  deathMessageToShow: 
+  gameOver: 0
+  won: 0
+  paused: 0
 --- !u!82 &1944101019
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1935,6 +1935,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1944101018}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2347279030969806264, guid: e9c371af83ca92942b653e323fd2256e,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2347279031928549291, guid: e9c371af83ca92942b653e323fd2256e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
