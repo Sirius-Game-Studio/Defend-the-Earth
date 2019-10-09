@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
         if (!foundBulletSpawns)
         {
             GameObject newBullet = Instantiate(bullet, new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.Euler(-90, 0, 0));
-            if (newBullet.transform.rotation.y != 90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
+            if (newBullet.transform.rotation.y != -90) newBullet.transform.rotation = Quaternion.Euler(-90, 0, 0);
             newBullet.GetComponent<Bullet>().damage = damage;
             foundBulletSpawns = true;
         }
