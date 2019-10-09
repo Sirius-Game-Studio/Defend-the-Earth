@@ -122,12 +122,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1070339840893364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b16f3c49995ea03429c640b31c268159, type: 3}
+  m_Script: {fileID: 11500000, guid: b38f028e9a637b14d88a1d16663a1e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 21
-  highDamageMultiplier: 1.5
-  highDamageLayer: -1
+  damage: 24
+  highDamageMultiplier: 1.75
+  highDamageLayer: 8
   explosion: {fileID: 100012, guid: a48a65569b0fec9499ffe333aee391a3, type: 3}
 --- !u!114 &8513550893873227408
 MonoBehaviour:
