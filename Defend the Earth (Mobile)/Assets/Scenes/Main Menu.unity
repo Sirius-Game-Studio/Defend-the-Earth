@@ -5387,14 +5387,14 @@ MonoBehaviour:
     damage: 26 (x1)
     fireRate: 115
   - key: AlienMower
-    price: 350
+    price: 300
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
     preview: {fileID: 4097527700973107782}
     name: Alien Mower
     health: 110
-    damage: 9 (x2)
+    damage: 10 (x2)
     fireRate: 250
   - key: BlazingRocket
     price: 900
@@ -5414,7 +5414,7 @@ MonoBehaviour:
     preview: {fileID: 33509719716669379}
     name: Quad Shooter
     health: 120
-    damage: 8 (x4)
+    damage: 9 (x2)
     fireRate: 190
   - key: PointVoidBreaker
     price: 2500
@@ -5423,7 +5423,7 @@ MonoBehaviour:
       rgba: 2529741000
     preview: {fileID: 8582098512099938217}
     name: Point-Void Breaker
-    health: 130
+    health: 135
     damage: 4-9 (x6)
     fireRate: 130
   - key: Annihilator
@@ -5433,8 +5433,8 @@ MonoBehaviour:
       rgba: 2516582655
     preview: {fileID: 418968582547181042}
     name: Annihilator
-    health: 145
-    damage: 7 (x6)
+    health: 150
+    damage: 9 (x2)
     fireRate: 130
   upgrades:
   - name: Damage
