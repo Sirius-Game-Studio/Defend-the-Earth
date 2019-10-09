@@ -12299,7 +12299,7 @@ MonoBehaviour:
     damage: 28 (x1)
     fireRate: 115
   - key: AlienMower
-    price: 350
+    price: 300
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
