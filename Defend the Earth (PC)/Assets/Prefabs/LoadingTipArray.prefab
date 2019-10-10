@@ -55,3 +55,5 @@ MonoBehaviour:
   - The Supercharge powerup increases your damage by 50% for 12 seconds when collected.
   - Destroying alien ships and asteroids as fast as possible is a necessity on higher
     Campaign levels, as too many enemies reaching the Earth means game over!
+  - Each spaceship has their own pros and cons. For example, spaceships that shoot
+    missiles deal high damage but have a slow fire rate.
