@@ -261,7 +261,7 @@ PlayerSettings:
   clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
   templatePackageId: com.unity.template.3d@2.3.3
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  AndroidTargetArchitectures: 5
+  AndroidTargetArchitectures: 7
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 2800000, guid: 06443ec0fd0bd5047841800fe67ccf89, type: 3}
   AndroidKeystoreName: D:/Unity Projects/Main Projects/user.keystore
@@ -666,7 +666,7 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   platformArchitecture: {}
   scriptingBackend:
-    Android: 0
+    Android: 1
     Standalone: 1
   il2cppCompilerConfiguration:
     Android: 2
