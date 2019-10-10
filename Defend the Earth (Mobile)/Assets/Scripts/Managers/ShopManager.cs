@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
 
 [System.Serializable]
 public struct Spaceship
@@ -248,9 +250,24 @@ public class ShopManager : MonoBehaviour
                     }
                 } else
                 {
+                    if (audioSource)
+                    {
+                        if (purchaseItem)
+                        {
+                            audioSource.PlayOneShot(purchaseItem);
+                        } else
+                        {
+                            audioSource.Play();
+                        }
+                    }
                     PlayerPrefs.SetInt("Has" + spaceships[page - 1].key, 1);
                 }
                 PlayerPrefs.Save();
+                AnalyticsEvent.Custom("buy_spaceship", new Dictionary<string, object>
+                {
+                    {"spaceship", spaceships[page - 1].name},
+                    {"price", spaceships[page - 1].price}
+                });
             } else
             {
                 if (audioSource)
@@ -329,6 +346,12 @@ public class ShopManager : MonoBehaviour
                     PlayerPrefs.SetInt(upgrades[index].name + "Percentage", p);
                 }
                 PlayerPrefs.Save();
+                AnalyticsEvent.Custom("buy_upgrade", new Dictionary<string, object>
+                {
+                    {"upgrade", upgrades[index].name},
+                    {"current_multiplier", PlayerPrefs.GetFloat(upgrades[index].name + "Multiplier")},
+                    {"current_price", PlayerPrefs.GetInt(upgrades[index].name + "Price")}
+                });
             }
         }
     }
