@@ -240,7 +240,6 @@ public class GameController : MonoBehaviour
         newHighScoreText.enabled = false;
         saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);
-        pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         StartCoroutine(spawnWaves());
         StartCoroutine(spawnAsteroids());
         AnalyticsEvent.LevelStart(SceneManager.GetActiveScene().name, new Dictionary<string, object>());
@@ -316,8 +315,6 @@ public class GameController : MonoBehaviour
                 revivePrompt.enabled = true;
             }
             if (!quitGameMenu.enabled && !revivePrompt.enabled && !saveMeInProgress && !loading) gameOverMenu.enabled = true;
-            pauseButton.gameObject.SetActive(false);
-            pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
             if (canSetNewHighScore)
             {
                 canSetNewHighScore = false;
@@ -372,6 +369,7 @@ public class GameController : MonoBehaviour
                     });
                 }
             }
+            pauseButton.gameObject.SetActive(false);
         }
         if (isCampaignLevel)
         {
@@ -782,7 +780,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(setupPlayerOnRevive(playerShip.GetComponent<PlayerController>()));
         saveMeCountdown.text = "";
         pauseButton.gameObject.SetActive(true);
-        pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         canSetNewHighScore = true;
         if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Play();
     }
@@ -842,7 +839,6 @@ public class GameController : MonoBehaviour
                 AudioListener.pause = true;
                 gamePausedMenu.enabled = true;
                 pauseButton.gameObject.SetActive(false);
-                pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
             } else //Unpauses the game
             {
                 if (!settingsMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
@@ -852,7 +848,6 @@ public class GameController : MonoBehaviour
                     AudioListener.pause = false;
                     gamePausedMenu.enabled = false;
                     pauseButton.gameObject.SetActive(true);
-                    pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
                 }
             }
         }
@@ -860,7 +855,7 @@ public class GameController : MonoBehaviour
 
     public void resumeGame()
     {
-        if (!settingsMenu.enabled && !quitGameMenu.enabled)
+        if (!settingsMenu.enabled && !quitGameMenu.enabled && !restartPrompt.enabled)
         {
             if (audioSource)
             {
@@ -877,7 +872,6 @@ public class GameController : MonoBehaviour
             AudioListener.pause = false;
             gamePausedMenu.enabled = false;
             pauseButton.gameObject.SetActive(true);
-            pauseButton.color = pauseButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
