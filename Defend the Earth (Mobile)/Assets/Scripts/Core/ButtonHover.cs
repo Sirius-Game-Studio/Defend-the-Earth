@@ -33,33 +33,49 @@ public class ButtonHover : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        if (!isImage)
-        {
-            text.color = hoverColor;
-            if (outline) outline.effectColor = new Color32((byte)(hoverColor.r * 0.5), (byte)(hoverColor.g * 0.5), (byte)(hoverColor.b * 0.5), 255);
-        } else
-        {
-            image.color = hoverColor;
-        }
-        if (textsToShow.Length > 0)
-        {
-            foreach (Text t in textsToShow) if (t) t.enabled = true;
-        }
+        setState(true);
     }
 
     public void OnMouseExit()
     {
-        if (!isImage)
+        setState(false);
+    }
+
+    public void OnMouseClick()
+    {
+        setState(false);
+    }
+
+    void setState(bool state)
+    {
+        if (state)
         {
-            text.color = normalColor;
-            if (outline) outline.effectColor = new Color32((byte)(normalColor.r * 0.5), (byte)(normalColor.g * 0.5), (byte)(normalColor.b * 0.5), 255);
+            if (!isImage)
+            {
+                text.color = hoverColor;
+                if (outline) outline.effectColor = new Color32((byte)(hoverColor.r * 0.5), (byte)(hoverColor.g * 0.5), (byte)(hoverColor.b * 0.5), 255);
+            } else
+            {
+                image.color = hoverColor;
+            }
+            if (textsToShow.Length > 0)
+            {
+                foreach (Text t in textsToShow) if (t) t.enabled = true;
+            }
         } else
         {
-            image.color = normalColor;
-        }
-        if (textsToShow.Length > 0)
-        {
-            foreach (Text t in textsToShow) if (t) t.enabled = false;
+            if (!isImage)
+            {
+                text.color = normalColor;
+                if (outline) outline.effectColor = new Color32((byte)(normalColor.r * 0.5), (byte)(normalColor.g * 0.5), (byte)(normalColor.b * 0.5), 255);
+            } else
+            {
+                image.color = normalColor;
+            }
+            if (textsToShow.Length > 0)
+            {
+                foreach (Text t in textsToShow) if (t) t.enabled = false;
+            }
         }
     }
 }
