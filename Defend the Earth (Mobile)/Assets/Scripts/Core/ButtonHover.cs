@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class ButtonHover : MonoBehaviour
 {
     [SerializeField] private bool isImage = false;
-    [SerializeField] private Color32 normalColor = new Color32(200, 200, 200, 255);
-    [SerializeField] private Color32 hoverColor = new Color32(255, 255, 255, 255);
+    public Color32 normalColor = new Color32(200, 200, 200, 255);
+    public Color32 hoverColor = new Color32(255, 255, 255, 255);
     [SerializeField] private Text[] textsToShow = new Text[0];
 
     private Text text;
