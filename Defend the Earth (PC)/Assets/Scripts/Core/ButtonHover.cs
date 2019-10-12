@@ -23,7 +23,7 @@ public class ButtonHover : MonoBehaviour
         } else
         {
             image = GetComponent<Image>();
-            image.color = hoverColor;
+            image.color = normalColor;
         }
         if (textsToShow.Length > 0)
         {
