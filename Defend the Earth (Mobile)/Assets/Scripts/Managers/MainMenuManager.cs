@@ -95,11 +95,13 @@ public class MainMenuManager : MonoBehaviour
                     ShopManager.instance.page = 1;
                     ShopManager.instance.open = false;
                     openBuyMoneyButton.SetActive(true);
+                    openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
                 } else if (upgradesMenu.enabled)
                 {
                     upgradesMenu.enabled = false;
                     shopMenu.enabled = true;
                     openBuyMoneyButton.SetActive(true);
+                    openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
                 } else if (settingsMenu.enabled)
                 {
                     settingsMenu.enabled = false;
@@ -117,6 +119,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 buyMoneyMenu.enabled = false;
                 openBuyMoneyButton.SetActive(true);
+                openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
             }
         }
 
@@ -323,6 +326,7 @@ public class MainMenuManager : MonoBehaviour
             shopMenu.enabled = false;
             ShopManager.instance.open = true;
             openBuyMoneyButton.SetActive(false);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         } else
         {
             spaceshipsMenu.enabled = false;
@@ -330,6 +334,7 @@ public class MainMenuManager : MonoBehaviour
             ShopManager.instance.page = 1;
             ShopManager.instance.open = false;
             openBuyMoneyButton.SetActive(true);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
@@ -348,12 +353,14 @@ public class MainMenuManager : MonoBehaviour
             shopMenu.enabled = false;
             ShopManager.instance.open = true;
             openBuyMoneyButton.SetActive(false);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         } else
         {
             upgradesMenu.enabled = false;
             shopMenu.enabled = true;
             ShopManager.instance.open = false;
             openBuyMoneyButton.SetActive(true);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
@@ -370,10 +377,12 @@ public class MainMenuManager : MonoBehaviour
         {
             buyMoneyMenu.enabled = true;
             openBuyMoneyButton.SetActive(false);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         } else
         {
             buyMoneyMenu.enabled = false;
             openBuyMoneyButton.SetActive(true);
+            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
