@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -1510,6 +1511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -1706,6 +1708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -1902,6 +1905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -2254,6 +2258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4278241480
@@ -2634,6 +2639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -3020,7 +3026,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: d07027e4310365b40a9cb90a10a567e9, type: 3}
-    m_FontSize: 47
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 0
@@ -3270,6 +3276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -3659,6 +3666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -4135,6 +4143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -4997,8 +5006,10 @@ GameObject:
   - component: {fileID: 772848237}
   - component: {fileID: 772848236}
   - component: {fileID: 772848235}
+  - component: {fileID: 772848239}
+  - component: {fileID: 772848238}
   m_Layer: 5
-  m_Name: OpenBuyMoneyMenu
+  m_Name: IAPShopButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5022,7 +5033,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 45}
-  m_SizeDelta: {x: 70, y: 70}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &772848235
 MonoBehaviour:
@@ -5037,12 +5048,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -5098,7 +5109,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -5114,6 +5125,69 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772848233}
   m_CullTransparentMesh: 0
+--- !u!114 &772848238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772848233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isImage: 1
+  normalColor:
+    serializedVersion: 2
+    rgba: 4278228650
+  hoverColor:
+    serializedVersion: 2
+    rgba: 4278238172
+  textsToShow: []
+--- !u!114 &772848239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772848233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 772848238}
+          m_MethodName: OnMouseEnter
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 1
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 772848238}
+          m_MethodName: OnMouseExit
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &774799491
 GameObject:
   m_ObjectHideFlags: 0
@@ -5912,6 +5986,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -6108,6 +6183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -6787,6 +6863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4278215850
@@ -6999,6 +7076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -7374,6 +7452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -8513,6 +8592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4278241280
@@ -8726,6 +8806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -9143,6 +9224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -10275,6 +10357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -10506,6 +10589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -10858,6 +10942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4278190280
@@ -11142,6 +11227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -11512,6 +11598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -11708,6 +11795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -11904,6 +11992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -12500,6 +12589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -12769,6 +12859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -13042,6 +13133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
@@ -13466,6 +13558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291335680
