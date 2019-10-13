@@ -277,6 +277,52 @@ public class MainMenuManager : MonoBehaviour
     #endif
     #endregion
 
+    IEnumerator loadScene(string scene)
+    {
+        if (!loading)
+        {
+            loading = true;
+            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            while (!load.isDone)
+            {
+                Time.timeScale = 0;
+                AudioListener.pause = true;
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (PlayerPrefs.GetInt("Tips") >= 1)
+                    {
+                        if (Input.anyKeyDown) load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(true);
+                    } else
+                    {
+                        load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(false);
+                    }
+                }
+                mainMenu.enabled = false;
+                shopMenu.enabled = false;
+                spaceshipsMenu.enabled = false;
+                upgradesMenu.enabled = false;
+                settingsMenu.enabled = false;
+                selectGamemodeMenu.enabled = false;
+                selectDifficultyMenu.enabled = false;
+                yield return null;
+            }
+        }
+    }
+
     #region Menu Functions
     public void clickPlayGame()
     {
@@ -487,50 +533,4 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(loadScene("Endless"));
     }
     #endregion
-
-    IEnumerator loadScene(string scene)
-    {
-        if (!loading)
-        {
-            loading = true;
-            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            while (!load.isDone)
-            {
-                Time.timeScale = 0;
-                AudioListener.pause = true;
-                if (load.progress < 0.9f)
-                {
-                    load.allowSceneActivation = false;
-                    loadingSlider.value = load.progress;
-                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
-                    anyKeyPrompt.SetActive(false);
-                } else
-                {
-                    if (PlayerPrefs.GetInt("Tips") >= 1)
-                    {
-                        if (Input.anyKeyDown) load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(true);
-                    } else
-                    {
-                        load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(false);
-                    }
-                }
-                mainMenu.enabled = false;
-                shopMenu.enabled = false;
-                spaceshipsMenu.enabled = false;
-                upgradesMenu.enabled = false;
-                settingsMenu.enabled = false;
-                selectGamemodeMenu.enabled = false;
-                selectDifficultyMenu.enabled = false;
-                yield return null;
-            }
-        }
-    }
 }
