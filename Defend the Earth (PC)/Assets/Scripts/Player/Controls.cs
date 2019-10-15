@@ -190,63 +190,19 @@ public class Controls : IInputActionCollection
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Analog Stick"",
-                    ""id"": ""c5600742-a43c-4dee-bf87-6f74de0b1717"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""ce0e40ff-11fe-4b00-b718-3844ea7a6f48"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""27589569-1a64-47c8-a5de-fcb822ca5121"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""c6bd405b-c0fe-4d5c-9dc0-19cc99c16e2f"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""652da4d4-60c6-49ca-8313-9defc7854d2d"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""f86c50de-5851-4d1b-a872-559e1e1b2bb9"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""D-Pad"",
-                    ""id"": ""ba42c167-8b75-4218-996b-3efff9843393"",
+                    ""id"": ""268b72f0-6257-4436-b39f-64ace920eba6"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -257,7 +213,7 @@ public class Controls : IInputActionCollection
                 },
                 {
                     ""name"": ""up"",
-                    ""id"": ""f7ba55d1-197b-46fb-af3a-55586aa84ea7"",
+                    ""id"": ""fb937eca-19b9-43c1-9a6d-541f97115dec"",
                     ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -268,7 +224,7 @@ public class Controls : IInputActionCollection
                 },
                 {
                     ""name"": ""down"",
-                    ""id"": ""0e39fe76-2091-4aa7-b12a-cc3258073c7c"",
+                    ""id"": ""05769a24-6df1-47b0-923b-fa2476f4caa1"",
                     ""path"": ""<Gamepad>/dpad/down"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -279,7 +235,7 @@ public class Controls : IInputActionCollection
                 },
                 {
                     ""name"": ""left"",
-                    ""id"": ""11edbdab-000b-43f0-808c-80295bef083e"",
+                    ""id"": ""5a0ea013-e705-44eb-91e6-bfb8dd5d8a97"",
                     ""path"": ""<Gamepad>/dpad/left"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -290,7 +246,7 @@ public class Controls : IInputActionCollection
                 },
                 {
                     ""name"": ""right"",
-                    ""id"": ""17349211-eadb-47b4-b315-968911c862fc"",
+                    ""id"": ""20cd361a-e9df-4fc8-be85-f8b74d7135c6"",
                     ""path"": ""<Gamepad>/dpad/right"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -300,59 +256,15 @@ public class Controls : IInputActionCollection
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Joystick"",
-                    ""id"": ""f6f45bac-b116-4e38-98e4-ec11527c9d81"",
-                    ""path"": ""2DVector"",
+                    ""name"": """",
+                    ""id"": ""02390203-e908-4e1e-949f-2b987679de04"",
+                    ""path"": ""<Joystick>/stick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": ""Joystick"",
                     ""action"": ""Move"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""c7a2f36d-18c0-45b4-ad22-d5a25dc99c56"",
-                    ""path"": ""<Joystick>/stick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""818748fd-c352-4157-9d7b-ecf90eb27561"",
-                    ""path"": ""<Joystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d1e24262-ed52-4873-91ce-23c4668af210"",
-                    ""path"": ""<Joystick>/stick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""57e83122-2387-4312-84f4-4161812d80df"",
-                    ""path"": ""<Joystick>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         },
