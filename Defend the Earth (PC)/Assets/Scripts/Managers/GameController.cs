@@ -359,6 +359,27 @@ public class GameController : MonoBehaviour
                         if (!sentLevelCompleted)
                         {
                             sentLevelCompleted = true;
+                            if (!PlayerPrefs.HasKey("Restarted"))
+                            {
+                                long reward = 30;
+                                if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
+                                {
+                                    reward = Random.Range(10, 40);
+                                } else if (PlayerPrefs.GetInt("Difficulty") == 2) //Normal
+                                {
+                                    reward = Random.Range(15, 40);
+                                } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
+                                {
+                                    reward = Random.Range(15, 45);
+                                } else if (PlayerPrefs.GetInt("Difficulty") >= 4) //Nightmare
+                                {
+                                    reward = Random.Range(20, 50);
+                                }
+                                long money = long.Parse(PlayerPrefs.GetString("Money"));
+                                money += reward;
+                                PlayerPrefs.SetString("Money", money.ToString());
+                                PlayerPrefs.Save();
+                            }
                             AnalyticsEvent.LevelComplete(SceneManager.GetActiveScene().name, new Dictionary<string, object>{});
                         }
                     } else
