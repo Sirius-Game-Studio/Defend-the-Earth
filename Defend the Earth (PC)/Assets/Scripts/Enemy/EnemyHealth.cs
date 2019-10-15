@@ -91,7 +91,7 @@ public class EnemyHealth : MonoBehaviour
                 float random = Random.value;
                 if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
-            if (GameController.instance.isCampaignLevel && money > 0)
+            if (GameController.instance.isCampaignLevel && !GameController.instance.gameOver && money > 0)
             {
                 if (PlayerPrefs.GetString("Money") != "")
                 {
@@ -107,7 +107,7 @@ public class EnemyHealth : MonoBehaviour
                     if (textPopup.GetComponent<TextMeshPro>())
                     {
                         GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
-                        popup.GetComponent<TextMeshPro>().text = "$" + money;
+                        popup.GetComponent<TextMeshPro>().text = "+$" + money;
                         popup.GetComponent<TextMeshPro>().color = new Color32(255, 215, 0, 255);
                         popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 107, 0, 255);
                     } else
@@ -124,7 +124,7 @@ public class EnemyHealth : MonoBehaviour
                     if (textPopup.GetComponent<TextMeshPro>())
                     {
                         GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
-                        popup.GetComponent<TextMeshPro>().text = "+" + score;
+                        popup.GetComponent<TextMeshPro>().text = "+" + score + " Score";
                         popup.GetComponent<TextMeshPro>().color = new Color32(0, 170, 255, 255);
                         popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 85, 127, 255);
                     } else
