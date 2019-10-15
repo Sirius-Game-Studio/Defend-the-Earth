@@ -57,7 +57,6 @@ public class EvilMain : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private GameObject longlaser = null;
     [SerializeField] private GameObject scatterlaser = null;
-    [SerializeField] private GameObject laser = null;
     [SerializeField] private GameObject superlaser = null;
     [SerializeField] private GameObject shipkillerMissile = null;
     [SerializeField] private GameObject miniOrb = null;
