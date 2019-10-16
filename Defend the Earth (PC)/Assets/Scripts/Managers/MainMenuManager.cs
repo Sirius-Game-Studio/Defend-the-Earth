@@ -501,6 +501,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Difficulty", 4);
             }
+            PlayerPrefs.Save();
             StartCoroutine(loadScene("Level " + PlayerPrefs.GetInt("Level")));
         } else
         {
@@ -513,6 +514,7 @@ public class MainMenuManager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("Difficulty", 4);
             }
+            PlayerPrefs.Save();
             StartCoroutine(loadScene("Level 1"));
         }
         PlayerPrefs.Save();
