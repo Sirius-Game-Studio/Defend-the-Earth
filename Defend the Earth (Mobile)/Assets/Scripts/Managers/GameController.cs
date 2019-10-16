@@ -314,7 +314,7 @@ public class GameController : MonoBehaviour
                 showRevivePrompt = false;
                 revivePrompt.enabled = true;
             }
-            if (!quitGameMenu.enabled && !revivePrompt.enabled && !saveMeInProgress && !loading) gameOverMenu.enabled = true;
+            if (!loading && !saveMeInProgress && !quitGameMenu.enabled && !revivePrompt.enabled) gameOverMenu.enabled = true;
             if (canSetNewHighScore)
             {
                 canSetNewHighScore = false;
@@ -388,7 +388,7 @@ public class GameController : MonoBehaviour
                     clickSource = 3;
                     if (PlayerPrefs.GetInt("Level") < PlayerPrefs.GetInt("MaxLevels"))
                     {
-                        if (!loading && !quitGameMenu.enabled) levelCompletedMenu.enabled = true;
+                        if (!loading && !saveMeInProgress && !quitGameMenu.enabled && !revivePrompt.enabled) levelCompletedMenu.enabled = true;
                         if (!PlayerPrefs.HasKey("Restarted"))
                         {
                             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);

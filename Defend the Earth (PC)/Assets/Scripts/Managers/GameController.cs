@@ -272,7 +272,7 @@ public class GameController : MonoBehaviour
         if (gameOver)
         {
             clickSource = 2;
-            if (!quitGameMenu.enabled && !loading) gameOverMenu.enabled = true;
+            if (!loading && !quitGameMenu.enabled) gameOverMenu.enabled = true;
             if (canSetNewHighScore)
             {
                 canSetNewHighScore = false;
