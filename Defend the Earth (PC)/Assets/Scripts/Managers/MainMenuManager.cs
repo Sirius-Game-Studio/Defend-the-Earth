@@ -100,15 +100,6 @@ public class MainMenuManager : MonoBehaviour
 
     void Update()
     {
-        //Updates the money counter
-        if (PlayerPrefs.GetString("Money") != "")
-        {
-            moneyCount.text = "$" + PlayerPrefs.GetString("Money");
-        } else
-        {
-            moneyCount.text = "$0";
-        }
-
         if (PlayerPrefs.GetInt("Level") > 0)
         {
             currentLevelText.text = "Level: " + PlayerPrefs.GetInt("Level");
