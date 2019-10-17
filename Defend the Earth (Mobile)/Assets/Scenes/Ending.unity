@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 44209463}
   - component: {fileID: 44209462}
   - component: {fileID: 44209461}
+  - component: {fileID: 44209464}
   m_Layer: 5
   m_Name: MoneyCount
   m_TagString: Untagged
@@ -299,6 +300,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44209459}
   m_CullTransparentMesh: 0
+--- !u!114 &44209464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44209459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82bb5aca8f570f144adaabb1ae92e42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258595771
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -547,6 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -1305,6 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b9f17b545b4a974694b4d58f30489e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isImage: 0
   normalColor:
     serializedVersion: 2
     rgba: 4291348680
@@ -2273,7 +2289,6 @@ MonoBehaviour:
   endingMenu: {fileID: 1004614330}
   creditsMenu: {fileID: 400375241}
   credits: {fileID: 2071122828}
-  moneyCount: {fileID: 44209462}
   loadingScreen: {fileID: 939271051}
   loadingSlider: {fileID: 389705138}
   loadingPercentage: {fileID: 724662035}
