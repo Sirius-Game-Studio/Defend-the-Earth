@@ -1,11 +1,12 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/Controls.inputactions'
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class Controls : IInputActionCollection
+public class Controls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
     public Controls()
@@ -82,7 +83,7 @@ public class Controls : IInputActionCollection
         m_Gameplay_Press = m_Gameplay.FindAction("Press", throwIfNotFound: true);
     }
 
-    ~Controls()
+    public void Dispose()
     {
         UnityEngine.Object.Destroy(asset);
     }

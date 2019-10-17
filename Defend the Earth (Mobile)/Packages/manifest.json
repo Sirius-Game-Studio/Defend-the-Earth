@@ -2,7 +2,7 @@
   "dependencies": {
     "com.unity.analytics": "3.3.2",
     "com.unity.ide.vscode": "1.1.2",
-    "com.unity.inputsystem": "1.0.0-preview",
+    "com.unity.inputsystem": "1.0.0-preview.1",
     "com.unity.mobile.android-logcat": "1.0.0",
     "com.unity.package-manager-ui": "2.2.0",
     "com.unity.purchasing": "2.0.6",
@@ -21,6 +21,8 @@
     "com.unity.modules.uielements": "1.0.0",
     "com.unity.modules.umbra": "1.0.0",
     "com.unity.modules.unityanalytics": "1.0.0",
-    "com.unity.modules.unitywebrequest": "1.0.0"
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.modules.vr": "1.0.0",
+    "com.unity.modules.xr": "1.0.0"
   }
 }
