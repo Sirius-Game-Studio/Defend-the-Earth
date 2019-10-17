@@ -340,12 +340,12 @@ public class PlayerController : MonoBehaviour
                     GameObject popup = Instantiate(textPopup, new Vector3(transform.position.x, transform.position.y, -2), Quaternion.Euler(0, 0, 0));
                     if (heal > 0)
                     {
-                        popup.GetComponent<TextMeshPro>().text = "+" + heal;
+                        popup.GetComponent<TextMeshPro>().text = "+" + heal + " Health";
                         popup.GetComponent<TextMeshPro>().color = new Color32(0, 255, 0, 255);
                         popup.GetComponent<TextMeshPro>().outlineColor = new Color32(0, 127, 0, 255);
                     } else
                     {
-                        popup.GetComponent<TextMeshPro>().text = "-" + heal;
+                        popup.GetComponent<TextMeshPro>().text = "-" + heal + " Health";
                         popup.GetComponent<TextMeshPro>().color = new Color32(255, 0, 0, 255);
                         popup.GetComponent<TextMeshPro>().outlineColor = new Color32(127, 0, 0, 255);
                     }
