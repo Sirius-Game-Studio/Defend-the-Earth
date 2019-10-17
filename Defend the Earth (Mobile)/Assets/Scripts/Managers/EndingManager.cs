@@ -17,7 +17,6 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Canvas endingMenu = null;
     [SerializeField] private Canvas creditsMenu = null;
     [SerializeField] private RectTransform credits = null;
-    [SerializeField] private Text moneyCount = null;
     [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -89,23 +88,14 @@ public class EndingManager : MonoBehaviour
             StopCoroutine(scrollCredits());
         }
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
-        if (PlayerPrefs.GetString("Money") != "")
-        {
-            moneyCount.text = "$" + PlayerPrefs.GetString("Money");
-        } else
-        {
-            moneyCount.text = "$0";
-        }
         if (!loading)
         {
             loadingScreen.SetActive(false);
             loadingTip.text = "";
-            moneyCount.gameObject.SetActive(true);
         } else
         {
             loadingScreen.SetActive(true);
             loadingTip.text = currentLoadingTip; 
-            moneyCount.gameObject.SetActive(false);
         }
         if (PlayerPrefs.GetInt("Level") > PlayerPrefs.GetInt("MaxLevels")) //Checks if current level is more than the maximum amount
         {
