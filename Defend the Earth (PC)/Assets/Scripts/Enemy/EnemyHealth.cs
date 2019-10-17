@@ -91,7 +91,7 @@ public class EnemyHealth : MonoBehaviour
                 float random = Random.value;
                 if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
-            if (GameController.instance.isCampaignLevel && !GameController.instance.gameOver && money > 0)
+            if (GameController.instance.isCampaignLevel && !GameController.instance.gameOver && !GameController.instance.won && money > 0)
             {
                 if (PlayerPrefs.GetString("Money") != "")
                 {
