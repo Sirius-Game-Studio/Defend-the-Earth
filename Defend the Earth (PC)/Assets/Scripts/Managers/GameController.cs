@@ -33,7 +33,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private Text levelCount = null;
     [SerializeField] private Text scoreCount = null;
     [SerializeField] private Text waveCount = null;
-    [SerializeField] private Text moneyCount = null;
     [SerializeField] private Text bossName = null;
     [SerializeField] private Slider bossHealthBar = null;
     [SerializeField] private Text bossHealthText = null;
@@ -444,13 +443,6 @@ public class GameController : MonoBehaviour
             scoreCount.transform.parent.gameObject.SetActive(true);
             scoreCount.text = score.ToString();
             waveCount.text = wave.ToString();
-        }
-        if (PlayerPrefs.GetString("Money") != "")
-        {
-            moneyCount.text = "$" + PlayerPrefs.GetString("Money");
-        } else
-        {
-            moneyCount.text = "$0";
         }
         if (!currentBoss)
         {
