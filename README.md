@@ -7,4 +7,4 @@ The Windows build's current version is 0.3.1, which was built with Unity 2019.2.
 The Android build's current version is 0.3.1, which was built with Unity 2019.2.8.
 
 # License
-Defend the Earth is released under the GNU General Public License v3.0.
+Defend the Earth is licensed under GNU General Public License v3.0.
