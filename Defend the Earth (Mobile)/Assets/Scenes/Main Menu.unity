@@ -5068,7 +5068,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9a95b73e286369c4bbf932bd77e279d0, type: 3}
+  m_Sprite: {fileID: 5583423497815739149, guid: e4392cf29bed63544b37c9eea25c3a59,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7644,7 +7645,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ec5c4d854f163224782480cab1c81de5, type: 3}
+  m_Sprite: {fileID: -559988651086909065, guid: e4392cf29bed63544b37c9eea25c3a59,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12026,7 +12028,7 @@ GameObject:
   - component: {fileID: 1821970276}
   - component: {fileID: 1821970275}
   m_Layer: 5
-  m_Name: BuyMoneyMenu
+  m_Name: IAPShopMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13417,7 +13419,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3170cf6e5ef75224e9aadd05960b0f96, type: 3}
+  m_Sprite: {fileID: -2532280519035355864, guid: e4392cf29bed63544b37c9eea25c3a59,
+    type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
