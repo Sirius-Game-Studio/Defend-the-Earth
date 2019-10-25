@@ -21,12 +21,12 @@ public class DataInitializer : MonoBehaviour
         if (!PlayerPrefs.HasKey("HasAnnihilator")) PlayerPrefs.SetInt("HasAnnihilator", 0);
 
         //Set up level data
-        string sceneName = SceneManager.GetActiveScene().name;
         if (setLevel)
         {
+            string sceneName = SceneManager.GetActiveScene().name.ToLower();
             if (!PlayerPrefs.HasKey("Level"))
             {
-                if (sceneName.ToLower().Contains("level"))
+                if (sceneName.Contains("level"))
                 {
                     PlayerPrefs.SetInt("IngameLevel", level);
                     if (!PlayerPrefs.HasKey("Restarted")) PlayerPrefs.SetInt("Level", level);
@@ -37,7 +37,7 @@ public class DataInitializer : MonoBehaviour
                 }
             } else
             {
-                if (sceneName.ToLower().Contains("level"))
+                if (sceneName.Contains("level"))
                 {
                     PlayerPrefs.SetInt("IngameLevel", level);
                     if (!PlayerPrefs.HasKey("Restarted")) PlayerPrefs.SetInt("Level", level);
