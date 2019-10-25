@@ -6,14 +6,14 @@ using UnityEngine.Analytics;
 [System.Serializable]
 public struct Spaceship
 {
+    [Tooltip("Spaceship name.")] public string name;
     [Tooltip("Spaceship data key.")] public string key;
     [Tooltip("Spaceship price.")] public int price;
-    [Tooltip("Spaceship info panel color.")] public Color32 panelColor;
-    [Tooltip("Spaceship preview object.")] public GameObject preview;
-    [Tooltip("Spaceship name.")] public string name;
     [Tooltip("Spaceship health in info panel.")] public long health;
     [Tooltip("Spaceship damage in info panel.")] public string damage;
     [Tooltip("Spaceship fire rate in info panel.")] public float fireRate;
+    [Tooltip("Spaceship info panel color.")] public Color32 panelColor;
+    [Tooltip("Spaceship preview object.")] public GameObject preview;
 }
 
 [System.Serializable]
@@ -34,7 +34,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private Spaceship[] spaceships = new Spaceship[0];
     [SerializeField] private Upgrade[] upgrades = new Upgrade[0];
 
-    [Header("Spaceships Menu")]
+    [Header("Spaceship Shop")]
     [SerializeField] private Text spaceshipName = null;
     [SerializeField] private Text spaceshipPrice = null;
     [SerializeField] private Text spaceshipBuyText = null;
@@ -44,19 +44,19 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private GameObject rightButton = null;
     [SerializeField] private Text controllerBuyText = null;
 
-    [Header("Upgrades Menu")]
-    [SerializeField] private Text damagePercentage = null;
-    [SerializeField] private Text speedPercentage = null;
-    [SerializeField] private Text healthPercentage = null;
-    [SerializeField] private Text moneyPercentage = null;
-    [SerializeField] private Text damagePrice = null;
-    [SerializeField] private Text speedPrice = null;
-    [SerializeField] private Text healthPrice = null;
-    [SerializeField] private Text moneyPrice = null;
+    [Header("Upgrade Shop")]
     [SerializeField] private Text damageButton = null;
     [SerializeField] private Text speedButton = null;
     [SerializeField] private Text healthButton = null;
     [SerializeField] private Text moneyButton = null;
+    [SerializeField] private Text damagePrice = null;
+    [SerializeField] private Text speedPrice = null;
+    [SerializeField] private Text healthPrice = null;
+    [SerializeField] private Text moneyPrice = null;
+    [SerializeField] private Text damagePercentage = null;
+    [SerializeField] private Text speedPercentage = null;
+    [SerializeField] private Text healthPercentage = null;
+    [SerializeField] private Text moneyPercentage = null;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
