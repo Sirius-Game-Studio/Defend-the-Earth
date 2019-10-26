@@ -21,12 +21,6 @@ namespace UnityEngine.UDP.Editor.Analytics
 
             if (request != null && request.isDone)
             {
-                if (request.error != null || request.responseCode / 100 != 2)
-                {
-                }
-                else
-                {
-                }
             }
             else
             {

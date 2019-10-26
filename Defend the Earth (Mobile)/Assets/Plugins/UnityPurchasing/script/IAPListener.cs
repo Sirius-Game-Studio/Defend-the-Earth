@@ -1,6 +1,8 @@
 #if UNITY_PURCHASING
 using UnityEngine.Events;
 using UnityEngine.UI;
+using System.IO;
+using System.Collections.Generic;
 
 namespace UnityEngine.Purchasing
 {
@@ -29,7 +31,6 @@ namespace UnityEngine.Purchasing
 
         [Tooltip("Event fired after a failed purchase of this product")]
         public OnPurchaseFailedEvent onPurchaseFailed;
-        [SerializeField] private Text purchaseNotification = null;
 
         void OnEnable()
         {
@@ -63,28 +64,7 @@ namespace UnityEngine.Purchasing
         {
             Debug.Log(string.Format("IAPListener.OnPurchaseFailed(Product {0}, PurchaseFailureReason {1})", product,
                 reason));
-            if (reason == PurchaseFailureReason.UserCancelled)
-            {
-                purchaseNotification.text = "Purchase canceled.";
-            } else if (reason == PurchaseFailureReason.PaymentDeclined)
-            {
-                purchaseNotification.text = "There was a problem with the payment.";
-            } else if (reason == PurchaseFailureReason.ExistingPurchasePending)
-            {
-                purchaseNotification.text = "A purchase is already in progress.";
-            } else if (reason == PurchaseFailureReason.ProductUnavailable)
-            {
-                purchaseNotification.text = "This product is unavailable for purchase.";
-            } else if (reason == PurchaseFailureReason.PurchasingUnavailable)
-            {
-                purchaseNotification.text = "Purchasing is currently unavailable.";
-            } else if (reason == PurchaseFailureReason.SignatureInvalid)
-            {
-                purchaseNotification.text = "Signature validation of the purchase's receipt has failed.";
-            } else if (reason == PurchaseFailureReason.Unknown)
-            {
-                purchaseNotification.text = "There was a problem with the purchase due to unknown reasons.";
-            }
+
             onPurchaseFailed.Invoke(product, reason);
         }
     }

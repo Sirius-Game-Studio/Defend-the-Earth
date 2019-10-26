@@ -1,3 +1,20 @@
+## [1.23.0] - 2019-10-16
+### Added
+- UDP - Upgrade to version 1.2.0: new installer to manage previously-installed versions in Project; new UI for UDP Settings window; injection of SDK version information into app manifest; premium game support; user permissions aligned between Unity editor and UDP console; improved security around the transmission of telemetry data (the data you see in your reporting dashboard) between the repacked games and the UDP backend.
+
+### Changed
+- UnityChannel / Xiaomi - Please use Unity Distributation Platform (UDP) for Xiaomi functionality. Removed UnityChannel.unitypackage from installer. Disabled and deprecated related APIs: `UnityEngine.Store`, `IUnityChannelExtensions`, `IUnityChannelConfiguration`.
+- Tizen - NOTICE Tizen Store support will be removed in an upcoming release.
+
+### Fixed
+- Improved installer compatibility with Unity 2018.4 and 2019.x
+
+## [1.22.1] - 2019-08-13
+### Fixed
+- GooglePlay - SubscriptionInfo.getSubscriptionInfo() KeyNotFoundException when parsing receipts which omit expected fields.
+- GooglePlay - IStoreListener.OnInitializeFailed / IStoreCallback.OnSetupFailed should return InitializationFailureReason.AppNotKnown error when user changes password off-device - user must login. Previously erroneously generated infinite error 6 codes when fetching purchase history after password change.
+- OverflowException when initializing if device locale used the comma (“,”) character as decimal separator.
+
 ## [1.22.0] - 2019-03-18
 ### Added
 - Added Unity Distribution Portal (UDP) module as an Android build target. Unity Distribution Portal streamlines your distribution process. UDP allows you to only build one version of your game, centralize the management of your marketing assets and metadata, and submit your content to multiple app stores, all in the same workflow. For more details, please refer to https://docs.unity3d.com/Packages/com.unity.purchasing.udp@1.0/manual/index.html.
