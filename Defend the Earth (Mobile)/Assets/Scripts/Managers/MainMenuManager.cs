@@ -8,7 +8,6 @@ public class MainMenuManager : MonoBehaviour
 {
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
-    [SerializeField] private AudioClip cannotAfford = null;
 
     [Header("Setup")]
     [SerializeField] private Canvas mainMenu = null;
@@ -23,7 +22,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Text currentLevelText = null;
     [SerializeField] private Text highScoreText = null;
     [SerializeField] private Text moneyCount = null;
-    [SerializeField] private Text purchaseNotification = null;
     [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
@@ -72,7 +70,6 @@ public class MainMenuManager : MonoBehaviour
         selectGamemodeMenu.enabled = false;
         selectDifficultyMenu.enabled = false;
         buyMoneyMenu.enabled = false;
-        if (purchaseNotification) purchaseNotification.text = "";
         currentLoadingTip = "";
         ShopManager.instance.page = 1;
         ShopManager.instance.open = false;
@@ -94,14 +91,10 @@ public class MainMenuManager : MonoBehaviour
                     shopMenu.enabled = true;
                     ShopManager.instance.page = 1;
                     ShopManager.instance.open = false;
-                    openBuyMoneyButton.SetActive(true);
-                    openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
                 } else if (upgradesMenu.enabled)
                 {
                     upgradesMenu.enabled = false;
                     shopMenu.enabled = true;
-                    openBuyMoneyButton.SetActive(true);
-                    openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
                 } else if (settingsMenu.enabled)
                 {
                     settingsMenu.enabled = false;
@@ -205,6 +198,66 @@ public class MainMenuManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Difficulty");
         PlayerPrefs.DeleteKey("Restarted");
     }
+
+    #region Main Functions
+    public void grantMoney(int amount)
+    {
+        if (PlayerPrefs.GetString("Money") != "")
+        {
+            long money = long.Parse(PlayerPrefs.GetString("Money"));
+            money += amount;
+            PlayerPrefs.SetString("Money", money.ToString());
+        } else
+        {
+            PlayerPrefs.SetString("Money", amount.ToString());
+        }
+        PlayerPrefs.Save();
+    }
+
+    IEnumerator loadScene(string scene)
+    {
+        if (!loading)
+        {
+            loading = true;
+            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            while (!load.isDone)
+            {
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (PlayerPrefs.GetInt("Tips") >= 1)
+                    {
+                        if (Input.anyKeyDown) load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(true);
+                    } else
+                    {
+                        load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(false);
+                    }
+                }
+                mainMenu.enabled = false;
+                shopMenu.enabled = false;
+                spaceshipsMenu.enabled = false;
+                upgradesMenu.enabled = false;
+                settingsMenu.enabled = false;
+                selectGamemodeMenu.enabled = false;
+                selectDifficultyMenu.enabled = false;
+                yield return null;
+            }
+        }
+    }
+    #endregion
 
     #region Menu Functions
     public void clickPlayGame()
@@ -316,16 +369,12 @@ public class MainMenuManager : MonoBehaviour
             spaceshipsMenu.enabled = true;
             shopMenu.enabled = false;
             ShopManager.instance.open = true;
-            openBuyMoneyButton.SetActive(false);
-            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         } else
         {
             spaceshipsMenu.enabled = false;
             shopMenu.enabled = true;
             ShopManager.instance.page = 1;
             ShopManager.instance.open = false;
-            openBuyMoneyButton.SetActive(true);
-            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
@@ -343,15 +392,11 @@ public class MainMenuManager : MonoBehaviour
             upgradesMenu.enabled = true;
             shopMenu.enabled = false;
             ShopManager.instance.open = true;
-            openBuyMoneyButton.SetActive(false);
-            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         } else
         {
             upgradesMenu.enabled = false;
             shopMenu.enabled = true;
             ShopManager.instance.open = false;
-            openBuyMoneyButton.SetActive(true);
-            openBuyMoneyButton.GetComponent<Image>().color = openBuyMoneyButton.GetComponent<ButtonHover>().normalColor;
         }
     }
 
@@ -432,79 +477,4 @@ public class MainMenuManager : MonoBehaviour
         StartCoroutine(loadScene("Endless"));
     }
     #endregion
-
-    #region IAP Functions
-    public void grantMoney(int amount)
-    {
-        if (PlayerPrefs.GetString("Money") != "")
-        {
-            long money = long.Parse(PlayerPrefs.GetString("Money"));
-            money += amount;
-            PlayerPrefs.SetString("Money", money.ToString());
-        } else
-        {
-            PlayerPrefs.SetString("Money", amount.ToString());
-        }
-        PlayerPrefs.Save();
-    }
-
-    public void onPurchaseFailure()
-    {
-        if (audioSource && cannotAfford) audioSource.PlayOneShot(cannotAfford);
-        if (purchaseNotification)
-        {
-            CancelInvoke("resetPurchaseNotification");
-            Invoke("resetPurchaseNotification", 1);
-        }
-    }
-
-    public void resetPurchaseNotification()
-    {
-        if (purchaseNotification) purchaseNotification.text = "";
-    }
-    #endregion
-
-    IEnumerator loadScene(string scene)
-    {
-        if (!loading)
-        {
-            loading = true;
-            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            while (!load.isDone)
-            {
-                if (load.progress < 0.9f)
-                {
-                    load.allowSceneActivation = false;
-                    loadingSlider.value = load.progress;
-                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
-                    anyKeyPrompt.SetActive(false);
-                } else
-                {
-                    if (PlayerPrefs.GetInt("Tips") >= 1)
-                    {
-                        if (Input.anyKeyDown) load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(true);
-                    } else
-                    {
-                        load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(false);
-                    }
-                }
-                mainMenu.enabled = false;
-                shopMenu.enabled = false;
-                spaceshipsMenu.enabled = false;
-                upgradesMenu.enabled = false;
-                settingsMenu.enabled = false;
-                selectGamemodeMenu.enabled = false;
-                selectDifficultyMenu.enabled = false;
-                yield return null;
-            }
-        }
-    }
 }

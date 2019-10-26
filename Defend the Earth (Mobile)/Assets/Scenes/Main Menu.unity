@@ -5497,99 +5497,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!1 &774799491
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 774799492}
-  - component: {fileID: 774799498}
-  - component: {fileID: 774799495}
-  - component: {fileID: 774799494}
-  m_Layer: 5
-  m_Name: PurchaseNotification
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &774799492
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774799491}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 884458635}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 45}
-  m_SizeDelta: {x: 0, y: 35}
-  m_Pivot: {x: 0.5, y: 1}
---- !u!114 &774799494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774799491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0.49803922, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: -2}
-  m_UseGraphicAlpha: 1
---- !u!114 &774799495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774799491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: c91b585e834362042a9392c70006a2fe, type: 3}
-    m_FontSize: 34
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 48
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 
---- !u!222 &774799498
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774799491}
-  m_CullTransparentMesh: 0
 --- !u!1001 &790898056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5759,66 +5666,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceships:
-  - key: SpaceFighter
+  - name: Space Fighter
+    key: SpaceFighter
     price: 0
+    health: 100
+    damage: 26 (x1)
+    fireRate: 115
     panelColor:
       serializedVersion: 2
       rgba: 2519690069
     preview: {fileID: 82860646}
-    name: Space Fighter
-    health: 100
-    damage: 26 (x1)
-    fireRate: 115
-  - key: AlienMower
+  - name: Alien Mower
+    key: AlienMower
     price: 300
+    health: 110
+    damage: 10 (x2)
+    fireRate: 250
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
     preview: {fileID: 4097527700973107782}
-    name: Alien Mower
-    health: 110
-    damage: 10 (x2)
-    fireRate: 250
-  - key: BlazingRocket
+  - name: Blazing Rocket
+    key: BlazingRocket
     price: 800
+    health: 85
+    damage: 23 (x2)
+    fireRate: 125
     panelColor:
       serializedVersion: 2
       rgba: 2516590260
     preview: {fileID: 2150153896285785821}
-    name: Blazing Rocket
-    health: 85
-    damage: 23 (x2)
-    fireRate: 125
-  - key: QuadShooter
+  - name: Quad Shooter
+    key: QuadShooter
     price: 1550
+    health: 120
+    damage: 9 (x2)
+    fireRate: 190
     panelColor:
       serializedVersion: 2
       rgba: 2516630527
     preview: {fileID: 33509719716669379}
-    name: Quad Shooter
-    health: 120
-    damage: 9 (x2)
-    fireRate: 190
-  - key: PointVoidBreaker
+  - name: Point-Void Breaker
+    key: PointVoidBreaker
     price: 2500
+    health: 135
+    damage: 4-9 (x6)
+    fireRate: 130
     panelColor:
       serializedVersion: 2
       rgba: 2529741000
     preview: {fileID: 8582098512099938217}
-    name: Point-Void Breaker
-    health: 135
-    damage: 4-9 (x6)
-    fireRate: 130
-  - key: Annihilator
+  - name: Annihilator
+    key: Annihilator
     price: 5000
+    health: 150
+    damage: 9 (x2)
+    fireRate: 130
     panelColor:
       serializedVersion: 2
       rgba: 2516582655
     preview: {fileID: 418968582547181042}
-    name: Annihilator
-    health: 150
-    damage: 9 (x2)
-    fireRate: 130
   upgrades:
   - name: Damage
     maxValue: 50
@@ -5851,18 +5758,18 @@ MonoBehaviour:
   spaceshipPanel: {fileID: 1180378358}
   leftButton: {fileID: 84203524}
   rightButton: {fileID: 1568359513}
-  damagePercentage: {fileID: 1960001748}
-  speedPercentage: {fileID: 53955296}
-  healthPercentage: {fileID: 267383547}
-  moneyPercentage: {fileID: 32723923}
-  damagePrice: {fileID: 176536102}
-  speedPrice: {fileID: 1508655231}
-  healthPrice: {fileID: 329266297}
-  moneyPrice: {fileID: 1399138115}
   damageButton: {fileID: 1032177964}
   speedButton: {fileID: 955937598}
   healthButton: {fileID: 2059130173}
   moneyButton: {fileID: 2128962718}
+  damagePrice: {fileID: 176536102}
+  speedPrice: {fileID: 1508655231}
+  healthPrice: {fileID: 329266297}
+  moneyPrice: {fileID: 1399138115}
+  damagePercentage: {fileID: 1960001748}
+  speedPercentage: {fileID: 53955296}
+  healthPercentage: {fileID: 267383547}
+  moneyPercentage: {fileID: 32723923}
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
   purchaseItem: {fileID: 8300000, guid: 6a3f866963c549d41b5522a0330501b2, type: 3}
   cannotAfford: {fileID: 8300000, guid: 95eae1e42658e14429853e87a35919e7, type: 3}
@@ -6011,7 +5918,6 @@ RectTransform:
   - {fileID: 1170668409}
   - {fileID: 476756688}
   - {fileID: 300783231}
-  - {fileID: 774799492}
   m_Father: {fileID: 1821970278}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7951,18 +7857,7 @@ MonoBehaviour:
         m_CallState: 2
   onPurchaseFailed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: onPurchaseFailure
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   titleText: {fileID: 2130782268}
   descriptionText: {fileID: 0}
   priceText: {fileID: 1525952727}
@@ -9386,18 +9281,7 @@ MonoBehaviour:
         m_CallState: 2
   onPurchaseFailed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: onPurchaseFailure
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   titleText: {fileID: 437704447}
   descriptionText: {fileID: 0}
   priceText: {fileID: 1241954997}
@@ -11047,18 +10931,7 @@ MonoBehaviour:
         m_CallState: 2
   onPurchaseFailed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2143584395}
-        m_MethodName: onPurchaseFailure
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   titleText: {fileID: 2065938215}
   descriptionText: {fileID: 0}
   priceText: {fileID: 540767618}
@@ -14488,7 +14361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonClick: {fileID: 8300000, guid: ffd4fe831773f1f4b9e70119ecc9ae03, type: 3}
-  cannotAfford: {fileID: 8300000, guid: 95eae1e42658e14429853e87a35919e7, type: 3}
   mainMenu: {fileID: 1004614330}
   shopMenu: {fileID: 445606114}
   upgradesMenu: {fileID: 214567956}
@@ -14501,7 +14373,6 @@ MonoBehaviour:
   currentLevelText: {fileID: 922169621}
   highScoreText: {fileID: 1073656590}
   moneyCount: {fileID: 44209462}
-  purchaseNotification: {fileID: 774799495}
   loadingScreen: {fileID: 1526435074}
   loadingSlider: {fileID: 1526435073}
   loadingPercentage: {fileID: 1526435072}
@@ -14639,7 +14510,6 @@ MonoBehaviour:
   onPurchaseFailed:
     m_PersistentCalls:
       m_Calls: []
-  purchaseNotification: {fileID: 774799495}
 --- !u!33 &1766489518595915
 MeshFilter:
   m_ObjectHideFlags: 0
