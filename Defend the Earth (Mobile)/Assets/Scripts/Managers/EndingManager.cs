@@ -81,6 +81,8 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
+        audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         if (Input.GetKeyDown(KeyCode.Escape) && creditsMenu.enabled)
         {
             creditsMenu.enabled = false;
@@ -161,6 +163,62 @@ public class EndingManager : MonoBehaviour
     }
     #endregion
 
+    #region Main Functions
+    IEnumerator scrollCredits()
+    {
+        while (creditsMenu.enabled)
+        {
+            yield return new WaitForEndOfFrame();
+            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
+            if (credits.anchoredPosition.y <= -creditsY)
+            {
+                endingMenu.enabled = true;
+                creditsMenu.enabled = false;
+                yield break;
+            }
+        }
+    }
+
+    IEnumerator loadScene(string scene)
+    {
+        if (!loading)
+        {
+            loading = true;
+            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
+            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
+            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
+            while (!load.isDone)
+            {
+                if (load.progress < 0.9f)
+                {
+                    load.allowSceneActivation = false;
+                    loadingSlider.value = load.progress;
+                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
+                    anyKeyPrompt.SetActive(false);
+                } else
+                {
+                    if (PlayerPrefs.GetInt("Tips") >= 1)
+                    {
+                        if (Input.anyKeyDown) load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(true);
+                    } else
+                    {
+                        load.allowSceneActivation = true;
+                        loadingSlider.value = 1;
+                        loadingPercentage.text = "100%";
+                        anyKeyPrompt.SetActive(false);
+                    }
+                }
+                endingMenu.enabled = false;
+                creditsMenu.enabled = false;
+                yield return null;
+            }
+        }
+    }
+    #endregion
+
     #region Menu Functions
     public void clickCredits()
     {
@@ -201,59 +259,5 @@ public class EndingManager : MonoBehaviour
         }
         StartCoroutine(loadScene("Main Menu"));
     }
-
-    IEnumerator scrollCredits()
-    {
-        while (creditsMenu.enabled)
-        {
-            yield return new WaitForEndOfFrame();
-            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
-            if (credits.anchoredPosition.y <= -creditsY)
-            {
-                endingMenu.enabled = true;
-                creditsMenu.enabled = false;
-                yield break;
-            }
-        }
-    }
     #endregion
-
-    IEnumerator loadScene(string scene)
-    {
-        if (!loading)
-        {
-            loading = true;
-            AsyncOperation load = SceneManager.LoadSceneAsync(scene);
-            if (LoadingTipArray.instance && LoadingTipArray.instance.tips.Length > 0 && PlayerPrefs.GetInt("Tips") >= 1) currentLoadingTip = LoadingTipArray.instance.tips[Random.Range(0, LoadingTipArray.instance.tips.Length)];
-            if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
-            while (!load.isDone)
-            {
-                if (load.progress < 0.9f)
-                {
-                    load.allowSceneActivation = false;
-                    loadingSlider.value = load.progress;
-                    loadingPercentage.text = Mathf.Floor(load.progress * 100) + "%";
-                    anyKeyPrompt.SetActive(false);
-                } else
-                {
-                    if (PlayerPrefs.GetInt("Tips") >= 1)
-                    {
-                        if (Input.anyKeyDown) load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(true);
-                    } else
-                    {
-                        load.allowSceneActivation = true;
-                        loadingSlider.value = 1;
-                        loadingPercentage.text = "100%";
-                        anyKeyPrompt.SetActive(false);
-                    }
-                }
-                endingMenu.enabled = false;
-                creditsMenu.enabled = false;
-                yield return null;
-            }
-        }
-    }
 }

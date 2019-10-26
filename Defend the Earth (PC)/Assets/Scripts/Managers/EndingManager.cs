@@ -81,6 +81,8 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
+        audioMixer.SetFloat("SoundVolume", Mathf.Log10(PlayerPrefs.GetFloat("SoundVolume")) * 20);
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(PlayerPrefs.GetFloat("MusicVolume")) * 20);
         if (!creditsMenu.enabled) credits.anchoredPosition = new Vector2(0, creditsY);
         if (!loading)
         {
@@ -167,6 +169,22 @@ public class EndingManager : MonoBehaviour
     }
     #endregion
 
+    #region Main Functions
+    IEnumerator scrollCredits()
+    {
+        while (creditsMenu.enabled)
+        {
+            yield return new WaitForEndOfFrame();
+            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
+            if (credits.anchoredPosition.y <= -creditsY)
+            {
+                endingMenu.enabled = true;
+                creditsMenu.enabled = false;
+                yield break;
+            }
+        }
+    }
+
     IEnumerator loadScene(string scene)
     {
         if (!loading)
@@ -207,6 +225,7 @@ public class EndingManager : MonoBehaviour
             }
         }
     }
+    #endregion
 
     #region Menu Functions
     public void clickCredits()
@@ -247,21 +266,6 @@ public class EndingManager : MonoBehaviour
             }
         }
         StartCoroutine(loadScene("Main Menu"));
-    }
-
-    IEnumerator scrollCredits()
-    {
-        while (creditsMenu.enabled)
-        {
-            yield return new WaitForEndOfFrame();
-            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
-            if (credits.anchoredPosition.y <= -creditsY)
-            {
-                endingMenu.enabled = true;
-                creditsMenu.enabled = false;
-                yield break;
-            }
-        }
     }
     #endregion
 }
