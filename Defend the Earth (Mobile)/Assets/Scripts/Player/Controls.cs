@@ -30,22 +30,22 @@ public class Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""65cd65bf-e85b-44af-ac3e-cc9e416f8063"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""id"": ""94d6fdbe-09a1-438c-bc15-3d74cb998b14"",
+                    ""path"": ""<Touchscreen>/press"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Mouse"",
+                    ""groups"": ""Touchscreen"",
                     ""action"": ""Press"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""94d6fdbe-09a1-438c-bc15-3d74cb998b14"",
-                    ""path"": ""<Touchscreen>/press"",
+                    ""id"": ""65cd65bf-e85b-44af-ac3e-cc9e416f8063"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Touchscreen"",
+                    ""groups"": ""Mouse"",
                     ""action"": ""Press"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -55,22 +55,22 @@ public class Controls : IInputActionCollection, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Mouse"",
-            ""bindingGroup"": ""Mouse"",
+            ""name"": ""Touchscreen"",
+            ""bindingGroup"": ""Touchscreen"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<Mouse>"",
+                    ""devicePath"": ""<Touchscreen>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
         },
         {
-            ""name"": ""Touchscreen"",
-            ""bindingGroup"": ""Touchscreen"",
+            ""name"": ""Mouse"",
+            ""bindingGroup"": ""Mouse"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<Touchscreen>"",
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -159,15 +159,6 @@ public class Controls : IInputActionCollection, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
-    private int m_MouseSchemeIndex = -1;
-    public InputControlScheme MouseScheme
-    {
-        get
-        {
-            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
-            return asset.controlSchemes[m_MouseSchemeIndex];
-        }
-    }
     private int m_TouchscreenSchemeIndex = -1;
     public InputControlScheme TouchscreenScheme
     {
@@ -175,6 +166,15 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_TouchscreenSchemeIndex == -1) m_TouchscreenSchemeIndex = asset.FindControlSchemeIndex("Touchscreen");
             return asset.controlSchemes[m_TouchscreenSchemeIndex];
+        }
+    }
+    private int m_MouseSchemeIndex = -1;
+    public InputControlScheme MouseScheme
+    {
+        get
+        {
+            if (m_MouseSchemeIndex == -1) m_MouseSchemeIndex = asset.FindControlSchemeIndex("Mouse");
+            return asset.controlSchemes[m_MouseSchemeIndex];
         }
     }
     public interface IGameplayActions
