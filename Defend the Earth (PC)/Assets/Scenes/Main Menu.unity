@@ -3735,7 +3735,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: This mode is recommended for new players. Aliens deal 20% less damage, have
-    15% less fire rate and 20% less health. Bosses deal 10% less damage. Enemies give
+    15% less fire rate and 20% less health. Bosses deal 15% less damage. Enemies give
     50% less money when killed.
 --- !u!222 &518051439
 CanvasRenderer:
@@ -12909,66 +12909,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spaceships:
-  - key: SpaceFighter
+  - name: Space Fighter
+    key: SpaceFighter
     price: 0
+    health: 100
+    damage: 28 (x1)
+    fireRate: 115
     panelColor:
       serializedVersion: 2
       rgba: 2519690069
     preview: {fileID: 1624393284}
-    name: Space Fighter
-    health: 100
-    damage: 28 (x1)
-    fireRate: 115
-  - key: AlienMower
+  - name: Alien Mower
+    key: AlienMower
     price: 300
+    health: 110
+    damage: 10 (x2)
+    fireRate: 250
     panelColor:
       serializedVersion: 2
       rgba: 2533324800
     preview: {fileID: 1322182277599627}
-    name: Alien Mower
-    health: 110
-    damage: 10 (x2)
-    fireRate: 250
-  - key: BlazingRocket
+  - name: Blazing Rocket
+    key: BlazingRocket
     price: 800
+    health: 90
+    damage: 24 (x2)
+    fireRate: 125
     panelColor:
       serializedVersion: 2
       rgba: 2516590260
     preview: {fileID: 1057239078526749}
-    name: Blazing Rocket
-    health: 90
-    damage: 24 (x2)
-    fireRate: 125
-  - key: QuadShooter
+  - name: Quad Shooter
+    key: QuadShooter
     price: 1550
+    health: 120
+    damage: 9 (x4)
+    fireRate: 190
     panelColor:
       serializedVersion: 2
       rgba: 2516630527
     preview: {fileID: 1404723850354989}
-    name: Quad Shooter
-    health: 120
-    damage: 9 (x4)
-    fireRate: 190
-  - key: PointVoidBreaker
+  - name: Point-Void Breaker
+    key: PointVoidBreaker
     price: 2500
+    health: 135
+    damage: 4-9 (x6)
+    fireRate: 130
     panelColor:
       serializedVersion: 2
       rgba: 2529741000
     preview: {fileID: 1405877507023526}
-    name: Point-Void Breaker
-    health: 135
-    damage: 4-9 (x6)
-    fireRate: 130
-  - key: Annihilator
+  - name: Annihilator
+    key: Annihilator
     price: 5000
+    health: 150
+    damage: 9 (x6)
+    fireRate: 130
     panelColor:
       serializedVersion: 2
       rgba: 2516582655
     preview: {fileID: 7283461143348297379}
-    name: Annihilator
-    health: 150
-    damage: 9 (x6)
-    fireRate: 130
   upgrades:
   - name: Damage
     maxValue: 50
@@ -13002,18 +13002,18 @@ MonoBehaviour:
   leftButton: {fileID: 1766291425}
   rightButton: {fileID: 630728902}
   controllerBuyText: {fileID: 1266690941}
-  damagePercentage: {fileID: 1960001748}
-  speedPercentage: {fileID: 53955296}
-  healthPercentage: {fileID: 267383547}
-  moneyPercentage: {fileID: 32723923}
-  damagePrice: {fileID: 176536102}
-  speedPrice: {fileID: 1508655231}
-  healthPrice: {fileID: 329266297}
-  moneyPrice: {fileID: 1399138115}
   damageButton: {fileID: 1032177964}
   speedButton: {fileID: 955937598}
   healthButton: {fileID: 2059130173}
   moneyButton: {fileID: 2128962718}
+  damagePrice: {fileID: 176536102}
+  speedPrice: {fileID: 1508655231}
+  healthPrice: {fileID: 329266297}
+  moneyPrice: {fileID: 1399138115}
+  damagePercentage: {fileID: 1960001748}
+  speedPercentage: {fileID: 53955296}
+  healthPercentage: {fileID: 267383547}
+  moneyPercentage: {fileID: 32723923}
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   purchaseItem: {fileID: 8300000, guid: 10cbf318929984d4cace2d718707fa80, type: 3}
   cannotAfford: {fileID: 8300000, guid: c202d1acca0d69f46a301c3d0c5dd807, type: 3}
