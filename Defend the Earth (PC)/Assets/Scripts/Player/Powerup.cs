@@ -2,6 +2,8 @@
 
 public class Powerup : MonoBehaviour
 {
+    [SerializeField] private GameObject sound = null;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && !GameController.instance.gameOver && !GameController.instance.won)
@@ -20,8 +22,10 @@ public class Powerup : MonoBehaviour
                     playerController.supercharge();
                 } else
                 {
+                    sound = null;
                     Debug.LogError("Powerup tag " + tag + " is invalid.");
                 }
+                if (sound) Instantiate(sound, transform.position, transform.rotation);
                 Destroy(gameObject);
             } else
             {
