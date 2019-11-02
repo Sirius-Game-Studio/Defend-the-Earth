@@ -79,8 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb2fecb882c7a144bf2f46c0be1daf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPopup: {fileID: 3546921227744333752, guid: 5b63e4a64c654a14d9f8f94ab4bd849d,
-    type: 3}
+  sound: {fileID: 9204756421500558348, guid: 7dafbd80cbeed1a49973c56550ccd8f4, type: 3}
 --- !u!114 &4839323291990872610
 MonoBehaviour:
   m_ObjectHideFlags: 0
