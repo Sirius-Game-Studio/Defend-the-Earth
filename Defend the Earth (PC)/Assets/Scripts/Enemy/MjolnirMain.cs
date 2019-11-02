@@ -69,10 +69,10 @@ public class MjolnirMain : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            longlaserDamage = (long)(longlaserDamage * 0.9);
-            scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
-            shipkillerDamage = (long)(shipkillerDamage * 0.9);
-            chaosOrbDamage = (long)(chaosOrbDamage * 0.9);
+            longlaserDamage = (long)(longlaserDamage * 0.85);
+            scatterlaserDamage = (long)(scatterlaserDamage * 0.85);
+            shipkillerDamage = (long)(shipkillerDamage * 0.85);
+            chaosOrbDamage = (long)(chaosOrbDamage * 0.85);
             protectiveShieldDuration *= 0.75f;
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {

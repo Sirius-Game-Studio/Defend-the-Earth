@@ -50,8 +50,8 @@ public class KoutakriMain : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            laserDamage = (long)(laserDamage * 0.9);
-            scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
+            laserDamage = (long)(laserDamage * 0.85);
+            scatterlaserDamage = (long)(scatterlaserDamage * 0.85);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             laserDamage = (long)(laserDamage * 1.2);

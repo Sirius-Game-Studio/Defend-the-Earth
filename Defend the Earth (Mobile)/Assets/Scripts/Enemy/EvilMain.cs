@@ -81,11 +81,11 @@ public class EvilMain : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            longlaserDamage = (long)(longlaserDamage * 0.9);
-            scatterlaserDamage = (long)(scatterlaserDamage * 0.9);
-            superlaserDamage = (long)(superlaserDamage * 0.9);
-            shipkillerDamage = (long)(shipkillerDamage * 0.9);
-            orbDamage = (long)(orbDamage * 0.9);
+            longlaserDamage = (long)(longlaserDamage * 0.85);
+            scatterlaserDamage = (long)(scatterlaserDamage * 0.85);
+            superlaserDamage = (long)(superlaserDamage * 0.85);
+            shipkillerDamage = (long)(shipkillerDamage * 0.85);
+            orbDamage = (long)(orbDamage * 0.85);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             longlaserDamage = (long)(longlaserDamage * 1.2);

@@ -48,8 +48,8 @@ public class AlienMothershipMain : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
         {
-            bioTorpedoDamage = (long)(bioTorpedoDamage * 0.9);
-            missileDamage = (long)(missileDamage * 0.9);
+            bioTorpedoDamage = (long)(bioTorpedoDamage * 0.85);
+            missileDamage = (long)(missileDamage * 0.85);
         } else if (PlayerPrefs.GetInt("Difficulty") == 3) //Hard
         {
             bioTorpedoDamage = (long)(bioTorpedoDamage * 1.2);
