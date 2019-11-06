@@ -2,30 +2,30 @@
 
 public class ControllerMusicAdjuster : MonoBehaviour
 {
-    [SerializeField] private SetVolume volumeSlider = null;
-
+    private SetVolume setVolume;
     private Controls input;
 
     void Awake()
     {
+        setVolume = GetComponent<SetVolume>();
         input = new Controls();
     }
 
     void OnEnable()
     {
         input.Enable();
-        input.Sound.LowerMusic.performed += context => volumeSlider.controllerAdjust(false, true);
-        input.Sound.IncreaseMusic.performed += context => volumeSlider.controllerAdjust(true, false);
-        input.Sound.LowerMusic.canceled += context => volumeSlider.controllerCancel();
-        input.Sound.IncreaseMusic.canceled += context => volumeSlider.controllerCancel();
+        input.Sound.LowerMusic.performed += context => setVolume.controllerAdjust(false, true);
+        input.Sound.IncreaseMusic.performed += context => setVolume.controllerAdjust(true, false);
+        input.Sound.LowerMusic.canceled += context => setVolume.controllerCancel();
+        input.Sound.IncreaseMusic.canceled += context => setVolume.controllerCancel();
     }
 
     void OnDisable()
     {
         input.Disable();
-        input.Sound.LowerMusic.performed -= context => volumeSlider.controllerAdjust(false, true);
-        input.Sound.IncreaseMusic.performed -= context => volumeSlider.controllerAdjust(true, false);
-        input.Sound.LowerMusic.canceled -= context => volumeSlider.controllerCancel();
-        input.Sound.IncreaseMusic.canceled -= context => volumeSlider.controllerCancel();
+        input.Sound.LowerMusic.performed -= context => setVolume.controllerAdjust(false, true);
+        input.Sound.IncreaseMusic.performed -= context => setVolume.controllerAdjust(true, false);
+        input.Sound.LowerMusic.canceled -= context => setVolume.controllerCancel();
+        input.Sound.IncreaseMusic.canceled -= context => setVolume.controllerCancel();
     }
 }
