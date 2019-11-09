@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class Controls : IInputActionCollection, IDisposable
+public class @Controls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
-    public Controls()
+    public @Controls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
@@ -952,8 +952,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
-        private Controls m_Wrapper;
-        public PlayerActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -965,22 +965,22 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
-                Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
-                Fire.started += instance.OnFire;
-                Fire.performed += instance.OnFire;
-                Fire.canceled += instance.OnFire;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -995,8 +995,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Restart;
     public struct GameplayActions
     {
-        private Controls m_Wrapper;
-        public GameplayActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fullscreen => m_Wrapper.m_Gameplay_Fullscreen;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Resume => m_Wrapper.m_Gameplay_Resume;
@@ -1010,34 +1010,34 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                Fullscreen.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
-                Fullscreen.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
-                Fullscreen.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
-                Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
-                Resume.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
-                Resume.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
-                Resume.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
-                Restart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
-                Restart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
-                Restart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
+                @Fullscreen.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
+                @Fullscreen.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
+                @Fullscreen.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
+                @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
+                @Resume.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
+                @Resume.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
+                @Resume.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnResume;
+                @Restart.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
+                @Restart.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
+                @Restart.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRestart;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Fullscreen.started += instance.OnFullscreen;
-                Fullscreen.performed += instance.OnFullscreen;
-                Fullscreen.canceled += instance.OnFullscreen;
-                Pause.started += instance.OnPause;
-                Pause.performed += instance.OnPause;
-                Pause.canceled += instance.OnPause;
-                Resume.started += instance.OnResume;
-                Resume.performed += instance.OnResume;
-                Resume.canceled += instance.OnResume;
-                Restart.started += instance.OnRestart;
-                Restart.performed += instance.OnRestart;
-                Restart.canceled += instance.OnRestart;
+                @Fullscreen.started += instance.OnFullscreen;
+                @Fullscreen.performed += instance.OnFullscreen;
+                @Fullscreen.canceled += instance.OnFullscreen;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Resume.started += instance.OnResume;
+                @Resume.performed += instance.OnResume;
+                @Resume.canceled += instance.OnResume;
+                @Restart.started += instance.OnRestart;
+                @Restart.performed += instance.OnRestart;
+                @Restart.canceled += instance.OnRestart;
             }
         }
     }
@@ -1057,8 +1057,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Menu_SpeedUpCredits;
     public struct MenuActions
     {
-        private Controls m_Wrapper;
-        public MenuActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public MenuActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @BuySpaceship => m_Wrapper.m_Menu_BuySpaceship;
         public InputAction @UpgradeDamage => m_Wrapper.m_Menu_UpgradeDamage;
         public InputAction @UpgradeSpeed => m_Wrapper.m_Menu_UpgradeSpeed;
@@ -1077,64 +1077,64 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_MenuActionsCallbackInterface != null)
             {
-                BuySpaceship.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
-                BuySpaceship.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
-                BuySpaceship.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
-                UpgradeDamage.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
-                UpgradeDamage.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
-                UpgradeDamage.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
-                UpgradeSpeed.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
-                UpgradeSpeed.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
-                UpgradeSpeed.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
-                UpgradeHealth.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
-                UpgradeHealth.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
-                UpgradeHealth.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
-                UpgradeMoney.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
-                UpgradeMoney.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
-                UpgradeMoney.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
-                SpaceshipsLeft.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
-                SpaceshipsLeft.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
-                SpaceshipsLeft.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
-                SpaceshipsRight.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
-                SpaceshipsRight.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
-                SpaceshipsRight.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
-                CloseMenu.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
-                CloseMenu.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
-                CloseMenu.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
-                SpeedUpCredits.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
-                SpeedUpCredits.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
-                SpeedUpCredits.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
+                @BuySpaceship.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                @BuySpaceship.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                @BuySpaceship.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnBuySpaceship;
+                @UpgradeDamage.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                @UpgradeDamage.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                @UpgradeDamage.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeDamage;
+                @UpgradeSpeed.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                @UpgradeSpeed.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                @UpgradeSpeed.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeSpeed;
+                @UpgradeHealth.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                @UpgradeHealth.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                @UpgradeHealth.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeHealth;
+                @UpgradeMoney.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
+                @UpgradeMoney.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
+                @UpgradeMoney.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnUpgradeMoney;
+                @SpaceshipsLeft.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                @SpaceshipsLeft.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                @SpaceshipsLeft.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsLeft;
+                @SpaceshipsRight.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
+                @SpaceshipsRight.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
+                @SpaceshipsRight.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpaceshipsRight;
+                @CloseMenu.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
+                @CloseMenu.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
+                @CloseMenu.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnCloseMenu;
+                @SpeedUpCredits.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
+                @SpeedUpCredits.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
+                @SpeedUpCredits.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnSpeedUpCredits;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
             {
-                BuySpaceship.started += instance.OnBuySpaceship;
-                BuySpaceship.performed += instance.OnBuySpaceship;
-                BuySpaceship.canceled += instance.OnBuySpaceship;
-                UpgradeDamage.started += instance.OnUpgradeDamage;
-                UpgradeDamage.performed += instance.OnUpgradeDamage;
-                UpgradeDamage.canceled += instance.OnUpgradeDamage;
-                UpgradeSpeed.started += instance.OnUpgradeSpeed;
-                UpgradeSpeed.performed += instance.OnUpgradeSpeed;
-                UpgradeSpeed.canceled += instance.OnUpgradeSpeed;
-                UpgradeHealth.started += instance.OnUpgradeHealth;
-                UpgradeHealth.performed += instance.OnUpgradeHealth;
-                UpgradeHealth.canceled += instance.OnUpgradeHealth;
-                UpgradeMoney.started += instance.OnUpgradeMoney;
-                UpgradeMoney.performed += instance.OnUpgradeMoney;
-                UpgradeMoney.canceled += instance.OnUpgradeMoney;
-                SpaceshipsLeft.started += instance.OnSpaceshipsLeft;
-                SpaceshipsLeft.performed += instance.OnSpaceshipsLeft;
-                SpaceshipsLeft.canceled += instance.OnSpaceshipsLeft;
-                SpaceshipsRight.started += instance.OnSpaceshipsRight;
-                SpaceshipsRight.performed += instance.OnSpaceshipsRight;
-                SpaceshipsRight.canceled += instance.OnSpaceshipsRight;
-                CloseMenu.started += instance.OnCloseMenu;
-                CloseMenu.performed += instance.OnCloseMenu;
-                CloseMenu.canceled += instance.OnCloseMenu;
-                SpeedUpCredits.started += instance.OnSpeedUpCredits;
-                SpeedUpCredits.performed += instance.OnSpeedUpCredits;
-                SpeedUpCredits.canceled += instance.OnSpeedUpCredits;
+                @BuySpaceship.started += instance.OnBuySpaceship;
+                @BuySpaceship.performed += instance.OnBuySpaceship;
+                @BuySpaceship.canceled += instance.OnBuySpaceship;
+                @UpgradeDamage.started += instance.OnUpgradeDamage;
+                @UpgradeDamage.performed += instance.OnUpgradeDamage;
+                @UpgradeDamage.canceled += instance.OnUpgradeDamage;
+                @UpgradeSpeed.started += instance.OnUpgradeSpeed;
+                @UpgradeSpeed.performed += instance.OnUpgradeSpeed;
+                @UpgradeSpeed.canceled += instance.OnUpgradeSpeed;
+                @UpgradeHealth.started += instance.OnUpgradeHealth;
+                @UpgradeHealth.performed += instance.OnUpgradeHealth;
+                @UpgradeHealth.canceled += instance.OnUpgradeHealth;
+                @UpgradeMoney.started += instance.OnUpgradeMoney;
+                @UpgradeMoney.performed += instance.OnUpgradeMoney;
+                @UpgradeMoney.canceled += instance.OnUpgradeMoney;
+                @SpaceshipsLeft.started += instance.OnSpaceshipsLeft;
+                @SpaceshipsLeft.performed += instance.OnSpaceshipsLeft;
+                @SpaceshipsLeft.canceled += instance.OnSpaceshipsLeft;
+                @SpaceshipsRight.started += instance.OnSpaceshipsRight;
+                @SpaceshipsRight.performed += instance.OnSpaceshipsRight;
+                @SpaceshipsRight.canceled += instance.OnSpaceshipsRight;
+                @CloseMenu.started += instance.OnCloseMenu;
+                @CloseMenu.performed += instance.OnCloseMenu;
+                @CloseMenu.canceled += instance.OnCloseMenu;
+                @SpeedUpCredits.started += instance.OnSpeedUpCredits;
+                @SpeedUpCredits.performed += instance.OnSpeedUpCredits;
+                @SpeedUpCredits.canceled += instance.OnSpeedUpCredits;
             }
         }
     }
@@ -1149,8 +1149,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Sound_IncreaseMusic;
     public struct SoundActions
     {
-        private Controls m_Wrapper;
-        public SoundActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public SoundActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LowerSound => m_Wrapper.m_Sound_LowerSound;
         public InputAction @LowerMusic => m_Wrapper.m_Sound_LowerMusic;
         public InputAction @IncreaseSound => m_Wrapper.m_Sound_IncreaseSound;
@@ -1164,34 +1164,34 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_SoundActionsCallbackInterface != null)
             {
-                LowerSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
-                LowerSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
-                LowerSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
-                LowerMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
-                LowerMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
-                LowerMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
-                IncreaseSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
-                IncreaseSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
-                IncreaseSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
-                IncreaseMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
-                IncreaseMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
-                IncreaseMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+                @LowerSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                @LowerSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                @LowerSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerSound;
+                @LowerMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                @LowerMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                @LowerMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnLowerMusic;
+                @IncreaseSound.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                @IncreaseSound.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                @IncreaseSound.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseSound;
+                @IncreaseMusic.started -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+                @IncreaseMusic.performed -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
+                @IncreaseMusic.canceled -= m_Wrapper.m_SoundActionsCallbackInterface.OnIncreaseMusic;
             }
             m_Wrapper.m_SoundActionsCallbackInterface = instance;
             if (instance != null)
             {
-                LowerSound.started += instance.OnLowerSound;
-                LowerSound.performed += instance.OnLowerSound;
-                LowerSound.canceled += instance.OnLowerSound;
-                LowerMusic.started += instance.OnLowerMusic;
-                LowerMusic.performed += instance.OnLowerMusic;
-                LowerMusic.canceled += instance.OnLowerMusic;
-                IncreaseSound.started += instance.OnIncreaseSound;
-                IncreaseSound.performed += instance.OnIncreaseSound;
-                IncreaseSound.canceled += instance.OnIncreaseSound;
-                IncreaseMusic.started += instance.OnIncreaseMusic;
-                IncreaseMusic.performed += instance.OnIncreaseMusic;
-                IncreaseMusic.canceled += instance.OnIncreaseMusic;
+                @LowerSound.started += instance.OnLowerSound;
+                @LowerSound.performed += instance.OnLowerSound;
+                @LowerSound.canceled += instance.OnLowerSound;
+                @LowerMusic.started += instance.OnLowerMusic;
+                @LowerMusic.performed += instance.OnLowerMusic;
+                @LowerMusic.canceled += instance.OnLowerMusic;
+                @IncreaseSound.started += instance.OnIncreaseSound;
+                @IncreaseSound.performed += instance.OnIncreaseSound;
+                @IncreaseSound.canceled += instance.OnIncreaseSound;
+                @IncreaseMusic.started += instance.OnIncreaseMusic;
+                @IncreaseMusic.performed += instance.OnIncreaseMusic;
+                @IncreaseMusic.canceled += instance.OnIncreaseMusic;
             }
         }
     }
@@ -1210,8 +1210,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Debug_DecreaseLevel;
     public struct DebugActions
     {
-        private Controls m_Wrapper;
-        public DebugActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public DebugActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @SmallRepair => m_Wrapper.m_Debug_SmallRepair;
         public InputAction @LargeRepair => m_Wrapper.m_Debug_LargeRepair;
         public InputAction @MaxHealth => m_Wrapper.m_Debug_MaxHealth;
@@ -1229,58 +1229,58 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_DebugActionsCallbackInterface != null)
             {
-                SmallRepair.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
-                SmallRepair.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
-                SmallRepair.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
-                LargeRepair.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
-                LargeRepair.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
-                LargeRepair.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
-                MaxHealth.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
-                MaxHealth.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
-                MaxHealth.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
-                Supercharge.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
-                Supercharge.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
-                Supercharge.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
-                NextWave.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
-                NextWave.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
-                NextWave.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
-                SkipToBoss.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
-                SkipToBoss.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
-                SkipToBoss.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
-                IncreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
-                IncreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
-                IncreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
-                DecreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
-                DecreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
-                DecreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
+                @SmallRepair.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
+                @SmallRepair.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
+                @SmallRepair.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSmallRepair;
+                @LargeRepair.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
+                @LargeRepair.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
+                @LargeRepair.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnLargeRepair;
+                @MaxHealth.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
+                @MaxHealth.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
+                @MaxHealth.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnMaxHealth;
+                @Supercharge.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
+                @Supercharge.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
+                @Supercharge.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSupercharge;
+                @NextWave.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
+                @NextWave.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
+                @NextWave.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnNextWave;
+                @SkipToBoss.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
+                @SkipToBoss.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
+                @SkipToBoss.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnSkipToBoss;
+                @IncreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                @IncreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                @IncreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnIncreaseLevel;
+                @DecreaseLevel.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
+                @DecreaseLevel.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
+                @DecreaseLevel.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnDecreaseLevel;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
             {
-                SmallRepair.started += instance.OnSmallRepair;
-                SmallRepair.performed += instance.OnSmallRepair;
-                SmallRepair.canceled += instance.OnSmallRepair;
-                LargeRepair.started += instance.OnLargeRepair;
-                LargeRepair.performed += instance.OnLargeRepair;
-                LargeRepair.canceled += instance.OnLargeRepair;
-                MaxHealth.started += instance.OnMaxHealth;
-                MaxHealth.performed += instance.OnMaxHealth;
-                MaxHealth.canceled += instance.OnMaxHealth;
-                Supercharge.started += instance.OnSupercharge;
-                Supercharge.performed += instance.OnSupercharge;
-                Supercharge.canceled += instance.OnSupercharge;
-                NextWave.started += instance.OnNextWave;
-                NextWave.performed += instance.OnNextWave;
-                NextWave.canceled += instance.OnNextWave;
-                SkipToBoss.started += instance.OnSkipToBoss;
-                SkipToBoss.performed += instance.OnSkipToBoss;
-                SkipToBoss.canceled += instance.OnSkipToBoss;
-                IncreaseLevel.started += instance.OnIncreaseLevel;
-                IncreaseLevel.performed += instance.OnIncreaseLevel;
-                IncreaseLevel.canceled += instance.OnIncreaseLevel;
-                DecreaseLevel.started += instance.OnDecreaseLevel;
-                DecreaseLevel.performed += instance.OnDecreaseLevel;
-                DecreaseLevel.canceled += instance.OnDecreaseLevel;
+                @SmallRepair.started += instance.OnSmallRepair;
+                @SmallRepair.performed += instance.OnSmallRepair;
+                @SmallRepair.canceled += instance.OnSmallRepair;
+                @LargeRepair.started += instance.OnLargeRepair;
+                @LargeRepair.performed += instance.OnLargeRepair;
+                @LargeRepair.canceled += instance.OnLargeRepair;
+                @MaxHealth.started += instance.OnMaxHealth;
+                @MaxHealth.performed += instance.OnMaxHealth;
+                @MaxHealth.canceled += instance.OnMaxHealth;
+                @Supercharge.started += instance.OnSupercharge;
+                @Supercharge.performed += instance.OnSupercharge;
+                @Supercharge.canceled += instance.OnSupercharge;
+                @NextWave.started += instance.OnNextWave;
+                @NextWave.performed += instance.OnNextWave;
+                @NextWave.canceled += instance.OnNextWave;
+                @SkipToBoss.started += instance.OnSkipToBoss;
+                @SkipToBoss.performed += instance.OnSkipToBoss;
+                @SkipToBoss.canceled += instance.OnSkipToBoss;
+                @IncreaseLevel.started += instance.OnIncreaseLevel;
+                @IncreaseLevel.performed += instance.OnIncreaseLevel;
+                @IncreaseLevel.canceled += instance.OnIncreaseLevel;
+                @DecreaseLevel.started += instance.OnDecreaseLevel;
+                @DecreaseLevel.performed += instance.OnDecreaseLevel;
+                @DecreaseLevel.canceled += instance.OnDecreaseLevel;
             }
         }
     }

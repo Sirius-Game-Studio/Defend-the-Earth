@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class Controls : IInputActionCollection, IDisposable
+public class @Controls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
-    public Controls()
+    public @Controls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""Controls"",
@@ -133,8 +133,8 @@ public class Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Press;
     public struct GameplayActions
     {
-        private Controls m_Wrapper;
-        public GameplayActions(Controls wrapper) { m_Wrapper = wrapper; }
+        private @Controls m_Wrapper;
+        public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Press => m_Wrapper.m_Gameplay_Press;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
@@ -145,16 +145,16 @@ public class Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                Press.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
-                Press.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
-                Press.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
+                @Press.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
+                @Press.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
+                @Press.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPress;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Press.started += instance.OnPress;
-                Press.performed += instance.OnPress;
-                Press.canceled += instance.OnPress;
+                @Press.started += instance.OnPress;
+                @Press.performed += instance.OnPress;
+                @Press.canceled += instance.OnPress;
             }
         }
     }
