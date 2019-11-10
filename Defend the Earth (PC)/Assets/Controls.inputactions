@@ -261,14 +261,6 @@
             "id": "26fb9768-2f21-43b1-a1b5-5ca4b05c8a0c",
             "actions": [
                 {
-                    "name": "Fullscreen",
-                    "type": "Button",
-                    "id": "03625aca-ecf4-43d7-a9ed-1f2dd46fde65",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "71670120-61b5-40f5-9a39-f92cca42a6c1",
@@ -324,17 +316,6 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Restart",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cfc35b33-9714-4d22-bcca-dcc4a154d247",
-                    "path": "<Keyboard>/f11",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard & Mouse",
-                    "action": "Fullscreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

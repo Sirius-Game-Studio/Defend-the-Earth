@@ -274,14 +274,6 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""26fb9768-2f21-43b1-a1b5-5ca4b05c8a0c"",
             ""actions"": [
                 {
-                    ""name"": ""Fullscreen"",
-                    ""type"": ""Button"",
-                    ""id"": ""03625aca-ecf4-43d7-a9ed-1f2dd46fde65"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""71670120-61b5-40f5-9a39-f92cca42a6c1"",
@@ -337,17 +329,6 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Restart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cfc35b33-9714-4d22-bcca-dcc4a154d247"",
-                    ""path"": ""<Keyboard>/f11"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard & Mouse"",
-                    ""action"": ""Fullscreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -868,7 +849,6 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
-        m_Gameplay_Fullscreen = m_Gameplay.FindAction("Fullscreen", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         m_Gameplay_Resume = m_Gameplay.FindAction("Resume", throwIfNotFound: true);
         m_Gameplay_Restart = m_Gameplay.FindAction("Restart", throwIfNotFound: true);
@@ -989,7 +969,6 @@ public class @Controls : IInputActionCollection, IDisposable
     // Gameplay
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
-    private readonly InputAction m_Gameplay_Fullscreen;
     private readonly InputAction m_Gameplay_Pause;
     private readonly InputAction m_Gameplay_Resume;
     private readonly InputAction m_Gameplay_Restart;
@@ -997,7 +976,6 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         private @Controls m_Wrapper;
         public GameplayActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Fullscreen => m_Wrapper.m_Gameplay_Fullscreen;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputAction @Resume => m_Wrapper.m_Gameplay_Resume;
         public InputAction @Restart => m_Wrapper.m_Gameplay_Restart;
@@ -1010,9 +988,6 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
             {
-                @Fullscreen.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
-                @Fullscreen.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
-                @Fullscreen.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnFullscreen;
                 @Pause.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPause;
@@ -1026,9 +1001,6 @@ public class @Controls : IInputActionCollection, IDisposable
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Fullscreen.started += instance.OnFullscreen;
-                @Fullscreen.performed += instance.OnFullscreen;
-                @Fullscreen.canceled += instance.OnFullscreen;
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
@@ -1319,7 +1291,6 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IGameplayActions
     {
-        void OnFullscreen(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnResume(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
