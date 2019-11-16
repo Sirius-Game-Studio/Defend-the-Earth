@@ -5688,7 +5688,7 @@ MonoBehaviour:
     preview: {fileID: 4097527700973107782}
   - name: Blazing Rocket
     key: BlazingRocket
-    price: 800
+    price: 500
     health: 85
     damage: 23 (x2)
     fireRate: 125
@@ -5698,7 +5698,7 @@ MonoBehaviour:
     preview: {fileID: 2150153896285785821}
   - name: Quad Shooter
     key: QuadShooter
-    price: 1550
+    price: 1200
     health: 120
     damage: 9 (x2)
     fireRate: 190
@@ -5708,7 +5708,7 @@ MonoBehaviour:
     preview: {fileID: 33509719716669379}
   - name: Point-Void Breaker
     key: PointVoidBreaker
-    price: 2500
+    price: 2300
     health: 135
     damage: 4-9 (x6)
     fireRate: 130
