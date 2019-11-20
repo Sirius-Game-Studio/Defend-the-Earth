@@ -1296,6 +1296,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthBarText
+      objectReference: {fileID: 0}
     - target: {fileID: 2615693148980937725, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1311,11 +1316,6 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7479411707804821743, guid: 4e96fd4f62f31b44e8a2200689649778,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBarText
-      objectReference: {fileID: 0}
     - target: {fileID: 7828969710937775465, guid: 4e96fd4f62f31b44e8a2200689649778,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1328,18 +1328,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e96fd4f62f31b44e8a2200689649778, type: 3}
---- !u!114 &1802036948 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7828969709800477457, guid: 4e96fd4f62f31b44e8a2200689649778,
-    type: 3}
-  m_PrefabInstance: {fileID: 1802036947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1802036949 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7828969710197568853, guid: 4e96fd4f62f31b44e8a2200689649778,
@@ -1458,7 +1446,6 @@ MonoBehaviour:
   levelCount: {fileID: 1802036950}
   scoreCount: {fileID: 1802036953}
   waveCount: {fileID: 1802036949}
-  moneyCount: {fileID: 1802036948}
   bossName: {fileID: 1750000092}
   bossHealthBar: {fileID: 2120916792}
   bossHealthText: {fileID: 2112879940}
@@ -1474,15 +1461,15 @@ MonoBehaviour:
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
   isCampaignLevel: 1
-  randomMusic: []
-  aliensReached: 0
-  currentBoss: {fileID: 0}
-  wavesCleared: 0
-  canRestart: 0
-  deathMessageToShow: 
-  gameOver: 0
-  won: 0
-  paused: 0
+  randomMusic:
+  - {fileID: 8300000, guid: ba2501ab59ee5cd42a36c25a9de77968, type: 3}
+  - {fileID: 8300000, guid: 521dd5f113658f44089772546deefe8b, type: 3}
+  - {fileID: 8300000, guid: f097d0704324ab14692e12cc5fd97a12, type: 3}
+  - {fileID: 8300000, guid: 236f306a65922e2449ae83ff985aca1e, type: 3}
+  - {fileID: 8300000, guid: b2c88b34038081a42b4c9987aeeb2151, type: 3}
+  - {fileID: 8300000, guid: 6515811dc7373aa46bb5afaa6f08c101, type: 3}
+  - {fileID: 8300000, guid: 8bd3e89dec7edaa43a1ac9dfc0adfc5e, type: 3}
+  - {fileID: 8300000, guid: 9b7d0127afc2c15429aabc320dbcdd9c, type: 3}
   playerShips:
   - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
   - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
@@ -1527,6 +1514,13 @@ MonoBehaviour:
   - {fileID: 7646070162773227609, guid: cc933fd09c276dd46bc1fef8e42de522, type: 3}
   - {fileID: 7646070162773227609, guid: b165a5473427081459620cdd07bf90d1, type: 3}
   audioMixer: {fileID: 24100000, guid: c1ef42722485a0041badfa391742e5c6, type: 2}
+  aliensReached: 0
+  currentBoss: {fileID: 0}
+  wavesCleared: 0
+  deathMessageToShow: 
+  gameOver: 0
+  won: 0
+  paused: 0
 --- !u!82 &1944101019
 AudioSource:
   m_ObjectHideFlags: 0
