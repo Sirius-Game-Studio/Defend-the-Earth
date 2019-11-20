@@ -2443,7 +2443,6 @@ MonoBehaviour:
   endingMenu: {fileID: 1004614330}
   creditsMenu: {fileID: 400375241}
   credits: {fileID: 2071122828}
-  moneyCount: {fileID: 44209462}
   controllerSpeedUpButton: {fileID: 1917512004}
   loadingScreen: {fileID: 1072652450}
   loadingSlider: {fileID: 1072652449}
