@@ -1060,18 +1060,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e96fd4f62f31b44e8a2200689649778, type: 3}
---- !u!114 &1802036948 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7828969709800477457, guid: 4e96fd4f62f31b44e8a2200689649778,
-    type: 3}
-  m_PrefabInstance: {fileID: 1802036947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1802036949 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7828969710197568853, guid: 4e96fd4f62f31b44e8a2200689649778,
@@ -1414,7 +1402,6 @@ MonoBehaviour:
   levelCount: {fileID: 1802036950}
   scoreCount: {fileID: 1802036957}
   waveCount: {fileID: 1802036949}
-  moneyCount: {fileID: 1802036948}
   bossName: {fileID: 1802036954}
   bossHealthBar: {fileID: 1802036953}
   bossHealthText: {fileID: 1802036952}
@@ -1430,14 +1417,15 @@ MonoBehaviour:
   loseJingle: {fileID: 8300000, guid: 7d4039d0a5237f9498763b210c9844b3, type: 3}
   winJingle: {fileID: 8300000, guid: 055eef4fb6957444d8fa26af25c61461, type: 3}
   isCampaignLevel: 1
-  randomMusic: []
-  aliensReached: 0
-  currentBoss: {fileID: 0}
-  wavesCleared: 0
-  deathMessageToShow: 
-  gameOver: 0
-  won: 0
-  paused: 0
+  randomMusic:
+  - {fileID: 8300000, guid: ba2501ab59ee5cd42a36c25a9de77968, type: 3}
+  - {fileID: 8300000, guid: 521dd5f113658f44089772546deefe8b, type: 3}
+  - {fileID: 8300000, guid: f097d0704324ab14692e12cc5fd97a12, type: 3}
+  - {fileID: 8300000, guid: 236f306a65922e2449ae83ff985aca1e, type: 3}
+  - {fileID: 8300000, guid: b2c88b34038081a42b4c9987aeeb2151, type: 3}
+  - {fileID: 8300000, guid: 6515811dc7373aa46bb5afaa6f08c101, type: 3}
+  - {fileID: 8300000, guid: 8bd3e89dec7edaa43a1ac9dfc0adfc5e, type: 3}
+  - {fileID: 8300000, guid: 9b7d0127afc2c15429aabc320dbcdd9c, type: 3}
   playerShips:
   - {fileID: 100012, guid: 2121120e731eda841a6c7793e7337aa5, type: 3}
   - {fileID: 1322182638669642, guid: ec6c320a41b48f448b4f67e0c941f00d, type: 3}
@@ -1483,6 +1471,13 @@ MonoBehaviour:
   - {fileID: 7646070162773227609, guid: 66a0d308554dd8a40b2498da52d238ae, type: 3}
   - {fileID: 7646070162773227609, guid: 5a5f540f4550ae448bdda00b36263893, type: 3}
   audioMixer: {fileID: 24100000, guid: df105e377a1592e4d849ab4c76cd4861, type: 2}
+  aliensReached: 0
+  currentBoss: {fileID: 0}
+  wavesCleared: 0
+  deathMessageToShow: 
+  gameOver: 0
+  won: 0
+  paused: 0
 --- !u!82 &1944101019
 AudioSource:
   m_ObjectHideFlags: 0
