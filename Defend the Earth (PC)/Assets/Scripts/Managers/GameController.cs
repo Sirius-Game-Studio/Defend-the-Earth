@@ -51,7 +51,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip winJingle = null;
 
     [Header("Miscellaneous")]
-    public bool isCampaignLevel = true;
+    public Gamemodes gamemode = Gamemodes.Campaign;
     [SerializeField] private AudioClip[] randomMusic = new AudioClip[0];
 
     [Header("Setup")]
@@ -64,6 +64,7 @@ public class GameController : MonoBehaviour
 
     private AudioSource audioSource;
     private Controls input;
+    public enum Gamemodes {Campaign, Endless}
     private long wave = 1;
     private long score = 0;
     private long endlessMoneyReward = 150;
@@ -295,7 +296,7 @@ public class GameController : MonoBehaviour
             if (!sentGameOverData)
             {
                 sentGameOverData = true;
-                if (isCampaignLevel)
+                if (gamemode == Gamemodes.Campaign)
                 {
                     string currentBossName = "None";
                     if (currentBoss)
@@ -312,7 +313,7 @@ public class GameController : MonoBehaviour
                         {"enemy_amount", enemyAmount},
                         {"boss", currentBossName}
                     });
-                } else
+                } else if (gamemode == Gamemodes.Endless)
                 {
                     AnalyticsEvent.Custom("endless_game_over", new Dictionary<string, object>
                     {
@@ -327,7 +328,7 @@ public class GameController : MonoBehaviour
                 }
             }
         }
-        if (isCampaignLevel)
+        if (gamemode == Gamemodes.Campaign)
         {
             if (!gameOver && !won && enemiesLeft <= 0)
             {
@@ -396,7 +397,7 @@ public class GameController : MonoBehaviour
                     if (Camera.main.GetComponent<AudioSource>()) Camera.main.GetComponent<AudioSource>().Stop();
                 }
             }
-        } else
+        } else if (gamemode == Gamemodes.Endless)
         {
             if (!gameOver && enemiesLeft <= 0 && !reachedNextWave)
             {
@@ -425,7 +426,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (isCampaignLevel)
+        if (gamemode == Gamemodes.Campaign)
         {
             levelCount.transform.parent.gameObject.SetActive(true);
             scoreCount.transform.parent.gameObject.SetActive(false);
@@ -437,7 +438,7 @@ public class GameController : MonoBehaviour
                 levelCount.text = "1";
             }
             waveCount.text = wave + "/" + maxWaves;
-        } else
+        } else if (gamemode == Gamemodes.Endless)
         {
             levelCount.transform.parent.gameObject.SetActive(false);
             scoreCount.transform.parent.gameObject.SetActive(true);
@@ -449,7 +450,7 @@ public class GameController : MonoBehaviour
             currentBoss = null;
             if (controllerShootIcon)
             {
-                if (isCampaignLevel)
+                if (gamemode == Gamemodes.Campaign)
                 {
                     controllerShootIcon.anchoredPosition = new Vector2(-20, 20);
                 } else
@@ -464,7 +465,7 @@ public class GameController : MonoBehaviour
             if (bossMaxHealth <= 0) bossMaxHealth = currentBoss.GetComponent<EnemyHealth>().health;
             if (controllerShootIcon)
             {
-                if (isCampaignLevel)
+                if (gamemode == Gamemodes.Campaign)
                 {
                     controllerShootIcon.anchoredPosition = new Vector2(-20, 70);
                 } else
@@ -619,12 +620,12 @@ public class GameController : MonoBehaviour
     #if (UNITY_EDITOR || DEVELOPMENT_BUILD)
     void nextWave()
     {
-        if (!gameOver && !won && !paused && !loading && isCampaignLevel && wave < maxWaves && enemiesLeft > 0) enemiesLeft = 0;
+        if (!gameOver && !won && !paused && !loading && wave < maxWaves && enemiesLeft > 0) enemiesLeft = 0;
     }
 
     void skipToBoss()
     {
-        if (!gameOver && !won && !paused && !loading && isCampaignLevel && boss && enemiesLeft > 0 && !currentBoss)
+        if (!gameOver && !won && !paused && !loading && gamemode == Gamemodes.Campaign && boss && enemiesLeft > 0 && !currentBoss)
         {
             enemiesLeft = 0;
             wave = maxWaves;
@@ -649,10 +650,10 @@ public class GameController : MonoBehaviour
                         yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
                         if (!enemyToLimit)
                         {
-                            if (isCampaignLevel)
+                            if (gamemode == Gamemodes.Campaign)
                             {
                                 Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
-                            } else
+                            } else if (gamemode == Gamemodes.Endless)
                             {
                                 int length = enemies.Length;
                                 if (wave < 4)
@@ -674,7 +675,7 @@ public class GameController : MonoBehaviour
                             }
                             if (foundEnemies < limitedEnemySpawns)
                             {
-                                if (isCampaignLevel)
+                                if (gamemode == Gamemodes.Campaign)
                                 {
                                     Instantiate(enemies[Random.Range(0, enemies.Length)], new Vector3(Random.Range(left.x, right.x), 16, 0), Quaternion.Euler(90, 180, 0));
                                 } else
@@ -698,7 +699,7 @@ public class GameController : MonoBehaviour
                 } else
                 {
                     yield return new WaitForSeconds(3);
-                    if (isCampaignLevel)
+                    if (gamemode == Gamemodes.Campaign)
                     {
                         if (!boss)
                         {
@@ -749,7 +750,7 @@ public class GameController : MonoBehaviour
                                 yield break;
                             }
                         }
-                    } else
+                    } else if (gamemode == Gamemodes.Endless)
                     {
                         enemiesLeft = enemyAmount;
                         aliensReached = 0;
@@ -785,7 +786,7 @@ public class GameController : MonoBehaviour
 
     public void addScore(long newScore)
     {
-        if (!isCampaignLevel && !gameOver && !won && newScore > 0) score += newScore;
+        if (gamemode == Gamemodes.Endless && !gameOver && !won && newScore > 0) score += newScore;
     }
 
     IEnumerator showNewHighScore()
@@ -895,7 +896,7 @@ public class GameController : MonoBehaviour
 
     public void toNextLevel()
     {
-        if (isCampaignLevel && won && levelCompletedMenu.enabled)
+        if (gamemode == Gamemodes.Campaign && won && levelCompletedMenu.enabled)
         {
             if (audioSource)
             {
@@ -930,7 +931,7 @@ public class GameController : MonoBehaviour
                 audioSource.Play();
             }
         }
-        if (isCampaignLevel)
+        if (gamemode == Gamemodes.Campaign)
         {
             PlayerPrefs.SetInt("Restarted", 1);
             PlayerPrefs.Save();
