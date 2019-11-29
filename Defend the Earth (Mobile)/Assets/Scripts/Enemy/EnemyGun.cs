@@ -28,7 +28,7 @@ public class EnemyGun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         nextShot = Time.time + 60 / RPM;
-        if (GameController.instance.isCampaignLevel)
+        if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
         {
             if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
             {
@@ -43,7 +43,7 @@ public class EnemyGun : MonoBehaviour
                 damage = (long)(damage * 1.3);
                 RPM *= 1.05f;
             }
-        } else
+        } else if (GameController.instance.gamemode == GameController.Gamemodes.Endless)
         {
             if (GameController.instance.wavesCleared > 0)
             {

@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        if (GameController.instance.isCampaignLevel)
+        if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
         {
             if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
             {
@@ -91,7 +91,7 @@ public class EnemyHealth : MonoBehaviour
                 float random = Random.value;
                 if (random <= powerupChance) Instantiate(powerups[Random.Range(0, powerups.Length)], transform.position, Quaternion.Euler(0, 0, 0));
             }
-            if (GameController.instance.isCampaignLevel && !GameController.instance.gameOver && !GameController.instance.won && money > 0)
+            if (GameController.instance.gamemode == GameController.Gamemodes.Campaign && !GameController.instance.gameOver && !GameController.instance.won && money > 0)
             {
                 if (PlayerPrefs.GetString("Money") != "")
                 {
@@ -116,7 +116,7 @@ public class EnemyHealth : MonoBehaviour
                     }
                 }
             }
-            if (!GameController.instance.isCampaignLevel && !GameController.instance.gameOver && score > 0)
+            if (GameController.instance.gamemode == GameController.Gamemodes.Endless && !GameController.instance.gameOver && score > 0)
             {
                 GameController.instance.addScore(score);
                 if (textPopup)

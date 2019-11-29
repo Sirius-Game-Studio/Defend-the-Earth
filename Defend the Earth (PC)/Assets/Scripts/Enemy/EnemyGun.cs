@@ -28,7 +28,7 @@ public class EnemyGun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         nextShot = Time.time + 60 / RPM;
-        if (GameController.instance.isCampaignLevel)
+        if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
         {
             if (PlayerPrefs.GetInt("Difficulty") <= 1) //Easy
             {

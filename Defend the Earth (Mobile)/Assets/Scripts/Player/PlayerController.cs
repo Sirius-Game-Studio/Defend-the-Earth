@@ -66,10 +66,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if (healthBar && healthBar.maxValue != health) healthBar.maxValue = health;
-        if (GameController.instance.isCampaignLevel)
+        if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
         {
             lives = 1;
-        } else
+        } else if (GameController.instance.gamemode == GameController.Gamemodes.Endless)
         {
             lives = 3;
         }
@@ -103,20 +103,20 @@ public class PlayerController : MonoBehaviour
             {
                 livesCount.rectTransform.anchoredPosition = new Vector2(0, 70);
             }
-            if (GameController.instance.isCampaignLevel)
+            if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
             {
                 livesCount.enabled = false;
-            } else
+            } else if (GameController.instance.gamemode == GameController.Gamemodes.Endless)
             {
                 livesCount.enabled = true;
             }
         }
         if (health <= 0)
         {
-            if (GameController.instance.isCampaignLevel)
+            if (GameController.instance.gamemode == GameController.Gamemodes.Campaign)
             {
                 lives = 0;
-            } else
+            } else if (GameController.instance.gamemode == GameController.Gamemodes.Endless)
             {
                 if (lives > 1)
                 {
