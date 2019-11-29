@@ -1404,7 +1404,7 @@ MonoBehaviour:
   buttonClick: {fileID: 8300000, guid: 5af82cb31bb2cc540acc15538c0a4e6f, type: 3}
   loseJingle: {fileID: 8300000, guid: fe3e8d247d883da4c91ae4176f235002, type: 3}
   winJingle: {fileID: 8300000, guid: d6d641b61d3f73b4a90708464cc3d5da, type: 3}
-  isCampaignLevel: 0
+  gamemode: 1
   randomMusic:
   - {fileID: 8300000, guid: ba2501ab59ee5cd42a36c25a9de77968, type: 3}
   - {fileID: 8300000, guid: 521dd5f113658f44089772546deefe8b, type: 3}
