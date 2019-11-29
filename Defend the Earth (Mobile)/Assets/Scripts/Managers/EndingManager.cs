@@ -9,6 +9,7 @@ public class EndingManager : MonoBehaviour
     [Header("Credits Settings")]
     [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 600;
     [SerializeField] private float creditsScrollSpeed = 0.375f;
+    [SerializeField] private float creditsFastScrollSpeed = 0.75f;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -26,7 +27,7 @@ public class EndingManager : MonoBehaviour
 
     private AudioSource audioSource;
     private Controls input;
-    private float creditsFastScrollSpeed = 0.75f;
+    private bool fastCredits = false;
     private string currentLoadingTip = "";
     private bool loading = false;
 
@@ -38,7 +39,6 @@ public class EndingManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
-        creditsFastScrollSpeed = creditsScrollSpeed * 2;
         currentLoadingTip = "";
         loading = false;
         Time.timeScale = 1;
@@ -68,15 +68,15 @@ public class EndingManager : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
-        input.Gameplay.Press.performed += context => speedUpCredits(true);
-        input.Gameplay.Press.canceled += context => speedUpCredits(false);
+        input.Gameplay.Press.performed += context => fastCredits = true;
+        input.Gameplay.Press.canceled += context => fastCredits = false;
     }
 
     void OnDisable()
     {
         input.Disable();
-        input.Gameplay.Press.performed -= context => speedUpCredits(true);
-        input.Gameplay.Press.canceled -= context => speedUpCredits(false);
+        input.Gameplay.Press.performed -= context => fastCredits = true;
+        input.Gameplay.Press.canceled -= context => fastCredits = false;
     }
 
     void Update()
@@ -150,26 +150,21 @@ public class EndingManager : MonoBehaviour
         PlayerPrefs.DeleteKey("Restarted");
     }
 
-    #region Input Functions
-    void speedUpCredits(bool state)
-    {
-        if (state)
-        {
-            creditsScrollSpeed = creditsFastScrollSpeed;
-        } else
-        {
-            creditsScrollSpeed = creditsFastScrollSpeed * 0.5f;
-        }
-    }
-    #endregion
-
     #region Main Functions
     IEnumerator scrollCredits()
     {
         while (creditsMenu.enabled)
         {
             yield return new WaitForEndOfFrame();
-            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
+            float speed;
+            if (!fastCredits)
+            {
+                speed = creditsScrollSpeed;
+            } else
+            {
+                speed = creditsFastScrollSpeed;
+            }
+            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, speed);
             if (credits.anchoredPosition.y <= -creditsY)
             {
                 endingMenu.enabled = true;

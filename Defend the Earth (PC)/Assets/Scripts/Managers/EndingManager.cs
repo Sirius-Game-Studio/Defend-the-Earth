@@ -9,6 +9,7 @@ public class EndingManager : MonoBehaviour
     [Header("Credits Settings")]
     [Tooltip("The Y position credits start at.")] [SerializeField] private float creditsY = 670;
     [SerializeField] private float creditsScrollSpeed = 0.5f;
+    [SerializeField] private float creditsFastScrollSpeed = 1;
 
     [Header("Sound Effects")]
     [SerializeField] private AudioClip buttonClick = null;
@@ -27,7 +28,7 @@ public class EndingManager : MonoBehaviour
 
     private AudioSource audioSource;
     private Controls input;
-    private float creditsFastScrollSpeed = 1;
+    private bool fastCredits = false;
     private string currentLoadingTip = "";
     private bool loading = false;
 
@@ -36,7 +37,6 @@ public class EndingManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         input = new Controls();
         if (audioSource) audioSource.ignoreListenerPause = true;
-        creditsFastScrollSpeed = creditsScrollSpeed * 2;
         currentLoadingTip = "";
         loading = false;
         Time.timeScale = 1;
@@ -67,16 +67,16 @@ public class EndingManager : MonoBehaviour
     {
         input.Enable();
         input.Menu.CloseMenu.performed += context => stopCredits();
-        input.Menu.SpeedUpCredits.performed += context => speedUpCredits(true);
-        input.Menu.SpeedUpCredits.canceled += context => speedUpCredits(false);
+        input.Menu.SpeedUpCredits.performed += context => fastCredits = true;
+        input.Menu.SpeedUpCredits.canceled += context => fastCredits = false;
     }
 
     void OnDisable()
     {
         input.Disable();
         input.Menu.CloseMenu.performed -= context => stopCredits();
-        input.Menu.SpeedUpCredits.performed -= context => speedUpCredits(true);
-        input.Menu.SpeedUpCredits.canceled -= context => speedUpCredits(false);
+        input.Menu.SpeedUpCredits.performed -= context => fastCredits = true;
+        input.Menu.SpeedUpCredits.canceled -= context => fastCredits = false;
     }
 
     void Update()
@@ -157,15 +157,7 @@ public class EndingManager : MonoBehaviour
 
     void speedUpCredits(bool state)
     {
-        if (state)
-        {
-            creditsScrollSpeed = creditsFastScrollSpeed;
-            controllerSpeedUpButton.text = "Slow Down";
-        } else
-        {
-            creditsScrollSpeed = creditsFastScrollSpeed * 0.5f;
-            controllerSpeedUpButton.text = "Speed Up";
-        }
+        fastCredits = state;
     }
     #endregion
 
@@ -175,7 +167,15 @@ public class EndingManager : MonoBehaviour
         while (creditsMenu.enabled)
         {
             yield return new WaitForEndOfFrame();
-            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, creditsScrollSpeed);
+            float speed;
+            if (!fastCredits)
+            {
+                speed = creditsScrollSpeed;
+            } else
+            {
+                speed = creditsFastScrollSpeed;
+            }
+            if (creditsMenu.enabled) credits.anchoredPosition -= new Vector2(0, speed);
             if (credits.anchoredPosition.y <= -creditsY)
             {
                 endingMenu.enabled = true;
