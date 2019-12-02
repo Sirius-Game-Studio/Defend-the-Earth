@@ -18,7 +18,6 @@ public class EndingManager : MonoBehaviour
     [SerializeField] private Canvas endingMenu = null;
     [SerializeField] private Canvas creditsMenu = null;
     [SerializeField] private RectTransform credits = null;
-    [SerializeField] private Text controllerSpeedUpButton = null;
     [SerializeField] private GameObject loadingScreen = null;
     [SerializeField] private Slider loadingSlider = null;
     [SerializeField] private Text loadingPercentage = null;
