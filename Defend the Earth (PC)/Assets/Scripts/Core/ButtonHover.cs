@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonHover : MonoBehaviour
@@ -20,14 +21,14 @@ public class ButtonHover : MonoBehaviour
         outline = GetComponent<Outline>();
         hovering = false;
         setState(false);
-        CancelInvoke("onClickColor");
+        StopAllCoroutines();
     }
 
     void OnDisable()
     {
         hovering = false;
         setState(false);
-        CancelInvoke("onClickColor");
+        StopAllCoroutines();
     }
 
     public void OnMouseEnter()
@@ -45,8 +46,8 @@ public class ButtonHover : MonoBehaviour
     public void OnMouseClick()
     {
         setState(false);
-        CancelInvoke("onClickColor");
-        Invoke("onClickColor", 0.15f);
+        StopAllCoroutines();
+        StartCoroutine(onClickColor());
         if (textsToShow.Length > 0)
         {
             foreach (Text t in textsToShow) if (t) t.enabled = true;
@@ -86,8 +87,9 @@ public class ButtonHover : MonoBehaviour
         }
     }
 
-    void onClickColor()
+    IEnumerator onClickColor()
     {
+        yield return new WaitForSecondsRealtime(0.15f);
         if (hovering)
         {
             if (!isImage)
