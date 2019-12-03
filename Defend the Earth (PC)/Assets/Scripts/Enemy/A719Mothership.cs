@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class AlienMothershipMain : MonoBehaviour
+public class A719Mothership : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private long bioTorpedoDamage = 17;

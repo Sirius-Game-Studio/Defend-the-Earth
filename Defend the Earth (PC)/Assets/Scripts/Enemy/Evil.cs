@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EvilMain : MonoBehaviour
+public class Evil : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 3.5f);

@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MjolnirMain : MonoBehaviour
+public class Mjolnir : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);

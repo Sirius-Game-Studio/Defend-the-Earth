@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class KoutakriMain : MonoBehaviour
+public class Koutakri : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private Vector2 abilityTime = new Vector2(3, 4);
